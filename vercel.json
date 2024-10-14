@@ -6,5 +6,5 @@
       "config": { "zeroConfig": true }
     }
   ],
-  "outputDirectory": "docs"
+  "outputDirectory": "site"
 }
