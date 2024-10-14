@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "src": "mkdocs.yml",
+      "use": "@vercel/python",
+      "config": { "zeroConfig": true }
+    }
+  ],
+  "scripts": {
+    "build": "mkdocs build"
+  },
+  "outputDirectory": "site"
+}
