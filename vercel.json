@@ -6,8 +6,5 @@
       "config": { "zeroConfig": true }
     }
   ],
-  "scripts": {
-    "build": "mkdocs build"
-  },
   "outputDirectory": "site"
 }
