@@ -1,37 +1,42 @@
-Every time a trade occurs on Curve Finance, **50% of the trading fee is collected by users who have vote-locked their CRV**. Furthermore, since the introduction of Curve's stablecoin, crvUSD, all **accumulated interest rate fees** are awarded to veCRV holders.
-
-As of 20th June, 2024, fees are now **distributed in crvUSD** instead of 3CRV pool tokens.
-
-Fees are collected weekly from the pools, converted to crvUSD, and then distributed.  See the ["How does it all work?" section](#how-does-it-all-work) for how this process works.  Users who lock CRV can claim trading fees as often as they wish; however, fees will only be converted into crvUSD once a week.
-
-
-
-!!!info
-    There is a delay before the first claim of crvUSD can be made after locking. A wait of 8 days from the Thursday following the lock is required before a claim can be done.
+<h1>Сбор (Claiming) торговых комиссий</h1>
 
 
 ---
+    
+## **Распределение комиссий veCRV** {#fee-distribution-vecrv}
 
-## **New UI**
+Каждый раз, когда происходит обмен на Curve Finance, **50% торговой комиссии собирается пользователями, которые заблокировали свои CRV**. Более того, с момента введения стейблкоина Curve, crvUSD, все **накопленные процентные комиссии** направляются держателям veCRV.
 
-To claim trading fees, visit [https://curve.fi/#/ethereum/dashboard](https://curve.fi/#/ethereum/dashboard) and click the **`Claim LP Rewards`** button. 
+По состоянию на 20 июня 2024 года, комиссии теперь **распределяются в crvUSD** вместо токенов пула 3CRV.
+
+Комиссии собираются еженедельно из пулов, конвертируются в crvUSD и затем распределяются. См. раздел ["Как это все работает?"](./overview.md#how-does-it-all-work) для понимания процесса. Пользователи, блокирующие CRV, могут заявлять торговые комиссии так часто, как пожелают; однако комиссии будут конвертироваться в crvUSD только раз в неделю.
+
+!!! info
+    Существует задержка перед первой заявкой на получение crvUSD после блокировки. Требуется ожидание 8 дней с четверга, следующего за блокировкой, перед возможностью подачи заявки.
+
+---
+
+## **Новый интерфейс** {#new-ui}
+
+Чтобы заявить торговые комиссии, посетите [https://curve.fi/#/ethereum/dashboard](https://curve.fi/#/ethereum/dashboard) и нажмите кнопку **`Claim LP Rewards`**. 
 
 <figure markdown>
   ![](../images/claim-new.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-!!!info
-    3CRV and crvUSD are both shown on this UI as some users may not have claimed their 3CRV fees yet.
+
+!!! info
+    3CRV и crvUSD отображаются в этом интерфейсе, так как некоторые пользователи еще не заявили свои комиссии в 3CRV.
 
 ---
 
-## **Classic UI**
+## **Классический интерфейс** {#classic-ui}
 
-!!!warning
-    The classic UI has not been updated to claim crvUSD fees.
+!!! warning
+    Классический интерфейс не был обновлен для заявки на получение комиссий crvUSD.
 
-when using the **classic UI** please visit: [https://classic.curve.fi/](https://classic.curve.fi) and look for the green **`Claim`** button in the box labeled **`veCRV 3pool LP claim`** at the bottom of the page.
+    При использовании **классического интерфейса** пожалуйста, посетите: [https://classic.curve.fi/](https://classic.curve.fi/) и найдите зеленую кнопку **`Claim`** в блоке, обозначенном как **`veCRV 3pool LP claim`** внизу страницы.
 
 <figure markdown>
   ![](../images/claim-old.png){ width="700" }
@@ -40,14 +45,14 @@ when using the **classic UI** please visit: [https://classic.curve.fi/](https://
 
 ---
 
-# **Swapping 3CRV for a Stable Coin**
+# **Обмен 3CRV на стабильный коин** {#swapping-3crv-for-a-stable-coin}
 
 !!! note
-    **No more 3CRV will be distributed as fees going forward**.  The last week of 3CRV fees was 13th June, 2024.  However, there may be users who haven't claimed their 3CRV yet, so this information is left for them.
+    **В дальнейшем 3CRV не будет распределяться как комиссия**. Последняя неделя распределения комиссий в 3CRV была 13 июня 2024 года. Однако могут быть пользователи, которые еще не заявили свои 3CRV, поэтому эта информация оставлена для них.
 
-3CRV is the liquidity provider (LP) token of the 3pool, which consists of USDC, USDT, and DAI. If the pool is perfectly balanced with 33% USDC, 33% USDT, and 33% DAI, then one 3CRV will represent 0.33 USDC, 0.33 USDT, and 0.33 DAI.
+3CRV — это токен поставщика ликвидности (LP токен) пула 3pool, который состоит из USDC, USDT и DAI. Если пул идеально сбалансирован с соотношением 33% USDC, 33% USDT и 33% DAI, то один 3CRV будет представлять 0.33 USDC, 0.33 USDT и 0.33 DAI.
 
-If a user wishes to withdraw 3CRV back into a stablecoin, they can do so at: [**https://curve.fi/#/ethereum/pools/3pool/withdraw**](https://curve.fi/#/ethereum/pools/3pool/withdraw). The user needs to select the stablecoin they would like to receive (withdrawing in a balanced or custom proportion is also an option) and click **`Withdraw`**. After the transaction is confirmed, they will receive the withdrawn stablecoin.
+Если пользователь желает вывести 3CRV обратно в стабильный коин, он может сделать это по адресу: [**https://curve.fi/#/ethereum/pools/3pool/withdraw**](https://curve.fi/#/ethereum/pools/3pool/withdraw). Пользователю необходимо выбрать стабильный коин, который он хотел бы получить (вывод в сбалансированном или пользовательском соотношении также является опцией) и нажать **`Withdraw`**. После подтверждения транзакции он получит выведенный стабильный коин.
 
 <figure markdown>
   ![](../images/withdraw-3crv.png){ width="400" }
@@ -56,17 +61,18 @@ If a user wishes to withdraw 3CRV back into a stablecoin, they can do so at: [**
 
 
 !!! note
-    When withdrawing 3CRV into a stablecoin, it **might be beneficial to take a look at the balance ratios of the pool**. Withdrawing in a token with a higher balance than the other two could result in a small premium for that token. On the other hand, withdrawing a token with a lower balance relative to the other two coins may lead to receiving a slightly lesser amount. Further information can be found [here](../lp/deposit-faqs.md#but-does-that-mean-i-can-still-withdraw-in-my-favorite-stable-coin).
+    При выводе 3CRV в стабильный коин **может быть полезно обратить внимание на соотношение балансов пула**. Вывод в токен с более высоким балансом, чем два других, может привести к небольшой премии для этого токена. С другой стороны, вывод токена с более низким балансом по сравнению с двумя другими монетами может привести к получению немного меньшего количества. Дополнительную информацию можно найти [здесь](../lp/deposit-faqs.md#but-does-that-mean-i-can-still-withdraw-in-my-favorite-stable-coin).
 
 ---
 
-# **How does it all work?**
+# **Как это все работает?** {#how-does-it-all-work}
 
-When the burn process is initiated, a contract collects fees, which come in dozens of different forms such as stablecoins, volatile assets, or LP tokens. These tokens are then burned through various contracts and pools, and converted into crvUSD through swapping in Cowswap.
+Когда инициируется процесс сжигания (burn), контракт собирает комиссии, которые поступают в различных формах, таких как стабильные коины, волатильные активы или токены LP. Эти токены затем сжигаются через различные контракты и пулы и конвертируются в crvUSD путем обмена на Cowswap.
 
-Burning is a costly process due to the complexity and number of transactions involved. However, anyone can trigger this process at any time, provided they are willing to cover the associated costs.
+Сжигание — это затратный процесс из-за сложности и количества необходимых транзакций. Однако любой может инициировать этот процесс в любое время, при условии готовности покрыть связанные с ним расходы.
 
-Fees can only be claimed for the week that has already concluded, as the burner cannot determine each user's entitlement before the end of that period. Fees will be made available **weekly, within 24 hours after Thursday midnight UTC**, as long as someone — typically the Curve team — has initiated the burn process beforehand.
+Комиссии могут быть заявлены только за неделю, которая уже завершилась, так как сжигатель не может определить право каждого пользователя до окончания этого периода. Комиссии будут доступны **еженедельно, в течение 24 часов после полуночи четверга по UTC**, при условии, что кто-то — обычно команда Curve — предварительно инициировал процесс сжигания.
 
-!!!info
-    See the [Fee Collection & Distribution page](./fee-collection-distribution.md) for more information about this process.
+!!! info
+    См. страницу [Сбор и распределение комиссий](./fee-collection-distribution.md) для получения дополнительной информации об этом процессе.
+

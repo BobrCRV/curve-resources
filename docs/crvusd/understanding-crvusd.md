@@ -1,41 +1,37 @@
-Curve Stablecoin infrastructure enables users to mint crvUSD using a variety of crypto collaterals.
+<h1>Понимание crvUSD</h1>
 
-Positions are managed passively: if the price of the collateral decreases, the loan automatically enters a ***soft-liquidation* mode**, wherein some of the collateral is converted to crvUSD. Conversely, if the collateral's price increases, the system reclaims the collateral by converting crvUSD back to the collateral token.
+Инфраструктура стейблкоина Curve позволяет пользователям эмитировать crvUSD, используя различные криптовалютные залоги.
 
-**However, this process may incur some losses due to the soft-liquidations and de-liquidations.**
+Позиции управляются пассивно: если цена залога снижается, заем автоматически переходит в ***режим мягкой ликвидации***, в рамках которого часть залога конвертируется в crvUSD. Напротив, если цена залога увеличивается, система возвращает залог, конвертируя crvUSD обратно в токен залога.
 
-Manage crvUSD positions at [**https://crvusd.curve.fi/**](https://crvusd.curve.fi/).
+**Однако этот процесс может привести к некоторым потерям из-за мягких ликвидаций и диливидаций.**
 
+Управляйте позициями crvUSD на [**https://crvusd.curve.fi/**](https://crvusd.curve.fi/).
 
+# **Рынки**
+На вкладке **`Markets`** отображаются все доступные типы залогов.
 
-# **Markets**
-On the **`Markets`** tab, all available collateral types are displayed.
-
-The page displays the current [**borrow rate**](./loan-concepts.md#borrow-rate), total debt, debt cap, remaining amount available for borrowing, and the total value of collateral.
+На странице отображаются текущая [**процентная ставка за заем**](./loan-concepts.md#borrow-rate), общий долг, лимит долга, оставшаяся сумма, доступная для займа, и общая стоимость залога.
 
 <figure markdown>
   ![](../images/crvusd_markets.png){ width="700" }
   <figcaption></figcaption>
 </figure>
 
+Если у пользователя нет существующего займа, нажатие на любой рынок приведет к интерфейсу [**создания займа**](./loan-creation.md#loan-creation).
 
-If a user does not have an existing loan, clicking on any market will lead to the [**loan creation**](./loan-creation.md#loan-creation) interface.
+Если заем уже существует, слева появится обозначение с символом доллара. В этом случае выбор рынка приведет к интерфейсу [**управления займом**](./loan-creation.md#loan-management).
 
-Should a loan already exist, a dollar sign overlay will appear on the left. Selecting the market in this case will lead to the [**loan management**](./loan-creation.md#loan-management) interface.
+# **Риски**
 
+!!!danger "Пожалуйста, рассмотрите следующие предупреждения о рисках при использовании инфраструктуры стейблкоин Curve:"
 
-
-# **Risks**
-
-!!!danger "Please consider the following risk disclaimers when using the Curve Stablecoin infrastructure:"
-
-    1. If your collateral enters soft-liquidation mode, you can't withdraw it or add more collateral to your position. Should the price of the collateral drop sharply over a short time interval, your position will get hard-liquidated, with no option of de-liquidation. Please choose your leverage wisely, as you would with any collateralized debt position.
-        1. If your collateral enters soft-liquidation mode, you can't withdraw it or add more collateral to your position.
-        2. Should the price of the collateral change drop sharply over a short time interval, it can result in large losses that may reduce your loan's health.
-        3. If you are in soft-liquidation mode and the price of the collateral goes up sharply, this can result in de-liquidation losses on the way up. If your loan's health is low, value of collateral going up could potentially reduce your underwater loan's health.
-        4. If the health of your loan drops to zero or below, your position will get hard-liquidated with no option of de-liquidation. Please choose your leverage wisely, as you would with any collateralized debt position.
-    2. The crvUSD stablecoin and its infrastructure are currently in beta testing. As a result, investing in crvUSD carries high risk and could lead to partial or complete loss of your investment due to its experimental nature. You are responsible for understanding the associated risks of buying, selling, and using crvUSD and its infrastructure.
-    3. The value of crvUSD can fluctuate due to stablecoin market volatility or rapid changes in the liquidity of the stablecoin.
-    4. crvUSD is exclusively issued by smart contracts, without an intermediary. However, the parameters that ensure the proper operation of the crvUSD infrastructure are subject to updates approved by Curve DAO. Users must stay informed about any parameter changes in the stablecoin infrastructure.
-
+    1. Если ваш залог переходит в режим мягкой ликвидации, вы не можете вывести его или добавить больше залога к своей позиции. Если цена залога резко упадет за короткий промежуток времени, ваша позиция будет жестко ликвидирована без возможности диливидации. Пожалуйста, разумно выбирайте кредитное плечо, как и в случае любого обеспеченного займа.
+        1. Если ваш залог переходит в режим мягкой ликвидации, вы не можете вывести его или добавить больше залога к своей позиции.
+        2. Если цена залога резко упадет за короткий промежуток времени, это может привести к большим потерям, которые могут снизить здоровье вашего займа.
+        3. Если вы находитесь в режиме мягкой ликвидации и цена залога резко возрастает, это может привести к потерям при диливидации при росте. Если здоровье вашего займа низкое, увеличение стоимости залога может потенциально снизить здоровье вашего займа под залогом.
+        4. Если здоровье вашего займа упадет до нуля или ниже, ваша позиция будет жестко ликвидирована без возможности диливидации. Пожалуйста, разумно выбирайте кредитное плечо, как и в случае любого обеспеченного займа.
+    2. Стейблкоин crvUSD и его инфраструктура находятся в стадии бета-тестирования. В результате инвестиции в crvUSD несут высокий риск и могут привести к частичной или полной потере инвестиций из-за экспериментального характера. Вы несете ответственность за понимание связанных рисков покупки, продажи и использования crvUSD и его инфраструктуры.
+    3. Стоимость crvUSD может колебаться из-за волатильности рынка стейблкоинов или быстрых изменений в ликвидности стейблкоина.
+    4. crvUSD выпускается исключительно смарт-контрактами без посредников. Однако параметры, обеспечивающие правильную работу инфраструктуры crvUSD, подлежат обновлениям, одобренным Curve DAO. Пользователи должны быть в курсе любых изменений параметров в инфраструктуре стейблкоина.
 

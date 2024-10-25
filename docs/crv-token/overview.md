@@ -1,53 +1,53 @@
-<h1>CRV Overview</h1>
+<h1>Обзор CRV</h1>
 
-The CRV token is the token for Curve DAO which governs the whole Curve Finance ecosystem.  CRV was launched on August 13, 2020.
+Токен CRV — это токен для Curve DAO, который управляет всей экосистемой Curve Finance. CRV был запущен 13 августа 2020 года.
 
-## **Supply**
+## **Эмиссия**
 
-The total supply of 3.03 billion is distributed as such:
+Общая эмиссия в размере 3,03 миллиарда распределена следующим образом:
 
-* 62% to community liquidity providers
-* 30% to shareholders (team and investors) with 2-4 years vesting
-* 5% to the community reserve
-* 3% to employees with 2 years vesting
+* 62% для провайдеров ликвидности сообщества
+* 30% для акционеров (команда и инвесторы) с вестингом на 2-4 года
+* 5% для резервов сообщества
+* 3% для сотрудников с вестингом на 2 года
 
 <div class="centered" style="transform: scale(1.1);">
   <canvas id="crvAllocationChart"></canvas>
 </div>
 <br>
 
-The initial supply of around 1.3b (~43%) was distributed as such:
+Начальная эмиссия около 1,3 миллиарда (~43%) была распределена следующим образом:
 
-* 5% to pre-CRV liquidity providers with 1 year vesting
-* 30% to shareholders (team and investors) with 2-4 years vesting
-* 3% to employees with 2 years vesting
-* 5% to the community reserve
+* 5% для провайдеров ликвидности до запуска CRV с вестингом на 1 год
+* 30% для акционеров (команда и инвесторы) с вестингом на 2-4 года
+* 3% для сотрудников с вестингом на 2 года
+* 5% для резервов сообщества
 
-The circulating supply was 0 at launch and the initial release rate was around 2m CRV per day.
+Циркулирующая эмиссия на момент запуска была равна 0, а первоначальная скорость выпуска составляла около 2 миллионов CRV в день.
 
-CRV inflation (community emissions for providing liquidity) started at 274 million tokens a year in 2020, and each year it decreases by roughly 16%.
+Инфляция CRV (эмиссия сообщества для предоставления ликвидности) началась с 274 миллионов токенов в год в 2020 году и каждый год уменьшается примерно на 16%.
 
-See the [Supply & Distribution page](./supply-distribution.md) for more detailed information.
+Подробнее смотрите на странице [Эмиссия и распределение](./supply-distribution.md).
 
-## **Utility**
+## **Утилитарность**
 
-There are 4 main use-cases for CRV, most require locked CRV (veCRV):
+Есть 4 основных применения CRV, большинство из которых требует заблокированные CRV (veCRV):
 
-1. **Incentivizing liquidity providers** to provide liquidity to pools and lending markets through CRV rewards.  This is how CRV tokens are distributed to the community.
-2. Allowing liquidity providers to **boost their CRV rewards** up to 2.5x by holding veCRV.
-3. Allowing users to participate and **vote in governance proposals** including directing CRV emissions (gauge weight votes) through holding veCRV.
-4. **Collecting a portion of the fees** from swaps and loans that occur on Curve through holding veCRV.
+1. **Стимулирование провайдеров ликвидности** к предоставлению ликвидности пулам и рынкам кредитования через награды CRV. Таким образом, CRV распределяются среди сообщества.
+2. Позволяет провайдерам ликвидности **увеличивать свои награды CRV** до 2,5 раз, удерживая veCRV.
+3. Позволяет пользователям участвовать и **голосовать по предложениям управления**, включая распределение эмиссии CRV (голоса за распределение веса вознаграждений по счётчикам) через удержание veCRV.
+4. **Получение части комиссий** от обменов и кредитов, происходящих на Curve, через удержание veCRV.
 
 !!!info
-    veCRV stands for **vote-escrowed CRV**, representing CRV tokens locked for voting in the Curve DAO.  Locked CRV, Vote-locked CRV and vote-escrowed CRV all mean veCRV, these terms are used interchangeably throughout the ecosystem.
+    veCRV обозначает **заблокированные для голосования CRV**, представляющие CRV токены, заблокированные для голосования в Curve DAO. Заблокированные CRV, голос-заблокированные CRV и vote-escrowed CRV — все эти термины обозначают veCRV и используются взаимозаменяемо в экосистеме.
 
-    For information about how to lock see the [**locking guide**](../vecrv/locking-your-crv.md), or for more information about veCRV, see the [**veCRV page**](../vecrv/overview.md).
+    Для получения информации о том, как заблокировать токены, смотрите [**руководство по блокировке**](../vecrv/locking-your-crv.md), или для получения дополнительной информации о veCRV смотрите страницу [**veCRV**](../vecrv/overview.md).
 
 ---
 
-# **The CRV Matrix**
+# **Матрица CRV**
 
-The table below can help you understand the value of CRV and veCRV in different situations
+Таблица ниже поможет вам понять ценность CRV и veCRV в разных ситуациях
 
 <style type="text/css">
 .tg {
@@ -71,7 +71,7 @@ The table below can help you understand the value of CRV and veCRV in different 
   border-style: solid;
   border-width: 1px;
   font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   overflow: hidden;
   padding: 4px;
   word-break: normal;
@@ -85,14 +85,14 @@ The table below can help you understand the value of CRV and veCRV in different 
 }
 .tg .tg-3lxi {
   border-color: #656565;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   vertical-align: bottom;
 }
 .tg .tg-kk90 {
   background-color: #9aff99;
   border-color: #656565;
-  font-size: 12px;
+  font-size: 11px;
   color: black;
 }
 .tg .tg-hkgo {
@@ -108,74 +108,74 @@ The table below can help you understand the value of CRV and veCRV in different 
 .tg .tg-gtpm {
   background-color: #ffccc9;
   border-color: #656565;
-  font-size: 12px;
+  font-size: 11px;
   color: black;
 }
 </style>
 <table class="tg"><thead>
   <tr>
     <th class="tg-hkgo"></th>
-    <th class="tg-3lxi">Liquidity in Pool &amp; no veCRV</th>
-    <th class="tg-3lxi">Liquidity in Pool &amp; veCRV</th>
-    <th class="tg-3lxi">Liquidity in Pool &amp; Staked in Gauge &amp; no veCRV</th>
-    <th class="tg-3lxi">Liquidity in Pool &amp; Staked in Gauge &amp; veCRV</th>
-    <th class="tg-3lxi">No Liquidity &amp; no veCRV</th>
-    <th class="tg-3lxi">No Liquidity &amp; veCRV</th>
+    <th class="tg-3lxi">Ликвидность в пуле &amp; без veCRV</th>
+    <th class="tg-3lxi">Ликвидность в пуле &amp; с veCRV</th>
+    <th class="tg-3lxi">Ликвидность в пуле &amp; стейкинг в счётчике (gauge) &amp; без veCRV</th>
+    <th class="tg-3lxi">Ликвидность в пуле &amp; стейкинг в счётчике (gauge) &amp; с veCRV</th>
+    <th class="tg-3lxi">Без ликвидности &amp; без veCRV</th>
+    <th class="tg-3lxi">Без ликвидности &amp; с veCRV</th>
   </tr></thead>
 <tbody>
   <tr>
-    <td class="tg-xmch">Earns lending &amp; trading fees</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-gtpm"> No</td>
+    <td class="tg-xmch">Получает доходы от кредитования и торговли</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-gtpm"> Нет</td>
   </tr>
   <tr>
-    <td class="tg-xmch">Earns CRV Emissions</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-gtpm"> No</td>
+    <td class="tg-xmch">Получает CRV эмиссии</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-gtpm"> Нет</td>
   </tr>
   <tr>
-    <td class="tg-xmch">Earns boosted CRV Emissions</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-gtpm"> No</td>
+    <td class="tg-xmch">Получает увеличенные CRV эмиссии</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-gtpm"> Нет</td>
   </tr>
   <tr>
-    <td class="tg-xmch">Can vote on DAO Proposals</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-kk90"> Yes</td>
+    <td class="tg-xmch">Может голосовать по предложениям DAO</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-kk90"> Да</td>
   </tr>
   <tr>
-    <td class="tg-xmch">Can vote on Gauge Weight</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-kk90"> Yes</td>
+    <td class="tg-xmch">Может голосовать за распределение веса вознаграждений по счётчикам</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-kk90"> Да</td>
   </tr>
   <tr>
-    <td class="tg-xmch">Earns Admin Fees</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-hs62"> Yes</td>
-    <td class="tg-jlsk"> No</td>
-    <td class="tg-kk90"> Yes</td>
+    <td class="tg-xmch">Получает комиссии администратора</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-hs62"> Да</td>
+    <td class="tg-jlsk"> Нет</td>
+    <td class="tg-kk90"> Да</td>
   </tr>
 </tbody></table>
 
@@ -190,7 +190,7 @@ The table below can help you understand the value of CRV and veCRV in different 
     var crvAllocationChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Community', 'Core Team', 'Investors', 'Employees', 'Reserve'],
+            labels: ['Сообщество', 'Основная команда', 'Инвесторы', 'Сотрудники', 'Резерв'],
             datasets: [{
                 data: data,
                 backgroundColor: ['#FF6384', '#FFCE56', '#8E5EA2', '#3cba9f', '#e8c3b9'],
@@ -220,9 +220,10 @@ The table below can help you understand the value of CRV and veCRV in different 
                 },
                 title: {
                     display: true,
-                    text: 'CRV Total Supply'
+                    text: 'Общая эмиссия CRV'
                 }
             }
         }
     });
 </script>
+

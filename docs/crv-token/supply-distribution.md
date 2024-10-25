@@ -1,166 +1,163 @@
-<h1>CRV Supply and Distribution</h1>
+<h1>Объем и распределение CRV</h1>
 
-There is a **fixed total supply of 3,030,303,031 CRV**.  No CRV tokens can ever be minted after that.  The total supply of CRV tokens allocated to different groups is shown below in the "CRV Total Allocation" chart.  **Not all CRV are currently minted or circulating**.  CRV tokens are slowly minted to the community each week and will continue to be released for over 200 years.  The amount of tokens minted each week is defined in the [community emissions section](#community-emissions-crv-inflation).  
+Существует **фиксированная общая эмиссия 3 030 303 031 CRV**. После этого новых токенов CRV выпущено быть не может. Общий объем токенов CRV, выделенный различным группам, показан ниже в диаграмме "Общая аллокация CRV". **Не все CRV в настоящее время выпущены или находятся в обращении**. Токены CRV постепенно выпускаются для сообщества каждую неделю и будут продолжать выпускаться более 200 лет. Количество токенов, выпускаемых каждую неделю, определяется в [разделе об эмиссии сообщества](#community-emissions-crv-inflation).
 
-Have a look over this page to learn about how CRV has been allocated and how much is distributed each week.  The [Supply Calculator](#supply-calculator) is a great tool see the CRV supply and statistics on any date.
+Посмотрите эту страницу, чтобы узнать, как распределены CRV и сколько их распределяется каждую неделю. [Калькулятор предложения](#supply-calculator) — отличный инструмент для просмотра объема CRV и статистики на любую дату.
 
-## **Total Supply Allocation**
+## **Общая аллокация** {#total-supply-allocation}
 
-The below chart shows the total allocation of CRV to different groups within the Curve ecosystem.
+Ниже представлена диаграмма, показывающая распределение CRV среди различных групп внутри экосистемы Curve.
 
 <div class="centered" style="transform: scale(1.1);">
   <canvas id="crvAllocationChart"></canvas>
 </div>
 <br>
 <div class="centered" markdown="block">
-| Group                                     | Allocated CRV | Percentage |
-|-------------------------------------------|---------------|------------|
-| Community (emissions)                     | 1,727,272,729 | 57%        |
-| Early Users (pre-CRV liquidity providers) | 151,515,152   | 5%         |
-| Core Team                                 | 800,961,153   | 26.43%     |
-| Investors                                 | 108,129,756   | 3.57%      |
-| Employees                                 | 90,909,091    | 3%         |
-| Community Reserve                         | 151,515,152   | 5%         |
-| **Total**                             | **3,030,303,031** |  **100%**  |
+| Группа                                     | Выделенные CRV | Процент |
+|-------------------------------------------|----------------|---------|
+| Сообщество (эмиссии)                      | 1 727 272 729   | 57%     |
+| Ранние пользователи (провайдеры ликвидности до CRV) | 151 515 152     | 5%      |
+| Основная команда                          | 800 961 153     | 26,43%  |
+| Инвесторы                                 | 108 129 756     | 3,57%   |
+| Сотрудники                                | 90 909 091      | 3%      |
+| Резерв сообщества                         | 151 515 152     | 5%      |
+| **Всего**                                 | **3 030 303 031** | **100%**  |
 </div>
 
-The above allocation shows that the **community will own 67% of all CRV** when the total supply is distributed, but note that **CRV tokens will continue to be distributed until 2376**, but meaningful distributions will stop in around 50 years, see [notable emissions years](#notable-emission-years) for how the yearly distribution will change over time.
+Данное распределение показывает, что **сообщество будет владеть 67% всех CRV** после того, как будет распределена вся эмиссия. Однако стоит отметить, что **токены CRV будут распределяться до 2376 года**, а значимые распределения прекратятся примерно через 50 лет. Подробнее смотрите в разделе [значимые годы эмиссии](#notable-emission-years).
 
 ---
 
-## **Token Launch**
+## **Запуск токена** {#token-launch}
 
-CRV officially launched on the **13th of August 2020**.  At the time of launch there were no unlocked tokens.  **All** tokens in the launch were linearly vested for 1-4 years (gradually unlocking over a period of 1-4 years).  The initial supply is quoted as 1,303,030,303 because these tokens were pre-mined and sent into the vesting contracts, which gradually unlocked them.  Below shows the allocation to different groups of the initial distribution.
+CRV был официально запущен **13 августа 2020 года**. На момент запуска не было разблокированных токенов. **Все** токены на момент запуска были линейно распределены на 1-4 года (постепенно разблокировались в течение 1-4 лет). Начальное предложение составляет 1 303 030 303 токенов, так как эти токены были добыты заранее и отправлены в контракты вестинга, которые постепенно их разблокировали. Ниже показано распределение начальной эмиссии по различным группам.
 
 <div class="centered" style="transform: scale(1.1);">
   <canvas id="crvLaunchChart"></canvas>
 </div>
 <br>
 <div class="centered" markdown="block">
-| Group                                     | Allocated CRV | Vesting Years | Transactions                                                                                                                                                                                                                                                                                                  |
-|-------------------------------------------|---------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Early Users (pre-CRV liquidity providers) | 151,515,152   | 1[^1]         | [1]( https://etherscan.io/tx/0x1d36fa3e154f409e48c59dc5085e5d3cf5993f48d2ed525b49f7d1aa1bf3bca5 )                                                                                                                                                                                                             |
-| Core Team                                 | 800,961,153   | 4             | [1]( https://etherscan.io/tx/0xb7f7de7dc668b584bb22ffa164b959729db96385e500f926f03936c453a3a45e )                                                                                                                                                                                                             |
-| Investors                                 | 108,129,756   | 2             | [ 1 ]( https://etherscan.io/tx/0x5f762bc8e2929b76cf22936595b2e2a58cbaa9f31ec896bfaf63f798c4c65d38 ), [ 2 ]( https://etherscan.io/tx/0xcaf8fc449a2c28e13877f6e0dc3e12cb2ba585a86f771d92ae8959cc3303c5d4 ), [ 3 ]( https://etherscan.io/tx/0x2bada5103c3c1c64879125b8832961bc30a6e1524861272347e9f32a9593a084 ) |
-| Employees                                 | 90,909,091    | 2             | [ 1 ]( https://etherscan.io/tx/0xe99a98d6aa3ee2413c58a28c9505be123e02399336364ab47e10bf13102816f1 ), [ 2 ]( https://etherscan.io/tx/0xb84eb0488e9696e063ce829cfad38aeaced814c54d897078fdc7267c567b0f8e )                                                                                                      |
-| Community Reserve                         | 151,515,152   | N/A[^2]       | [1]( https://etherscan.io/tx/0x3f9aa0ff15fbd00cce60e36f32f25d6f85a43a19d983100d98007a84609f861a )                                                                                                                                                                                                             |
-| **Total**                             | **1,303,030,303** |    |  [1](https://etherscan.io/tx/0x5dc4a688b63cea09bf4d73a695175b77572792a2e2b3656297809ad3596d4bfe)  |
+| Группа                                     | Выделенные CRV | Годы вестинга | Транзакции                                                                                                                                                                                                                                                                                                  |
+|-------------------------------------------|----------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ранние пользователи (провайдеры ликвидности до CRV) | 151 515 152     | 1[^1]         | [1](https://etherscan.io/tx/0x1d36fa3e154f409e48c59dc5085e5d3cf5993f48d2ed525b49f7d1aa1bf3bca5)                                                                                                                                                                                                             |
+| Основная команда                          | 800 961 153     | 4             | [1](https://etherscan.io/tx/0xb7f7de7dc668b584bb22ffa164b959729db96385e500f926f03936c453a3a45e)                                                                                                                                                                                                             |
+| Инвесторы                                 | 108 129 756     | 2             | [1](https://etherscan.io/tx/0x5f762bc8e2929b76cf22936595b2e2a58cbaa9f31ec896bfaf63f798c4c65d38), [2](https://etherscan.io/tx/0xcaf8fc449a2c28e13877f6e0dc3e12cb2ba585a86f771d92ae8959cc3303c5d4), [3](https://etherscan.io/tx/0x2bada5103c3c1c64879125b8832961bc30a6e1524861272347e9f32a9593a084) |
+| Сотрудники                                | 90 909 091      | 2             | [1](https://etherscan.io/tx/0xe99a98d6aa3ee2413c58a28c9505be123e02399336364ab47e10bf13102816f1), [2](https://etherscan.io/tx/0xb84eb0488e9696e063ce829cfad38aeaced814c54d897078fdc7267c567b0f8e)                                                                                                      |
+| Резерв сообщества                         | 151 515 152     | N/A[^2]       | [1](https://etherscan.io/tx/0x3f9aa0ff15fbd00cce60e36f32f25d6f85a43a19d983100d98007a84609f861a)                                                                                                                                                                                                             |
+| **Всего**                                 | **1 303 030 303** |    |  [1](https://etherscan.io/tx/0x5dc4a688b63cea09bf4d73a695175b77572792a2e2b3656297809ad3596d4bfe)  |
 </div>
 
-[^1]: This was vested through the public vesting contract
+[^1]: Это было распределено через публичный контракт вестинга
 
-[^2]: These tokens had no vesting themselves, but the contract they are allocated to creates other vesting contracts. When tokens are allocated from this pool they create a child vesting contract with a minimum 1 year vesting period.
+[^2]: Эти токены сами по себе не имели вестинга, но контракт, которому они выделены, создаёт другие контракты вестинга. Когда токены выделяются из этого пула, создаётся дочерний контракт вестинга с минимальным сроком 1 год.
 
-The circulating supply was 0 at launch. Each day of the first year approx. 750k tokens were emitted to the community for providing liquidity and 1.65million tokens were vested (unlocked).  Use the [supply calculator below](#supply-calculator) to see how quickly tokens became liquid and circulating.
+На момент запуска объем токенов в обращении составлял 0. Каждый день первого года примерно 750 тыс. токенов эмитировались для сообщества за предоставление ликвидности, а 1,65 миллиона токенов разблокировались. Используйте [калькулятор предложения ниже](#supply-calculator), чтобы увидеть, как быстро токены стали ликвидными и попали в обращение.
 
-!!!tip
-    6 year CRV release schedule is available here: [https://dao.curve.fi/releaseschedule](https://dao.curve.fi/releaseschedule), or the full release schedule is available as a google spreadsheet [here](https://docs.google.com/spreadsheets/d/1kFFdaLCX8ISM7yzvfUmuz151QiRzrFfaljCzEiO6sus/edit?usp=sharing).
+> **Совет:**  
+> Расписание выпуска CRV на 6 лет доступно здесь: [https://dao.curve.fi/releaseschedule](https://dao.curve.fi/releaseschedule), или полное расписание доступно в виде Google-таблицы [здесь](https://docs.google.com/spreadsheets/d/1kFFdaLCX8ISM7yzvfUmuz151QiRzrFfaljCzEiO6sus/edit?usp=sharing).
 
 ---
 
-## **Community Emissions (CRV Inflation)**
+## **Эмиссия сообщества (инфляция CRV)** {#community-emissions-crv-inflation}
 
-Community emissions (regularly called CRV Inflation) are minted and allocated to gauges based on the weekly weight gauge vote.  Gauges have a very flexible design and can direct emissions to liquidity pools and suppliers of a lending market, or even to funding for the Vyper programming language.
+Эмиссия сообщества (часто называемая инфляцией CRV) выпускается и распределяется по гейджам на основе голосования за вес гейджей, проводимого еженедельно. Гейджи обладают очень гибким дизайном и могут направлять эмиссию в пулы ликвидности и поставщикам на рынке кредитования, а также даже на финансирование языка программирования Vyper.
 
-Community emissions reduce each year.  They are modelled off the Bitcoin Halving which halves the allocation every 4 years, in Curve however, we reduce rewards by $2^{\frac{1}{4}}$ every 365 days instead.  This works out to be approx. 16% each year and 50% every 4 years.  Community emissions were initially set at 274,815,283 CRV for the first year.  This means the formula for how much CRV is emitted to the community in any year is:
+Эмиссия сообщества уменьшается каждый год. Она основана на модели Bitcoin Halving, которая уменьшает эмиссию вдвое каждые 4 года. В Curve, однако, мы уменьшаем вознаграждения на \(2^{\frac{1}{4}}\) каждые 365 дней. Это составляет примерно 16% каждый год и 50% каждые 4 года. Изначально эмиссия сообщества была установлена на уровне 274 815 283 CRV за первый год. Это означает, что формула для вычисления количества CRV, выпускаемых сообществу в любой год, выглядит следующим образом:
 
-$$\text{Yearly Community Emissions} = \frac{274,815,283}{2^{\text{year}/4}}$$
+$$\text{Годовая эмиссия сообщества} = \frac{274\,815\,283}{2^{\text{года}/4}}$$
 
-Where `year` is the number of years after 13th August 2020, e.g., year 1 emissions are for the period 13th August 2021 until 13th August 2022.  The emissions for year 10 are for the period of 11th August 2030 - 11th August 2031 (2 leap years with 366 days, yet Curve assumes all years have 365 days), this would come to 48,580,938 CRV emitted for that year.
+Где `год` — это количество лет, прошедших после 13 августа 2020 года, например, эмиссия первого года приходится на период с 13 августа 2021 года по 13 августа 2022 года. Эмиссия за 10-й год приходится на период с 11 августа 2030 года по 11 августа 2031 года (2 високосных года с 366 днями, однако Curve предполагает, что все годы содержат 365 дней), что составляет 48 580 938 CRV, выпущенных в тот год.
 
-In the smart contracts the yearly community emissions is not defined, it's actually defined as a rate of CRV emitted per second, we can convert between the yearly and per second value using the following formula:
+В смарт-контрактах годовая эмиссия сообщества не определена напрямую, а вместо этого определена как ставка эмиссии CRV в секунду, и мы можем преобразовать годовую эмиссию в значение в секунду с помощью следующей формулы:
 
-$$\text{Emission Rate} = \frac{\text{Yearly Community Emissions}}{365 \times 84600}$$
+$$\text{Ставка эмиссии} = \frac{\text{Годовая эмиссия сообщества}}{365 \times 86400}$$
 
-We divide by $365 \times 84600$ because there is 365 days in a year and 86400 seconds in a day.
+Мы делим на \(365 \times 86400\), потому что в году 365 дней и 86400 секунд в дне.
 
-The emission rate has 18 decimal places, this means that **emissions continue for 245 years**.  The emission rate will be 0.000000000000000001 CRV/sec in year 2265.  **Emissions are hardcoded and cannot change**.  See the [notable emission years](#notable-emission-years) below, or have a play with the [supply calculator](#supply-calculator) to see how much CRV will be distributed and to who in different years.
+Ставка эмиссии имеет 18 знаков после запятой, это значит, что **эмиссия продолжается в течение 245 лет**. Ставка эмиссии составит 0.000000000000000001 CRV/сек в 2265 году. **Эмиссия жестко запрограммирована и не может измениться**. Смотрите [значимые годы эмиссии](#notable-emission-years) ниже или воспользуйтесь [калькулятором предложения](#supply-calculator), чтобы увидеть, сколько CRV будет распределено и кому в разные годы.
 
-See [this section](./faq.md#how-does-the-yearly-emissions-reduction-work) of the FAQ for how the yearly reduction works.  See [this section](./faq.md#how-is-crv-minted) for how CRV is minted and added to the supply.
+Смотрите [этот раздел](./faq.md#how-does-the-yearly-emissions-reduction-work) FAQ, чтобы узнать, как работает годовое сокращение эмиссии. Смотрите [этот раздел](./faq.md#how-is-crv-minted), чтобы узнать, как CRV выпускается и добавляется в предложение.
 
-### **CRV Emissions for the next 10 years**
+### **Эмиссия CRV на следующие 10 лет**
 
-See below for a chart of how the CRV will be distributed each year for the next 10 years.  This year (2024), is the last year of the Core Team's CRV allocation vesting.  After August 12th, 2024 all CRV added to the circulating supply will be distributed to the community through gauges, and CRV inflation will fall dramatically from 20.37% to 6.34% for the year.
+Смотрите ниже диаграмму того, как CRV будет распределяться каждый год в течение следующих 10 лет. Этот год (2024) — последний год вестинга CRV для основной команды. После 12 августа 2024 года весь CRV, добавляемый в обращение, будет распределяться сообществу через гейджи, а инфляция CRV резко снизится с 20,37% до 6,34% в этом году.
 
-*Note: dashed lines are percentage values and relate to the percentage axis, other lines relate to the CRV amount axis, click on datasets to turn them on/off.*
-
+*Примечание: пунктирные линии отображают процентные значения и относятся к оси процентов, остальные линии относятся к оси объемов CRV. Нажмите на наборы данных, чтобы включить/отключить их.*
 <canvas id="crv10yearChart"></canvas>
 
-### **Notable Emission Years**
+### **Значимые годы эмиссии**  {#notable-emission-years}
 
-As CRV will continue to be distributed for 245 years, interesting years of CRV distribution are noted below.  See the [google spreadsheet here](https://docs.google.com/spreadsheets/d/1kFFdaLCX8ISM7yzvfUmuz151QiRzrFfaljCzEiO6sus/edit?usp=sharing) for data for all years.
+Поскольку CRV будет продолжать распределяться в течение 245 лет, интересные годы распределения CRV отмечены ниже. Смотрите [Google-таблицу здесь](https://docs.google.com/spreadsheets/d/1kFFdaLCX8ISM7yzvfUmuz151QiRzrFfaljCzEiO6sus/edit?usp=sharing) для данных за все годы.
 
 <div class="centered" markdown="block">
-| Year | Date Start | Date Finish | CRV Emissions        | Note                                 |
-|------|------------|-------------|----------------------|--------------------------------------|
-| 5    | 2025-08-12 | 2026-08-12  | 115,545,593          | Last year emissions > 100M |
-| 19   | 2039-08-09 | 2040-08-08  | 10,212,884           | Last year emissions > 10M  |
-| 32   | 2052-08-05 | 2053-08-05  | 1,073,497            | Last year emissions > 1M   |
-| 45   | 2065-08-02 | 2066-08-02  | 112,837              | Last year emissions > 100k |
-| 58   | 2078-07-30 | 2079-07-30  | 11,860               | Last year emissions > 10k  |
-| 72   | 2092-07-26 | 2093-07-26  | 1,048                | Last year emissions > 1k   |
-| 85   | 2105-07-24 | 2106-07-24  | 110.1                | Last year emissions > 100  |
-| 98   | 2118-07-21 | 2119-07-21  | 11.58                | Last year emissions > 10   |
-| 112  | 2132-07-17 | 2133-07-17  | 1.023                | Last year emissions > 1    |
-| 245  | 2264-06-15 | 2265-06-15  | 0.000000000031536000 | Last year of emissions     |
+| Год | Дата начала | Дата окончания | Эмиссия CRV        | Примечание                                 |
+|-----|-------------|----------------|---------------------|--------------------------------------------|
+| 5   | 2025-08-12  | 2026-08-12     | 115 545 593         | Последний год эмиссии > 100M               |
+| 19  | 2039-08-09  | 2040-08-08     | 10 212 884          | Последний год эмиссии > 10M                |
+| 32  | 2052-08-05  | 2053-08-05     | 1 073 497           | Последний год эмиссии > 1M                 |
+| 45  | 2065-08-02  | 2066-08-02     | 112 837             | Последний год эмиссии > 100k               |
+| 58  | 2078-07-30  | 2079-07-30     | 11 860              | Последний год эмиссии > 10k                |
+| 72  | 2092-07-26  | 2093-07-26     | 1 048               | Последний год эмиссии > 1k                 |
+| 85  | 2105-07-24  | 2106-07-24     | 110.1               | Последний год эмиссии > 100                 |
+| 98  | 2118-07-21  | 2119-07-21     | 11.58               | Последний год эмиссии > 10                  |
+| 112 | 2132-07-17  | 2133-07-17     | 1.023               | Последний год эмиссии > 1                   |
+| 245 | 2264-06-15  | 2265-06-15     | 0.000000000031536000 | Последний год эмиссии                     |
 </div>
 
 ---
 
-## **Supply Calculator**
+## **Калькулятор предложения** {#supply-calculator}
 
-*Accuracy Disclaimer*: ***This calculator is theoretical based on vesting schedules and smart contract formulae***. *It does not pull data from the Ethereum blockchain.  It may show slightly different values because users can wait any period of time before minting CRV from liquidity emissions, or unlocking claimable tokens from vesting contracts.  It is also assumed that community reserve tokens are vested for a 1 year period.  This is not completely true as they are vested for at least 1 year once allocated to a cause by the DAO.*
+*Дисклеймер точности*: ***Этот калькулятор теоретический, основанный на расписаниях вестинга и формулах смарт-контрактов***. *Он не извлекает данные из блокчейна Ethereum. Возможно небольшое расхождение в значениях, так как пользователи могут ждать любое время перед выпуском CRV из эмиссии ликвидности или разблокировкой токенов из контрактов вестинга. Также предполагается, что резервные токены сообщества вестируются в течение 1 года. Это не совсем так, так как они вестируются как минимум в течение 1 года после назначения на проект DAO.*
 
 <div class="chart-container">
-<div style="display: flex; align-items: center;">
-    <div class="input">
-    <label for="dateInput" style="margin-left: 10px;">Choose a date:</label>
-    <input type="date" style="margin-left: 10px;" id="dateInput" onchange="renderCharts()">
-    </div>
-    <button class="preset-button" onclick="setDate('2020-08-13')">Launch Day</button>
-    <button class="preset-button" onclick="setDate(getCurrentDate())">Today</button>
-    <button class="preset-button" onclick="setDate(getNextReductionDate())">Next Reduction</button>
-    <button class="preset-button" onclick="setDate('2040-08-13')">20 Years</button>
-
-</div>
-<div id="errorMessage" style="color: red; margin-left: 10px;"></div>
-<div class="chart-wrapper-container">
-    <div class="chart-wrapper" style="flex: 1;">
-        <div style="display: flex;">
-        <span style="text-align: center; margin-top: 5px; margin-right: 10px; flex: 2; font-weight: bold;">Total CRV Circulating</span>
+    <div style="display: flex; align-items: center;">
+        <div class="input">
+            <label for="dateInput" style="margin-left: 10px;">Выберите дату:</label>
+            <input type="date" style="margin-left: 10px;" id="dateInput" onchange="renderCharts()">
         </div>
-      <div class="centered" style="width=65%;">
-        <canvas id="totalChart" class="emission-chart"></canvas>
-      </div>
-      <div id="totalAmounts"></div>
+        <button class="preset-button" onclick="setDate('2020-08-13')">День запуска</button>
+        <button class="preset-button" onclick="setDate(getCurrentDate())">Сегодня</button>
+        <button class="preset-button" onclick="setDate(getNextReductionDate())">Следующее сокращение</button>
+        <button class="preset-button" onclick="setDate('2040-08-13')">20 лет</button>
     </div>
-    <div class="chart-wrapper" style="flex: 1;">
-      <div style="display: flex;">
-      <span style="text-align: center; margin-top: 5px; margin-right: 10px; flex: 2; font-weight: bold;">Daily CRV Added to Circulating</span>
-      </div>
-      <div class="centered" style="width=65%;">
-        <canvas id="dailyChart" class="emission-chart"></canvas>
-      </div>
-      <div id="dailyAmounts"></div>
+    <div id="errorMessage" style="color: red; margin-left: 10px;"></div>
+    <div class="chart-wrapper-container">
+        <div class="chart-wrapper" style="flex: 1;">
+            <div style="display: flex;">
+                <span style="text-align: center; margin-top: 5px; margin-right: 10px; flex: 2; font-weight: bold;">Всего CRV в обращении</span>
+            </div>
+            <div class="centered" style="width=65%;">
+                <canvas id="totalChart" class="emission-chart"></canvas>
+            </div>
+            <div id="totalAmounts"></div>
+        </div>
+        <div class="chart-wrapper" style="flex: 1;">
+            <div style="display: flex;">
+                <span style="text-align: center; margin-top: 5px; margin-right: 10px; flex: 2; font-weight: bold;">Ежедневно добавляется CRV</span>
+            </div>
+            <div class="centered" style="width=65%;">
+                <canvas id="dailyChart" class="emission-chart"></canvas>
+            </div>
+            <div id="dailyAmounts"></div>
+        </div>
     </div>
-  </div>
-  <div class="chart-wrapper">
-    <div id="totalEmissions"></div>
-  </div>
+    <div class="chart-wrapper">
+        <div id="totalEmissions"></div>
+    </div>
 </div>
 
-Definition of terms in the calculator:
+### **Определения терминов в калькуляторе:**
 
-* `Vesting/Vested` - Vesting tokens are locked for a time period.  Vested tokens are unlocked as the vesting time period elapsed.
-* `Emissions/Emitted` - Emissions are CRV Inflation from newly minted CRV increasing the supply.  Emitted are the CRV which were added to the supply.
-* `Max CRV Supply` - Unchanging value, the max CRV that can exist.
-* `Total CRV Circulating` - The total supply of CRV unlocked from vesting and released from community emissions.  Including rewards that can currently be claimed/minted by users.
-* `Total CRV Supply` - The amount of minted CRV which currently exists, including pre-mined CRV locked in vesting contracts.
-* `Remaining CRV Emissions` - Remaining amount of CRV to be emitted to the community.
-* `Remaining CRV Vesting` - Remaining CRV to be unlocked from vesting contracts.
-* `Percentage of CRV Circulating` - Measure of the max CRV supply compared to the current circulating supply.  `Total CRV Circulating` divided by `Max CRV Supply`.
-* `CRV Inflation Rate` - Measure of the yearly CRV emitted & vested compared to the current circulating supply.  `Yearly CRV Emitted & Vested` divided by `Total CRV Circulating`.
-
+- **Вестинг/Разблокировано** — Вестинг токены заблокированы на определённый период. Разблокированные токены становятся доступными по мере истечения этого периода.
+- **Эмиссия/Выпущено** — Эмиссия это инфляция CRV от новых выпускаемых CRV, увеличивающих предложение. Выпущено это CRV, добавленные в предложение.
+- **Максимальное предложение CRV** — Неизменяемое значение, максимальное количество CRV, которое может существовать.
+- **Всего CRV в обращении** — Общее предложение CRV, разблокированное из вестинга и выпущенное из эмиссии сообщества. Включает вознаграждения, которые могут быть в данный момент получены/выпущены пользователями.
+- **Всего предложения CRV** — Количество выпущенных CRV, которые в данный момент существуют, включая предмайненные CRV, заблокированные в контрактах вестинга.
+- **Оставшаяся эмиссия CRV** — Оставшееся количество CRV, которое будет выпущено сообществу.
+- **Оставшийся вестинг CRV** — Оставшееся количество CRV, которое будет разблокировано из контрактов вестинга.
+- **Процент CRV в обращении** — Мера максимального предложения CRV по отношению к текущему предложению в обращении. `Всего CRV в обращении` делённое на `Максимальное предложение CRV`.
+- **Ставка инфляции CRV** — Мера годовой эмиссии & вестинга CRV по отношению к текущему предложению в обращении. `Годовая эмиссия & вестинг CRV` делённая на `Всего CRV в обращении`.
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -286,7 +283,7 @@ function renderCharts() {
     totalChart = new Chart(totalCtx, {
         type: 'pie',
         data: {
-        labels: ['Community', 'Early Users', 'Core Team', 'Investors', 'Employees', 'Reserve'],
+        labels: ['Сообщество', 'Ранние пользователи', 'Основная команда', 'Инвесторы', 'Сотрудники', 'Резерв'],
         datasets: [{
             data: [
             roundedAmounts.emissionsTotal,
@@ -305,7 +302,7 @@ function renderCharts() {
         plugins: {
             title: {
                 display: false,
-                text: 'Total CRV Circulating'
+                text: 'Всего CRV в обращении'
             }
         }}
     });
@@ -314,7 +311,7 @@ function renderCharts() {
         type: 'pie',
         devicePixelRatio: 2.5,
         data: {
-        labels: ['Community', 'Early Users', 'Core Team', 'Investors', 'Employees', 'Reserve'],
+        labels: ['Сообщество', 'Ранние пользователи', 'Основная команда', 'Инвесторы', 'Сотрудники', 'Резерв'],
         datasets: [{
             data: [
             roundedAmounts.emissionsDaily,
@@ -332,148 +329,146 @@ function renderCharts() {
         plugins: {
             title: {
                 display: false,
-                text: 'Daily CRV Added to Circulating'
+                text: 'Ежедневно добавляется CRV'
             }
         }}
     });
 
-    // Update the total amounts
+   // Обновление общих сумм
     const totalAmountsElement = document.getElementById('totalAmounts');
     totalAmountsElement.innerHTML = `
         <div style="display: flex;">
-        <span style="text-align: center; margin-top: 15px; margin-right: 10px; flex: 2; font-weight: bold;">Total Emissions</span>
+            <span style="text-align: center; margin-top: 15px; margin-right: 10px; flex: 2; font-weight: bold;">Всего эмиссия</span>
         </div>
         <div style="display: flex; border-bottom: 1px solid #ddd;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Community:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.emissionsTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.emissionsTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Сообщество:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.emissionsTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.emissionsTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: center; margin-right: 10px; flex: 2; font-weight: bold;">Total Vested</span>
+            <span style="text-align: center; margin-right: 10px; flex: 2; font-weight: bold;">Всего вестинг</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Early Users:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.earlyUsersTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.earlyUsersTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Ранние пол.:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.earlyUsersTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.earlyUsersTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Core Team:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.coreTeamTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.coreTeamTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Осн. команда:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.coreTeamTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.coreTeamTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Investors:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.investorsTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.investorsTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Инвесторы:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.investorsTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.investorsTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Employees:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.employeesTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.employeesTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Сотрудники:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.employeesTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.employeesTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex; border-bottom: 1px solid #ddd;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Reserve:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.reserveTotal.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.reserveTotal/amounts.totalEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Резерв:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.reserveTotal.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.reserveTotal / amounts.totalEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2; font-weight: bold;">Total:</span>
-        <span style="text-align: left; flex: 2; font-weight: bold;">${(Math.round(amounts.totalEmitted)).toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey"></span>
+            <span style="text-align: right; margin-right: 10px; flex: 2; font-weight: bold;">Всего:</span>
+            <span style="text-align: left; flex: 2; font-weight: bold;">${(Math.round(amounts.totalEmitted)).toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;"></span>
         </div>
     `;
 
-    // Update the daily amounts
+    // Обновление ежедневных сумм
     const dailyAmountsElement = document.getElementById('dailyAmounts');
     dailyAmountsElement.innerHTML = `
         <div style="display: flex;">
-        <span style="text-align: center; margin-top: 15px; margin-right: 10px; flex: 2; font-weight: bold;">Daily Emissions</span>
+            <span style="text-align: center; margin-top: 15px; margin-right: 10px; flex: 2; font-weight: bold;">Ежедневные эмиссии</span>
         </div>
         <div style="display: flex; border-bottom: 1px solid #ddd;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Community:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.emissionsDaily.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.emissionsDaily/amounts.dailyEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Сообщество:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.emissionsDaily.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.emissionsDaily / amounts.dailyEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: center; margin-right: 10px; flex: 2; font-weight: bold;">Daily Vested</span>
+            <span style="text-align: center; margin-right: 10px; flex: 2; font-weight: bold;">Ежедневный вестинг</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Early Users:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.earlyUsersDaily.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.earlyUsersDaily/amounts.dailyEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Ранние пол.:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.earlyUsersDaily.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.earlyUsersDaily / amounts.dailyEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Core Team:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.coreTeamDaily.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.coreTeamDaily/amounts.dailyEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Осн. команда:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.coreTeamDaily.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.coreTeamDaily / amounts.dailyEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Investors:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.investorsDaily.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.investorsDaily/amounts.dailyEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Инвесторы:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.investorsDaily.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.investorsDaily / amounts.dailyEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Employees:</span>
-        <span style="text-align: left; flex: 2;">${roundedAmounts.employeesDaily.toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(amounts.employeesDaily/amounts.dailyEmitted*100).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Сотрудники:</span>
+            <span style="text-align: left; flex: 2;">${roundedAmounts.employeesDaily.toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(amounts.employeesDaily / amounts.dailyEmitted * 100).toFixed(2)}%</span>
         </div>
         <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Reserve:</span>
-        <span style="text-align: left; flex: 2;">${(0).toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey">${(0).toFixed(2)} %</span>
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Резерв:</span>
+            <span style="text-align: left; flex: 2;">${(0).toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;">${(0).toFixed(2)}%</span>
         </div>
         <div style="display: flex; border-top: 1px solid #ddd;">
-        <span style="text-align: right; margin-right: 10px; flex: 2; font-weight: bold;">Daily Total:</span>
-        <span style="text-align: left; flex: 2; font-weight: bold;">${(Math.round(amounts.dailyEmitted)).toLocaleString(undefined)}</span>
-        <span style="text-align: left; flex: 1.3; color: grey"></span>
+            <span style="text-align: right; margin-right: 10px; flex: 2; font-weight: bold;">Всего в день:</span>
+            <span style="text-align: left; flex: 2; font-weight: bold;">${(Math.round(amounts.dailyEmitted)).toLocaleString()}</span>
+            <span style="text-align: left; flex: 1.3; color: grey;"></span>
         </div>
     `;
 
 
-    // Update the daily amounts
+    // Обновление статистики эмиссии
     const totalEmissionsElement = document.getElementById('totalEmissions');
     totalEmissionsElement.innerHTML = `
-    <div style="text-align: center; font-weight: bold;border-bottom: 1px solid #ddd;">CRV Stats on ${chosenDateString}</div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Max CRV Supply :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(amounts.maxSupply).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Total CRV Circulating :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(amounts.totalEmitted).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Total CRV Supply :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(Math.max(1303030303+amounts.emissionsTotal,amounts.totalEmitted)).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Remaining CRV Emissions :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(amounts.maxSupply - amounts.totalEmitted - amounts.vestingRemaining).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-      <span style="text-align: right; margin-right: 10px; flex: 2;">Remaining CRV Vesting :</span>
-      <span style="text-align: left; flex: 2;">
-        ${Math.max(0, roundAmount(amounts.vestingRemaining)).toLocaleString(undefined)}
-      </span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Percentage of CRV Circulating :</span>
-        <span style="text-align: left; flex: 2;">${amounts.percentEmitted.toLocaleString(undefined, { maximumFractionDigits: 2 })} %</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Daily CRV Emitted & Vested :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(amounts.dailyEmitted).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">Yearly CRV Emitted & Vested :</span>
-        <span style="text-align: left; flex: 2;">${roundAmount(amounts.yearlyEmitted).toLocaleString(undefined)}</span>
-    </div>
-    <div style="display: flex;">
-        <span style="text-align: right; margin-right: 10px; flex: 2;">CRV Inflation Rate :</span>
-        <span style="text-align: left; flex: 2;">${amounts.inflationRate.toLocaleString(undefined, { maximumFractionDigits: 2 })} %</span>
-    </div>
-
-
+        <div style="text-align: center; font-weight: bold; border-bottom: 1px solid #ddd;">Статистика CRV на ${chosenDateString}</div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Максимальное предложение:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(amounts.maxSupply).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Всего в обращении:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(amounts.totalEmitted).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Всего предложение:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(Math.max(1303030303 + amounts.emissionsTotal, amounts.totalEmitted)).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Оставшаяся эмиссия:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(amounts.maxSupply - amounts.totalEmitted - amounts.vestingRemaining).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Оставшийся вестинг:</span>
+            <span style="text-align: left; flex: 2;">
+                ${Math.max(0, roundAmount(amounts.vestingRemaining)).toLocaleString()}
+            </span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Процент в обращении:</span>
+            <span style="text-align: left; flex: 2;">${amounts.percentEmitted.toLocaleString(undefined, { maximumFractionDigits: 2 })}%</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Ежедневно эмитируется & вестится:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(amounts.dailyEmitted).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Годовая эмиссия & вестинг:</span>
+            <span style="text-align: left; flex: 2;">${roundAmount(amounts.yearlyEmitted).toLocaleString()}</span>
+        </div>
+        <div style="display: flex;">
+            <span style="text-align: right; margin-right: 10px; flex: 2;">Ставка инфляции CRV:</span>
+            <span style="text-align: left; flex: 2;">${amounts.inflationRate.toLocaleString(undefined, { maximumFractionDigits: 2 })}%</span>
+        </div>
     `;
 }
 
@@ -568,7 +563,7 @@ new Chart(crv10yearChartctx, {
   data: {
     datasets: [
       {
-        label: 'Community Yearly CRV',
+        label: 'Годовая эмиссия сообщества CRV',
         data: datasets.emissionsYearly,
         borderColor: '#FF6384',
         fill: false,
@@ -576,7 +571,7 @@ new Chart(crv10yearChartctx, {
         pointRadius: 0,
       },
       {
-        label: 'Core Team Yearly CRV',
+        label: 'Годовая эмиссия CRV для основной команды',
         data: datasets.coreTeamYearly,
         borderColor: '#FFCE56',
         fill: false,
@@ -584,7 +579,7 @@ new Chart(crv10yearChartctx, {
         pointRadius: 0,
       },
       {
-        label: 'Total Circulating CRV',
+        label: 'Общий объем в обращении',
         data: datasets.totalEmitted,
         borderColor: '#8E5EA2',
         fill: false,
@@ -593,7 +588,7 @@ new Chart(crv10yearChartctx, {
         hidden: true
       },
       {
-        label: 'Total Distributed %',
+        label: 'Общий процент распределенных',
         data: datasets.percentEmitted,
         borderColor: '#36A2EB',
         fill: false,
@@ -603,7 +598,7 @@ new Chart(crv10yearChartctx, {
         borderDashOffset: 0
       },
       {
-        label: 'CRV Inflation Rate',
+        label: 'Ставка инфляции CRV',
         data: datasets.inflationRate,
         borderColor: '#3cba9f',
         fill: false,
@@ -707,103 +702,103 @@ new Chart(crv10yearChartctx, {
     },
   },
 });
-
 </script>
 
 
 <script>
-    var ctx = document.getElementById('crvAllocationChart').getContext('2d');
-    var data = [1727272729, 151515152, 800961153, 108129756, 90909091, 151515152];
-    var totalSum = data.reduce((a, b) => a + b, 0);
-    var percentages = data.map(value => ((value / totalSum) * 100).toFixed(2));
+var ctxAllocation = document.getElementById('crvAllocationChart').getContext('2d');
+var dataAllocation = [1727272729, 151515152, 800961153, 108129756, 90909091, 151515152];
+var totalSumAllocation = dataAllocation.reduce((a, b) => a + b, 0);
+var percentagesAllocation = dataAllocation.map(value => ((value / totalSumAllocation) * 100).toFixed(2));
 
-    var crvAllocationChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Community', 'Early Users', 'Core Team', 'Investors', 'Employees', 'Reserve'],
-            datasets: [{
-                data: data,
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#8E5EA2', '#3cba9f', '#e8c3b9'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            devicePixelRatio: 2.5,
-            responsive: true,
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                                var label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                var value = context.raw;
-                                var percentage = percentages[context.dataIndex];
-                                label += value.toLocaleString() + ' (' + percentage + '%)';
-                                return label;
-                            }
-                    }
-                },
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'CRV Total Allocation'
-                }
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('crvLaunchChart').getContext('2d');
-    var data = [151515152, 800961152, 108129756, 90909090, 151515152];
-    var totalSum = data.reduce((a, b) => a + b, 0);
-    var percentagesLaunch = data.map(value => ((value / totalSum) * 100).toFixed(2));
-    var crvLaunchChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: [
-                'Early Users',
-                'Core Team',
-                'Investors',
-                'Employees',
-                'Reserve'
-            ],
-            datasets: [{
-                data: data,
-                backgroundColor: ['#36A2EB', '#FFCE56', '#8E5EA2', '#3cba9f', '#e8c3b9'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            devicePixelRatio: 2.5,
-            responsive: true,
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            var value = context.raw;
-                            var percentage = percentagesLaunch[context.dataIndex];
-                            var vestingYears = [1, 4, 2, 2, 0][context.dataIndex];
-                            label += value.toLocaleString() + ' (' + percentage + '%)';                            return label;
+var crvAllocationChart = new Chart(ctxAllocation, {
+    type: 'pie',
+    data: {
+        labels: ['Сообщество (эмиссии)', 'Ранние пользователи (провайдеры ликвидности до CRV)', 'Основная команда', 'Инвесторы', 'Сотрудники', 'Резерв сообщества'],
+        datasets: [{
+            data: dataAllocation,
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#8E5EA2', '#3cba9f', '#e8c3b9'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        devicePixelRatio: 2.5,
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        var label = context.label || '';
+                        if (label) {
+                            label += ': ';
                         }
+                        var value = context.raw;
+                        var percentage = percentagesAllocation[context.dataIndex];
+                        label += value.toLocaleString() + ' (' + percentage + '%)';
+                        return label;
                     }
-                },
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'CRV Launch Allocation'
                 }
+            },
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Общая аллокация CRV'
             }
         }
-    });
+    }
+});
+</script>
+
+<script>
+var ctxLaunch = document.getElementById('crvLaunchChart').getContext('2d');
+var dataLaunch = [151515152, 800961152, 108129756, 90909090, 151515152];
+var totalSumLaunch = dataLaunch.reduce((a, b) => a + b, 0);
+var percentagesLaunch = dataLaunch.map(value => ((value / totalSumLaunch) * 100).toFixed(2));
+
+var crvLaunchChart = new Chart(ctxLaunch, {
+    type: 'pie',
+    data: {
+        labels: [
+            'Ранние пользователи',
+            'Основная команда',
+            'Инвесторы',
+            'Сотрудники',
+            'Резерв'
+        ],
+        datasets: [{
+            data: dataLaunch,
+            backgroundColor: ['#36A2EB', '#FFCE56', '#8E5EA2', '#3cba9f', '#e8c3b9'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        devicePixelRatio: 2.5,
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        var label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        var value = context.raw;
+                        var percentage = percentagesLaunch[context.dataIndex];
+                        label += value.toLocaleString() + ' (' + percentage + '%)';
+                        return label;
+                    }
+                }
+            },
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Распределение при запуске CRV'
+            }
+        }
+    }
+});
 </script>

@@ -1,15 +1,15 @@
-# **Loan Creation**
+<h1>Создание и управление займами</h1>
 
-In standard mode, creating a loan with crvUSD involves specifying a certain amount of a collateral asset and determining the quantity of crvUSD to borrow. After the collateral amount is set, the interface displays the maximum amount of crvUSD that can be borrowed, along with the health and borrow rate of the loan.
+# **Создание займа** {#loan-creation}
+
+В стандартном режиме создание займа с crvUSD включает указание определённого количества залогового актива и определение количества crvUSD для заимствования. После установки суммы залога интерфейс отображает максимальное количество crvUSD, которое можно заимствовать, а также здоровье займа и [**процентную ставку за займ**](./loan-concepts.md#borrow-rate).
 
 <figure markdown>
   ![](../images/tbtc_create_simple_a.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-
-The user interface (UI) features a dropdown menu for viewing additional loan parameters, such as the current Oracle Price and [**Borrow Rate**](./loan-concepts.md#borrow-rate).
-
+Интерфейс пользователя (UI) включает выпадающее меню для просмотра дополнительных параметров займа, таких как текущая цена оракула и [**процентная ставка за займ**](./loan-concepts.md#borrow-rate).
 
 <figure markdown>
   ![](../images/tbtc_loan_param.png){ width="300" }
@@ -18,77 +18,76 @@ The user interface (UI) features a dropdown menu for viewing additional loan par
 
 ---
 
-# **Loan Management**
+# **Управление займом** {#loan-management}
 
-Everything needed to manage a loan is available in this interface. The features include:
+В этом интерфейсе доступно всё необходимое для управления займом. Функции включают:
 
 <figure markdown>
   ![](../images/loan_management.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-**`Loan`**   
-This tab provides options to **`Borrow more`** crvUSD, **`Repay`** debt, or **`Self-liquidate`** a loan
+**`Loan`** (Заем)  
+Эта вкладка предоставляет опции для **`Borrow more`** (Занять больше) crvUSD, **`Repay`** (Погасить) долг или **`Self-liquidate`** (Самоликвидировать) займ.
 
-**`Collateral`**  
-Options to **`add`** or **`remove`** collateral from a loan are available here.
+**`Collateral`** (Залог)  
+Здесь доступны опции для **`add`** (Добавить) или **`remove`** (Удалить) залог из займа.
 
-**`Deleverage`**   
-This tab facilitates loan deleveraging. Find more details [here](#deleveraging-loans).
+**`Deleverage`** (Снижение кредитного плеча)  
+Эта вкладка облегчает деливереджинг займа. Подробнее см. [здесь](#deleveraging-loans).
 
 ---
 
-# **Loan Details**
+# **Детали займа** {#loan-details}
 
-The `Your Loan Details` tab shows all the information about your personal loan:
+Вкладка `Your Loan Details` (Детали вашего займа) отображает всю информацию о вашем личном займе:
 
 <figure markdown>
   ![](../images/loan_details_2.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-When a user creates a loan, their **collateral is allocated across a number of [bands](./loan-concepts.md#bands-n) (liquidation range)**. Should the asset price fall within this range, the loan will enter [soft-liquidation](./liquidations.md#soft-liquidation) mode. In this state, the user is not allowed to add additional collateral. The only recourse is to either repay with crvUSD or to self-liquidate the loan.
+Когда пользователь создаёт займ, его **залог распределяется по ряду диапазонов мягкой ликвидации — полосам [Bands](./loan-concepts.md#bands-n) (полосам ликвидации)**. Если цена актива опустится в эту полосу, займ перейдёт в режим [мягкой ликвидации](./liquidations.md#soft-liquidation). В этом состоянии пользователю запрещено добавлять дополнительный залог. Единственный выход — либо погасить crvUSD частично или полностью, либо самоликвидировать займ.
 
-When a position was or is in soft-liquidation mode, losses occur. The UI displays these losses in 3 ways:
+Если позиция находилась или находится в режиме мягкой ликвидации, возникают потери. Интерфейс пользователя отображает эти потери тремя способами:
 
-- `LOSS AMOUNT` is how much you've lost in soft-liquidation in collateral format, e.g. 0.001 ETH.
-- `% LOST` is percentage of deposited collateral you've lost in soft liquidation.
-- `COLLATERAL CURRENT BALANCE (EST.) / DEPOSITED` shows your current collateral minus any losses compared to the amount deposited.
+- `LOSS AMOUNT` (СУММА ПОТЕРИ) — сколько вы потеряли в мягкой ликвидации в формате залога, например, 0.001 ETH.
+- `% LOST` (% ПОТЕРЯНО) — процент залога, потерянный в мягкой ликвидации.
+- `COLLATERAL CURRENT BALANCE (EST.) / DEPOSITED` (ТЕКУЩИЙ БАЛАНС ЗАЛОГА (ОЦЕНКА) / ВНЕСЁННЫЙ ЗАЛОГ) — ваш текущий залог за вычетом любых потерь по сравнению с внесённой суммой.
 
-The `LLAMMA BALANCES` section shows the breakdown of your current loan collateral.  For example, in the above picture there is 0.01 ETH and 0 crvUSD.  If the user was in soft-liquidation some of the collateral would be swapped to crvUSD to protect from further price decreases, and this would reduce the current ETH balance and increase the crvUSD balance.
+Раздел `LLAMMA BALANCES` показывает распределение вашего текущего залога. Например, на приведённой выше картинке показано 0.01 ETH и 0 crvUSD. Если пользователь находится в режиме мягкой ликвидации, часть залога будет обменена на crvUSD для защиты от дальнейшего снижения цены, что уменьшит текущий баланс ETH и увеличит баланс crvUSD.
 
+!!!info "Режим мягкой ликвидации"
+    **Во время [мягкой ликвидации](./liquidations.md#soft-liquidation) пользователи не могут добавлять или выводить залог.** Они могут выбрать **либо частично или полностью погасить (repay)** свой долг в crvUSD для улучшения своего [**здоровья займа (health)**](./loan-concepts.md#loan-health) **либо** решить [**самоликвидировать (self-liquidate)**](../lending/how-to-borrow.md#self-liquidate) свой займ, если их структура залога содержит достаточное количество crvUSD для покрытия непогашенного долга. Если они выбирают самоликвидизацию, долг пользователя полностью погашается, и займ закрывается. Любые остаточные суммы возвращаются пользователю.
 
-!!!info "Soft-Liquidation Mode"
-    **During [soft-liquidation](./liquidations.md#soft-liquidation), users are unable to add or withdraw collateral.** They can choose to **either partially or fully repay** their crvUSD debt to improve their [**health**](./loan-concepts.md#loan-health) **or** decide to [**self-liquidate**](../lending/how-to-borrow.md#self-liquidate) their loan if their collateral composition contains sufficient crvUSD to cover the outstanding debt. If they opt for self-liquidation, the user's debt is fully repaid and the loan will be closed. Any residual amounts are then returned to the user.
-
-    If their health declines to 0, they are [**hard-liquidated**](./liquidations.md#hard-liquidation) and lose their collateral but keep their debt.
+Если здоровье займа (health) падает до 0, займ [**жестко ликвидируется (hard-liquidated)**](./liquidations.md#hard-liquidation), и пользователь теряет свой залог, но сохраняет занятые средства.
 
 ---
 
-# **Advanced Loan Creation & Management**
+# **Расширенное создание и управление займами** {#advanced-loan-creation-management}
 
-In the upper right-hand side of the screen, there is a toggle button for advanced mode.
+В правом верхнем углу экрана находится переключатель для включения расширенного режима.
 
 <figure markdown>
   ![](../images/adv.png){width="400"}
   <figcaption></figcaption>
 </figure>
 
-In advanced mode the UI shows more information about the [**Collateral Bands**](./loan-concepts.md#bands-n) for your personal loan:
+В расширенном режиме интерфейс пользователя показывает больше информации о [**Диапазонах залога (Collateral Bands - полос обеспечения)**](./loan-concepts.md#bands-n) для вашего личного займа:
 
 <figure markdown>
   ![](../images/loan_details_3.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-Advanced mode also adds a tab with info about the [**LLAMMA Bands**](./loan-concepts.md#bands-n) for all loans together:
+Расширенный режим также добавляет вкладку с информацией о [**Диапазонах LLAMMA**](./loan-concepts.md#bands-n) для всех займов вместе:
 
 <figure markdown>
   ![](../images/loan_details_4.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-It also expands the loan creation interface by displaying the **liquidation and band range**, **number of bands**, **borrow rate**, and **Loan to Value ratio (LTV)**. Additionally, users can manually select the number of bands for the loan by pressing the **`adjust`** button and using the slider to increase or decrease the number of bands.
+Он также расширяет интерфейс создания займа, отображая **диапазон ликвидации и диапазон (LR)**, **количество полос (band range)**, **процентную ставку по займу (borrow rate)** и **коэффициент займа к стоимости залога (Loan to Value ratio - LTV)**. Кроме того, пользователи могут вручную выбрать количество полос для займа, нажав кнопку **`adjust`** (регулировать) и используя ползунок для увеличения или уменьшения количества полос.
 
 <figure markdown>
   ![](../images/tbtc_create_adv2.png){ width="300" }
@@ -96,32 +95,32 @@ It also expands the loan creation interface by displaying the **liquidation and 
 </figure>
 
 !!!tip
-    A **higher number of bands generally results in fewer losses when the loan is in soft-liquidation** mode, see [**here**](./loan-concepts.md#loan-health). The maximum number of bands is 50, while the minimum is 4.
+    **Большее количество полос (bands) обычно приводит к меньшим потерям при нахождении займа в режиме мягкой ликвидации**, см. [здесь](./loan-concepts.md#loan-health). Максимальное количество полос — 50, а минимальное — 4.
 
 ---
 
-## **Leveraged Loans**
+## **Использование кредитного плеча** {#leveraged-loans}
 
-The UI offers a leveraging feature for loans, accessible by navigating to the **`Leverage`** tab.
+Интерфейс пользователя предлагает функцию использования кредитного плеча для займов, доступную через вкладку **`Leverage`** (Использование кредитного плеча).
 
-More information on how to deleverage a loan [here](#deleveraging-loans).
+Подробнее о том, как деливереджить займ, см. [здесь](#deleveraging-loans).
 
-!!!info "Leverage"
-    Collateral can be leveraged **up to 9x**, depending on the number of bands chosen. If a user wants to use the maximum leverage (9x), they loan will have the minimum number of bands (4). Using the highest number of bands (50) only allows for a leverage of up to 3x. **For the consequences of using different numbers of bands, see [here](./loan-concepts.md#loan-health).**
+!!!info "Использование кредитного плеча"
+    Залог может быть использован с **до 9x кредитного плеча**, в зависимости от выбранного количества полос. Если пользователь хочет использовать максимальное кредитное плечо (9x), его займ будет иметь минимальное количество полос (4). Использование наибольшего количества полос (50) позволяет использовать кредитное плечо только до 3x. **Для последствий использования разного количества полос см. [здесь](./loan-concepts.md#loan-health).**
 
-The process of leveraging effectively involves **repeat trading of crvUSD for collateral and depositing it to maximize the collateral position**. Essentially, all borrowed crvUSD is utilized to acquire more collateral.  
+Процесс использования кредитного плеча фактически включает **повторяющуюся продажу crvUSD за токены залога и последующие депонирование их для максимизации залоговой позиции**. По сути, весь заимствованный crvUSD используется для приобретения большего количества залога.
 
 !!!warning
-    **Caution is advised, as a dip in the collateral price would necessitate repaying the entire amount to reclaim the initial position.**
+    **Будьте осторожны, так как падение цены залога потребует погашения всей суммы для возврата исходной позиции.**
 
-:fontawesome-solid-book: [A good explainer how leveraging works](https://curve.substack.com/p/august-15-2023-all-or-nothing)
+:fontawesome-solid-book: [Хорошее объяснение использования кредитного плеча](https://curve.substack.com/p/august-15-2023-all-or-nothing)
 
 <figure markdown>
 ![](../images/tbtc_lev1.png){ width="400" }
 <figcaption></figcaption>
 </figure>
 
-Toggling the advanced mode expands the display to show additional information about the loan, including the price impact, trade route and the actual leverage.
+Переключение в расширенный режим раскрывает дополнительные сведения о займе, включая влияние на цену, маршрут торговли и фактическое кредитное плечо.
 
 <figure markdown>
 ![](../images/lev_info.png){ width="300" }
@@ -130,22 +129,22 @@ Toggling the advanced mode expands the display to show additional information ab
 
 ---
 
-## **Deleveraging Loans**
+## **Деливереджинг займов** {#deleveraging-loans}
 
-Deleveraging a loan — irrespective of it being [**leveraged**](../crvusd/loan-creation.md#leveraged-loans)  — is an option available through the UI. Users must navigate to the `Deleverage` tab and input the amount of collateral they intend to allocate for deleveraging. This particular collateral is then converted into crvUSD, which is used to facilitate debt repayment.
+Деливереджинг займа (Снижение кредитного плеча займа) — независимо от того, является ли он [**используемым с кредитным плечом**](../crvusd/loan-creation.md#leveraged-loans) — это опция, доступная через интерфейс пользователя. Пользователи могут перейти на вкладку `Deleverage` (Снижение кредитного плеча) и ввести сумму залога, которую они намерены выделить для деливереджинга. Этот залог затем конвертируется в crvUSD, который используется для погашения долга.
 
 <figure markdown>
   ![](../images/delev_no_softliq1.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-
 !!!info
-    **When a user's loan is in soft-liquidation, deleveraging is only possible if the loan is fully repaid.** Apart from that, the loan can typically be self-liquidated. If the position is not in soft-liquidation, the user can deliberately deleverage by any chosen amount.
+    **Когда займ пользователя находится в режиме мягкой ликвидации, деливереджинг возможен только в случае полного погашения.** Помимо этого, займ обычно может быть самоликвидирован. Если позиция не находится в режиме мягкой ликвидации, пользователь может сознательно деливереджить на любую выбранную сумму.
 
-The UI will provide the user with their updated loan details, such as liquidation and band range, borrow rate, and health, as well as the LLAMMA changes of collateral and debt.
+Интерфейс предоставит пользователю обновленные детали займа, такие как диапазон ликвидации (LR) и полос (Band range), процентная ставка по займу (Borrow rate), уровень здоровья (Health), а также изменения LLAMMA залога (Collateral) и долга (Debt).
 
 <figure markdown>
 ![](../images/delev_new_details.png){ width="300" }
   <figcaption></figcaption>
 </figure>
+

@@ -1,94 +1,95 @@
-<h1>Fee Collection & Distribution</h1>
+<h1>Сбор и распределение комиссий</h1>
 
-The Curve DAO earns revenue from pools and crvUSD minting markets within the ecosystem.  Each week this revenue is collected in different tokens and exchanged for a single token (currently crvUSD) which is then distributed to [veCRV](./overview.md) holders.
+DAO Curve зарабатывает доход от пулов и рынков эмиссии crvUSD внутри экосистемы. Каждую неделю этот доход собирается в различных токенах и обменивается на единый токен (в настоящее время crvUSD), который затем распределяется держателям [veCRV](./overview.md).
 
-# **Admin Fees**
+# **Административные комиссии**
 
-The revenue comes in the form of admin fees.  There are three different ways these accrue and are collected:
+Доход поступает в форме административных комиссий. Существует три различных способа их накопления и сбора:
 
-## **Stableswap Fees**
+## **Комиссии Stableswap**
 
-Stableswap admin fees are 50% of the total fee charged using a Stableswap pool.  The fee is taken in the output token of the swap and calculated against the final amount received. For example, if swapping from USDC to DAI, the fee is taken in DAI.  Because of this every week each coin in the pool will have accrued fees that can be collected, e.g., for the pool below Admin Fees in USDC and DAI can both be collected.
+Административные комиссии Stableswap составляют 50% от общей комиссии, взимаемой за использование пула Stableswap. Комиссия берется в выходном токене обмена и рассчитывается на основе конечной полученной суммы. Например, при обмене USDC на DAI комиссия взимается в DAI. Из-за этого каждую неделю каждая монета в пуле будет накапливать комиссии, которые можно собирать, например, для следующего пула административные комиссии в USDC и DAI могут быть собраны.
 
-![Stableswap Fees](../images/governance/stableswap_fees.svg){ : .centered }
+![Комиссии Stableswap](../images/governance/stableswap_fees.svg){ : .centered }
 
-## **Cryptoswap Fees**
+## **Комиссии Cryptoswap**
 
-Cryptoswap admin fees are 50% of the total fee charged from a Cryptoswap pool.  As Cryptoswap pools always maintain balance, these fees accrue in the LP token of a pool, which represents an equal share of all assets in the pool.  LP shares are collected each week for these pools.
+Административные комиссии Cryptoswap составляют 50% от общей комиссии, взимаемой за пул Cryptoswap. Поскольку пулы Cryptoswap всегда поддерживают баланс, эти комиссии накапливаются в LP токене пула, который представляет равную долю всех активов в пуле. Доли LP собираются каждую неделю для этих пулов.
 
-![Cryptoswap Fees](../images/governance/cryptoswap_fees.svg){ : .centered }
+![Комиссии Cryptoswap](../images/governance/cryptoswap_fees.svg){ : .centered }
 
-## **crvUSD Minting Market Fees**
+## **Комиссии рынков эмиссии crvUSD**
 
-All accrued interest on debt in crvUSD minting markets is collected as crvUSD.  Also the AMM for crvUSD minting markets (LLAMMA) has the ability to collect admin fees on swaps, but currently all fees in these pools go to liquidity providers.
+Все накопленные процентные комиссии по задолженности на рынках эмиссии crvUSD собираются в crvUSD. Также AMM для рынков эмиссии crvUSD (LLAMMA) имеет возможность собирать административные комиссии за обмены, но в настоящее время все комиссии в этих пулах идут поставщикам ликвидности.
 
-![crvUSD Minting Market Fees](../images/governance/crvusd_fees.svg){ : .centered }
-
----
-
-# **Fee Collection & Distribution Architecture**
-
-Currently there are two ways fee collection, and distribution is being achieved.  The old way relies on hardcoding exchange routes for each coin collected, and the manual collection of these each week.  This is being phased out as a new architecture has been developed which incentivizes 3rd parties to do the collection of fees and uses [Cowswap's conditional orders](https://blog.cow.fi/introducing-the-programmatic-order-framework-from-cow-protocol-088a14cb0375) to flexibly sell any coin/token collected.
-
-The distribution of each week's fees happens on Thursday.  The fees are evenly split between all veCRV and can be claimed by veCRV holders at any time.  See [How to Claim veCRV Trading Fees](./claiming-trading-fees.md) for more information.
+![Комиссии рынков эмиссии crvUSD](../images/governance/crvusd_fees.svg){ : .centered }
 
 ---
 
-## **The New Cowswap Architecture**
+# **Архитектура сбора и распределения комиссий**
 
-The new Cowswap Architecture is based around a 4 phases occurring on different days of the week.  These phases are: `collection` on Monday, `exchanging` on Tuesday, `forwarding` on Wednesday and `distribution` on Thursday.  See below for further details about each phase.
+В настоящее время существует два способа сбора комиссий и их распределения. Старый способ полагается на жесткое кодирование маршрутов обмена для каждой собранной монеты и ручной сбор этих комиссий каждую неделю. Этот способ постепенно заменяется новой архитектурой, которая стимулирует третьи стороны заниматься сбором комиссий и использует [условные ордера Cowswap](https://blog.cow.fi/introducing-the-programmatic-order-framework-from-cow-protocol-088a14cb0375) для гибкой продажи любых собранных монет/токенов.
 
-### **Collection** - Monday
-
-The `collection` phase occurs on Monday, it makes sure any significant amounts of fees are collected and ready to be sold the following day.
-
-Newer pools automatically claim admin fees throughout the week when users withdraw their liquidity from the pools.  
-
-Otherwise, on Monday anyone can call functions which claim the fees from pools and then create conditional orders on Cowswap to sell the coins/tokens on Tuesday.  Doing this work is incentivized by giving the caller a reward.
-
-![Fee Collection](../images/governance/fee_collecting_phase.svg){ : .centered}
-
-### **Exchanging** - Tuesday
-
-The `exchanging` phase happens on Tuesday.  In this phase the conditional sell orders which were created on Monday during the `collection` phase can be executed by Cowswap searchers.  Each coin/token is swapped separately, and by the end of the day all coins and tokens should be swapped into the target coin (currently crvUSD).
-
-![Fee Exchanging](../images/governance/fee_exchanging_phase.svg){ : .centered}
-
-### **Forwarding** - Wednesday
-
-The `forwarding` phase happens on Wednesday.  All the target coin (currently crvUSD) which was exchanged for on Tuesday is forwarded to the Fee Distributor on Ethereum Mainnet through an intermediary contract called a hooker.  The hooker contract is a future proofing contract which can implement any arbitrary functions that are approved by the DAO.  Calling the function to do this transfer is incentivized by giving the caller a reward.
-
-### **Distribution** - Thursday
-
-Fees are distributed to veCRV holders weekly, within 24 hours after Thursday 00:00 UTC. These fees are split evenly among all veCRV holders, who can claim their share once each week after distribution. Users can first claim trading fees 8 days after the first Thursday following their lock. For example, if you lock on a Tuesday, you can claim trading fees 10 days later on Thursday. See [How to Claim veCRV Trading Fees](./claiming-trading-fees.md) for more information.
-
-!!!info "Info"
-    For more technical information regarding this new process please see the fee collection and distribution pages on the technical documentation: [https://docs.curve.fi/curve_dao/fee-collection-distribution/curve-burner/overview/](https://docs.curve.fi/curve_dao/fee-collection-distribution/curve-burner/overview/)
+Распределение комиссий за каждую неделю происходит в четверг. Комиссии равномерно распределяются среди всех держателей veCRV и могут быть заявлены держателями veCRV в любое время. См. [Как заявить торговые комиссии veCRV](./claiming-trading-fees.md) для получения дополнительной информации.
 
 ---
 
-## **Old Architecture**
+## **Новая архитектура Cowswap**
 
-This is outdated and is currently being phased out.  
+Новая архитектура Cowswap основана на четырех фазах, происходящих в разные дни недели. Эти фазы: `сбор` в понедельник, `обмен` во вторник, `пересылка` в среду и `распределение` в четверг. См. ниже для подробностей о каждой фазе.
 
-### **Collection**
+### **Сбор** - понедельник
 
-Collection happened manually by calling withdraw functions on pools and crvUSD markets.
+Фаза `сбор` происходит в понедельник и гарантирует, что значительные суммы комиссий собраны и готовы к продаже на следующий день.
 
-### **Exchanging (Burning)**
+Новые пулы автоматически заявляют административные комиссии на протяжении всей недели, когда пользователи выводят свою ликвидность из пулов.
+  
+В противном случае в понедельник любой может вызвать функции, которые собирают комиссии из пулов и затем создают условные ордера на Cowswap для продажи монет/токенов во вторник. Выполнение этой работы стимулируется предоставлением вознаграждения вызывающему.
 
-This happened manually by hardcoding in different exchange routes for each token, e.g., to transfer wstETH to 3CRV (the old target coin) the process was:
+![Сбор комиссий](../images/governance/fee_collecting_phase.svg){ : .centered}
 
-1. `wstETH` to `stETH` via unwrapping (wstETH Burner)
-2. `stETH` to `ETH` via swap through stETH/ETH curve pool (SwapStableBurner)
-3. `ETH` to `USDT` via swap through tricrypto pool (CryptoSwapBurner)
-4. `USDT` to `3CRV` via depositing into 3pool (StableDepositBurner)
+### **Обмен** - вторник
 
-This process worked well, but became cumbersome when an exchange route was needed for every coin in every pool.  The exchanges also needed to be called manually.
+Фаза `обмен` происходит во вторник. В этой фазе условные ордера на продажу, созданные в понедельник во время фазы `сбор`, могут быть исполнены поисковиками Cowswap. Каждая монета/токен обменивается отдельно, и к концу дня все монеты и токены должны быть обменены на целевую монету (в настоящее время crvUSD).
 
-### **Distribution**
+![Обмен комиссий](../images/governance/fee_exchanging_phase.svg){ : .centered}
 
-After the exchanging process is completed distribution happens by forwarding the exchanged coins to the fee distributor on Ethereum Mainnet.  Fees are distributed to veCRV holders weekly, within 24 hours after Thursday 00:00 UTC. These fees are split evenly among all veCRV holders, who can claim their share once each week after distribution. Users can first claim trading fees 8 days after the first Thursday following their lock. For example, if you lock on a Tuesday, you can claim trading fees 10 days later on Thursday. See [How to Claim veCRV Trading Fees](./claiming-trading-fees.md) for more information.
+### **Пересылка** - среда
 
-!!!info "Info"
-    For more technical information regarding this old process please see the fee collection and distribution pages on the technical documentation: [https://docs.curve.fi/curve_dao/fee-collection-distribution/overview/](https://docs.curve.fi/curve_dao/fee-collection-distribution/overview/)
+Фаза `пересылка` происходит в среду. Все целевые монеты (в настоящее время crvUSD), обмененные во вторник, пересылаются в распределитель комиссий на основной сети Ethereum через промежуточный контракт под названием hooker. Контракт hooker — это контракт для обеспечения будущей совместимости, который может реализовать любые произвольные функции, одобренные DAO. Вызов функции для выполнения этой передачи стимулируется предоставлением вознаграждения вызывающему.
+
+### **Распределение** - четверг
+
+Комиссии распределяются среди держателей veCRV еженедельно в течение 24 часов после четверга 00:00 UTC. Эти комиссии равномерно распределяются среди всех держателей veCRV, которые могут заявить свою долю каждую неделю после распределения. Пользователи могут впервые заявить торговые комиссии через 8 дней после первого четверга, следующего за их блокировкой. Например, если вы заблокировали во вторник, вы можете заявить торговые комиссии через 10 дней в четверг. См. [Как заявить торговые комиссии veCRV](./claiming-trading-fees.md) для получения дополнительной информации.
+
+!!! info "Информация"
+    Для получения более технической информации о новом процессе см. страницы сбора и распределения комиссий в технической документации: [https://docs.curve.fi/curve_dao/fee-collection-distribution/curve-burner/overview/](https://docs.curve.fi/curve_dao/fee-collection-distribution/curve-burner/overview/)
+    
+---
+
+## **Старая архитектура**
+
+Этот способ устарел и в настоящее время постепенно заменяется.
+  
+### **Сбор**
+  
+Сбор происходил вручную путем вызова функций вывода из пулов и рынков crvUSD.
+  
+### **Обмен (Сжигание)**
+  
+Обмен происходил вручную путем жесткого кодирования различных маршрутов обмена для каждого токена, например, для перевода wstETH в 3CRV (старый целевой токен) процесс был следующим:
+  
+1. `wstETH` в `stETH` через разворачивание (wstETH Burner)
+2. `stETH` в `ETH` через обмен через пул stETH/ETH Curve (SwapStableBurner)
+3. `ETH` в `USDT` через обмен через пул tricrypto (CryptoSwapBurner)
+4. `USDT` в `3CRV` через депонирование в 3pool (StableDepositBurner)
+  
+Этот процесс работал хорошо, но стал громоздким, когда для каждой монеты в каждом пуле требовался маршрут обмена. Кроме того, обмены также нужно было вызывать вручную.
+  
+### **Распределение**
+  
+После завершения процесса обмена распределение происходит путем пересылки обмененных монет распределителю комиссий на основной сети Ethereum. Комиссии распределяются среди держателей veCRV еженедельно в течение 24 часов после четверга 00:00 UTC. Эти комиссии равномерно распределяются среди всех держателей veCRV, которые могут заявить свою долю каждую неделю после распределения. Пользователи могут впервые заявить торговые комиссии через 8 дней после первого четверга, следующего за их блокировкой. Например, если вы заблокировали во вторник, вы можете заявить торговые комиссии через 10 дней в четверг. См. [Как заявить торговые комиссии veCRV](./claiming-trading-fees.md) для получения дополнительной информации.
+    
+!!! info "Информация"
+    Для получения более технической информации о старом процессе см. страницы сбора и распределения комиссий в технической документации: [https://docs.curve.fi/fees/overview/](https://docs.curve.fi/fees/overview/)
+

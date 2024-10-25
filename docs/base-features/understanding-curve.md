@@ -1,61 +1,61 @@
-Getting started with Curve isn’t easy, there is a lot to grasp and the unique UI can be a lot to take in. This small guide is intended for Curve beginners with an understanding of DeFi and Crypto. It tries to answer recurring questions about how to get started with Curve and how it works or makes money for liquidity providers.
+Начать работу с Curve непросто — здесь много информации, и уникальный интерфейс может поначалу показаться сложным. Это небольшое руководство предназначено для начинающих пользователей Curve, имеющих понимание DeFi и криптовалют. Оно помогает ответить на частые вопросы о том, как начать работать с Curve и как платформа приносит прибыль провайдерам ликвидности.
 
-# **What is Curve.fi?**
+# **Что такое Curve.fi?**
 
-The easiest way to understand Curve is to see it as an exchange. Its main goal is to let users and other decentralised protocols **exchange ERC-20 tokens (DAI to USDC for example) through it with low fees and low slippage**. Unlike exchanges that match a buyer and a seller, Curve uses liquidity pools. To achieve successful exchange volume, Curve needs a high volume of liquidity (tokens) and therefore offers rewards to **liquidity providers**.
+Проще всего понять Curve как обменник. Его основная цель — позволить пользователям и другим децентрализованным протоколам **обменивать токены ERC-20 (например, DAI на USDC) с низкими комиссиями и низким проскальзыванием**. В отличие от бирж, которые связывают покупателя и продавца, Curve использует пулы ликвидности. Для успешного обмена Curve нуждается в высоком объёме ликвидности (токенов), поэтому предоставляет вознаграждения **провайдерам ликвидности**.
 
-Curve is **non-custodial**, meaning the Curve developers do not have access to your tokens. Curve pools are also non-upgradable, so you can have confidence that the logic protecting your funds can never change.
+Curve — **некастодиальная платформа**, то есть разработчики Curve не имеют доступа к вашим токенам. Пулы Curve также не могут быть обновлены, что гарантирует, что логика, защищающая ваши средства, никогда не изменится.
 
-# **What are liquidity pools & why should I deposit?**
+# **Что такое пулы ликвидности и зачем мне вносить средства?**
 
-Liquidity pools are pools of tokens held in smart contracts that allow users to exchange or withdraw tokens at set rates. By adding liquidity to a Curve pool, you earn passive income through trading fees, with rewards based on your contribution. Additionally, you may receive extra incentives like CRV tokens or Points, increasing your returns. Providing liquidity also helps maintain efficient, low-cost trades for all swappers, benefiting the whole DeFi ecosystem.
+Пулы ликвидности — это пулы токенов, хранящиеся в смарт-контрактах, которые позволяют пользователям обменивать или выводить токены по установленным ставкам. Добавляя ликвидность в пул Curve, вы зарабатываете пассивный доход за счёт торговых комиссий, с вознаграждением, зависящим от вашего вклада. Также вы можете получать дополнительные бонусы, такие как токены CRV или баллы, увеличивающие ваш доход. Предоставление ликвидности также помогает поддерживать эффективные и недорогие сделки для всех участников, что выгодно всей экосистеме DeFi.
 
-For more information, visit the following section:
+Подробнее читайте в разделе:
 
-[**Understanding Curve Pools**](../lp/overview.md)
+[**Понимание пулов Curve**](../lp/overview.md)
 
-# **How much does it cost to swap through Curve?**
+# **Сколько стоит обмен через Curve?**
 
-Different pools have different fees.  Most are typically in the range of 0.01-0.4%.  Newer pools have dynamic fees, and so these fees can go higher if the pool is in high  demand.  The current fee is listed on each pool's page.
+Комиссии различаются для разных пулов. В большинстве случаев они составляют от 0,01% до 0,4%. В новых пулах комиссии могут быть динамическими, и в случае высокого спроса они могут увеличиваться. Текущая комиссия указана на странице каждого пула.
 
-# **What are those percentages next to each pool?**
+# **Что означают проценты рядом с каждым пулом?**
 
-Curve pools may have several different percentages shown next to them in the UI.
+В интерфейсе Curve рядом с пулами может отображаться несколько разных процентов.
 
 ![Pools UI](../images/pools.webp)
 
-The first column, vAPY, refers to the annualized rate of trading fees earned by liquidity providers in the pool. Swaps through Curve pools generate fees, a portion of which accrue to everybody who has a stake in the pool. Further information is in the [Liquidity Provider section](../lp/overview.md).
+Первая колонка, vAPY, показывает годовую процентную ставку дохода от торговых комиссий, заработанных провайдерами ликвидности. Сделки через пулы Curve генерируют комиссии, часть которых начисляется всем, кто внёс ликвидность в пул. Подробнее читайте в разделе [Провайдеры ликвидности](../lp/overview.md).
 
-The second column refers to the reward gauges. This entitles liquidity providers to earn bonus CRV emissions. More detail on these bonuses are in the [Reward Gauges section](../reward-gauges/overview.md).
+Вторая колонка относится к вознаграждениям (reward gauges). Это позволяет провайдерам ликвидности получать бонусные токены CRV. Подробнее об этих бонусах читайте в разделе [Вознаграждения](../reward-gauges/overview.md).
 
-# **What is the CRV token?**
+# **Что такое токен CRV?**
 
-CRV token is a governance and utility token for Curve.
+CRV — это токен управления и утилитарный токен для Curve.
 
-[**Understanding CRV**](../crv-token/overview.md)
+[**Понимание CRV**](../crv-token/overview.md)
 
-[**Understanding Governance**](../governance/understanding-governance.md)
+[**Понимание управления**](../governance/understanding-governance.md)
 
-# **Can I use Curve on sidechains?**
+# **Можно ли использовать Curve на сайдчейнах?**
 
-Yes. Curve has launched on several sidechains and will continue to do so. Visit our section on Multichain for more information.
+Да, Curve запущен на нескольких сайдчейнах и продолжит их поддержку. Для получения дополнительной информации посетите наш раздел о Multichain.
 
-# **How Can I Launch a Pool**
+# **Как создать новый пул?**
 
-All new Curve pools are deployed permissionlessly through the Curve Factory. This means anybody can deploy a pool anytime, anywhere. For a full guide, check our Factory Pools section.
-​
-# **Why has Curve grown so quickly?**
+Все новые пулы Curve разворачиваются без разрешений через Curve Factory. Это значит, что любой может запустить пул в любое время и в любом месте. Полное руководство доступно в разделе о Factory Pools.
 
-When Curve launched it grew quickly by securing the underdeveloped stablecoin market. Stablecoins have become an inherent part of cryptocurrency for a long time but they now come in many different flavours (DAI, TUSD, sUSD, bUSD, USDC and so on) which means there is a much bigger need for crypto users to move from a stable coin to another. Centralised exchanges tend to have high fees which are problematic for those trying to move from a stable coin to another. As a result, Curve.fi has become the best place to exchange stable coins because of its low fees and low slippage.
+# **Почему Curve так быстро вырос?**
 
-More recently, Curve launched v2 Crypto Pools to bring the same simplicity and efficiency of Curve's stablecoin pools to transactions between differentially priced assets (ie BTC and ETH). These pools are sufficiently different to justify their own section:
-​
-# **Where can I find Curve smart contracts?**
+После запуска Curve быстро вырос, обеспечив доступ к развивающемуся рынку стейблкоинов. Стейблкоины стали неотъемлемой частью криптовалютного рынка, но теперь они представлены в разных вариантах (DAI, TUSD, sUSD, bUSD, USDC и так далее), что создаёт спрос на их обмен. Централизованные биржи взимают высокие комиссии, что затрудняет переход от одного стейблкоина к другому. Поэтому Curve.fi стал лучшим местом для обмена стейблкоинов благодаря низким комиссиям и низкому проскальзыванию.
 
-The [**Github repository**](https://github.com/curvefi) also open sources the bulk of Curve development activity.
+Недавно Curve запустил v2 Crypto Pools, чтобы предоставить такую же простоту и эффективность, как и в стейблкоиновых пулах, для транзакций между активами с разной стоимостью (например, BTC и ETH). Эти пулы достаточно отличаются, чтобы заслуживать отдельного раздела.
 
+# **Где можно найти смарт-контракты Curve?**
+
+[**GitHub репозиторий**](https://github.com/curvefi) открывает основной код и активность разработки Curve.
 
 # **Whitepaper**
 
-!!!pdf "StableSwap (Curve V1) Whitepaper"
-    For a detailed overview of Curve V1, please read the official [**whitepaper**](../pdf/curve-stableswap.pdf).
+!!!pdf "Whitepaper StableSwap (Curve V1)"
+    Для подробного обзора Curve V1 ознакомьтесь с официальным [**whitepaper**](../pdf/curve-stableswap.pdf).
+

@@ -1,56 +1,56 @@
-<h1>Soft & Hard Liquidations</h1>
+<h1>Мягкие и Жёсткие Ликвидации</h1>
 
-Liquidations on Curve Lending and crvUSD work differently to other DeFi loans.  There are Soft-liquidations (including de-liquidations) and Hard-liquidations.  This page defines them and shows examples.
+Ликвидации в Curve Lending и crvUSD работают иначе, чем другие DeFi займы. Существуют мягкие ликвидации (Soft-liquidations, включая де-ликвидации) и жёсткие ликвидации (Hard-liquidations). Эта страница их определяет и показывает примеры.
 
-## **Soft-Liquidation**
+## **Мягкая Ликвидация** {#soft-liquidation}
 
-When the position enters Soft-liquidation it's a warning.  The system will try to protect user loans by converting the original collateral to the borrowed asset as prices decrease, and back to the original collateral as prices increase.
+Когда позиция переходит в режим мягкой ликвидации (Soft-liquidation), это предупреждение. Система будет пытаться защитить займы пользователей, конвертируя исходный залог (collateral) в заимствованный актив (borrowed asset) по мере снижения цен и обратно в исходный залог по мере повышения цен.
 
-![Collateral Loss](../images/crvusd/soft-liq.svg#only-light){: .centered }
-![Collateral Loss](../images/crvusd/soft-liq-dark.svg#only-dark){: .centered }
+![Потеря залога](../images/crvusd/soft-liq.svg#only-light){: .centered }
+![Потеря залога](../images/crvusd/soft-liq-dark.svg#only-dark){: .centered }
 
-**Hard Liquidation does not happen at the bottom of the soft-liquidation range**.
+**Жёсткая ликвидация не происходит на нижней границе диапазона мягкой ликвидации** (Soft-liquidation range).
 
-**Hard-liquidation can only occur when the health goes below 0**.  If the health is negative anyone can pay off the debt and claim the collateral backing the loan, this should always be profitable, but in rare circumstances it may not be, if this happens it's called [bad debt](./loan-concepts.md#bad-debt).
+**Жёсткая ликвидация может произойти только когда здоровье займа** (health) **падает ниже 0**. Если здоровье отрицательно, любой может погасить долг (debt) и забрать залог, поддерживающий займ. Это должно быть всегда выгодно, но в редких случаях может не сработать. Если это происходит, это называется [плохим долгом](./loan-concepts.md#bad-debt) (bad debt).
 
-In Soft-liquidation and de-liquidation, collateral will slowly be lost to fees from swapping back and forth as prices move higher and lower, this is how health deteriorates over time.  **Health can deteriorate very quickly when volatility is high**.  More information on health can be found [here](./loan-concepts.md#loan-health).
+В режимах мягкой ликвидации и де-ликвидации залог будет постепенно теряться за счёт комиссий за обмен туда и обратно по мере изменения цен, так происходит ухудшение здоровья займа со временем. **Здоровье может ухудшаться очень быстро при высокой волатильности** (volatility). Более подробную информацию о здоровье займа можно найти [здесь](./loan-concepts.md#loan-health).
 
-The [soft-liquidation applet](#soft-liquidation-applet) also simulates how Collateral is converted through the soft-liquidation range.
-
----
-
-## **Hard-Liquidation**
-
-**Soft-liquidation turns into Hard-liquidation when health is 0%**.  In Hard-liquidation the borrower keeps their borrowed assets (normally crvUSD) but loses their collateral, the process is detailed [here](loan-concepts.md#hard-liquidations).
-
-**Hard-liquidation does not trigger at the bottom of the Soft-liquidation range, it only relies on health**.  A user can have all their collateral fully converted to their borrowed asset and be below the Soft-liquidation range if they manage their health carefully.
-
-Health can be increased in soft-liquidation by repaying some or all debt.
+[**Апплет мягкой ликвидации**](#soft-liquidation-applet) также симулирует, как залог конвертируется через диапазон мягкой ликвидации.
 
 ---
 
-## **Hard-Liquidation Example**
+## **Жёсткая Ликвидация** {#hard-liquidation}
 
-**Hard-liquidation can only occur when the health of a loan is 0% or below**.  If the health is 0% or below anyone can pay off the debt and claim the collateral backing the loan, this should always be profitable, but in rare circumstances it may not be, if this happens it's called [bad debt](./loan-concepts.md#bad-debt).
+**Мягкая ликвидация переходит в жёсткую ликвидацию, когда здоровье падает до 0%**. В жёсткой ликвидации заёмщик сохраняет свои заимствованные активы (обычно crvUSD), но теряет залог. Процесс подробно описан [здесь](loan-concepts.md#hard-liquidations).
 
-The example below shows a loan in the CRV/crvUSD lending market which was hard-liquidated.  The chart is interactive, by hovering over prices, you can see how the health of the loan decreases over time.  See that hard-liquidation only relies on health.  **The bottom of the soft-liquidation range is not where hard-liquidation happens.**
+**Жёсткая ликвидация не срабатывает на нижней границе диапазона мягкой ликвидации, она зависит только от здоровья займа**. Пользователь может полностью конвертировать свой залог в заимствованный актив и оказаться ниже диапазона мягкой ликвидации, если он тщательно управляет своим здоровьем займа.
 
-<h2 style="margin: 10px 0 20px; text-align: center;">Hard-liquidation - Borrowing crvUSD using CRV</h2>
+Здоровье можно увеличить в режиме мягкой ликвидации, погасив часть или весь долг.
+
+---
+
+## **Пример Жёсткой Ликвидации** {#hard-liquidation-example}
+
+**Жёсткая ликвидация может произойти только когда здоровье займа составляет 0% или ниже**. Если здоровье составляет 0% или ниже, любой может погасить долг и забрать залог, поддерживающий займ. Это должно быть всегда выгодно, но в редких случаях может не сработать. Если это происходит, это называется [плохим долгом](./loan-concepts.md#bad-debt) (bad debt).
+
+Ниже приведён пример займа на рынке кредитования CRV/crvUSD, который был жёстко ликвидирован. График интерактивный: при наведении курсора на цены вы можете увидеть, как здоровье займа уменьшается со временем. Видно, что жёсткая ликвидация зависит только от здоровья. **Нижняя граница диапазона мягкой ликвидации не является местом жёсткой ликвидации**.
+
+<h2 style="margin: 10px 0 20px; text-align: center;">Жёсткая ликвидация - Заимствование crvUSD с использованием CRV</h2>
 <div class="centered2" style="width: 100%">
   <canvas id="crvHardLiq"></canvas>
 </div>
 
-**It is always better to self-liquidate a loan before a loan is hard-liquidated**.  This is because the health calculation values your collateral lower than its actual worth. In this example, the borrower would have gotten back 11,107 crvUSD more if they had self-liquidated their loan instead of letting it be hard-liquidated.
+**Всегда лучше самоликвидировать займ до его жёсткой ликвидации**. Это потому, что расчёт здоровья (health calculation) оценивает ваш залог ниже его фактической стоимости. В этом примере заёмщик вернул бы на 11,107 crvUSD больше, если бы самоликвидировал займ, вместо того чтобы позволить ему быть жёстко ликвидированным.
 
 ---
 
-## **Managing Health & Self-Liquidation Example**
+## **Пример Управления Здоровьем и Самоликвидации** {#managing-health-self-liquidation-example}
 
-The below example shows how to manage health and how self-liquidation works, this shows a loan in the WETH/crvUSD lending market.  When the user got into soft-liquidation they decided to repay around 10% of their debt, this increased their health from approx. 3% to 13%, but kept their soft-liquidation range the same.   They then stayed in soft-liquidation for a long time, so they self-liquidated.  **If some debt is repaid while in soft-liquidation the range will stay the same but health will increase**, if debt is repaid outside the soft-liquidation range, the range will move lower.
+Ниже приведён пример того, как управлять здоровьем (health) и как работает самоликвидация (self-liquidation). Это показывает займ на рынке кредитования WETH/crvUSD. Когда пользователь попал в режим мягкой ликвидации, он решил погасить около 10% своего долга, что увеличило его здоровье с примерно 3% до 13%, но сохранило диапазон мягкой ликвидации неизменным. Затем он долгое время оставался в режиме мягкой ликвидации, поэтому он самоликвидировал займ. **Если часть долга погашена во время мягкой ликвидации, диапазон останется прежним, но здоровье увеличится**. Если долг погашен за пределами диапазона мягкой ликвидации, диапазон будет снижаться.
 
-Self-liquidating here was a good idea, this is because they already had 38,857 crvUSD as collateral (from swapped WETH in soft-liquidation), and their debt was 98,299 crvUSD, they only had to send 59,442 crvUSD and they received back their 24.3371 WETH.  If they chose to repay they would have had to repay all 98,299 crvUSD of debt, and received all collateral back (38,857 crvUSD and 24.3371 WETH) in return.
+Самоликвидирование здесь было хорошей идеей, потому что у него уже было 38,857 crvUSD в качестве залога (из обменянного WETH в режиме мягкой ликвидации), а его долг составлял 98,299 crvUSD. Ему нужно было отправить только 59,442 crvUSD и он получил обратно 24.3371 WETH. Если бы он выбрал погашение, ему пришлось бы погасить весь долг в размере 98,299 crvUSD и получить обратно весь залог (38,857 crvUSD и 24.3371 WETH) в обмен.
 
-<h2 style="margin: 10px 0 20px; text-align: center;">Self-liquidation - Borrowing crvUSD using WETH</h2>
+<h2 style="margin: 10px 0 20px; text-align: center;">Самоликвидирование - Заимствование crvUSD с использованием WETH</h2>
 <div class="centered2" style="width: 100%">
   <canvas id="wethSelfLiq"></canvas>
 </div>
@@ -60,9 +60,10 @@ Self-liquidating here was a good idea, this is because they already had 38,857 c
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js"></script>
 
 
-## **Soft-liquidation Applet**
+## **Апплет Мягкой Ликвидации** {#soft-liquidation-applet}
 
-This applet simulates how collateral is converted through a soft-liquidation range.
+Этот апплет симулирует, как залог конвертируется через диапазон мягкой ликвидации.
+
 
 <style>
     .price-input {
@@ -89,15 +90,15 @@ This applet simulates how collateral is converted through a soft-liquidation ran
 </style>
 
 <div id="ethCrvUsdChartContainer">
-    <h2 style="margin: 10px 0 20px; text-align: center;">Soft-liquidation Collateral Conversion</h2>
+    <h2 style="margin: 10px 0 20px; text-align: center;">Конвертация Залога в Мягкой Ликвидации</h2>
     <div style="margin-top: 10px;">
-        <label for="collateralInput">Collateral Amount (ETH):</label>
+        <label for="collateralInput">Количество залога (ETH):</label>
         <input type="number" id="collateralInput" class="price-input" value="10" min="0" step="0.1">
     </div>
     <div style="position: relative; margin-top: 20px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-            <span>Bottom of SL Range:</span>
-            <span>Top of SL Range:</span>
+            <span>Нижняя граница диапазона SL:</span>
+            <span>Верхняя граница диапазона SL:</span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-top: 5px;">
             <input type="number" id="bottomRange" class="price-input" value="2311.92">
@@ -115,10 +116,10 @@ This applet simulates how collateral is converted through a soft-liquidation ran
 function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT) {
   const ctx = document.getElementById(chartId).getContext('2d');
   
-  // Convert epoch times to Date objects
+  // Конвертируем эпохальные времена в объекты Date
   const dates = data.time.map(epoch => new Date(parseInt(epoch) * 1000));
 
-  // Calculate xmin and xmax
+  // Вычисляем xmin и xmax
   const timeRange = parseInt(data.time[data.time.length - 1]) - parseInt(data.time[0]);
   const xmin = new Date((parseInt(data.time[0]) - timeRange * 0.1) * 1000);
   const xmax = new Date((parseInt(data.time[data.time.length - 1]) + timeRange * 0.1) * 1000);
@@ -129,7 +130,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
       labels: dates,
       datasets: [
         {
-          label: 'Price',
+          label: 'Цена',
           data: data.price,
           borderColor: 'orange',
           pointRadius: 0,
@@ -137,7 +138,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
           pointHitRadius: 10
         },
         {
-          label: 'Soft-Liquidation Price Range',
+          label: 'Диапазон цен мягкой ликвидации',
           data: data.slUp,
           fill: '+1',
           backgroundColor: 'rgba(255, 255, 0, 0.25)',
@@ -147,7 +148,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
           pointRadius: 0,
         },
         {
-          label: 'Soft-Liquidation Price Range (lower)',
+          label: 'Диапазон цен мягкой ликвидации (нижний)',
           data: data.slDown,
           fill: '-1',
           backgroundColor: 'rgba(255, 255, 0, 0.25)',
@@ -173,7 +174,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
           },
           title: {
             display: true,
-            text: 'Date'
+            text: 'Дата'
           },
           ticks: {
             maxRotation: 45,
@@ -187,7 +188,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
           position: 'left',
           title: {
             display: true,
-            text: 'Price ($)'
+            text: 'Цена ($)'
           }
         }
       },
@@ -233,7 +234,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
               xValue: dates[0],
               yValue: yOpenLabel,
               backgroundColor: 'rgb(41, 155, 31)',
-              content: ['Loan Open'],
+              content: ['Начало займа'],
               font: {
                 size: 12
               },
@@ -245,7 +246,7 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
               xValue: dates[dates.length - 1],
               yValue: yCloseLabel,
               backgroundColor: 'rgb(255, 99, 132)',
-              content: ['Hard Liquidation'],
+              content: ['Жёсткая ликвидация'],
               font: {
                 size: 12
               },
@@ -259,23 +260,23 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
           onClick: function(e, legendItem, legend) {
             const index = legendItem.datasetIndex;
             const chart = legend.chart;
-            if (legendItem.text === 'Soft-Liquidation Price Range') {
-              // Toggle visibility of both datasets when clicking "Soft-Liquidation Price Range"
+            if (legendItem.text === 'Диапазон цен мягкой ликвидации') {
+              // Переключение видимости обоих наборов данных при клике на "Диапазон цен мягкой ликвидации"
               const softLiqDataset1 = chart.data.datasets[1];
               const softLiqDataset2 = chart.data.datasets[2];
               const isHidden = softLiqDataset1.hidden;
               softLiqDataset1.hidden = !isHidden;
               softLiqDataset2.hidden = !isHidden;
             } else {
-              // Default behavior for other legend items
+              // Поведение по умолчанию для других элементов легенды
               Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
             }
             chart.update();
           },
           labels: {
             filter: function(legendItem, chartData) {
-              // Filter out the lower soft liquidation dataset
-              return legendItem.text !== 'Soft-Liquidation Price Range (lower)';
+              // Фильтрация нижнего набора данных мягкой ликвидации
+              return legendItem.text !== 'Диапазон цен мягкой ликвидации (нижний)';
             }
           }
         },
@@ -290,21 +291,21 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
             afterBody: function(tooltipItems) {
               const dataIndex = tooltipItems[0].dataIndex;
               return [
-                'Price: ' + data.price[dataIndex],
-                'Health: ' + data.health[dataIndex],
-                'Collateral as ' + tokenCOL + ': ' + data.collateral[dataIndex],
-                'Collateral as ' + tokenDEBT + ': ' + data.stablecoin[dataIndex],
-                'crvUSD Debt: ' + data.debt[dataIndex]
+                'Цена: ' + data.price[dataIndex],
+                'Здоровье: ' + data.health[dataIndex],
+                'Залог как ' + tokenCOL + ': ' + data.collateral[dataIndex],
+                'Залог как ' + tokenDEBT + ': ' + data.stablecoin[dataIndex],
+                'Долг в crvUSD: ' + data.debt[dataIndex]
               ];
             }
           },
-          displayColors: false, // This removes the color box
+          displayColors: false, // Удаляет цветовую коробку
           bodyAlign: 'left',
           padding: 10
         },
         title: {
           display: false,
-          text: 'Loan Chart'
+          text: 'График займа'
         }
       }
     }
@@ -315,10 +316,10 @@ function createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT
 function createChart2(data, chartId) {
   const ctx = document.getElementById(chartId).getContext('2d');
   
-  // Convert epoch times to Date objects
+  // Конвертируем эпохальные времена в объекты Date
   const dates = data.time.map(epoch => new Date(parseInt(epoch) * 1000));
 
-  // Calculate xmin and xmax
+  // Вычисляем xmin и xmax
   const timeRange = parseInt(data.time[data.time.length - 1]) - parseInt(data.time[0]);
   const xmin = new Date((parseInt(data.time[0]) - timeRange * 0.1) * 1000);
   const xmax = new Date((parseInt(data.time[data.time.length - 1]) + timeRange * 0.1) * 1000);
@@ -329,7 +330,7 @@ function createChart2(data, chartId) {
       labels: dates,
       datasets: [
         {
-          label: 'Price',
+          label: 'Цена',
           data: data.price,
           borderColor: 'orange',
           pointRadius: 0,
@@ -337,7 +338,7 @@ function createChart2(data, chartId) {
           pointHitRadius: 10
         },
         {
-          label: 'Soft-Liquidation Price Range',
+          label: 'Диапазон цен мягкой ликвидации',
           data: data.slUp,
           fill: '+1',
           backgroundColor: 'rgba(255, 255, 0, 0.25)',
@@ -347,7 +348,7 @@ function createChart2(data, chartId) {
           pointRadius: 0,
         },
         {
-          label: 'Soft-Liquidation Price Range (lower)',
+          label: 'Диапазон цен мягкой ликвидации (нижний)',
           data: data.slDown,
           fill: '-1',
           backgroundColor: 'rgba(255, 255, 0, 0.25)',
@@ -373,7 +374,7 @@ function createChart2(data, chartId) {
           },
           title: {
             display: true,
-            text: 'Date'
+            text: 'Дата'
           },
           ticks: {
             maxRotation: 45,
@@ -387,7 +388,7 @@ function createChart2(data, chartId) {
           position: 'left',
           title: {
             display: true,
-            text: 'Price ($)'
+            text: 'Цена ($)'
           }
         }
       },
@@ -450,7 +451,7 @@ function createChart2(data, chartId) {
               xValue: dates[0],
               yValue: 3400,
               backgroundColor: 'rgb(41, 155, 31)',
-              content: ['Loan Open'],
+              content: ['Начало займа'],
               font: {
                 size: 12
               },
@@ -462,7 +463,7 @@ function createChart2(data, chartId) {
               xValue: dates[79],
               yValue: 3500,
               backgroundColor: 'rgb(41, 155, 31)',
-              content: ['Repaid 10% debt'],
+              content: ['Погашено 10% долга'],
               font: {
                 size: 12
               },
@@ -474,7 +475,7 @@ function createChart2(data, chartId) {
               xValue: dates[dates.length - 1],
               yValue: 3200,
               backgroundColor: 'rgb(135, 50, 143)',
-              content: ['Self Liquidation'],
+              content: ['Самоликвидизация'],
               font: {
                 size: 12
               },
@@ -488,23 +489,23 @@ function createChart2(data, chartId) {
           onClick: function(e, legendItem, legend) {
             const index = legendItem.datasetIndex;
             const chart = legend.chart;
-            if (legendItem.text === 'Soft-Liquidation Price Range') {
-              // Toggle visibility of both datasets when clicking "Soft-Liquidation Price Range"
+            if (legendItem.text === 'Диапазон цен мягкой ликвидации') {
+              // Переключение видимости обоих наборов данных при клике на "Диапазон цен мягкой ликвидации"
               const softLiqDataset1 = chart.data.datasets[1];
               const softLiqDataset2 = chart.data.datasets[2];
               const isHidden = softLiqDataset1.hidden;
               softLiqDataset1.hidden = !isHidden;
               softLiqDataset2.hidden = !isHidden;
             } else {
-              // Default behavior for other legend items
+              // Поведение по умолчанию для других элементов легенды
               Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
             }
             chart.update();
           },
           labels: {
             filter: function(legendItem, chartData) {
-              // Filter out the lower soft liquidation dataset
-              return legendItem.text !== 'Soft-Liquidation Price Range (lower)';
+              // Фильтрация нижнего набора данных мягкой ликвидации
+              return legendItem.text !== 'Диапазон цен мягкой ликвидации (нижний)';
             }
           }
         },
@@ -519,21 +520,249 @@ function createChart2(data, chartId) {
             afterBody: function(tooltipItems) {
               const dataIndex = tooltipItems[0].dataIndex;
               return [
-                'Price: ' + data.price[dataIndex],
-                'Health: ' + data.health[dataIndex],
-                'Collateral as WETH: ' + data.collateral[dataIndex],
-                'Collateral as crvUSD: ' + data.stablecoin[dataIndex],
-                'crvUSD Debt: ' + data.debt[dataIndex]
+                'Цена: ' + data.price[dataIndex],
+                'Здоровье: ' + data.health[dataIndex],
+                'Залог как ' + tokenCOL + ': ' + data.collateral[dataIndex],
+                'Залог как ' + tokenDEBT + ': ' + data.stablecoin[dataIndex],
+                'Долг в crvUSD: ' + data.debt[dataIndex]
               ];
             }
           },
-          displayColors: false, // This removes the color box
+          displayColors: false, // Удаляет цветовую коробку
           bodyAlign: 'left',
           padding: 10
         },
         title: {
           display: false,
-          text: 'Loan Chart'
+          text: 'График займа'
+        }
+      }
+    }
+  });
+}
+
+function createChart2(data, chartId) {
+  const ctx = document.getElementById(chartId).getContext('2d');
+  
+  // Конвертируем эпохальные времена в объекты Date
+  const dates = data.time.map(epoch => new Date(parseInt(epoch) * 1000));
+
+  // Вычисляем xmin и xmax
+  const timeRange = parseInt(data.time[data.time.length - 1]) - parseInt(data.time[0]);
+  const xmin = new Date((parseInt(data.time[0]) - timeRange * 0.1) * 1000);
+  const xmax = new Date((parseInt(data.time[data.time.length - 1]) + timeRange * 0.1) * 1000);
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: 'Цена',
+          data: data.price,
+          borderColor: 'orange',
+          pointRadius: 0,
+          pointHoverRadius: 10,
+          pointHitRadius: 10
+        },
+        {
+          label: 'Диапазон цен мягкой ликвидации',
+          data: data.slUp,
+          fill: '+1',
+          backgroundColor: 'rgba(255, 255, 0, 0.25)',
+          borderColor: 'rgba(255, 255, 0, 0.25)',
+          borderWidth: 0,
+          pointHitRadius: 0,
+          pointRadius: 0,
+        },
+        {
+          label: 'Диапазон цен мягкой ликвидации (нижний)',
+          data: data.slDown,
+          fill: '-1',
+          backgroundColor: 'rgba(255, 255, 0, 0.25)',
+          borderColor: 'rgba(255, 255, 0, 0.25)',
+          borderWidth: 0,
+          pointHitRadius: 0,
+          pointRadius: 0,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      aspectRatio: 4/3,
+      devicePixelRatio: 1,
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'day',
+            displayFormats: {
+              day: 'MMM d, yyyy'
+            }
+          },
+          title: {
+            display: true,
+            text: 'Дата'
+          },
+          ticks: {
+            maxRotation: 45,
+            minRotation: 25
+          },
+          min: xmin,
+          max: xmax
+        },
+        y: {
+          type: 'linear',
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Цена ($)'
+          }
+        }
+      },
+      plugins: {
+        annotation: {
+          annotations: {
+            firstLine: {
+              type: 'line',
+              xMin: dates[0],
+              xMax: dates[0],
+              borderColor: 'rgb(41, 155, 31)',
+              borderWidth: 2,
+              borderDash: [5, 5],
+            },
+            midLine: {
+              type: 'line',
+              xMin: dates[79],
+              xMax: dates[79],
+              borderColor: 'rgb(41, 155, 31)',
+              borderWidth: 2,
+              borderDash: [5, 5],
+            },
+            lastLine: {
+              type: 'line',
+              xMin: dates[dates.length - 1],
+              xMax: dates[dates.length - 1],
+              borderColor: 'rgb(135, 50, 143)',
+              borderWidth: 2,
+              borderDash: [5, 5],
+            },
+            firstPoint: {
+              type: 'point',
+              xValue: dates[0],
+              yValue: data.price[0],
+              backgroundColor: 'rgb(41, 155, 31)',
+              radius: 6,
+              borderColor: 'rgb(41, 155, 31)',
+              borderWidth: 1
+            },
+            midPoint: {
+              type: 'point',
+              xValue: dates[79],
+              yValue: data.price[79],
+              backgroundColor: 'rgb(41, 155, 31)',
+              radius: 6,
+              borderColor: 'rgb(41, 155, 31)',
+              borderWidth: 1
+            },
+            lastPoint: {
+              type: 'point',
+              xValue: dates[dates.length - 1],
+              yValue: data.price[data.price.length - 1],
+              backgroundColor: 'rgb(135, 50, 143)',
+              radius: 6,
+              borderColor: 'rgb(135, 50, 143)',
+              borderWidth: 1
+            },
+            firstLabel: {
+              type: 'label',
+              xValue: dates[0],
+              yValue: 3400,
+              backgroundColor: 'rgb(41, 155, 31)',
+              content: ['Начало займа'],
+              font: {
+                size: 12
+              },
+              color: 'white',
+              padding: 4
+            },
+            repayLabel: {
+              type: 'label',
+              xValue: dates[79],
+              yValue: 3500,
+              backgroundColor: 'rgb(41, 155, 31)',
+              content: ['Погашено 10% долга'],
+              font: {
+                size: 12
+              },
+              color: 'white',
+              padding: 4
+            },
+            lastLabel: {
+              type: 'label',
+              xValue: dates[dates.length - 1],
+              yValue: 3200,
+              backgroundColor: 'rgb(135, 50, 143)',
+              content: ['Самоликвидизация'],
+              font: {
+                size: 12
+              },
+              color: 'white',
+              padding: 4
+            }
+          }
+        },
+        legend: {
+          position: 'bottom',
+          onClick: function(e, legendItem, legend) {
+            const index = legendItem.datasetIndex;
+            const chart = legend.chart;
+            if (legendItem.text === 'Диапазон цен мягкой ликвидации') {
+              // Переключение видимости обоих наборов данных при клике на "Диапазон цен мягкой ликвидации"
+              const softLiqDataset1 = chart.data.datasets[1];
+              const softLiqDataset2 = chart.data.datasets[2];
+              const isHidden = softLiqDataset1.hidden;
+              softLiqDataset1.hidden = !isHidden;
+              softLiqDataset2.hidden = !isHidden;
+            } else {
+              // Поведение по умолчанию для других элементов легенды
+              Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
+            }
+            chart.update();
+          },
+          labels: {
+            filter: function(legendItem, chartData) {
+              // Фильтрация нижнего набора данных мягкой ликвидации
+              return legendItem.text !== 'Диапазон цен мягкой ликвидации (нижний)';
+            }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            title: function(tooltipItems) {
+              return new Date(tooltipItems[0].parsed.x).toLocaleString();
+            },
+            label: function(context) {
+              return '';
+            },
+            afterBody: function(tooltipItems) {
+              const dataIndex = tooltipItems[0].dataIndex;
+              return [
+                'Цена: ' + data.price[dataIndex],
+                'Здоровье: ' + data.health[dataIndex],
+                'Залог как ' + tokenCOL + ': ' + data.collateral[dataIndex],
+                'Залог как ' + tokenDEBT + ': ' + data.stablecoin[dataIndex],
+                'Долг в crvUSD: ' + data.debt[dataIndex]
+              ];
+            }
+          },
+          displayColors: false, // Удаляет цветовую коробку
+          bodyAlign: 'left',
+          padding: 10
+        },
+        title: {
+          display: false,
+          text: 'График займа'
         }
       }
     }
@@ -544,12 +773,12 @@ function loadData(jsonFile, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEB
 fetch(jsonFile)
     .then(response => {
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! статус: ${response.status}`);
     }
     return response.json();
     })
     .then(data => {
-    console.log('Data loaded successfully:', data);
+    console.log('Данные успешно загружены:', data);
     if (hardLiq) {
       createChart(data, chartId, yOpenLabel, yCloseLabel, tokenCOL, tokenDEBT);
     } else {
@@ -557,7 +786,7 @@ fetch(jsonFile)
     }
     })
     .catch(error => {
-    console.error('Error loading JSON file:', error);
+    console.error('Ошибка загрузки JSON файла:', error);
     });
 }
 
@@ -580,17 +809,17 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
     const ethCrvUsdChart = new Chart(ethCrvUsdCtx, {
     type: 'bar',
     data: {
-        labels: ['Collateral'],  // Single label
+        labels: ['Залог'],  // Единичный ярлык
         datasets: [
             {
                 label: 'ETH',
-                data: [0],  // Single value
+                data: [0],  // Единичное значение
                 backgroundColor: 'rgba(54, 162, 235, 0.8)',
                 yAxisID: 'y'
             },
             {
                 label: 'crvUSD',
-                data: [0],  // Single value
+                data: [0],  // Единичное значение
                 backgroundColor: 'rgba(75, 192, 192, 0.8)',
                 yAxisID: 'y1'
             }
@@ -600,12 +829,12 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
         responsive: true,
         scales: {
             x: {
-                stacked: false,  // Set stacked to false
-                categoryPercentage: 0.8,  // Adjusts the width of the bar group
-                barPercentage: 0.9,  // Adjusts the width of each individual bar
+                stacked: false,  // Устанавливаем stacked в false
+                categoryPercentage: 0.8,  // Настраивает ширину группы столбцов
+                barPercentage: 0.9,  // Настраивает ширину каждого отдельного столбца
                 title: {
                     display: false,
-                    text: 'Collateral'
+                    text: 'Залог'
                 }
             },
             y: {
@@ -615,7 +844,7 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'ETH Collateral'
+                    text: 'Залог в ETH'
                 },
                 ticks: {
                     callback: function(value) {
@@ -630,7 +859,7 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'crvUSD Collateral'
+                    text: 'Залог в crvUSD'
                 },
                 ticks: {
                     callback: function(value) {
@@ -648,7 +877,7 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
             },
             title: {
                 display: false,
-                text: 'Soft-Liquidation Collateral Conversion'
+                text: 'Конвертация залога в мягкой ликвидации'
             },
             tooltip: {
                 callbacks: {
@@ -688,7 +917,7 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
         
         ethCrvUsdChart.update();
 
-        ethCrvUsdValuesDisplay.innerHTML = `Collateral: ${eth.toFixed(2)} ETH, ${crvUSDValue.toFixed(2)} crvUSD<br>Average Swap Price: ${avgSellPrice.toFixed(2)} crvUSD/ETH<br>ETH Swapped to crvUSD: ${crvUSDPercentage}%`;
+        ethCrvUsdValuesDisplay.innerHTML = `Залог: ${eth.toFixed(2)} ETH, ${crvUSDValue.toFixed(2)} crvUSD<br>Средняя цена обмена: ${avgSellPrice.toFixed(2)} crvUSD/ETH<br>ETH обменены на crvUSD: ${crvUSDPercentage}%`;
 
         currentPriceDisplay.textContent = '$' + currentPrice.toFixed(2);
         ethPercentageDisplay.textContent = ethPercentage;
@@ -699,6 +928,7 @@ loadData('wethSelfLiqData.json', 'wethSelfLiq', 3200, 3200, 'WETH', 'crvUSD')
     topRangeInput.addEventListener('input', updateEthCrvUsdChart);
     collateralInput.addEventListener('input', updateEthCrvUsdChart);
 
-    // Initial update
+    // Начальное обновление
     updateEthCrvUsdChart();
 </script>
+

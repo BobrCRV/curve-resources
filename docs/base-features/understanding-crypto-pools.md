@@ -1,22 +1,22 @@
-Crypto pools are Curve pools holding assets with different prices. Curve core originally was pegged assets but a new type of AMM allows for extremely efficient trading and low risks of non-pegged assets.
+Криптопулы — это пулы Curve, содержащие активы с разными ценами. Изначально ядро Curve было ориентировано на привязанные активы, но новый тип AMM позволяет проводить чрезвычайно эффективную торговлю и снижать риски при работе с непривязанными активами.
 
-Crypto pools use liquidity more effectively by concentrating it at current prices. As trades happen, the pool readjusts its internal price to the highest liquidity region without creating losses for the pool. Crypto pools also have variable fees which can range between 0.04% and 0.40%.
+Криптопулы используют ликвидность более эффективно, концентрируя её на текущих ценах. По мере проведения сделок пул корректирует свою внутреннюю цену в область с наибольшей ликвидностью, не создавая убытков для пула. Криптопулы также имеют переменные комиссии, которые могут варьироваться от 0,04% до 0,40%.
 
-[**Tricrypto**](https://curve.fi/#/ethereum/pools/tricrypto2/deposit)​, the first and main base pool has the following coins: USDT/WBTC/WETH for Ethereum. On Polygon, the first pool has AAVE tokens and can handle swaps with the following tokens: DAI/USDC/USDT/ETH/WBTC.
+[**Tricrypto**](https://curve.fi/#/ethereum/pools/tricrypto2/deposit)​, первый и основной базовый пул, содержит следующие монеты: USDT/WBTC/WETH для Ethereum. На Polygon первый пул включает токены AAVE и может обрабатывать свопы с такими токенами, как DAI/USDC/USDT/ETH/WBTC.
 
-# **Liquidity Providers**
+# **Провайдеры ликвидности**
 
-Becoming a liquidity provider in a Curve Crypto pool is in all ways similar to stable pools. You will gain exposure and risks to all assets in the pools. You can deposit one or all the coins in the pool. Always be sure to check the bonus/slippage warning box.
+Становление провайдером ликвидности в криптопуле Curve во всех аспектах аналогично работе со стейблпулам. Вы будете подвержены рискам всех активов в пулах. Вы можете вносить один или все токены из пула. Всегда проверяйте окно предупреждений о бонусах/проскальзывании.
 
-# **Fees**
+# **Комиссии**
 
-Fees in these pools are dynamic, but they typically sit between 0.03% to 0.4%. The current fee varies based on how close the price is from the internal oracle. You can check a pool's current fee which changes every trade on the bottom of a pool page.  The minimum fee for these pools is 0.005% and max fee is 3%.
+Комиссии в этих пулах являются динамическими и обычно составляют от 0,03% до 0,4%. Текущая комиссия варьируется в зависимости от того, насколько цена близка к внутреннему оракулу. Вы можете проверить текущую комиссию пула, которая меняется с каждой сделкой, внизу страницы пула. Минимальная комиссия для этих пулов составляет 0,005%, а максимальная — 3%.
 
-# **Risks**
+# **Риски**
 
-As with any liquidity providing in blockchain, there are some smart contract risks involved. Curve crypto pools have been audited by MixBytes and ChainSecurity but audits never eliminate risks completely.
- 
+Как и в любом случае предоставления ликвидности на блокчейне, существуют определённые риски, связанные со смарт-контрактами. Криптопулы Curve были проверены MixBytes и ChainSecurity, но даже аудиты не устраняют риски полностью.
+
 # **Whitepaper**
 
-!!!pdf "CryptoSwap (Curve V2) Whitepaper"
-    For a detailed overview of Curve V2, please read the official [**whitepaper**](../pdf/curve-cryptopools.pdf).
+!!!pdf "Whitepaper CryptoSwap (Curve V2)"
+    Для подробного обзора Curve V2 ознакомьтесь с официальным [**whitepaper**](../pdf/curve-cryptopools.pdf).

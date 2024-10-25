@@ -3,8 +3,9 @@ hide:
   - toc
 ---
 
+<h1>Как заблокировать CRV</h1>
 
-:logos-youtube: **How to lock CRV**
+:logos-youtube: **Как заблокировать CRV**
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 560px;">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/8GAI1lopEdU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -12,26 +13,28 @@ hide:
 
 
 !!! warning
-    When a user locks their CRV tokens for voting, they will receive veCRV based on the lock duration and the amount locked. Locking is **not reversible** and veCRV tokens are **non-transferable**. If a user decides to vote-lock their CRV tokens, they will only be able to **reclaim the CRV tokens after the lock duration has ended**.
+    Когда пользователь блокирует свои токены CRV для голосования, он получает veCRV в зависимости от длительности блокировки и количества заблокированных токенов. Блокировка **не обратима**, а токены veCRV **не подлежат передаче**. Если пользователь решает осуществить vote-locking своих токенов CRV, он сможет **возвратить токены CRV только после окончания срока блокировки**.
 
-    Additionally, a user **cannot have multiple locks with different expiry dates**. However, a lock **can be extended**, or **additional CRV can be added** to it **at any time**.
-
-
-Users must specify the amount of CRV they wish to lock and their preferred lock duration. The minimum lock period is **one week**, while the maximum is **four years**. The amount of veCRV **linearly decays over time**, reaching 0 when the lock duration ends.
+    Кроме того, пользователь **не может иметь несколько блокировок с разными датами окончания**. Однако блокировка **может быть продлена**, или **к ней можно добавить дополнительные CRV** **в любое время**.
 
 
-*To lock CRV tokens, visit either the old UI: [https://dao.curve.fi/locker](https://dao.curve.fi/locker) or new UI: [https://curve.fi/#/ethereum/locker/create](https://curve.fi/#/ethereum/locker/create)*​
+Пользователи должны указать количество CRV, которое они хотят заблокировать, и предпочитаемую длительность блокировки. Минимальный период блокировки — **одна неделя**, а максимальный — **четыре года**. Количество veCRV **линейно уменьшается со временем**, достигая 0 по окончании срока блокировки.
+
+
+*Чтобы заблокировать токены CRV, посетите либо старый интерфейс: [https://dao.curve.fi/locker](https://dao.curve.fi/locker), либо новый интерфейс: [https://curve.fi/#/ethereum/locker/create](https://curve.fi/#/ethereum/locker/create)*​
+
 
 <figure markdown>
   ![CRV Locker](../images/locker-old.png){ width="500" }
-  <figcaption>old UI</figcaption>
+  <figcaption>старый интерфейс</figcaption>
 </figure>
 
 <figure markdown>
   ![CRV Locker](../images/locker.png){ width="300" }
-  <figcaption>new UI</figcaption>
+  <figcaption>новый интерфейс</figcaption>
 </figure>
 
 
-!!!tip
-    **The amount of veCRV received per CRV when locking depends on the duration of the lock.** See the [formula here](./overview.md#crv-to-vecrv-formula).
+!!! tip
+    **Количество veCRV, получаемое за каждый CRV при блокировке, зависит от длительности блокировки.** См. [формулу здесь](./overview.md#crv-to-vecrv-formula).
+

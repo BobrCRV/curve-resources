@@ -1,206 +1,205 @@
-<h1>Loan Strategies & Management</h1>
+<h1>Стратегии и Управление Займами</h1>
 
-Before taking a crvUSD loan a user should consider two factors that will influence how they structure their loan:
+Перед тем как взять займ в crvUSD, пользователь должен учитывать два фактора, которые будут влиять на структуру его займа:
 
-* How much risk they would like to take?
-* What management style will they employ?  Will they be actively managing their loan i.e., adding, removing collateral and repaying debt.  Or will they be passively taking a loan and leaving it in [LLAMMA's](loan-concepts.md#llamma-and-liquidations) hands?
+* Какой уровень риска (risk) он готов принять?
+* Какой стиль управления (management style) он будет применять? Будет ли он активно управлять своим займом, то есть добавлять или удалять залог (collateral) и погашать долг (debt), или будет пассивно брать займ и оставлять его на усмотрение [LLAMMA's](loan-concepts.md#llamma-and-liquidations) (LLAMMA)?
 
-Risk and Management styles can be thought of as spectrums, and they can be visualized in the image below.
+Риски и стили управления можно рассматривать как спектры, и они могут быть визуализированы на изображении ниже.
 
-![loan strategies](../images/crvusd/loan_strategies.svg#only-light){: .centered }
-![loan strategies](../images/crvusd/loan_strategies_dark.svg#only-dark){: .centered }
-The above image shows 4 main quadrants:
+![Стратегии займа](../images/crvusd/loan_strategies.svg#only-light){: .centered }
+![Стратегии займа](../images/crvusd/loan_strategies_dark.svg#only-dark){: .centered }
 
-* **High risk and Passive**: This is a dangerous strategy, users employing this strategy typically max borrow and make very little changes to the loan until they close or are hard-liquidated.  Some users are lucky and do well, but many are hard-liquidated.  Use at your own risk.
-* **High risk and Active**: Users with these loans are borrowing close to the maximum allowed, and actively adding and removing collateral, and debt as required to keep a loan healthy.
-* **Careful and Passive**: These loans are typically at low LTV ratios so their soft-liquidation ranges are far below the current price.  These loans generally don't need much management and users may only alter their loans after significant price changes.
-* **Careful and Active**: Users borrow at low LTV ratios but actively manage the loans by adding and removing capital and debt as required to keep away from soft-liquidation.
+Вышеуказанное изображение показывает 4 основных квадранта:
 
-Example loans for each of the 4 quadrants are given in the [loan example section here](#loan-examples).  The section directly below shows soft-liquidation losses based on user data, so prospective users can estimate losses.
+* **Высокий риск и пассивный (High risk and Passive)**: Это опасная стратегия. Пользователи, применяющие эту стратегию, обычно берут максимальный займ и вносят минимальные изменения в займ до его закрытия или жёсткой ликвидации (hard-liquidated). Некоторые пользователи везут и получают прибыль, но многие подвергаются жёсткой ликвидации. Используйте на свой страх и риск.
+* **Высокий риск и активный (High risk and Active)**: Пользователи с такими займами занимают близко к максимально допустимому объёму и активно добавляют и удаляют залог, а также долг по мере необходимости, чтобы поддерживать здоровье займа (health).
+* **Осторожный и пассивный (Careful and Passive)**: Эти займы обычно имеют низкие коэффициенты LTV (Loan-To-Value ratio), поэтому их диапазоны мягкой ликвидации (soft-liquidation ranges) значительно ниже текущей цены. Эти займы обычно не требуют большого управления, и пользователи могут изменять свои займы только после значительных изменений цен.
+* **Осторожный и активный (Careful and Active)**: Пользователи занимают на низких коэффициентах LTV, но активно управляют займами, добавляя и удаляя капитал и долг по мере необходимости, чтобы избегать мягкой ликвидации.
 
-!!!warning "Actively managing loans is gas intensive"
-    Actively managing loans is expensive when factoring in gas usage, loan size needs to be sufficient to offset this expense.  As a general rule allow $\text{USD} \approx \text{gasPrice} \times 4$ to add collateral or repay debt, e.g. if gasPrice is 10 gWei allow \$40 to add collateral or repay debt.
+Примеры займов для каждого из 4 квадрантов приведены в [разделе примеров займов здесь](#loan-examples). Раздел непосредственно ниже показывает потери от мягкой ликвидации на основе пользовательских данных, чтобы потенциальные пользователи могли оценить потери.
+
+!!!warning "Активное управление займами требует много газа"
+    Активное управление займами дорогостояще, если учитывать использование газа. Размер займа должен быть достаточным, чтобы компенсировать эти расходы. В общем случае, допускается примерно \$USD ≈ gasPrice × 4 для добавления залога или погашения долга, например, если gasPrice составляет 10 gWei, допускается \$40 для добавления залога или погашения долга.
 
 ---
 
-# **Soft Liquidation Losses**
+# **Потери от Мягкой Ликвидации** {#soft-liquidation-losses}
 
-The data from all crvUSD loans so far has shown that for each band range a user can expect the following losses in the table below.  Loss amount doesn't seem to be affected by the collateral asset used (i.e., losses from wBTC seem to be the very similar as wstETH).  The band range was the biggest factor in how a user performed.  The histogram and table below show **soft-liquidation losses are generally very low**, but keep in mind that high volatility periods can cause double digit losses.  
+Данные всех займов crvUSD до сих пор показали, что для каждого диапазона полос (band range) пользователь может ожидать следующие потери в таблице ниже. Сумма потерь, похоже, не зависит от используемого залогового актива (collateral asset) (например, потери от wBTC кажутся очень похожими на потери от wstETH). Диапазон полос был самым значительным фактором, влияющим на результаты пользователя. Гистограмма и таблица ниже показывают, что **потери от мягкой ликвидации (soft-liquidation losses) обычно очень низкие**, но имейте в виду, что периоды высокой волатильности (volatility) могут вызвать потери с двузначными процентами.
 
-*Note: you can show and hide any band ranges by clicking on them in the legend*.
+*Примечание: вы можете показывать и скрывать любые диапазоны полос, щёлкая по ним в легенде*.
+
 <div style="display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; justify-content: center; margin-top: 10px;">
         <label style="margin: 0 10px;">
             <input type="checkbox" id="percentageCheckbox" checked>
-            Use percent of data for y axis
+            Использовать процент данных для оси Y
         </label>
         <label style="margin: 0 10px;">
             <input type="checkbox" id="timeCheckbox">
-            Use days of data (time) for y axis
+            Использовать дни данных (время) для оси Y
         </label>
     </div>
     <canvas id="softLiqHistogram"></canvas>
 </div>
 
 <div class="centered" markdown="block">
-| band range | days of soft liq data | min loss/day | median loss/day | mean loss/day | std loss/day | max loss/day |
-|------------|-----------------------|------------------|---------------------|-------------------|------------------|-------------------|
-| **4-9**        | 4601.17                | 0%         | 0.0927%               | 0.93%             | 2.18%            | 38.93%            |
-| **10-19**      | 2248.19                | 0%         | 0.0331%               | 0.62%             | 1.98%            | 43.06%            |
-| **20-35**      | 124.92                 | 0%         | 0.0127%               | 0.20%             | 0.54%           | 6.41%            |
-| **36-50**      | 114.99                  | 0%         | 0.0004%               | 0.11%             | 0.30%            | 3.98%             |
+| диапазон полос | дни данных мягкой ликвидации | мин. потеря/день | медианная потеря/день | средняя потеря/день | стандартное отклонение потеря/день | макс. потеря/день |
+|----------------|-----------------------------|-------------------|-----------------------|---------------------|-------------------------------------|---------------------|
+| **4-9**        | 4601.17                     | 0%                | 0.0927%               | 0.93%               | 2.18%                               | 38.93%              |
+| **10-19**      | 2248.19                     | 0%                | 0.0331%               | 0.62%               | 1.98%                               | 43.06%              |
+| **20-35**      | 124.92                      | 0%                | 0.0127%               | 0.20%               | 0.54%                               | 6.41%               |
+| **36-50**      | 114.99                      | 0%                | 0.0004%               | 0.11%               | 0.30%                               | 3.98%               |
 </div>
 
-**Using more bands ($\uparrow$N) reduce your soft-liquidation loss per day but increase the time in soft-liquidation, while also reducing the total amount a user can borrow**.  It is up to the user to choose a comfortable number of bands which allows them to borrow their required amount.
+**Использование большего количества полос ($\uparrow$N) уменьшает ваши потери от мягкой ликвидации в день, но увеличивает время нахождения в мягкой ликвидации, а также снижает общую сумму, которую пользователь может занять**. Выбор комфортного количества полос (bands), которое позволяет занимать требуемую сумму, остаётся за пользователем.
 
-*The above results are from the notebook [here](https://github.com/saint-rat/curve-notebooks/blob/main/n_range_softliq_losses.ipynb)*
+*Вышеуказанные результаты получены из curve-notebooks [здесь](https://github.com/saint-rat/curve-notebooks/blob/main/n_range_softliq_losses.ipynb)*
 
-# **Managing Loan Health**
+# **Управление Здоровьем Займа** {#managing-loan-health}
 
-**[Loan health](./loan-concepts.md#loan-health) is a direct measure of the risk of a loan**.  The lower the loan health, the riskier the loan.  To keep from being hard-liquidated, a loan must have a health above 0.  
+**[Здоровье займа](./loan-concepts.md#loan-health) (Loan health) является прямой мерой риска займа**. Чем ниже здоровье займа, тем рискованнее займ. Чтобы избежать жёсткой ликвидации (hard-liquidation), займ должен иметь здоровье выше 0.
 
-There are 2 factors which influence the health of a loan:
+На здоровье займа влияют 2 фактора:
 
-1. LTV (Loan-To-Value ratio) - More collateral and less debt increases the health of the loan
-2. Increasing the `a` distance as shown on the figure [here](./loan-concepts.md#loan-health).  This can be done in 2 ways: reducing the number of bands, reducing the amount borrowed.
+1. Коэффициент LTV (Loan-To-Value ratio) - Больший залог (collateral) и меньший долг (debt) увеличивают здоровье займа.
+2. Увеличение расстояния `a` (a distance), как показано на рисунке [здесь](./loan-concepts.md#loan-health). Это можно сделать двумя способами: уменьшив количество полос (bands) или уменьшив сумму займа (amount borrowed).
 
-There are 2 ways of increasing the health of a loan:
+Есть 2 способа увеличения здоровья займа:
 
-1. Repaying debt
-2. Adding collateral
+1. Погашение долга (Repaying debt)
+2. Добавление залога (Adding collateral)
 
-However if a loan is in soft-liquidation collateral cannot be added, debt must be repaid to increase the health.
-
----
-
-# **Loan Examples**
-
-*All the charts provided in this section are interactive.*  ***Click on different items in the legend to show/hide that plot.***
-
-Here's a list of the plots that can be shown/hidden and their meaning:
-
-**Value (Left Axis) plots**:  
-*These plots only relate to the left axis, the percentage axis has no meaning for them*.
-
-* `Oracle Price`: The oracle price for 1 unit of the chosen deposited collateral asset (e.g., 1 wBTC, 1 wstETH, etc)
-* `Soft-Liquidation Price Range`: This is the soft-liquidation price range of the user.  This can also be thought of as all the small band ranges together.  This drifts higher over time with the `Interest Rate`.
-* `CV in <asset>`: The collateral value in the deposited asset (e.g., wstETH, wBTC, etc).
-* `CV in crvUSD`: The value of the crvUSD held as collateral.  `<asset>` is swapped to crvUSD through the soft-liquidation process to protect from further declines in price.
-* `Total CV`: Total Collateral Value.  `CV in <asset>` plus `CV in crvUSD`.
-* `Debt Value`: The total amount of debt owed (this includes interest)
-* `AAVE/Spark Liq Price`: The price at which this loan would be liquidated in AAVE/Spark.  When the `Oracle Price` is lower than this price, the loan would be liquidated/not possible.
-
-**Percentage (Right Axis) plots**: 
-*These plots only relate to the right axis, the value axis has no meaning for them*
-
-* `LTV`: The loan to value ratio, this is the `Debt Value` divided by the `Total CV`.
-* `Health`: The health factor of the loan, a loan is Hard-liquidated when this gets to 0, see [here](loan-concepts.md#loan-health) for more info.
-* `% CV in <asset>`: The percentage of `Total CV` currently in the deposited collateral asset (e.g., wstETH, wBTC, etc).  This is `CV in <asset>` divided by `Total CV`.
-* `% CV in crvUSD`: The percentage of `Total CV` currently swapped to crvUSD.  This is `CV in crvUSD` divided by `Total CV`.
-* `% SL Collateral Loss`: The percentage of collateral lost to soft-liquidation.  See [here](loan-concepts.md#llamma-and-liquidations) for more information.
-* `% Interest Collateral Loss`: The collateral loss due to interest accruing on the debt.  This amount is included in the `Debt Value` plot.
-* `% Total Collateral Loss`: `% SL Collateral Loss` plus `% Interest Collateral Loss`.
-* `% Max Deposited Collateral`: This is the percentage of the current deposited collateral vs. the maximum that will get deposited over the life of the loan.  This is shown as a percentage so it can be represented along side other plots.  This is just to show the magnitude and timing of deposits/withdrawals, not exact amounts. An example would be if there were 20 wstETH deposited at the beginning, but the user deposits another 5 (total 25 wstETH) at another point without withdrawing any, this value will be start at $20/25=80\%$.
-* `Interest Rate`: The current borrow interest rate for the market.
+Однако, если займ находится в режиме мягкой ликвидации (Soft-liquidation), залог добавить нельзя, необходимо погасить долг для увеличения здоровья.
 
 ---
 
-## **Careful and Passive Loan Example**
+# **Примеры Займов** {#loan-examples}
 
-This user **deposited 188 wBTC** as collateral.  They **borrowed 1.05 million crvUSD**.  They were very careful and only borrowed with a **21% LTV**.  They used **N=10**.
+*Все графики в этом разделе интерактивные.* ***Щёлкайте по различным элементам в легенде, чтобы показывать/скрывать соответствующий график.***
+
+Вот список графиков, которые можно показывать/скрывать, и их значение:
+
+**Графики значения (Ось слева)**:  
+*Эти графики относятся только к левой оси, процентная ось для них не имеет значения*.
+
+* `Oracle Price` (Цена оракула): Цена оракула за 1 единицу выбранного депонированного залогового актива (например, 1 wBTC, 1 wstETH и т.д.)
+* `Soft-Liquidation Price Range` (Диапазон цен мягкой ликвидации): Это диапазон цен мягкой ликвидации (soft-liquidation price range) пользователя. Это можно также рассматривать как все мелкие диапазоны полос (band ranges) вместе. Этот диапазон сдвигается вверх со временем с увеличением `Interest Rate` (процентной ставки).
+* `CV in <asset>` (Залоговая стоимость в <asset>): Стоимость залога (collateral value) в депонированном активе (например, wstETH, wBTC и т.д.).
+* `CV in crvUSD` (Залоговая стоимость в crvUSD): Стоимость crvUSD, хранимого в качестве залога. `<asset>` конвертируется в crvUSD через процесс мягкой ликвидации для защиты от дальнейшего снижения цены.
+* `Total CV` (Общая залоговая стоимость): `CV in <asset>` плюс `CV in crvUSD`.
+* `Debt Value` (Стоимость долга): Общая сумма задолженности (включая проценты).
+* `AAVE/Spark Liq Price` (Цена ликвидации AAVE/Spark): Цена, по которой займ был бы ликвидирован в AAVE/Spark. Когда `Oracle Price` (Цена оракула) ниже этой цены, займ был бы ликвидирован/невозможно.
+
+**Процентные графики (Ось справа)**:  
+*Эти графики относятся только к правой оси, значение оси стоимости для них не имеет значения*
+
+* `LTV` (Loan-To-Value): Коэффициент займа к стоимости, это `Debt Value` (Стоимость долга) делённая на `Total CV` (Общую залоговую стоимость).
+* `Health` (Здоровье): Фактор здоровья займа (health factor), займ подвергается жёсткой ликвидации (hard-liquidated), когда этот показатель достигает 0. Подробности [здесь](loan-concepts.md#loan-health).
+* `% CV in <asset>` (% Залоговой стоимости в <asset>): Процент общей залоговой стоимости, текущий в депонированном залоговом активе (например, wstETH, wBTC и т.д.). Это `CV in <asset>` делённое на `Total CV`.
+* `% CV in crvUSD` (% Залоговой стоимости в crvUSD): Процент общей залоговой стоимости, текущий, конвертированный в crvUSD. Это `CV in crvUSD` делённое на `Total CV`.
+* `% SL Collateral Loss` (% Потери залога от мягкой ликвидации): Процент залога, потерянный из-за мягкой ликвидации. Подробности [здесь](loan-concepts.md#llamma-and-liquidations).
+* `% Interest Collateral Loss` (% Потери залога из-за процентов): Потери залога из-за начисления процентов на долг. Эта сумма включена в график `Debt Value` (Стоимость долга).
+* `% Total Collateral Loss` (% Общие потери залога): `% SL Collateral Loss` плюс `% Interest Collateral Loss`.
+* `% Max Deposited Collateral` (% Максимально депонированный залог): Это процент текущего депонированного залога по сравнению с максимальным, который будет депонирован за время жизни займа. Это показано в процентах, чтобы его можно было представить наряду с другими графиками. Это просто для показа величины и времени депозитов/выводов, а не точных сумм. Пример: если изначально депонировано 20 wstETH, но пользователь добавляет ещё 5 (всего 25 wstETH) в другой момент без вывода, это значение начнётся с \$20/25=80\%.
+* `Interest Rate` (Процентная ставка): Текущая процентная ставка займа для рынка.
+
+---
+
+## **Пример Осторожного и Пассивного Займа** {#careful-and-passive-loan-example}
+
+Этот пользователь **депонировал 188 wBTC** в качестве залога. Он **занял 1.05 миллиона crvUSD**. Он был очень осторожен и занимал только с **коэффициентом LTV 21%**. Он использовал **N=10**.
 
 <div class="centered2" style="width: 100%">
   <canvas id="loanChart3"></canvas>
 </div>
 
-As you can see from above the user remained passive as they were far from soft-liquidation at all times.  They only fee they incurred was from the borrow interest rate increasing their debt, but luckily wBTC price went up fast enough to offset that.  
+Как видно из вышеуказанного, пользователь оставался пассивным, так как находился далеко от мягкой ликвидации всё время. Единственная плата, которую он понёс, была связана с увеличением процентной ставки займа, но, к счастью, цена wBTC росла достаточно быстро, чтобы компенсировать это.
 
-Throughout the approx. 100 day duration of the loan they increased their loan to 1.27 million crvUSD but their LTV actually went down as wBTC price went up ~30%.
+В течение примерно 100-дневного срока займа он увеличил свой займ до 1.27 миллиона crvUSD, но его коэффициент LTV фактически снизился, поскольку цена wBTC выросла примерно на 30%.
 
-**This is a good strategy for loans less than 10,000 crvUSD** as gas costs for managing the loan are minimal.
+**Это хорошая стратегия для займов менее 10,000 crvUSD**, так как затраты на газ для управления займом минимальны.
 
+## **Пример Осторожного и Активного Займа** {#careful-and-active-loan-example}
 
-## **Careful and Active Loan Example**
-
-This loan was opened with **N=50**, **93 sfrxETH collateral**, **105500 crvUSD debt**.  This was a **LTV of 67%**.
+Этот займ был открыт с **N=50**, **93 sfrxETH залога**, **105500 crvUSD долга**. Это был **коэффициент LTV 67%**.
 
 <div class="centered2" style="width: 100%">
   <canvas id="loanChart4"></canvas>
 </div>
 
-This user starts with 105k crvUSD debt, but slowly over time adds collateral and borrows more debt.  Ending with 219 sfrxETH collateral and 298k crvUSD debt.  They actively managed to stay out of soft-liquidation, and spend 0.56 ETH of fees on 32 transactions over this 2 month period.  The only fees they incurred were from borrowing interest and Ethereum transactions fees.
-
-**This loan LTV is possible in other systems, but soft-liquidations aren't.  Soft-liquidations reassure the user that they are protected from sudden price drops**.
+Этот пользователь начинает с долга в 105k crvUSD, но постепенно добавляет залог (collateral) и занимает больше долга (debt), завершив с 219 sfrxETH залога и 298k crvUSD долга. Он активно управлял позицией, чтобы оставаться вне мягкой ликвидации (soft-liquidation), и потратил 0.56 ETH на комиссии за 32 транзакции в течение этого двухмесячного периода. Единственные комиссии, которые он понёс, связаны с процентами по займу (borrowing interest) и комиссиями за транзакции в Ethereum.
 
 
-## **High Risk and Active Loan Example**
+**Этот коэффициент LTV (Loan-To-Value) возможен в других системах, но мягкие ликвидации там отсутствуют. Мягкие ликвидации защищают пользователя от внезапных падений цен.**.
 
-This user opened their loan using **N=4**, **deposited 20 wstETH**, and **borrowed 32600 crvUSD**.  This equated to an **85% LTV**.
+## **Пример Займа Высокого Риска и Активного Управления** {#high-risk-and-active-loan-example}
+
+Этот пользователь открыл свой займ, используя **N=4**, **депонировал 20 wstETH**, и **занял 32600 crvUSD**. Это эквивалентно **коэффициенту LTV 85%**.
 
 <div class="centered2" style="width: 100%">
   <canvas id="loanChart1"></canvas>
 </div>
 
-The user with the loan pictured above is tracked over a period of ~102 days, during which they actively managed their loan to maintain an LTV around 85%.  By taking a crvUSD loan, the user locked in 85% of the value of wstETH instantly while still benefiting from price increases on wstETH. This loan would not have been possible on other platforms due to the LTV of the wstETH collateral.
+Пользователь с показанным выше займом отслеживается в течение примерно 102 дней, в течение которых он активно управлял своим займом, чтобы поддерживать коэффициент LTV около 85%. Взяв займ crvUSD, пользователь мгновенно зафиксировал 85% стоимости wstETH, при этом по-прежнему получая выгоду от роста цен на wstETH. Этот займ не был бы возможен на других платформах из-за коэффициента LTV залога wstETH.
 
-The user fell into soft-liquidation around the 15-day mark and experienced health erosion, the user repaid 10% of their debt on the 18th day, restoring their health.  As the price of wstETH rose around the 70-day mark, the user decided to borrow more, changing their soft-liquidation range. They quickly repaid the newly added debt after falling into soft-liquidation in this higher range.  Around the 85th day, the user chose to add more collateral and increased their debt.
+Пользователь попал в мягкую ликвидацию примерно на 15-й день и испытал ухудшение здоровья займа (health erosion). Пользователь погасил 10% своего долга на 18-й день, восстановив своё здоровье. По мере роста цены wstETH около 70-го дня, пользователь решил занять больше, изменив свой диапазон мягкой ликвидации (soft-liquidation range). Он быстро погасил вновь добавленный долг после попадания в мягкую ликвидацию в этом более высоком диапазоне. Примерно на 85-й день пользователь решил добавить больше залога и увеличить свой долг.
 
-Throughout this period, the user seemed comfortable in soft-liquidation, only losing ~22% of their collateral from soft-liquidation and borrowing interest. Their collateral was fully swapped to crvUSD multiple times, protecting them from further price declines.
+В течение этого периода пользователь чувствовал себя комфортно в мягкой ликвидации, теряя только около 22% своего залога из-за мягкой ликвидации и процентов по займу. Их залог полностью конвертировался в crvUSD несколько раз, защищая их от дальнейшего снижения цен.
 
-LLAMMA saved the user from hard-liquidation that would have occurred in any other system, which can be seen by making the `AAVE/Spark Liquidation Price` plot visible.  Even after reducing the LTV on the 18th day, the user would have been liquidated on other platforms by the two wicks below $1767 on the 25th and 55th days, preventing them from recouping value during the subsequent price appreciation.
+LLAMMA спасла пользователя от жёсткой ликвидации (hard-liquidation), которая произошла бы в любой другой системе, что можно увидеть, сделав видимым график `AAVE/Spark Liquidation Price` (Цена ликвидации AAVE/Spark). Даже после снижения LTV на 18-й день, пользователь был бы ликвидирован на других платформах из-за двух спадов ниже $1767 на 25-й и 55-й днях, что не позволило бы им восстановить стоимость во время последующего роста цен.
 
-This loan shows that **actively managing high risk loans can result in outcomes not possible in any other system**.
+Этот займ показывает, что **активное управление займами высокого риска может привести к результатам, невозможным в любой другой системе**.
 
+## **Пример Займа Высокого Риска и Пассивного Управления (Жёсткая ликвидация)** {#high-risk-and-passive-loan-example-hard-liquidation}
 
-## **High Risk and Passive Loan Example (Hard-liquidation)**
-
-This loan was opened with **N=4**, **5.95 wstETH collateral**, **10500 crvUSD debt**.  This was a **LTV (Loan-To-Value) of 84%**.
+Этот займ был открыт с **N=4**, **5.95 wstETH залога**, **10500 crvUSD долга**. Это был **коэффициент LTV 84%**.
 
 <div class="centered2" style="width: 100%">
   <canvas id="loanChart2"></canvas>
 </div>
 
-The user almost max borrowed.  Putting their liquidation range very close to the current price.  They stayed above their soft-liquidation range for a long time before falling into soft liquidation on day 50.  They quickly fell through soft liquidation to the safety on the other side but lost 3.1% to soft liquidation fees.  
+Пользователь взял почти максимальный займ. Установив свой диапазон ликвидации (liquidation range) очень близко к текущей цене. Он оставался выше своего диапазона мягкой ликвидации (soft-liquidation range) долгое время, прежде чем упасть в мягкую ликвидацию на 50-й день. Он быстро прошёл через мягкую ликвидацию до безопасной зоны, но потерял 3.1% из-за комиссий за мягкую ликвидацию (soft-liquidation fees).
 
-At any time from day 50 to day 62 they could have repaid debt to increase their health.  As they were passive and did nothing soft-liquidation fees reduced their health to 0 when going back up through their soft-liquidation range.  This is an unfortunate situation where the increasing collateral price caused hard-liquidation.
+В любой момент с 50-го по 62-й день он могл бы погасить долг, чтобы увеличить своё здоровье (health). Но так как он был пассивным и ничего не делал, комиссии за мягкую ликвидацию снизили его здоровье до 0 при возврате обртано через диапазон мягкой ликвидации. Это неприятная ситуация, когда рост цены залога вызвал жёсткую ликвидацию.
 
-!!!warning "Use this strategy at your own risk"
-    Users in this quadrant are at the highest risk of hard-liquidation.  Using this strategy is not advised.
+!!!warning "Используйте эту стратегию на свой страх и риск"
+    Пользователи в этом квадранте (Высокий риск и пассивный) находятся в наивысшем риске жёсткой ликвидации (hard-liquidation). Использование этой стратегии не рекомендуется.
 
+## **Пример Займа Под Мягкой Ликвидацией** {#under-soft-liquidation-loan-example}
 
-## **Under Soft-Liquidation Loan Example**
-
-This loan started with **57.07 wstETH collateral**, with **N=4** and **102k crvUSD debt**.  They paid off small amounts of debt a few times throughout the loan and finished with **93.5k crvUSD debt** and **53.44 wstETH collateral**.
+Этот займ начался с **57.07 wstETH залога**, с **N=4** и **102k crvUSD долга**. Они погашали небольшие суммы долга несколько раз в течение займа и закончили с **93.5k crvUSD долга** и **53.44 wstETH залога**.
 
 <div class="centered2" style="width: 100%">
   <canvas id="loanChart5"></canvas>
 </div>
 
-This loan is a great example of the power of LLAMMA and soft-liquidations.  The user spent **more than 50% of the loan time under the soft-liquidation range**.  Yet the **loss from soft-liquidation fees was only 6.37%**.  While under the soft-liquidation range the user was shielded from any further losses in the wstETH price as all their collateral was converted to crvUSD.  Yet when the price rose the user benefited from price increases as their collateral was swapped back to wstETH.
+Этот займ является отличным примером силы LLAMMA и мягких ликвидаций (soft-liquidations). Пользователь провёл **более 50% времени займа под диапазоном мягкой ликвидации (soft-liquidation range)**. Тем не менее, **потери от комиссий за мягкую ликвидацию составили только 6.37%**. Находясь под диапазоном мягкой ликвидации, пользователь был защищён от дальнейших потерь в цене wstETH, так как весь его залог был конвертирован в crvUSD. Однако, когда цена выросла, пользователь получил выгоду от роста цен, так как его залог был обратно конвертирован в wstETH.
 
-The AAVE/Spark Liq price plot for this loan shows that this loan would not be possible in competitor systems except from the 91st day when debt was lower and wstETH price rose.
+График `AAVE/Spark Liq price` (Цена ликвидации AAVE/Spark) для этого займа показывает, что этот займ был бы невозможен в системах-конкурентах, за исключением 91-го дня, когда долг был ниже, и цена wstETH выросла.
 
 ---
 
-# **Strategies**
+# **Стратегии** {#strategies}
 
-## **Borrowing to Lending Rate Arbitrage**
+## **Арбитраж ставок заимствования и кредитования** {#borrowing-to-lending-rate-arbitrage}
 
-As crvUSD is minted with high quality collateral in crvUSD markets, a user can usually make profit by minting crvUSD and supplying it elsewhere, especially to riskier markets.  This strategy is simple, you borrow crvUSD and supply it at higher rates, making the difference:
+Поскольку crvUSD создаётся с высококачественным залогом (high quality collateral) на рынках crvUSD, пользователь обычно может получать прибыль, занимая crvUSD и предоставляя его в других местах, особенно на рискованных рынках. Эта стратегия проста: вы занимаете crvUSD и предоставляете его по более высоким ставкам, получая разницу:
 
 $$\text{profitRate = supplyRate - borrowRate}$$
 
-Strategy:
+**Стратегия:**
 
-1. Supply collateral (e.g., ETH, wBTC, wstETH) to a crvUSD market
-2. Borrow crvUSD
-3. Supply crvUSD to a market with a higher supplying rate than crvUSD borrow rates, e.g., [Curve Lending Markets](https://lend.curve.fi), [Conic Omnipools](https://conic.finance/), [Silo Finance Markets](https://app.silo.finance/).
+1. Предоставьте залог (например, ETH, wBTC, wstETH) на рынке crvUSD.
+2. Займите crvUSD.
+3. Предоставьте crvUSD на рынок с более высокой ставкой по займам, чем ставка по займу crvUSD, например, [Curve Lending Markets](https://lend.curve.fi), [Conic Omnipools](https://conic.finance/), [Silo Finance Markets](https://app.silo.finance/).
 
-Risks:
+**Риски:**
 
-* The user must monitor their loan health to stay out of any liquidations (soft or hard) as losses from liquidation may be larger than profit from the rate arbitrage.
-* crvUSD risk, i.e., smart contract risk from crvUSD stablecoin and the crvUSD markets, see crvUSD risk disclaimer [here](../risks-security/risks/crvusd.md)
-* Smart contract and bad debt risk from lending markets, i.e., if you supply to Curve lending, see Curve Lending risk disclaimer [here](../risks-security/risks/lending.md).  Otherwise please research and be informed of risks for other platforms.  **Mentions of platforms here is not an endorsement of their safety.**
+* Пользователь должен следить за здоровьем (loan health) своего займа, чтобы избежать любой ликвидации (soft или hard), так как потери от ликвидации могут быть больше, чем прибыль от арбитража ставок.
+* Риск crvUSD (crvUSD risk), т.е. риск смарт-контрактов crvUSD stablecoin и рынков crvUSD, см. отказ от ответственности по риску crvUSD [здесь](../risks-security/risks/crvusd.md)
+* Риск смарт-контрактов и плохого долга (bad debt risk) на рынках кредитования (lending markets), т.е. если вы предоставляете средства на Curve Lending, см. отказ от ответственности по риску Curve Lending [здесь](../risks-security/risks/lending.md). В противном случае, пожалуйста, изучите и будьте информированы о рисках других платформ. **Упоминания платформ здесь не являются одобрением их безопасности.**
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -243,7 +242,7 @@ Risks:
         { n_range: 'N: 36-50', loss_range: '10-50%', softLiqDays: 0.00, softLiqPercent: 0.00 }
     ];
 
-    // Extract unique n_range values
+    // Извлекаем уникальные значения n_range
     const nRanges = [...new Set(data.map(item => item.n_range))];
 
     const colors = [
@@ -253,7 +252,7 @@ Risks:
         'rgba(255, 206, 86, 0.7)'
     ];
 
-    // Create datasets for each n_range
+    // Создаём наборы данных для каждого n_range
     const datasets = nRanges.map((nRange, index) => {
         const filteredData = data.filter(item => item.n_range === nRange);
         return {
@@ -263,7 +262,7 @@ Risks:
         };
     });
 
-    // Create the chart
+    // Создаём график
     const ctx = document.getElementById('softLiqHistogram').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'bar',
@@ -278,21 +277,21 @@ Risks:
                     stacked: true,
                     title: {
                         display: true,
-                        text: 'Soft Liquidation Loss Range Per Day'
+                        text: 'Диапазон потерь от мягкой ликвидации за день'
                     }
                 },
                 y: {
                     stacked: true,
                     title: {
                         display: true,
-                        text: 'Percent of data in each range'
+                        text: 'Процент данных в каждом диапазоне'
                     }
                 }
             }
         }
     });
 
-    // Function to update the chart based on the selected checkbox
+    // Функция для обновления графика на основе выбранного флажка
     function updateChart() {
         const newDatasets = nRanges.map((nRange, index) => {
             const filteredData = data.filter(item => item.n_range === nRange);
@@ -306,12 +305,12 @@ Risks:
         });
         chart.data.datasets = newDatasets;
         chart.options.scales.y.title.text = percentageCheckbox.checked
-            ? 'Percent of data in each range'
-            : 'Days of data in each range';
+            ? 'Процент данных в каждом диапазоне'
+            : 'Дни данных в каждом диапазоне';
         chart.update();
     }
 
-    // Checkbox event listeners
+    // Слушатели событий для флажков
     const percentageCheckbox = document.getElementById('percentageCheckbox');
     const timeCheckbox = document.getElementById('timeCheckbox');
 
@@ -529,7 +528,7 @@ Risks:
           x: {
             title: {
               display: true,
-              text: 'Time (days)'
+              text: 'Время (дни)'
             },
           },
           y1: {
@@ -537,7 +536,7 @@ Risks:
             position: 'left',
             title: {
               display: true,
-              text: 'Value ($)'
+              text: 'Стоимость ($)'
             }
           },
           y2: {
@@ -545,7 +544,7 @@ Risks:
             position: 'right',
             title: {
               display: true,
-              text: 'Percentage (%)'
+              text: 'Процент (%)'
             },
             grid: {
               drawOnChartArea: false
@@ -571,13 +570,13 @@ Risks:
                   }
                 });
                 legendItems.unshift({
-                  text: 'Value (Left Axis):',
+                  text: 'Значение (Ось слева):',
                   fillStyle: 'rgba(0, 0, 0, 0)',
                   hidden: false,
                   lineWidth: 0
                 });
                 const sharedLegendItem = {
-                  text: 'Soft-Liquidation Price Range',
+                  text: 'Диапазон цен мягкой ликвидации',
                   fillStyle: datasets[1].borderColor,
                   hidden: datasets[1].hidden || datasets[2].hidden,
                   lineWidth: 0,
@@ -586,7 +585,7 @@ Risks:
                 const index = legendItems.findIndex(item => item.text === sharedLegendItem.text);
                 if (index !== -1) {
                   legendItems[index] = sharedLegendItem;
-                  legendItems.splice(2, 1); // Remove the duplicate entry under "Percentage"
+                  legendItems.splice(2, 1); // Удалить дублирующую запись под "Процентом"
                 }
                 legendItems.splice(8, 0, {
                   text: '  |  ',
@@ -595,7 +594,7 @@ Risks:
                   lineWidth: 0
                 });
                 legendItems.splice(9, 0, {
-                  text: 'Percentage (Right Axis):',
+                  text: 'Проценты (Ось справа):',
                   fillStyle: 'rgba(0, 0, 0, 0)',
                   hidden: false,
                   lineWidth: 0
@@ -607,7 +606,7 @@ Risks:
               const index = legendItem.datasetIndex;
               const chart = legend.chart;
               if (index === 1) {
-                // Toggle visibility of both datasets when clicking "Soft-Liquidation Price Range"
+                // Переключение видимости обоих наборов данных при клике на "Диапазон цен мягкой ликвидации"
                 const softLiqDataset1 = chart.data.datasets[1];
                 const softLiqDataset2 = chart.data.datasets[2];
                 const isHidden = softLiqDataset1.hidden || softLiqDataset2.hidden;
@@ -615,14 +614,14 @@ Risks:
                 softLiqDataset2.hidden = !isHidden;
                 chart.update();
               } else {
-                // Default behavior for other legend items
+                // Поведение по умолчанию для других элементов легенды
                 Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
               }
                 }
                   },
                   title: {
                     display: false,
-                    text: 'Loan Chart'
+                    text: 'График займа'
                   }
                 }
               }
@@ -638,7 +637,7 @@ Risks:
         createChart(data, chartId);
       })
       .catch(error => {
-        console.error('Error loading JSON file:', error);
+        console.error('Ошибка загрузки JSON файла:', error);
       });
   }
 
@@ -648,3 +647,140 @@ Risks:
   loadData('loan4.json', 'loanChart4');
   loadData('loan5.json', 'loanChart5');
 </script>
+
+<script>
+  const ethCrvUsdCtx = document.getElementById('ethCrvUsdChart').getContext('2d');
+  const ethCrvUsdSlider = document.getElementById('ethCrvUsdSlider');
+  const ethCrvUsdValuesDisplay = document.getElementById('ethCrvUsdValues');
+  const bottomRangeInput = document.getElementById('bottomRange');
+  const topRangeInput = document.getElementById('topRange');
+  const currentPriceDisplay = document.getElementById('currentPrice');
+  const collateralInput = document.getElementById('collateralInput');
+  const ethPercentageDisplay = document.getElementById('ethPercentageDisplay');
+
+  const ethCrvUsdChart = new Chart(ethCrvUsdCtx, {
+  type: 'bar',
+  data: {
+      labels: ['Залог'],  // Единичный ярлык
+      datasets: [
+          {
+              label: 'ETH',
+              data: [0],  // Единичное значение
+              backgroundColor: 'rgba(54, 162, 235, 0.8)',
+              yAxisID: 'y'
+          },
+          {
+              label: 'crvUSD',
+              data: [0],  // Единичное значение
+              backgroundColor: 'rgba(75, 192, 192, 0.8)',
+              yAxisID: 'y1'
+          }
+      ]
+  },
+  options: {
+      responsive: true,
+      scales: {
+          x: {
+              stacked: false,  // Устанавливаем stacked в false
+              categoryPercentage: 0.8,  // Настраивает ширину группы столбцов
+              barPercentage: 0.9,  // Настраивает ширину каждого отдельного столбца
+              title: {
+                  display: false,
+                  text: 'Залог'
+              }
+          },
+          y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              beginAtZero: true,
+              title: {
+                  display: true,
+                  text: 'Залог в ETH'
+              },
+              ticks: {
+                  callback: function(value) {
+                      return value.toFixed(2) + ' ETH';
+                  }
+              }
+          },
+          y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              beginAtZero: true,
+              title: {
+                  display: true,
+                  text: 'Залог в crvUSD'
+              },
+              ticks: {
+                  callback: function(value) {
+                      return value.toFixed(0) + ' crvUSD';
+                  }
+              },
+              grid: {
+                  drawOnChartArea: false,
+              },
+          }
+      },
+      plugins: {
+          legend: {
+              display: true
+          },
+          title: {
+              display: false,
+              text: 'Конвертация залога в мягкой ликвидации'
+          },
+          tooltip: {
+              callbacks: {
+                  label: function(context) {
+                      const label = context.dataset.label || '';
+                      if (label === 'ETH') {
+                          return context.parsed.y.toFixed(2) + ' ETH';
+                      } else {
+                          return context.parsed.y.toFixed(2) + ' crvUSD';
+                      }
+                  }
+              }
+          }
+      }
+  }
+});
+
+    function updateEthCrvUsdChart() {
+        const ethPercentage = Number(ethCrvUsdSlider.value);
+        const crvUSDPercentage = 100 - ethPercentage;
+        const bottomValue = Number(bottomRangeInput.value);
+        const topValue = Number(topRangeInput.value);
+        const sliderValue = Number(ethCrvUsdSlider.value);
+        const collateral = Number(collateralInput.value);
+        
+        const currentPrice = bottomValue + (topValue - bottomValue) * (sliderValue / 100);
+        const avgSellPrice = (topValue + currentPrice) / 2;
+        const eth = (ethPercentage/100) * collateral;
+        const crvUSDEth = (crvUSDPercentage / 100) * collateral;
+        const crvUSDValue = crvUSDEth * avgSellPrice;
+
+        ethCrvUsdChart.data.datasets[0].data = [eth];
+        ethCrvUsdChart.data.datasets[1].data = [crvUSDValue];
+        
+        ethCrvUsdChart.options.scales.y.max = Math.ceil(collateral);
+        ethCrvUsdChart.options.scales.y1.max = Math.ceil(topValue * collateral);
+        
+        ethCrvUsdChart.update();
+
+        ethCrvUsdValuesDisplay.innerHTML = `Залог: ${eth.toFixed(2)} ETH, ${crvUSDValue.toFixed(2)} crvUSD<br>Средняя цена обмена: ${avgSellPrice.toFixed(2)} crvUSD/ETH<br>ETH обменены на crvUSD: ${crvUSDPercentage}%`;
+
+        currentPriceDisplay.textContent = '$' + currentPrice.toFixed(2);
+        ethPercentageDisplay.textContent = ethPercentage;
+    }
+
+    ethCrvUsdSlider.addEventListener('input', updateEthCrvUsdChart);
+    bottomRangeInput.addEventListener('input', updateEthCrvUsdChart);
+    topRangeInput.addEventListener('input', updateEthCrvUsdChart);
+    collateralInput.addEventListener('input', updateEthCrvUsdChart);
+
+    // Начальное обновление
+    updateEthCrvUsdChart();
+</script>
+

@@ -1,93 +1,90 @@
 <h1>Locked CRV (veCRV)</h1>
 
-veCRV is an acronym for **vote-escrowed CRV**.  Users can lock their CRV for a **minimum of 1 week**, **maximum of 4 years**, in return the user is given veCRV, **veCRV amount [decays](#vecrv-decay) linearly over the chosen lock time**.  **veCRV is not transferrable**.  The longer you lock the more veCRV you receive, see the [locking formula section](#crv-to-vecrv-formula) for a detailed explanation but the simple explanation is:
+veCRV — это аббревиатура от **vote-escrowed CRV** (голосовая заморозка CRV). Пользователи могут заблокировать свои CRV на **минимум 1 неделю**, **максимум 4 года**, в обмен на veCRV. **Количество veCRV [уменьшается](#vecrv-decay) линейно с течением выбранного срока блокировки**. **veCRV не подлежит передаче**. Чем дольше вы блокируете, тем больше veCRV вы получаете. Подробнее см. в разделе [формула блокировки](#crv-to-vecrv-formula), но простое объяснение таково:
 
-- 1 CRV locked for 4 years = 1 veCRV
-- 1 CRV locked for 3 years = 0.75 veCRV
-- 1 CRV locked for 2 years = 0.5 veCRV
-- 1 CRV locked for 1 year = 0.25 veCRV
+- 1 CRV, заблокированный на 4 года = 1 veCRV
+- 1 CRV, заблокированный на 3 года = 0.75 veCRV
+- 1 CRV, заблокированный на 2 года = 0.5 veCRV
+- 1 CRV, заблокированный на 1 год = 0.25 veCRV
 
-**Locking was a concept created to align incentives for governance**.  Many coin voting systems have a problem where someone can buy tokens off the market to influence a governance vote, then sell the tokens after the vote passed/failed.  These users can influence governance votes greatly and only take minimal risk by holding tokens for a few days.  Locking stops this happening.  Users must lock their tokens for a period of time to receive voting power, and users are rewarded with more voting power if they lock their tokens for a longer period of time.
+**Блокировка (Locking) — это концепция, созданная для выравнивания стимулов в управлении.** Многие системы голосования с токенами имеют проблему: кто-то может купить токены на рынке, чтобы повлиять на голосование по управлению, а затем продать токены после того, как голосование прошло или провалилось. Эти пользователи могут значительно влиять на голосования по управлению и при этом не подвергаются серьезному риску, держа токены всего несколько дней. Блокировка предотвращает это. Пользователи должны заблокировать свои токены на определенный период времени, чтобы получить голосовую силу, и пользователи получают больше голосовой силы, если блокируют свои токены на более длительный срок.
 
-To find out how to lock see the guide here: [lock CRV tokens](./locking-your-crv.md)
+Чтобы узнать, как заблокировать токены, смотрите руководство здесь: [блокировка токенов CRV](./locking-your-crv.md)
 
 !!!info
-    The amount of veCRV shown as a statistic in various places is not a true reflection of the amount of locked CRV.  As 1 veCRV does not equal 1 CRV due to locking time and decay.  Read the [locking information](#locking-information) section of this page for more information
+    Количествo veCRV, отображаемое как статистика в различных местах, не является точным отражением количества заблокированных CRV. Так как 1 veCRV не равен 1 CRV из-за времени блокировки и уменьшения. Читайте раздел [Информация о блокировке](#locking-information) этой страницы для получения дополнительной информации.
 
-## **veCRV Benefits**
+## **Преимущества veCRV** {#vecrv-benefits}
 
-Users with veCRV are given the following benefits:
+Пользователи с veCRV получают следующие преимущества:
 
-### **Earning Fees**
+### **Заработок на комиссиях** {#earning-fees}
 
-After 2 community-led proposals and subsequent governance votes in September 2020 (Link to votes: [[1]](https://curvemonitor.com/#/dao/proposal/parameter/2), [[2]](https://curvemonitor.com/#/dao/proposal/parameter/3)), the admin fees of Curve pools were set to 50%, this means **50% of all trading fees are distributed to veCRV holders**, while the remaining 50% goes to the respective liquidity providers of the pools. This distribution was implemented to align the incentives between liquidity providers and governance participants (veCRV holders). Additionally, since the launch of Curve's own stablecoin (crvUSD), **100% of the accrued interest from crvUSD markets** also goes to veCRV holders.  veCRV holders don't receive any direct value from lending markets, but they do receive indirect value from increasing crvUSD supply.
+После двух предложений, инициированных сообществом, и последующих голосований по управлению в сентябре 2020 года (ссылки на голосования: [[1]](https://curvemonitor.com/#/dao/proposal/parameter/2), [[2]](https://curvemonitor.com/#/dao/proposal/parameter/3)), административные комиссии пулов Curve были установлены на уровне 50%. Это означает, что **50% всех торговых комиссий распределяются между держателями veCRV**, а оставшиеся 50% идут соответствующим поставщикам ликвидности пулов. Это распределение было реализовано для выравнивания стимулов между поставщиками ликвидности и участниками управления (держателями veCRV). Кроме того, с момента запуска собственного стейблкоина Curve (crvUSD), **100% накопленных процентов с рынков crvUSD** также направляются держателям veCRV. Держатели veCRV не получают никакой прямой ценности от кредитных рынков, но получают косвенную ценность от увеличения предложения crvUSD.
 
-All collected fees are converted to `crvUSD`  and distributed among veCRV holders. See [Claiming Trading Fees](./claiming-trading-fees.md) for how to claim, or [Fee Collection & Distribution](./fee-collection-distribution.md) for how they are collected.
+Все собранные комиссии конвертируются в `crvUSD` и распределяются между держателями veCRV. См. [Как заявить торговые комиссии](./claiming-trading-fees.md) для получения инструкций по заявке или [Сбор и распределение комиссий](./fee-collection-distribution.md) для информации о том, как они собираются.
 
-### **Boosting CRV Rewards**
+### **Увеличение (Boosting) вознаграждений CRV** {#boosting-crv-rewards}
 
-One of the primary incentives for vote-locking is the **boost mechanism**. Users who provide liquidity to a swap pool and/or lending market with a reward gauge and have some vote-locked CRV **receive boosted CRV rewards**.  See [Boosting your CRV rewards](../reward-gauges/boosting-your-crv-rewards.md) for more information.
+Одним из основных стимулов для vote-locking (голосовательной блокировки) является механизм **boost**. Пользователи, которые предоставляют ликвидность пулу обмена и/или кредитному рынку с [счётчиками вознаграждений (gauges)](/reward-gauges/overview/) и имеют заблокированный CRV для голосования, **получают увеличенные вознаграждения CRV**. См. [Увеличение (Boosting) вознаграждений CRV](../reward-gauges/boosting-your-crv-rewards.md) для получения дополнительной информации.
 
-### **Governance**
+### **Управление** {#governance}
 
-- The veCRV balance represents the voting power of a user in the Curve DAO, which allows them to **vote on on-chain proposals**. 
+- Баланс veCRV представляет собой силу голоса пользователя в Curve DAO, что позволяет ему **голосовать по on-chain предложениям**.
 
-- Additionally, a crucial part of Curve governance are **gauge weight votes**. Curve token emissions are created in a way that allows **veCRV holders to choose how future emissions are allocated**. Liquidity pools on Curve can be added to the GaugeController via a successfully passed DAO vote, making them eligible to receive CRV token emissions. The gauge weights determine how much CRV each pool receives. Every **Thursday at 00:00 UTC**, the updated gauge weights are applied.  More info on [Voting](../governance/voting.md) and [Gauge Weights](../reward-gauges/gauge-weights.md)
+- Кроме того, важной частью управления Curve являются **голосования по весу счётчиков вознаграждений (gauge weight votes)**. Эмиссии токенов Curve устроены таким образом, что **держатели veCRV могут выбирать, как будут распределяться будущие эмиссии**. Пулы ликвидности на Curve могут быть добавлены в GaugeController через успешно прошедшее голосование DAO, что делает их претендентами на получение эмиссий токенов CRV. Вес счётчиков определяет, сколько CRV получает каждый пул. Каждую **четверг в 00:00 UTC** обновленные веса счётчиков применяются. Подробнее см. [Голосование](../governance/voting.md) и [Вес счётчиков вознаграждений (Gauge Weights)](../reward-gauges/gauge-weights.md)
 
 ---
 
-## **Locking Information**
+## **Информация о блокировке** {#locking-information}
 
-When a user locks their CRV tokens for voting, they will receive veCRV based on the lock duration and the amount locked. Locking is **not reversible** and veCRV tokens are **non-transferable**. If a user decides to vote-lock their CRV tokens, they will only be able to **reclaim the CRV tokens after the lock duration has ended**.
+Когда пользователь блокирует свои токены CRV для голосования, он получает veCRV в зависимости от длительности блокировки и количества заблокированных токенов. Блокировка **не обратима**, а токены veCRV **не подлежат передаче**. Если пользователь решает осуществить vote-locking своих токенов CRV, он сможет **возвратить токены CRV только после окончания срока блокировки**.
 
-Additionally, a user **cannot have multiple locks with different expiry dates**. However, a lock **can be extended**, or **additional CRV can be added** to it **at any time**.
+### **Формула CRV в veCRV** {#crv-to-vecrv-formula}
 
-### **CRV to veCRV formula**
+При блокировке CRV в veCRV вы получаете количество veCRV, зависящее от продолжительности блокировки, минимальное время — 1 неделя, максимальное время — 4 года:
 
-When locking CRV to veCRV you are rewarded with an amount of veCRV based on how long you lock, the minimum time is 1 week, the maximum time is 4 years:
+$$ \text{veCRV} = \frac{\text{CRV} \times \text{lockTime}}{4 \text{ года}} $$
 
-$$ \text{veCRV} = \frac{\text{CRV} \times \text{lockTime}}{4 \text{ years}} $$
+Максимальная продолжительность блокировки — 4 года. Пользователи не могут блокировать токены на более длительные периоды для сохранения соотношения 1 CRV: 1 veCRV, вместо этого им необходимо продолжать продлевать свою блокировку. Пользователи могут вывести свои CRV в любое время после того, как их veCRV снизится до 0 (истек срок блокировки).
 
-The maximum duration of a lock is 4 years, users cannot lock for longer periods to keep the 1 CRV: 1 veCRV ratio, they must instead continue extending their lock.  Users can withdraw their CRV at any time after their veCRV has decayed to 0 (lock time has expired).
+### **Уменьшение veCRV (decay)** {#vecrv-decay}
 
-### **veCRV decay**
+Количество veCRV у пользователя будет уменьшаться со временем по мере приближения даты разблокировки. Параметр `lockTime` в приведенной выше формуле скорее должен называться `lockTimeLeft` (оставшееся время блокировки), так как veCRV пользователя постоянно пересчитывается. Существует два способа изменить блокировку: добавить к ней или продлить блокировку. Что происходит в обоих случаях и как это влияет на veCRV и уменьшение, показано на диаграммах ниже.
 
-The amount of veCRV a user has will decay over time as their unlock date draws closer.  The `lockTime` parameter in the equation above should more aptly be called `lockTimeLeft` as a user's veCRV is constantly recalculated.  There are two ways a user can change their lock.  They can add to their lock or they can extend their lock.  What happens in both situations and how it affects their veCRV and the decay is shown in the charts below.
+#### **Продление блокировок** {#extending-locks}
 
-#### **Extending Locks**
-
-Extending locks means increasing the time left on a lock.  In the above example if Alice locked 100 CRV for 4 years, after 3 years she would only have 25 veCRV left as her lock time is now 1 year.  If she extended her lock to be 4 years again after these 3 years, she would again have 100 veCRV:
+Продление блокировки означает увеличение оставшегося времени блокировки. В приведенном выше примере, если Алиса заблокировала 100 CRV на 4 года, через 3 года у нее останется только 25 veCRV, так как время блокировки теперь составляет 1 год. Если она снова продлит свою блокировку до 4 лет после этих 3 лет, у нее снова будет 100 veCRV:
 
 <canvas id="extendLockChart"></canvas>
 
-#### **Adding CRV to Locks**
+#### **Добавление CRV к блокировкам** {#adding-crv-to-locks}
 
-Adding CRV to locks means the unlock date will remain the same, but more CRV will be locked, meaning more veCRV. If Alice locked 100 CRV for 4 years, but after 2 years added 200 CRV to her lock, she would have 150 veCRV (300 CRV total locked for 2 years).  This veCRV would continue to decay to 0 over the next 2 years:
+Добавление CRV к блокировкам означает, что дата разблокировки останется прежней, но будет заблокировано больше CRV, что означает больше veCRV. Если Алиса заблокировала 100 CRV на 4 года, но через 2 года добавила 200 CRV к своей блокировке, у нее будет 150 veCRV (всего заблокировано 300 CRV на 2 года). Эти veCRV будут продолжать уменьшаться до 0 в течение следующих 2 лет:
 
 <canvas id="addLockChart"></canvas>
 
 ---
 
-## **External veCRV Incentives**
+## **Внешние стимулы veCRV** {#external-vecrv-incentives}
 
-External marketplaces (out of Curve's purview) have been created to pay for users to vote for specific swap pools/lending markets and receive rewards in return.  Curve does not condone or condemn such marketplaces or behavior.  It is within the users' rights to use these marketplaces as they wish.
+Внешние маркетплейсы (вне сферы действия Curve) были созданы для того, чтобы оплачивать голосование пользователей за определенные пулы обмена/кредитные рынки и предоставлять вознаграждения взамен. Curve не одобряет и не осуждает такие маркетплейсы или поведение. Пользователи имеют право использовать эти маркетплейсы по своему усмотрению.
 
-These incentives can be very lucrative and can be multiples of the platform fees earned by veCRV weekly.
+Эти стимулы могут быть очень выгодными и могут превышать платформенные комиссии, заработанные veCRV, в несколько раз еженедельно.
 
-These incentives work in the following way:
+Эти стимулы работают следующим образом:
 
-1. A project wants liquidity for their token in a swap pool on Curve
-2. The project puts up a incentive for users to vote for the swap pool in the weekly gauge vote.  This incentive can be of any amount in any token, e.g., $100k in ETH.
-3. If users vote for the pool, they receive a portion of the incentive based on how much veCRV they have, and how much voted for the pool total.  
+1. Проект хочет обеспечить ликвидность для своего токена в пуле обмена на Curve.
+2. Проект предоставляет стимул для пользователей, чтобы они проголосовали за пул обмена в еженедельном голосовании по счётчикам вознаграждений (gauges). Этот стимул может быть любой суммы в любом токене, например, 100k долларов в ETH.
+3. Если пользователи голосуют за пул, они получают часть стимула в зависимости от того, сколько у них veCRV и сколько всего проголосовало за пул.
 
-    e.g., 2 users vote for the pool Alice and Bob.  Alice has 100k veCRV, Bob has 900k veCRV.  The total which voted for the pool was 1M.  The $100k ETH get split between Alice and Bob based on their veCRV, so Alice gets $10k in ETH, Bob gets $90k in ETH.
+   Например, 2 пользователя голосуют за пул — Алиса и Боб. У Алисы 100k veCRV, у Боба 900k veCRV. Всего проголосовало за пул 1M. 100k долларов в ETH распределяются между Алисой и Бобом на основе их veCRV, так что Алиса получает 10k долларов в ETH, а Боб получает 90k долларов в ETH.
 
-## **External CRV Liquid Lockers**
+## **Внешние ликвидные замораживатели CRV** {#external-crv-liquid-lockers}
 
-CRV liquid lockers are products outside of the Curve platform.  Some projects have created ways of locking 1 CRV for 1 veCRV forever and giving the user another token in return, e.g., tokenCRV (this token doesn't exist, it was just created for this example).  Most of these tokens like tokenCRV don't have all of the benefits of normal veCRV.  Also, as all the designs revolve around locking forever, there is no way of getting deposited CRV out of their systems.  The user must trade their tokenCRV back to normal CRV on the open market.  These tokens are always worth less than 1 CRV.  
+Ликвидные замораживатели CRV — это продукты, находящиеся вне платформы Curve. Некоторые проекты создали способы замораживать 1 CRV за 1 veCRV навсегда и предоставлять пользователю другой токен взамен, например, tokenCRV (этот токен не существует, он был создан только для этого примера). Большинство этих токенов, таких как tokenCRV, не обладают всеми преимуществами обычного veCRV. Кроме того, так как все дизайны ориентированы на постоянную заморозку, нет возможности вывести замороженные CRV из их систем. Пользователь должен обменять свой tokenCRV обратно на обычный CRV на открытом рынке. Эти токены обычно стоят меньше чем 1 CRV.
 
-These tokens are risky, the only way to guarantee being able to withdraw the same amount of CRV as is deposited is to lock through the [Official Curve Locker UI](https://dao.curve.fi/locker).
-
+Эти токены рискованны, единственный способ гарантировать возможность вывода того же количества CRV, которое было депонировано, — это блокировка через [официальный интерфейс Curve Locker](https://dao.curve.fi/locker).
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -95,39 +92,39 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
 
 
 <script>
-    // Get today's date
+    // Получить сегодняшнюю дату
     const today = new Date();
     const endDate = new Date(today);
     const relockDate = new Date(today);
     relockDate.setFullYear(today.getFullYear() + 3);
     endDate.setFullYear(today.getFullYear() + 7);
 
-    // Generate data points every 7 days
+    // Генерация точек данных каждые 7 дней
     let data = [];
     let currentDate = new Date(today);
     
     while (currentDate <= relockDate) {
-        const x = (currentDate - today) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        const x = (currentDate - today) / (1000 * 60 * 60 * 24); // Преобразование миллисекунд в дни
         const veCRV = 100 - 100*x / (4 * 365);
         data.push({ x: currentDate.toISOString().split('T')[0], y: veCRV});
         currentDate.setDate(currentDate.getDate() + 7);
     }
     currentDate.setDate(currentDate.getDate() - 7);
     while (currentDate <= endDate) {
-        const x = (currentDate - relockDate) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        const x = (currentDate - relockDate) / (1000 * 60 * 60 * 24); // Преобразование миллисекунд в дни
         const veCRV = Math.min(100 - 100*x / (4 * 365), 100);
         data.push({ x: currentDate.toISOString().split('T')[0], y: veCRV});
         currentDate.setDate(currentDate.getDate() + 7);
     }
     
 
-    // Create the chart
+    // Создание графика
     const ctx = document.getElementById('extendLockChart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
         data: {
             datasets: [{
-                label: 'veCRV Percentage',
+                label: 'Процент veCRV',
                 data: data,
                 borderColor: 'blue',
                 fill: false,
@@ -153,7 +150,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                             backgroundColor: 'red',
                             borderRadius: 0,
                             color: 'white',
-                            content: (ctx) => ['Extend lock for 4 years'],
+                            content: (ctx) => ['Продлить блокировку на 4 года'],
                             display: true,
                             position: 'end'
                         }
@@ -161,7 +158,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                 },
                 title: {
                     display: true,
-                    text: 'veCRV decay for 100 CRV locked for 4 years with lock extended after 3 years for 4 more years'
+                    text: 'Уменьшение veCRV для 100 CRV, заблокированных на 4 года с продлением блокировки после 3 лет на еще 4 года'
                 },
                 legend: {
                     display: false
@@ -171,7 +168,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                     callbacks: {
                         title: (context) => {
                             const date = new Date(context[0].parsed.x);
-                            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                            return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short', day: 'numeric' });
                         },
                         label: (context) => {
                             return `100 CRV = ${context.parsed.y.toFixed(1)} veCRV`;
@@ -187,7 +184,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                     },
                     title: {
                         display: true,
-                        text: 'Date'
+                        text: 'Дата'
                     }
                 },
                 y: {
@@ -206,32 +203,32 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
     endDate.setFullYear(today.getFullYear() + 4);
     addLockDate.setFullYear(today.getFullYear() + 2);
 
-    // Generate data points every 7 days
+    // Генерация точек данных каждые 7 дней
     data = [];
     currentDate = new Date(today);
     
     while (currentDate <= addLockDate) {
-        const x = (currentDate - today) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        const x = (currentDate - today) / (1000 * 60 * 60 * 24); // Преобразование миллисекунд в дни
         const veCRV = 100 - 100*x / (4 * 365);
         data.push({ x: currentDate.toISOString().split('T')[0], y: veCRV});
         currentDate.setDate(currentDate.getDate() + 7);
     }
     currentDate.setDate(currentDate.getDate() - 7);
     while (currentDate <= endDate) {
-        const x = (currentDate - addLockDate) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        const x = (currentDate - addLockDate) / (1000 * 60 * 60 * 24); // Преобразование миллисекунд в дни
         const veCRV = Math.min(150 - 150*x / (2 * 365), 150);
         data.push({ x: currentDate.toISOString().split('T')[0], y: veCRV});
         currentDate.setDate(currentDate.getDate() + 7);
     }
     
 
-    // Create the chart
+    // Создание графика
     const addLockCtx = document.getElementById('addLockChart').getContext('2d');
     new Chart(addLockCtx, {
         type: 'line',
         data: {
             datasets: [{
-                label: 'veCRV Percentage',
+                label: 'Процент veCRV',
                 data: data,
                 borderColor: 'blue',
                 fill: false,
@@ -257,7 +254,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                             backgroundColor: 'green',
                             borderRadius: 0,
                             color: 'white',
-                            content: (addLockCtx) => ['Add 200 CRV to lock'],
+                            content: (addLockCtx) => ['Добавить 200 CRV к блокировке'],
                             display: true,
                             position: 'end'
                         }
@@ -265,7 +262,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                 },
                 title: {
                     display: true,
-                    text: 'veCRV decay for 100 CRV locked for 4 years with 200 CRV added to lock after 2 years'
+                    text: 'Уменьшение veCRV для 100 CRV, заблокированных на 4 года с добавлением 200 CRV к блокировке после 2 лет'
                 },
                 legend: {
                     display: false
@@ -275,7 +272,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                     callbacks: {
                         title: (context) => {
                             const date = new Date(context[0].parsed.x);
-                            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                            return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short', day: 'numeric' });
                         },
                         label: (context) => {
                             return `100 CRV = ${context.parsed.y.toFixed(1)} veCRV`;
@@ -291,7 +288,7 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
                     },
                     title: {
                         display: true,
-                        text: 'Date'
+                        text: 'Дата'
                     }
                 },
                 y: {
@@ -304,3 +301,4 @@ These tokens are risky, the only way to guarantee being able to withdraw the sam
         }
     });
 </script>
+

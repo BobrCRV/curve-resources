@@ -1,110 +1,109 @@
 <h1>CRV & veCRV FAQ</h1>
 
-## **What is the purpose and utility of CRV?**
+## **Какова цель и полезность CRV?** {#what-is-the-purpose-and-utility-of-crv}
 
-The main purposes of the Curve DAO token are to incentivize liquidity providers on the Curve Finance platform as well as getting as many users involved as possible in the governance of the protocol.
+Основные цели токена Curve DAO (CRV) заключаются в стимулировании поставщиков ликвидности на платформе Curve Finance, а также в вовлечении как можно большего числа пользователей в управление протоколом.
 
-It also has time-weighted voting for governance and accrues a portion of the Curve Finance fees generated when locked as veCRV.
+Он также имеет временно-взвешенное голосование для управления и накапливает часть комиссий Curve Finance, генерируемых при блокировке в виде veCRV.
 
-## **How to get CRV?**
+## **Как получить CRV?** {#how-to-get-crv}
 
-CRV can be acquired in two ways:
+CRV можно приобрести двумя способами:
 
-* Bought off the market from an exchange
-* As a reward for being a Liquidity provider in CRV with pools or lending markets that have CRV rewards. This ensures the protocol continues offering low fees and extremely low slippage.
+* Купить на рынке через биржу
+* Получить в качестве вознаграждения за предоставление ликвидности в пулах CRV или в кредитных рынках, которые предлагают вознаграждения в CRV. Это гарантирует, что протокол продолжает предлагать низкие комиссии и крайне низкое проскальзывание.
 
-## **Where can I find the release schedule?**
+## **Где можно найти график выпуска?** {#where-can-i-find-the-release-schedule}
 
-You can find the release schedule for the next six years at this address on the main UI: [**https://dao.curve.fi/inflation**](https://dao.curve.fi/inflation)​.
+Вы можете найти график выпуска на следующие шесть лет по этому адресу в основном интерфейсе: [**https://dao.curve.fi/inflation**](https://dao.curve.fi/inflation)​.
 
-There is also detailed documentation in the [Supply & Distribution](./supply-distribution.md#crv-emissions-for-the-next-10-years) about the CRV emissions for the next 10 years, and the [supply calculator](./supply-distribution.md#supply-calculator) can be used to see the emissions for any year.
+Также имеется подробная документация в разделе [Объем и распределение CRV](./supply-distribution.md#crv-emissions-for-the-next-10-years) о эмиссии CRV на следующие 10 лет, а [калькулятор предложения](./supply-distribution.md#supply-calculator) можно использовать для просмотра эмиссии на любой год.
 
-## **What is the current circulating supply?**
+## **Каково текущее обращающееся предложение?** {#what-is-the-current-circulating-supply}
 
-There are three ways to check the circulating supply:
+Есть три способа проверить обращающееся предложение:
 
-* On the main UI here: [**https://dao.curve.fi/inflation**](https://dao.curve.fi/inflation).
+* На основном интерфейсе здесь: [**https://dao.curve.fi/inflation**](https://dao.curve.fi/inflation).
+* В [калькуляторе предложения](./supply-distribution.md#supply-calculator) в этих ресурсах, посмотрев статистику на сегодняшний день.
+* В [**on-chain контракте**](https://etherscan.io/address/0x14139EB676342b6bC8E41E0d419969f23A49881e) (`0x14139EB676342b6bC8E41E0d419969f23A49881e`), который показывает обращающееся предложение, за вычетом заблокированных или иным образом зарезервированных токенов.
 
-* In the [supply calculator](./supply-distribution.md#supply-calculator) in these resources by looking at the statistics for today.
+## **Когда был запущен CRV?** {#when-was-crv-launched}
 
-* The [**on-chain contract**](https://etherscan.io/address/0x14139EB676342b6bC8E41E0d419969f23A49881e) (`0x14139EB676342b6bC8E41E0d419969f23A49881e`) which shows the circulating supply, net of locked or otherwise vested tokens.
+CRV был официально запущен 13 августа 2020 года.
 
-## **When was CRV launched?**
+## **Что такое vote-locking CRV?** {#what-is-crv-vote-locking}
 
-CRV was officially launched on the 13th of August 2020.
+Vote-locking (блокировка для права голоса) относится к процессу блокировки CRV на определенный период, чтобы получить veCRV. Чем дольше вы блокируете, тем больше veCRV вы получаете. Vote-locking позволяет вам голосовать в управлении, увеличивать ваши вознаграждения CRV и получать торговые комиссии. **Vote locking boost означает**, что пользователи с veCRV (vote-locked CRV) получают увеличенные вознаграждения при предоставлении ликвидности в пуле или кредитном рынке.
 
-## **What is CRV vote-locking?**
+!!!warning "veCRV не подлежит передаче"
+    Когда вы блокируете свои токены CRV (vote-locking), вы получаете veCRV в зависимости от длительности блокировки. Токены veCRV **не подлежат передаче**. После окончания периода блокировки пользователи могут вернуть свои токены CRV.
 
-"Vote-locking" refers to the process of locking CRV for a specified period to receive veCRV. The longer they lock for, the more veCRV they receive. Vote locking allows you to vote in governance, boost your CRV rewards and receive trading fees.  **Vote-locking boost** is when users with veCRV (vote-locked CRV) receive boosted rewards when they provide liquidity to a pool/lending market.
+## **Что такое vote locking boost?** {#what-is-the-vote-locking-boost}
 
-!!!warning "veCRV is not transferable"
-    When you lock your CRV tokens for voting, you will receive veCRV based on the lock duration. The veCRV tokens are **non-transferable**. Once the lock period has ended, users can reclaim their CRV tokens.
+Когда вы осуществляете vote-locking CRV, вы также получаете boost за предоставленную ликвидность до 2,5x. Цель заключается в стимулировании пользователей участвовать в управлении, вознаграждая их большей долей ежедневной инфляции CRV. Подробнее [здесь](../reward-gauges/boosting-your-crv-rewards.md)
 
-## **What is the vote locking boost?**
+## **Когда начился boost?** {#when-did-the-boost-start}
 
-When vote locking CRV, you will also earn a boost on your provided liquidity of up to 2.5x. The goal is to incentivize users to participate in governance by rewarding them with a bigger share of the daily CRV inflation.  See more [here](../reward-gauges/boosting-your-crv-rewards.md)
+Boost был впервые применен 26 августа 2020 года около 23:00 UTC.
 
-## **When did the boost start?**
+## **Что такое veCRV?** {#what-are-vecrv}
 
-The boost was first applied on the 26th of August 2020 around 11pm UTC.
+veCRV означает "голосовая заморозка CRV" (voting escrow CRV). Это ваши заблокированные для голосования CRV. Чем дольше вы блокируете свои CRV, тем больше у вас voting power (и тем больший boost вы можете получить). Вы можете заблокировать 1000 CRV на год, чтобы получить вес 250 veCRV. Каждый CRV, заблокированный на четыре года, равен 1 veCRV.
 
-## **What are veCRV?**
+Количество veCRV, которое вы получите, зависит от длительности блокировки ваших CRV. Минимальное время блокировки — одна неделя, а максимальное — четыре года.
 
-veCRV stands for voting escrow CRV. They are your CRV locked for voting. The longer you lock your CRV for, the more voting power you have (and the bigger boost you can reach). You can vote lock 1,000 CRV for a year to have a 250 veCRV weight. Each CRV locked for four years is equal to 1 veCRV.
+Ваш вес veCRV постепенно уменьшается по мере приближения срока окончания блокировки ваших токенов. График, иллюстрирующий уменьшение, можно найти по адресу: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
 
-The number of veCRV you will receive depends on how long you lock your CRV for. The minimum locking time is one week and the maximum locking time is four years.
+## **Как рассчитывается ваш boost?** {#how-is-your-boost-calculated}
 
-Your veCRV weight gradually decreases as your escrowed tokens approach their lock expiry. A graph illustrating the decrease can be found at this address: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
+Чтобы достичь максимального boost в 2.5x, необходимо учитывать несколько параметров. Формулу для увеличения можно увидеть [здесь](../reward-gauges/boosting-your-crv-rewards.md#formula)
 
-## **How is your boost calculated?**
+Вы можете найти текущую voting power (силу голоса) DAO по этому адресу: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
 
-To reach your maximum boost of 2.5x, there are several parameters to take into consideration.  You can see the formula for boosting [here](../reward-gauges/boosting-your-crv-rewards.md#formula)
+**Вы также можете найти калькулятор по этому адресу:** [https://dao.curve.fi/minter/calc](https://dao.curve.fi/minter/calc)​
 
-You can find the current DAO voting power at this address: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
+## **Что, если я предоставляю ликвидность в нескольких пулах?** {#what-if-i-provide-liquidity-in-multiple-pools}
 
-**You can also find a calculator at this address:** [https://dao.curve.fi/minter/calc](https://dao.curve.fi/minter/calc)​
+Ваша voting power (сила голоса) применяется ко всем cчётчикам вознаграждений (gauges), но может давать разный boost в зависимости от того, сколько ликвидности вы предоставляете и сколько общей ликвидности в пуле.
 
-## **What if I provide liquidity in multiple pools?**
+## **Что происходит, если больше людей блокируют CRV?** {#what-happens-if-more-people-vote-lock}
 
-Your voting power applies to all gauges but may produce different boosts based on how much liquidity you are providing and how much total liquidity the pool has.
+Если другие поставщики ликвидности блокируют больше CRV, ваш boost останется таким, каким оно был, когда вы его применили. Если вы злоупотребляете этим, другой пользователь может вмешаться и обновить ваш boost до реального уровня.
 
-## **What happens if more people vote lock?**
+## **Как часто мой boost учитывает изменения voting power?** {#how-often-does-my-boost-records-voting-power-changes}
 
-If other liquidity providers vote lock more CRV, your boost will stay what it was when you applied it. If you abuse this, another user can kick and force a boost update to take you down to your real boost.
+Ваша voting power уменьшается со временем, но ваш boost будет учитывать уменьшение voting power (силы голоса) только на определенных контрольных точках, таких как депозит, вывод в счётчик вознаграждений (gauges) или выпуск (minting) CRV.
 
-## **How often does my boost records voting power changes?**
+Например, если вы начинаете с 1000 veCRV, и ваша voting power со временем уменьшается до 800 veCRV, ваш boost все равно будет использовать исходную силу голоса в 1000 veCRV до следующей контрольной точки пользователя.
 
-Your voting weight decreases over time but your boost will take notice of your decreasing voting power at certain checkpoints like withdrawing, depositing into a gauge or minting CRV.
+## **Как применить мой boost?** {#how-can-i-apply-my-boost}
 
-For example if you start at 1000 veCRV and your voting power decreases to 800 veCRV, your boost will still use your original voting power of 1000 veCRV until a user checkpoint.
+После создания или добавления к вашей блокировке вам нужно нажать кнопку применения увеличения, чтобы обновить ваш boost для каждого cчётчика вознаграждений (gauge), в котором вы предоставляете ликвидность. Ваш boost также может быть обновлен путем депозита или вывода из cчётчика вознаграждений (gauge).
 
-## **How can I apply my boost?**
+Нажмите ниже для руководства по блокировке и увеличению ваших вознаграждений CRV
 
-After creating or adding to your lock, you need to click the apply boost button to update your boost on each of the gauge you're providing liquidity in. Your boost can also be updated by depositing or withdrawing from a gauge.
+[Увеличение (Boosting) ваших вознаграждений CRV](../reward-gauges/boosting-your-crv-rewards.md)
 
-Click below for a guide on how locking and boosting your CRV rewards
+## **Как узнать, активен ли мой boost?** {#how-to-know-my-boost-is-active}
 
-[Boosting your CRV Rewards](../reward-gauges/boosting-your-crv-rewards.md)
+Если ваш boost отображается, значит он активен.
 
-## **How to know my boost is active?**
+Если вы заблокировали CRV, но ваш boost не отображается, вам нужно его применить.
 
-If your boost is showing then it is active.
+## **Как работает ежегодное сокращение эмиссии?** {#how-does-the-yearly-emissions-reduction-work}
 
-If you have locked but your boost isn't showing then you need to apply it.
+Сокращение эмиссии может быть инициировано любым пользователем после истечения периода времени (точно 365 дней) с момента последнего сокращения эмиссий. Это делается путем вызова функции `update_mining_parameters` в контракте `CRV` по адресу [`0xD533a949740bb3306d119CC777fa900bA034cd52`](https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52).
 
-## **How does the yearly emissions reduction work?**
+Когда это вызывается, начинается новая эпоха, запускающая еще 365 дней. Если никто не вызывает эту функцию, CRV продолжает эмитироваться по текущей ставке, и новая эпоха не запускается. Например, если это вызвано на 1 день позже, это повлияет на две важные функции:
 
-The emissions reduction can be triggered by anyone after the time period (exactly 365 days) has elapsed since the last emissions reduction.  This is done by calling the `update_mining_parameters` function on the `CRV` contract at the address [`0xD533a949740bb3306d119CC777fa900bA034cd52`](https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52).
+* Предложение CRV будет выше теоретического максимума в 3,030,303,031.8 CRV
+* Следующее сокращение эмиссий будет отложено на 1 день, так как обратный отсчет 365 дней начинается на 1 день позже.
 
-When this is called a new epoch is started, triggering another 365 days.  If no one calls this function then CRV continues to be emitted at the current rate, and no new epoch is triggered.  If for example this was triggered 1 day late it would affect two important functions:
+Это также означает, что каждый раз, когда происходит високосный год, дата, когда можно сократить эмиссии, будет сдвинута вперед на один день в году.
 
-* The CRV supply will be higher than the theoretical maximum of 3,030,303,031.8 CRV
-* The next emissions reduction will be delayed by 1 as the 365 day countdown begins 1 day late.
+## **Как происходит чеканка CRV?** {#how-is-crv-minted}
 
-This also means however, that each time a leap year happens the date at which someone can reduce the emissions will be brought forward one day of the year.
+CRV может быть создан пользователями, которые стейкают в cчётчиках вознаграждений (gauges) после того, как в счётчики было выделенно CRV для чеканки. Когда это происходит, токены CRV создаются, добавляются к общему предложению и передаются пользователю.
 
-## **How is CRV minted?**
+Если пользователи решат не чеканить сразу, это может создать расхождение между теоретическим предложением токенов и реальным предложением токенов, отображаемым на блок-эксплорерах.
 
-CRV can be minted by users who stake in gauges after they are allocated some to mint.  When this happens CRV tokens are minted into existence, added to the total supply and transferred to the user.
-
-If users choose to not mint until a later date, this can create a discrepancy between the theoretical supply of tokens and the real supply of tokens shown on block explorers.

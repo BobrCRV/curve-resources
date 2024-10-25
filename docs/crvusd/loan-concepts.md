@@ -1,337 +1,330 @@
-## **Market Parameters**
+<h1>Концепции Займа: Подробный Обзор</h1>
 
-Each crvUSD market has the following parameters which affect all loans and change automatically due to market forces:
+## **Параметры Рынка** {#market-parameters}
 
-- **Base Price:** The base price is the upper price limit of band number 0.  Borrow rate increases the base price over time.
-- **Oracle Price:** The oracle price is the current price of the collateral as determined by the oracle. The oracle price is used to calculate the collateral's value and the [loan's health](#loan-health).
-- **Borrow Rate:** The borrow rate is the annual interest rate charged on the loan. This rate is variable and can change based on market conditions. The borrow rate is expressed as a percentage. For example, a borrow rate of 7.62% means that the user will be charged 7.62% interest on the loan's outstanding debt.  See [here](#borrow-rate) for how it's calculated.
+Каждый рынок crvUSD имеет следующие параметры, которые влияют на все займы и автоматически изменяются под воздействием рыночных сил:
 
-Each market also has the following parameters which only change if the CurveDAO votes them to change:
+- **Базовая Цена (Base Price):** Базовая цена — это верхний предел цены полосы номер 0. Ставка заимствования увеличивает базовую цену со временем.
+- **Цена оракула (Oracle Price):** Цена оракула — это текущая цена залога, определённая оракулом. Цена оракула используется для расчёта стоимости залога и [здоровья займа](#loan-health).
+- **Ставка заимствования (Borrow Rate):** Ставка заимствования — это годовая процентная ставка, начисляемая на займ. Эта ставка переменная и может изменяться в зависимости от рыночных условий. Ставка заимствования выражается в процентах. Например, ставка заимствования 7,62% означает, что пользователю будет начисляться 7,62% годовых процентов на непогашенный займ. Смотрите [здесь](#borrow-rate) для расчёта.
 
-- **A:** The amplification parameter A is used to calculate the density of liquidity and [band](#bands-n) width, as well as the [maximum LTV](#loan-discount) of a market.
-- **Loan Discount:** The loan discount defines how much the collateral is discounted when taking a loan, it is directly related to the maximum LTV of each crvUSD market.  See [here](#loan-discount) for more information.
-- **Liquidation Discount:** The liquidation discount is used to discount the collateral when calculating the health of the loan.  See the [health section](#loan-health) for more information.
-- **Sigma:** Sigma changes how quickly rates increase and decrease when crvUSD depegs.  With a higher sigma interest rates will increase slower when crvUSD depegs.  See [here](#borrow-rate) for more information.
+Каждый рынок также имеет следующие параметры, которые изменяются только если CurveDAO проголосует за их изменение:
 
+- **A (Амплификационный параметр):** Параметр амплификации A используется для расчёта плотности ликвидности и ширины [полос](#bands-n), а также [максимального LTV](#loan-discount) рынка.
+- **Дисконт займа (Loan Discount):** Дисконт займа определяет, насколько залог дисконтируется при взятии займа, он напрямую связан с максимальным LTV каждого рынка crvUSD. Смотрите [здесь](#loan-discount) для дополнительной информации.
+- **Дисконт ликвидации (Liquidation Discount):** Дисконт ликвидации используется для дисконтирования залога при расчёте здоровья займа. Смотрите раздел [здоровья займа](#loan-health) для дополнительной информации.
+- **Сигма (Sigma):** Сигма изменяет скорость увеличения и уменьшения ставок при девальвации crvUSD. При более высокой сигме процентные ставки будут увеличиваться медленнее, когда crvUSD теряет привязку (depeg). Смотрите [здесь](#borrow-rate) для дополнительной информации.
 
-## **LLAMMA and Liquidations**
+## **LLAMMA и Ликвидации** {#llamma-and-liquidations}
 
-LLAMMA (**Lending-Liquidating AMM Algorithm**) is a fully functional two-token AMM containing the collateral token and crvUSD, which is **responsible for the liquidation mechanism**. For more detailed documentation, please refer to the [technical docs](https://docs.curve.fi/crvUSD/amm/).
+LLAMMA (**Lending-Liquidating AMM Algorithm**) — это полностью функциональный двухтокеновый AMM, содержащий токен залога и crvUSD, который **отвечает за механизм ликвидации**. Для более подробной документации, пожалуйста, обратитесь к [технической документации](https://docs.curve.fi/crvUSD/amm/).
 
-When creating a new loan, the put-up **collateral will be deposited into a specified number of bands across the AMM**. Unlike regular liquidation, which has a single liquidation price, LLAMMA has multiple liquidation ranges (represented by the bands) and **continuously liquidates the collateral if needed**.   All bands have lower and upper price limits, each representing a "small liquidation range." The user's total liquidation range is represented by the upper price of the highest band to the lower price of the lowest band.
+При создании нового займа, предоставленный **залог будет депонирован в определённое количество полос (bands) по AMM**. В отличие от обычной ликвидации, которая имеет единую цену ликвидации, LLAMMA имеет несколько диапазонов ликвидации (представленных полосами) и **непрерывно ликвидирует залог при необходимости**. Все полосы имеют нижние и верхние пределы цен, каждая из которых представляет собой "небольшой диапазон ликвидации". Общий диапазон ликвидации пользователя представлен верхней ценой самой высокой полосы до нижней цены самой низкой полосы.
 
-A loan only **enters soft-liquidation mode once the price of the collateral asset is within a band**. If the price is outside the bands, there is no need to partially liquidate and therefore not in soft-liquidation.
+Займ входит в режим мягкой ликвидации только тогда, когда цена залогового актива находится внутри полосы. Если цена вне полос, то нет необходимости в частичной ликвидации, и займ не находится в мягкой ликвидации.
 
-The AMM works in a way that the collateral price within the AMM and the "regular price" are treated a bit differently. If the price falls into a band, prices are adjusted in a way that external arbitrageurs are incentivized to sell the collateral token and buy crvUSD in the band. So, **if the price is within a band, the user's collateral will be sold for crvUSD**, meaning the user's collateral is now a combination of both tokens. This happens for each individual band the user has liquidity deposited into.
+AMM работает таким образом, что цена залога внутри AMM и "обычная цена" обрабатываются немного иначе. Если цена попадает в полосу, цены корректируются таким образом, чтобы внешние арбитражеры были стимулированы продавать токен залога и покупать crvUSD в полосе. Таким образом, **если цена находится внутри полосы, залог пользователя будет продан за crvUSD**, что означает, что залог пользователя теперь представляет собой комбинацию обоих токенов. Это условие верно для каждой из полос, в которые пользователь внёс ликвидность.
 
-**This liquidation process does not only happen when prices fall but also when they rise again**. If the collateral in a band has been fully converted into crvUSD and the collateral price rises again, the earlier sold-off collateral will be bought up again.
+**Этот процесс мягкой ликвидации происходит не только при падении цен, но и при их росте.** Если залог в полосе был полностью конвертирован в crvUSD и цена залога снова выросла, ранее проданный залог будет снова выкуплен.
 
-*In short: External traders will soft-liquidate a users collateral when the collateral token's price is falling and de-liquidate it again when prices rise again.*
+*Короче говоря: Внешние трейдеры будут мягко ликвидировать залог пользователя, когда цена токена залога падает, и вновь де-ликвидировать его, когда цена о растёт.*
 
+!!!warning "Потери при Мягкой Ликвидации"
+    Позиции в мягкой ликвидации / де-ликвидации терпят убытки из-за продажи и покупки залога. Если позиция не находится в мягкой ликвидации, убытки не происходят. Эти убытки уменьшают здоровье займа. Как только здоровье пользователя достигает 0%, позиция пользователя может столкнуться с жёсткой ликвидацией, которая закрывает займ.
 
-!!!warning "Losses in Soft-Liquidation"
-    Positions in soft-liquidation / de-liquidation are suffering losses due to the selling and buying of collateral. If the position is not in soft-liquidation, no losses occur. These losses decrease the health of the loan. Once a user's health is at 0%, the user's position may face a hard-liquidation, which closes the loan.
+### **Жёсткие Ликвидации** {#hard-liquidations}
 
+Жёсткие ликвидации происходят, когда [здоровье](#loan-health) займа падает ниже 0%, позволяя ликвидатору ликвидировать займ. Любой может выступать в роли ликвидатора и ликвидировать подходящие займы, но обычно это делают специальные боты ликвидаторы (searchers).
 
-### **Hard Liquidations**
+Когда ликвидатор инициирует процесс, в рамках одной транзакции происходит следующее, используя рынок с залогом WETH и долгом в crvUSD в качестве примера:
 
-Hard liquidations occur when the [health](#loan-health) of a loan falls below 0%, allowing a liquidator to liquidate the loan. Anyone can act as a liquidator and liquidate eligible loans, but this is typically done by searchers.
+1. Любой залог, который был обменен на crvUSD в мягкой ликвидации, передаётся Curve и удаляется из позиции пользователя.
+2. Оставшийся долг в crvUSD погашается ликвидатором перед Curve.
+3. Ликвидатор получает оставшийся залог в WETH в качестве награды, которая обычно превышает сумму погашенного долга.
 
-When a liquidator initiates the process, the following occurs within a single transaction, using a market with WETH collateral and crvUSD debt as an example:
+Этот процесс иллюстрирован на изображении ниже:
 
-1. Any collateral which has been swapped to crvUSD in soft liquidation is transferred to Curve and removed from the user.
-2. The remaining crvUSD debt is repaid to Curve by the liquidator.
-3. The liquidator receives the remaining WETH collateral as a reward, which is normally more than the amount repaid.
+![Жёсткая Ликвидация](../images/llamma/hard-liquidation.svg#only-light){: .centered }
+![Жёсткая Ликвидация](../images/llamma/hard-liquidation-dark.svg#only-dark){: .centered }
 
-This process is illustrated in the image below:
+### **Плохой Долг** {#bad-debt}
 
-![Hard Liquidation](../images/llamma/hard-liquidation.svg#only-light){: .centered }
-![Hard Liquidation](../images/llamma/hard-liquidation-dark.svg#only-dark){: .centered }
+**Плохой долг возникает, когда займ невыгодно ликвидировать.** Это может произойти по многим причинам, включая высокие цены на газ, которые превышают прибыль от ликвидации, отключение секвенсера на L2, или просто отсутствие заинтересованных ликвидаторов на новом рынке. Это выглядит следующим образом:
 
+![Плохой Долг](../images/llamma/bad-debt.svg#only-light){: .centered }
+![Плохой Долг](../images/llamma/bad-debt-dark.svg#only-dark){: .centered }
 
-### **Bad Debt**
+В этом примере никакой рациональный ликвидатор не начнёт процесс ликвидации, потому что он потеряет деньги, делая это.
 
-**Bad debt occurs when a loan is not profitable to liquidate**.  This could happen for many reasons, including gas prices being higher than the profit from a liquidation, a sequencer being down on an L2, or simply no one searching for profitable liquidations in a new market.  It looks like the following:
-
-![Bad Debt](../images/llamma/bad-debt.svg#only-light){: .centered }
-![Bad Debt](../images/llamma/bad-debt-dark.svg#only-dark){: .centered }
-
-In this example no rational liquidator will begin the liquidation process because they will lose value by doing so.
-
-crvUSD is only minted on Ethereum and uses high-quality assets with strong liquidity to mitigate the risk of bad debt.  Due to these precautions, **bad debt is not expected to occur within the crvUSD minting system**. However, bad debt can and has occurred within specific Curve Lending markets, as they are permissionless and do not affect the integrity of the crvUSD stablecoin.
+crvUSD выпускается только на Ethereum и использует высококачественные активы с сильной ликвидностью для снижения риска плохого долга. Благодаря этим мерам предосторожности, **плохой долг не ожидается в системе выпуска crvUSD**. Однако плохой долг может и возникать на конкретных рынках Curve Lending, так как они не требуют разрешения для создания, но они не влияют на целостность стабильной монеты crvUSD.
 
 ---
 
+## **Полосы (N)** {#bands-n}
 
-## **Bands (N)**
+При создании займа добавленный залог распределяется между выбранным количеством полос. Минимальное количество полос — 4, максимальное — 50 полос.
 
-When creating a loan, the added collateral is spread among the number of bands selected. Minimum amount is 4 bands, and the maximum amount is 50 bands.
+**Полоса (Band) — это, по сути, диапазон цен с верхним и нижним пределами.** Если цена залога находится в пределах диапазона полосы, эта конкретная полоса, скорее всего, будет мягко ликвидирована.
 
-**A band essentially is a price range, with an upper and lower price limit**. If the price of the collateral is within the limits of a band, that particular band is likely to be liquidated.
-
-***Note that band price ranges drift higher over time as base price increases by the borrow rate***
+***Обратите внимание, что диапазоны цен полос со временем поднимаются вверх, так как базовая цена увеличивается за счёт ставки заимствования***
 
 <figure markdown>
   ![](../images/llamma/llamma_bands.png){ width="700" }
   <figcaption></figcaption>
 </figure>
 
-In the illustration above, there are multiple bands with different price ranges. The light grey areas represent the collateral token, which in this example is ETH. As depicted, the bands below the collateral token's price are entirely in ETH since there is no need for liquidation, given the higher price. The dark grey areas represent crvUSD. Because the price of ETH fell within the band on the far right, the deposited collateral (ETH) is converted into crvUSD. In this instance, the band consists of both ETH and crvUSD. If the price continues to decline, all collateral in the band will be fully converted into crvUSD, and the band to the left will undergo soft-liquidation.
+На приведённой выше иллюстрации показано несколько полос с разными диапазонами цен. Светло-серые области содержат токен залога, в данном примере — ETH. Как видно, полосы ниже цены токена залога полностью в ETH, поскольку нет необходимости в ликвидации из-за высокой цены. Тёмно-серые области содержат crvUSD. Поскольку цена ETH упала в крайнюю правую полосу, внесённый залог (ETH) был конвертирован в crvUSD. В этом случае полоса состоит из обоих токенов — ETH и crvUSD. Если цена продолжает падать, весь залог в полосе будет полностью конвертирован в crvUSD, и уже новая полоса слева будет проходить мягкую ликвидацию.
 
-*Remember: When prices rise again, the opposite is happening. The ETH which was converted into crvUSD earlier will be converted back into ETH again.*
+*Помните: Когда цены растут после снижения, происходит обратное. ETH, который ранее был конвертирован в crvUSD, будет обратно конвертирован в ETH.*
 
 <figure markdown>
   ![](../images/llamma/band_borrowable.png){ width="230" }
-  <figcaption>A band which has fully been soft-liquidated. All collateral was converted into crvUSD because the price of the collateral is below the liquidation range.</figcaption>
+  <figcaption>Полоса, которая полностью была мягко ликвидирована. Весь залог был конвертирован в crvUSD, потому что цена залога ниже диапазона ликвидации.</figcaption>
 </figure>
-
 
 <figure markdown>
   ![](../images/llamma/band_both.png){ width="250" }
-  <figcaption>A band which currently is in soft-liquidation. It contains both, the collateral token and crvUSD.</figcaption>
+  <figcaption>Полоса, которая в настоящее время находится в мягкой ликвидации. Она содержит как токен залога, так и crvUSD.</figcaption>
 </figure>
-
 
 <figure markdown>
   ![](../images/llamma/band_collateral.png){ width="250" }
-  <figcaption>A band which has not been liquidated yet (composition is 100% collateral token). The price of the collateral is above the liquidation range.</figcaption>
+  <figcaption>Полоса, которая ещё не была ликвидирована (состав 100% токен залога). Цена залога выше диапазона ликвидации.</figcaption>
 </figure>
 
+### Формулы для полос {#band-formulae}
 
-### Band Formulae:
+`A` контролирует плотность ликвидности. Это напрямую связано с шириной полос. Ширина полосы при любой цене может быть оценена как:
 
-`A` controls the density of the liquidity.  This is directly related to the width of the bands.  Band width at any price can be estimated to be:
+$$\text{ширина полосы} \approx \frac{\text{цена}}{\text{A}}$$
 
-$$\text{bandwidth} \approx \frac{\text{price}}{\text{A}}$$
+Для нахождения точных **верхнего предела цены** и **нижнего предела цен** полос можно использовать следующие формулы:
 
-To find the exact **upper price limit** and **lower price limits** of the bands the following formulae can be used:
+$$\begin{aligned} 
+\text{верхний предел} &= \text{basePrice} \times \left( \frac{A-1}{A} \right)^{n} \\
+\text{нижний предел} &= \text{basePrice} \times \left( \frac{A-1}{A} \right)^{n+1}
+\end{aligned}$$
 
-$$\begin{aligned} \text{upperLimit} &= \text{basePrice} * \left( \frac{A-1}{A} \right)^{n} \\
-\text{lowerLimit} &= \text{basePrice} * \left( \frac{A-1}{A} \right)^{n+1}\end{aligned}$$
+Где:
 
-Where:
+- $\text{basePrice}$: Текущая базовая цена желаемого рынка
+- $A$: Амплификационный фактор желаемого рынка (по умолчанию 100)
+- $n$: Номер полосы, например, $-67$.
 
-* $\text{basePrice}$: The current base price of the desired market
-* $A$: The amplification factor of the desired market (default is 100)
-* $n$: The Band Number, e.g., $-$67.
+### **Калькулятор Полос** {#band-calculator}
 
-### **Band Calculator**
-
-Use the calculator below to simulate how bands are shaped and how liquidity density changes with different parameters.  By definition the liquidity density will be 100% at band 1.  Liquidity density increases as band width decreases, because the same amount of collateral will be spread over a smaller price range.
+Используйте калькулятор ниже, чтобы смоделировать, как формируются полосы и как плотность ликвидности изменяется с разными параметрами. По определению, плотность ликвидности будет 100% на полосе 1. Плотность ликвидности увеличивается по мере уменьшения ширины полосы, потому что та же сумма залога будет распределена по меньшему диапазону цен.
 
 <div class="chart-container">
-<canvas id="ampChart"></canvas>
-<h4>Inputs:</h4>
-<div style="display: flex; align-items: center; justify-content: center; font-size: 16px;">
-<div class="input">
-    <label for="ampInput" style="margin-right: 2%;">A : </label>
-    <input type="number" id="ampInput" min="1" max="10000" step="1" value="30" style="font-size: 16px; width: 15%;">
-    <label for="numBandsInput" style="margin-left: 3%; margin-right: 2%;">N : </label>
-    <input type="number" id="numBandsInput" min="1" max="50" step="1" value="10" style="font-size: 16px; width: 15%;">
-    <label for="basePriceInput" style="margin-left: 3%; margin-right: 2%;">Base Price ($):</label>
-    <input type="number" id="basePriceInput" min="0.01" max="1000000" step="0.01" value="2000" style="font-size: 16px; width: 20%;">
+  <canvas id="ampChart"></canvas>
+  <h4>Входные данные:</h4>
+  <div style="align-items: center; justify-content: center; font-size: 16px;">
+    <div class="input">
+      <label for="ampInput" style="margin-right: 2%;">A : </label>
+      <input type="number" id="ampInput" min="1" max="10000" step="1" value="30" style="font-size: 16px; width: 15%;">
+      <label for="numBandsInput" style="margin-left: 3%; margin-right: 2%;">N : </label>
+      <input type="number" id="numBandsInput" min="1" max="50" step="1" value="10" style="font-size: 16px; width: 15%;">
+      <label for="basePriceInput" style="margin-left: 3%; margin-right: 2%;">Базовая Цена($):</label>
+      <input type="number" id="basePriceInput" min="0.01" max="1000000" step="0.01" value="2000" style="font-size: 16px; width: 20%;">
     </div>
+  </div>
 </div>
-</div>
-
 
 ---
 
+## **Здоровье Займа** {#loan-health}
 
+На основе суммы залога и долга пользователя, интерфейс пользователя будет отображать показатель здоровья (health score) и статус. Если позиция находится в режиме мягкой ликвидации, будет отображаться дополнительное предупреждение. Как только займ достигает **здоровья 0%**, займ **становится доступным для жёсткой ликвидации**. В жёсткой ликвидации кто-то другой может погасить долг пользователя и, взамен, получить его залог. Займ затем будет закрыт.
 
+**Здоровье займа уменьшается, когда займ находится в режиме мягкой ликвидации. Эти убытки происходят не только при падении цен, но и когда цена залога снова растёт, что приводит к де-ликвидации займа пользователя.** Это означает, что здоровье займа может уменьшаться, даже если стоимость залога позиции увеличивается. Если займ не находится в режиме мягкой ликвидации, то такие убытки не происходят.
 
-## **Loan Health**
+Убытки сложно количественно оценить. Нет общего правила о том, насколько велики убытки, так как они зависят от различных внешних факторов, таких как скорость падения или роста цены залога или эффективность арбитража. Однако можно сказать, что **убытки сильно зависят от количества полос**; чем больше полос используется, тем меньше убытки. Ежедневные убытки на основе текущих данных показаны [здесь](./loan-strategies.md#soft-liquidation-losses).
 
-Based on a user's collateral and debt amount, the UI will display a health score and status. If the position is in soft-liquidation mode, an additional warning will be displayed. Once a loan reaches **0% health**, the loan is **eligible to be hard-liquidated**. In a hard-liquidation, someone else can pay off a user's debt and, in exchange, receive their collateral. The loan will then be closed.
-
-The **health of a loan decreases when the loan is in soft-liquidation mode. These losses do not only occur when prices go down but also when the collateral price rises again, resulting in the de-liquidation of the user's loan.** This implies that the health of a loan can decrease even though the collateral value of the position increases. If a loan is not in soft-liquidation mode, then no losses occur.
-
-Losses are hard to quantify. There is no general rule on how big the losses are as they are dependent on various external factors such as how fast the collateral price falls or rises or how efficient the arbitrage is. But what can be said is that the **losses heavily depend on the number of bands** used; the more bands used, the fewer the losses.  Daily losses based on current data are shown [here](./loan-strategies.md#soft-liquidation-losses).
-
-The formula for health is below, this is visualized in the Health Calculator applet as well.
+Формула для **здоровья (health)** показана ниже, это также визуализировано в апплете калькулятора здоровья.
 
 $$\begin{aligned} \text{health} &= \frac{s \times (1-\text{liqDiscount}) + p}{\text{debt}} - 1 \\ 
 p &= \text{collateral} \times \text{priceAboveBands} \end{aligned}$$
 
-Where:
+Где:
 
-- $\text{collateralValue}$ : the value of all collateral at the current LLAMMA prices
-- $\text{liqDiscount}$ : the liquidation discount for the market (how much to discount the collateral value for safety during hard-liquidation).
-- $\text{debt}$ : the debt of the user
-- $s$ : an estimation of how much crvUSD a user would have after converting all collateral through their bands in soft-liquidation.  This can be very roughly estimated as: $\text{collateral} \times \left( \frac{\text{softLiqUpperLimit} - \text{softLiqLowerLimit}}{2} \right)$
-- $p$ : The value above the soft-liquidation bands.  Found by multiplying the amount of collateral by how far above soft-liquidation the current price is.  If user is in or below soft-liquidation, this value is 0.
-- $\text{collateral}$ - The amount of collateral a user has, e.g., if a user has 5 wBTC, this value is 5.
-- $\text{priceAboveBands}$ - The price difference between the oracle price and the top of the user's soft-liquidation range (upper limit of top band).  This value is 0 if user is in soft-liquidation.  See applet below for a visual representation.
-- $\text{collateralPrice}$ - The price of a single unit of the collateral asset, e.g., if the collateral asset is wBTC, this value is the price of 1 wBTC.
+- $\text{collateralValue}$ : стоимость всех залогов по текущим ценам LLAMMA
+- $\text{liqDiscount}$ : дисконт ликвидации для рынка (насколько дисконтируется стоимость залога для безопасности при жёсткой ликвидации).
+- $\text{debt}$ : долг пользователя
+- $s$ : оценка того, сколько crvUSD у пользователя будет после конвертации всех залогов через его полосы в мягкой ликвидации. Это можно очень грубо оценить как: $\text{collateral} \times \left( \frac{\text{softLiqUpperLimit} - \text{softLiqLowerLimit}}{2} \right)$
+- $p$ : стоимость выше полос мягкой ликвидации. Найдено путём умножения количества залога на то, насколько цена выше мягкой ликвидации. Если пользователь находится в или ниже мягкой ликвидации, это значение равно 0.
+- $\text{collateral}$ - количество залога, которое у пользователя есть, например, если у пользователя 5 wBTC, это значение равно 5.
+- $\text{priceAboveBands}$ - разница в цене между ценой оракула и верхней границей диапазона мягкой ликвидации пользователя (верхняя граница верхней полосы). Это значение равно 0, если пользователь находится в мягкой ликвидации. Смотрите апплет ниже для визуального представления.
+- $\text{collateralPrice}$ - цена одного токена залога, например, если залоговый актив — wBTC, это значение равно цене 1 wBTC.
 
-### **Health Calculator**
+### **Калькулятор Здоровья** {#health-calculator}
 
-*Use the applet below to simulate how health works, soft-liquidation losses are given as numbers in a comma separated list, the first number is the starting band onwards.  The light blue shaded areas in the bands represent the value without using the soft-liquidation discounts, while the dark blue areas are the values after discounting.*
+*Используйте апплет ниже, чтобы смоделировать, как работает здоровье, убытки от мягкой ликвидации представлены числами в списке, разделённом запятыми, первое число — это начальная полоса и далее. Светло-голубые затенённые области в полосах представляют значение без использования дисконта на мягкую ликвидацию, тогда как тёмно-голубые области — значения после дисконтирования.*
 
 <div class="chart-container">
-<h4>Inputs:</h4>
-<div class="input">
+  <h4>Входные Данные:</h4>
+  <div class="input">
+    <div style="display: flex; justify-content: center;">
+      <div style="text-align: right; margin-right: 20px;">
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="ampInputLiq" style="margin-right: 10px;">A:</label>
+          <input type="number" id="ampInputLiq" min="0" max="1000" step="1" value="10" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="startingBandInputLiq" style="margin-right: 10px;">Начальная Полоса:</label>
+          <input type="number" id="startingBandInputLiq" min="-1000" max="1000" step="1" value="2" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="oraclePriceLiq" style="margin-right: 10px;">Цена Оракула ($):</label>
+          <input type="number" id="oraclePriceLiq" min="0" max="100000" step="0.01" value="1100" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="collateralLiq" style="margin-right: 10px;">Сумма Залога:</label>
+          <input type="number" id="collateralLiq" min="0" max="1000000" step="0.01" value="10" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px;">
+          <label for="debtLiq" style="margin-right: 10px;">Долг ($):</label>
+          <input type="number" id="debtLiq" min="0" max="1000000" step="0.01" value="5000" style="font-size: 16px; width: 80px;">
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="basePriceInputLiq" style="margin-right: 10px;">Базовая Цена($):</label>
+          <input type="number" id="basePriceInputLiq" min="0" max="100000" step="0.01" value="1000" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="finishBandInputLiq" style="margin-right: 10px;">Финишная Полоса:</label>
+          <input type="number" id="finishBandInputLiq" min="-1000" max="1000" step="1" value="5" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="liqDiscountLiq" style="margin-right: 10px;">Скидка на Ликвидацию %:</label>
+          <input type="number" id="liqDiscountLiq" min="0" max="100" step="0.01" value="10" style="font-size: 16px; width: 80px;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
+          <label for="slLossesLiq" style="margin-right: 10px;">Убытки от Мягкой Ликвидации (%):</label>
+          <input type="text" id="slLossesLiq" value="0,0,0,0" style="font-size: 16px; width: 80px;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <canvas id="liqChart"></canvas>
+  <br>
+  <canvas id="healthChart"></canvas>
   <div style="display: flex; justify-content: center;">
-    <div style="text-align: right; margin-right: 20px;">
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="ampInputLiq" style="margin-right: 10px;">A:</label>
-        <input type="number" id="ampInputLiq" min="0" max="1000" step="1" value="10" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="startingBandInputLiq" style="margin-right: 10px;">Starting Band:</label>
-        <input type="number" id="startingBandInputLiq" min="-1000" max="1000" step="1" value="2" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="oraclePriceLiq" style="margin-right: 10px;">Oracle Price ($):</label>
-        <input type="number" id="oraclePriceLiq" min="0" max="100000" step="0.01" value="1100" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="collateralLiq" style="margin-right: 10px;">Collateral Amount:</label>
-        <input type="number" id="collateralLiq" min="0" max="1000000" step="0.01" value="10" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; ">
-        <label for="debtLiq" style="margin-right: 10px;">Debt ($):</label>
-        <input type="number" id="debtLiq" min="0" max="1000000" step="0.01" value="5000" style="font-size: 16px; width: 80px;">
-      </div>
+    <div style="text-align: right; margin-right: 10px;">
+      <p><strong>Здоровье</strong> (включая стоимость выше полос):</p>
+      <p><strong>Здоровье</strong> (без учета стоимости выше полос):</p>
     </div>
-    <div style="text-align: right;">
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="basePriceInputLiq" style="margin-right: 10px;">Base Price ($):</label>
-        <input type="number" id="basePriceInputLiq" min="0" max="100000" step="0.01" value="1000" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="finishBandInputLiq" style="margin-right: 10px;">Finish Band:</label>
-        <input type="number" id="finishBandInputLiq" min="-1000" max="1000" step="1" value="5" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="liqDiscountLiq" style="margin-right: 10px;">Liquidation Discount %:</label>
-        <input type="number" id="liqDiscountLiq" min="0" max="100" step="0.01" value="10" style="font-size: 16px; width: 80px;">
-      </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 16px; margin-bottom: 10px;">
-        <label for="slLossesLiq" style="margin-right: 10px;">Soft Liquidation Losses (%):</label>
-        <input type="string" id="slLossesLiq" value="0,0,0,0" style="font-size: 16px; width: 80px;">
-      </div>
+    <div>
+      <p>
+        <span id="healthResultGreen" style="color: green; background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span>
+      </p>
+      <p>
+        <span id="healthResultYellow" style="color: #D6B656; background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span>
+      </p>
     </div>
   </div>
 </div>
-<br>
-<canvas id="liqChart"></canvas>
-<br>
-<canvas id="healthChart"></canvas>
-<div style="display: flex; justify-content: center;">
-  <div style="text-align: right; margin-right: 10px;">
-    <p><strong>Health</strong> (including value above bands):</p>
-    <p><strong>Health</strong> (not including value above bands):</p>
-  </div>
-  <div>
-    <p>
-      <span id="healthResultGreen" style="color: green; background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span>
-    </p>
-    <p>
-      <span id="healthResultYellow" style="color: #D6B656; background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span>
-    </p>
-  </div>
-</div>
-</div>
-*The Curve UI will either show health adding value above bands or without that value based on how close to liquidation a user is.  If the active band (Oracle price band) is 3 or less bands away from the user's soft liquidation bands, the UI will show the health not including value above bands.  Otherwise it will show the health including the value above bands.*
 
-*The health values on the Curve UI and within smart contracts will always be slightly less than the values here.  Health is calculated by estimating the amount of crvUSD/debt tokens the collateral will be swapped for in each band.  This takes into account how much liquidity is in each band, the more liquidity in a band the less slippage Curve estimates will occur.  This slippage estimation slightly reduces a user's health.*
+
+*Интерфейс Curve будет отображать здоровье, добавляя стоимость выше полос или без этой стоимости, в зависимости от того, насколько близко пользователь находится к ликвидации. Если активная полоса (полоса цены оракула) находится на 3 или менее полос от полос мягкой ликвидации пользователя, интерфейс будет отображать здоровье без учёта стоимости выше полос. В противном случае будет отображаться здоровье с учётом стоимости выше полос.*
+
+*Значения здоровья в интерфейсе Curve и в смарт-контрактах всегда будут немного ниже значений здесь. Здоровье рассчитывается путём оценки количества crvUSD/долговых токенов, на которые залог обменен в каждой полосе. Это учитывает, сколько ликвидности находится в каждой полосе, чем больше ликвидности в полосе, тем меньше скольжение (slippage), которое оценивает Curve. Эта оценка скольжения слегка уменьшает здоровье пользователя.*
 
 ---
 
-## **Loan Discount**
+## **Дисконт займа** {#loan-discount}
 
-The `loan_discount` is used for finding the maximum LTV a user can have in a market.  At the time of writing in crvUSD markets this value is a constant 9%, in Curve Lending markets this value ranges from 7% for WETH to 33% for volatile assets like UwU.  Use the calculator below to see the maximum LTVs a user can have based on the `loan_discount`, amplification factor `A` and their number of bands `N`.  The formula is:
+`loan_discount` используется для определения максимального LTV, которое пользователь может иметь на рынке. На момент написания в рынках crvUSD это значение является постоянным 9%, в рынках Curve Lending это значение варьируется от 7% для WETH до 33% для волатильных активов, таких как UwU. Используйте калькулятор ниже, чтобы увидеть максимальные LTV, которые пользователь может иметь на основе `loan_discount`, амплификационного фактора `A` и количества полос `N`. Формула:
 
-$$\text{maxLTV} = 1 - \text{loan_discount} - \frac{N}{2*A}$$
-
+$$\text{maxLTV} = 1 - \text{loan_discount} - \frac{N}{2 \times A}$$
 
 <div class="chart-container">
-  <h3 style="margin-top: 0;">Maximum LTV Calculator</h3>
-  <h4>Inputs:</h4>
+  <h3 style="margin-top: 0;">Калькулятор Максимального LTV</h3>
+  <h4>Входные данные:</h4>
   <div class="input">
     <div style="display: flex; align-items: center; justify-content: center; font-size: 16px;">
-        <label for="ampInput2" style="margin-right: 10px;">A:</label>
-        <input type="number" id="ampInput2" min="1" max="10000" step="1" value="30" style="font-size: 16px; width: 80px;">
-        <label for="numBandsInput2" style="margin-left: 20px; margin-right: 10px;">N:</label>
-        <input type="number" id="numBandsInput2" min="4" max="50" step="1" value="10" style="font-size: 16px; width: 80px;">
-        <label for="loanDiscountInput" style="margin-left: 20px; margin-right: 10px;">Loan Discount % :</label>
-        <input type="number" id="loanDiscountInput" min="0" max="100" step="1" value="10" style="font-size: 16px; width: 80px;">
+      <label for="ampInput2" style="margin-right: 10px;">A:</label>
+      <input type="number" id="ampInput2" min="1" max="10000" step="1" value="30" style="font-size: 16px; width: 80px;">
+      <label for="numBandsInput2" style="margin-left: 20px; margin-right: 10px;">N:</label>
+      <input type="number" id="numBandsInput2" min="4" max="50" step="1" value="10" style="font-size: 16px; width: 80px;">
+      <label for="loanDiscountInput" style="margin-left: 20px; margin-right: 10px;">Дисконт займа %:</label>
+      <input type="number" id="loanDiscountInput" min="0" max="100" step="1" value="10" style="font-size: 16px; width: 80px;">
     </div>
-    </div>
-  <h4>Result</h4>
-<div style="text-align: center; margin-top: 5px;">
-  <p>Maximum LTV: <span id="ltvResult" style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span></p>
-</div>
+  </div>
+  <h4>Результат</h4>
+  <div style="text-align: center; margin-top: 5px;">
+    <p>Максимальный LTV: <span id="ltvResult" style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"></span></p>
+  </div>
 </div>
 
 ---
 
-## **Borrow Rate**
+## **Ставка Заимствования** {#borrow-rate}
 
-The general idea is that **borrow rate increases when crvUSD goes down in value and decreases when crvUSD goes up in value**.  Also, contracts called [PegKeepers](https://docs.curve.fi/crvUSD/pegkeepers/overview/) can also affect the interest rate and crvUSD peg by minting and selling crvUSD or buying and burning crvUSD.
+Основная идея состоит в том, что **ставка заимствования увеличивается, когда crvUSD теряет в стоимости, и уменьшается, когда crvUSD растёт в стоимости**. Также контракты, называемые [PegKeepers](https://docs.curve.fi/crvUSD/pegkeepers/overview/), могут влиять на процентную ставку и привязку crvUSD путем создания и продажи crvUSD или покупки и сжигания crvUSD.
 
-*The formula for the borrow rate is as follows:*
+*Формула для ставки заимствования следующая:*
 
-$$\begin{aligned}r &= \text{rate0} * e^{\text{power}} \\
-\text{power} &= \frac{\text{price}_\text{peg} - {\text{price}_\text{crvUSD}}}{\text{sigma}} - \frac{\text{DebtFraction}}{\text{TargetFraction}} \\
-\text{DebtFraction} &= \frac{\text{PegKeeperDebt}}{\text{TotalDebt}}\end{aligned}$$
+$$\begin{aligned} 
+r &= \text{rate0} \times e^{\text{power}} \\
+\text{power} &= \frac{\text{price}_\text{peg} - \text{price}_\text{crvUSD}}{\text{sigma}} - \frac{\text{DebtFraction}}{\text{TargetFraction}} \\
+\text{DebtFraction} &= \frac{\text{PegKeeperDebt}}{\text{TotalDebt}} 
+\end{aligned}$$
 
+*где:*
 
-*with:*
+- $r$: Процентная ставка.
+- $\text{rate0}$: Ставка, когда PegKeepers не имеют долга и цена crvUSD точно равна 1.00.
+- $\text{price}_\text{peg}$: Желаемая цена crvUSD: 1.00
+- $\text{price}_\text{crvUSD}$: Текущая цена crvUSD.
+- $\text{sigma}$: переменная, которую может настроить DAO, более низкое значение заставляет процентные ставки увеличиваться и уменьшаться быстрее, когда crvUSD теряет привязку (depeg).
+- $\text{DebtFraction}$: Соотношение долга PegKeepers к общему непогашенному долгу.
+- $\text{TargetFraction}$: Целевая доля.
+- $\text{PegKeeperDebt}$: Сумма долгов всех PegKeepers.
+- $\text{TotalDebt}$: Общий долг crvUSD на всех рынках.
 
-- $r$:	The interest rate.
-- $\text{rate0}$:	The rate when PegKeepers have no debt and the price of crvUSD is exactly 1.00.
-- $\text{price}_\text{peg}$:	Desired crvUSD price: 1.00
-- $\text{price}_\text{crvUSD}$:	Current crvUSD price.
-- $\text{sigma}$: variable which can be configured by the DAO, lower value makes the interest rates increase and decrease faster as crvUSD loses and gains value respectively.
-- $\text{DebtFraction}$:	Ratio of the PegKeeper's debt to the total outstanding debt.
-- $\text{TargetFraction}$:	Target fraction.
-- $\text{PegKeeperDebt}$:	The sum of debt of all PegKeepers.
-- $\text{TotalDebt}$:	Total crvUSD debt across all markets.
-
-*A tool to experiment with the interest rate model is available [here](https://crvusd-rate.0xreviews.xyz/).*
-
+*Инструмент для экспериментов с моделью процентных ставок доступен [здесь](https://crvusd-rate.0xreviews.xyz/).*
 
 ---
 
+## **PegKeeper** {#pegkeeper}
 
-## **PegKeeper**
+PegKeeper — это контракт, который помогает стабилизировать цену crvUSD. PegKeepers развёртываются для специальных пулов Curve, список которых можно найти [здесь](https://docs.curve.fi/references/deployed-contracts/#curve-stablecoin).
 
-A PegKeeper is a contract that helps stabilize the crvUSD price. PegKeepers are deployed for special Curve pools, a list of which can be found [here](https://docs.curve.fi/references/deployed-contracts/#curve-stablecoin).
+PegKeepers выполняют определённые действия на основе цены crvUSD в пулах. Все эти действия не требуют стороннего разрешения и могут быть вызваны любым пользователем.
 
-PegKeepers take certain actions based on the price of crvUSD within the pools. All these actions are fully permissionless and callable by any user.
+Когда цена crvUSD в пуле превышает 1.00, PegKeepers разрешается брать в долг путем чеканки (mint) необеспеченных crvUSD и депонирования их в определенных пулах Curve. Это увеличивает баланс crvUSD в пуле, что, как следствие, снижает его цену.
 
-When the price of crvUSD in a pool is above 1.00, they are allowed to take on debt by minting un-collateralized crvUSD and depositing it into specific Curve pools. This increases the balance of crvUSD in the pool, which consequently decreases its price.
+Если PegKeeper взял на себя долг, депонируя crvUSD в пул, он может снова выводить этот депонированный crvUSD из пула. Это можно сделать, когда цена опускается ниже 1.00. Вывод crvUSD уменьшает баланс токенов и увеличивает цену в пуле.
 
-If a PegKeeper has taken on debt by depositing crvUSD into a pool, it is able to withdraw those deposited crvUSD from the pool again. This can be done when the price is below 1.00. By withdrawing crvUSD, its token balance will decrease and the price within the pool increases.
-
-[:octicons-arrow-right-24: More on PegKeepers here](https://docs.curve.fi/crvUSD/pegkeepers/overview/)
-
+[:octicons-arrow-right-24: Подробнее о PegKeepers здесь](https://docs.curve.fi/crvUSD/pegkeepers/overview/)
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 
 <script>
 
+// Перезагрузка страницы при изменении палитры
 document.addEventListener("change", function (event) {
     if (event.target.matches('input[name="__palette"]')) {
       location.reload();
     }
   });
 
+// Функция для определения темного режима пользователя
 function isUserDarkmode() {
   var colorScheme = document.querySelector('body').getAttribute('data-md-color-scheme');
   return colorScheme === 'slate';
 }
 
-// liq chart
+// Диаграммы ликвидации и здоровья займа
 let liqChart = null;
 let healthChart = null;
 document.addEventListener('DOMContentLoaded', function() {
     updateLiqGraph();
 
-    // liq graph
+    // Элементы управления для графика ликвидации
     const ampInputLiq = document.getElementById('ampInputLiq');
     const basePriceInputLiq = document.getElementById('basePriceInputLiq');
     const startingBandInputLiq = document.getElementById('startingBandInputLiq');
@@ -341,6 +334,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const collateralLiq = document.getElementById('collateralLiq');
     const debtLiq = document.getElementById('debtLiq');
     const slLossesLiq = document.getElementById('slLossesLiq');
+    
+    // Добавление обработчиков событий для обновления графика при изменении значений
     ampInputLiq.addEventListener('change', updateLiqGraph);
     basePriceInputLiq.addEventListener('change', updateLiqGraph);
     startingBandInputLiq.addEventListener('change', updateLiqGraph);
@@ -355,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice, liqDiscount) {
     const softLiqLosses = document.getElementById('slLossesLiq').value.split(',').map(parseFloat);
     const bands = Math.abs(finishN - startN + 1);
-    const bandCollateral = collateral/bands;
+    const bandCollateral = collateral / bands;
     const data = [];
     const xTicks = [];
     let xAxisMin, startingWidth;
@@ -363,25 +358,27 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
     let totalValue = 0;
     let disTotalValue = 0;
     let collateralLeft = 0;
-    for (let i = startN; i < finishN+1; i++) {
-        const softLiqLoss = softLiqLosses[i-startN] || 0;
+    
+    for (let i = startN; i < finishN + 1; i++) {
+        const softLiqLoss = softLiqLosses[i - startN] || 0;
         const xMin = basePrice * Math.pow((A - 1) / A, i + 1);
         const xMax = basePrice * Math.pow((A - 1) / A, i);
         xAxisMin = xMin;
 
-        let thisBandCollateral = bandCollateral * (1-softLiqLoss/100)
-        let avgSell = (xMax-xMin)/2 + xMin;
+        let thisBandCollateral = bandCollateral * (1 - softLiqLoss / 100);
+        let avgSell = (xMax - xMin) / 2 + xMin;
         let collatVal = avgSell * thisBandCollateral;
-        collatVal = collatVal * (1-softLiqLoss/100);
+        collatVal = collatVal * (1 - softLiqLoss / 100);
         collateralLeft += thisBandCollateral;
         console.log(collateralLeft);
+        
         if (i == startN) {
             xAxisMax = Number(xMax.toPrecision(4));
             xTicks.push(xAxisMax);
         }
 
         totalValue += collatVal;
-        let discCollatVal = collatVal*(1-liqDiscount/100);
+        let discCollatVal = collatVal * (1 - liqDiscount / 100);
 
         xTicks.push(Number(xMin.toPrecision(4)));
         if (i == startN) {
@@ -421,20 +418,29 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
                 borderRadius: 1,
                 color: textColor,
                 drawTime: 'afterDatasetsDraw',
-                content: (ctx) => ['Band ' + Number(i), 'Collateral: ' + Number(thisBandCollateral.toPrecision(4)), 'Soft Liq Loss: ' + softLiqLoss + '%', 'Avg sell price: $' + Number(avgSell.toPrecision(4)), 'Collat Val: $' + Number(collatVal.toPrecision(4)), 'Disc. Collat Val: $' + Number(discCollatVal.toPrecision(4)),'Lower Lim: $' + Number(xMin.toPrecision(4)), 'Upper Lim: $' + Number(xMax.toPrecision(4))],
-                },
-                enter({ element }, event) {
-                    element.label.options.display = true;
-                    return true; // force update
-                },
-                leave({ element }, event) {
-                    element.label.options.display = false;
-                    return true;
-                }
+                content: (ctx) => [
+                    'Полоса ' + Number(i),
+                    'Залог: $' + Number(thisBandCollateral.toPrecision(4)),
+                    'Убытки от мягкой ликвидации: ' + softLiqLoss + '%',
+                    'Средняя цена продажи: $' + Number(avgSell.toPrecision(4)),
+                    'Стоимость залога: $' + Number(collatVal.toPrecision(4)),
+                    'Стоимость залога с дисконтом: $' + Number(discCollatVal.toPrecision(4)),
+                    'Нижний предел: $' + Number(xMin.toPrecision(4)),
+                    'Верхний предел: $' + Number(xMax.toPrecision(4))
+                ],
+            },
+            enter({ element }, event) {
+                element.label.options.display = true;
+                return true; // принудительное обновление
+            },
+            leave({ element }, event) {
+                element.label.options.display = false;
+                return true;
+            }
         });
     }
 
-    // add oraclePrice line
+    // Добавление линии цены оракула
     data.push({
             type: 'line',
             scaleID: 'x',
@@ -445,7 +451,7 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
                 backgroundColor: 'red',
                 borderRadius: 0,
                 color: 'white',
-                content: (ctx) => ['Oracle Price', '$' + oraclePrice],
+                content: (ctx) => ['Цена Оракула', '$' + oraclePrice],
                 display: true
             }
         });
@@ -455,8 +461,8 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
         priceAboveBands = oraclePrice - xAxisMax;
         data.push({
         type: 'line',
-        yMin: yAxisMax/3,
-        yMax: yAxisMax/3,
+        yMin: yAxisMax / 3,
+        yMax: yAxisMax / 3,
         xMin: xAxisMax,
         xMax: oraclePrice,
         borderColor: 'green',
@@ -466,7 +472,7 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
             backgroundColor: 'green',
             borderRadius: 0,
             color: 'white',
-            content: (ctx) => ['Price Above Bands', '$' + Number(priceAboveBands).toPrecision(4)],
+            content: (ctx) => ['Цена выше полос', '$' + Number(priceAboveBands).toPrecision(4)],
             display: true
         }
         });
@@ -475,14 +481,14 @@ function generateBandData(basePrice, startN, finishN, A, collateral, oraclePrice
     xTicks.push(Number(oraclePrice.toPrecision(4)));
 
     if (oraclePrice < xAxisMin) {
-        xAxisMin = oraclePrice - (xAxisMax-oraclePrice)*0.1;
-        xAxisMax = (xAxisMax + (xAxisMax-oraclePrice)*0.1)
+        xAxisMin = oraclePrice - (xAxisMax - oraclePrice) * 0.1;
+        xAxisMax = (xAxisMax + (xAxisMax - oraclePrice) * 0.1)
     } else if (oraclePrice > xAxisMax) {
-        xAxisMin = (xAxisMin - (oraclePrice-xAxisMin)*0.1)
-        xAxisMax = oraclePrice + (oraclePrice-xAxisMin)*0.1;
+        xAxisMin = (xAxisMin - (oraclePrice - xAxisMin) * 0.1)
+        xAxisMax = oraclePrice + (oraclePrice - xAxisMin) * 0.1;
     } else {
-        xAxisMin = (xAxisMin - (xAxisMax-xAxisMin)*0.1)
-        xAxisMax = (xAxisMax + (xAxisMax-xAxisMin)*0.1)
+        xAxisMin = (xAxisMin - (xAxisMax - xAxisMin) * 0.1)
+        xAxisMax = (xAxisMax + (xAxisMax - xAxisMin) * 0.1)
     }
 
     let valueAboveBands = collateralLeft * priceAboveBands;
@@ -509,7 +515,7 @@ function updateLiqGraph() {
     const reversedXTicks = xTicks.slice().reverse();
     const data = {
       datasets: [{
-        data: [], // Empty dataset
+        data: [], // Пустой набор данных
       }]
     };
 
@@ -518,7 +524,7 @@ function updateLiqGraph() {
         x: {
             title: {
                 display: true,
-                text: 'Price ($)'
+                text: 'Цена ($)'
             },
             min: xAxisMin,
             max: xAxisMax,
@@ -527,10 +533,10 @@ function updateLiqGraph() {
         y: {
             title: {
                 display: true,
-                text: 'Collateral Value ($)'
+                text: 'Стоимость Залога ($)'
             },
             min: 0,
-            max: (yAxisMax*1.1)
+            max: (yAxisMax * 1.1)
         }
       },
       plugins: {
@@ -548,7 +554,7 @@ function updateLiqGraph() {
         },
         title: {
             display: true,
-            text: 'Value in Bands'
+            text: 'Стоимость в Полосах'
         }
       },
       
@@ -567,20 +573,20 @@ function updateLiqGraph() {
 function updateHealthGraph(valueInBands, valueAboveBands, liqDiscount) {
 
     const debt = parseFloat(document.getElementById('debtLiq').value);
-    let disValueInBands = valueInBands * (1-liqDiscount/100);
+    let disValueInBands = valueInBands * (1 - liqDiscount / 100);
     let totalValue = disValueInBands + valueAboveBands
 
     const ctx = document.getElementById('healthChart').getContext('2d');
 
-    var healthGreen = (totalValue/debt - 1)*100;
-    var healthYellow = (disValueInBands/debt - 1)*100;
+    var healthGreen = (totalValue / debt - 1) * 100;
+    var healthYellow = (disValueInBands / debt - 1) * 100;
     document.getElementById('healthResultGreen').textContent = healthGreen.toFixed(2) + '%';
     document.getElementById('healthResultYellow').textContent = healthYellow.toFixed(2) + '%';
 
     const data = {
-      labels: ['Discounted Value in Bands', 'Value Above Bands', 'Total Value', 'Debt'],
+      labels: ['Дисконтированная Стоимость в Полосах', 'Стоимость выше Полос', 'Общая Стоимость', 'Долг'],
       datasets: [{
-        label: 'Data',
+        label: 'Данные',
         data: [Number(disValueInBands.toPrecision(4)), Number(valueAboveBands.toPrecision(4)), Number(totalValue.toPrecision(4)), Number(debt.toPrecision(4))],
         backgroundColor: [
           'rgba(80, 150, 220, 0.8)',
@@ -601,13 +607,13 @@ function updateHealthGraph(valueInBands, valueAboveBands, liqDiscount) {
     const options = {
       scales: {
         x: {
-        barPercentage: 0.5, // Adjust this value to make the bars thinner (e.g., 0.5 for 50% width)
-        categoryPercentage: 0.5 // Adjust this value to add spacing between categories (e.g., 0.8 for 80% width)
+        barPercentage: 0.5, // Настройте это значение, чтобы сделать бары тоньше (например, 0.5 для ширины 50%)
+        categoryPercentage: 0.5 // Настройте это значение, чтобы добавить промежутки между категориями (например, 0.8 для ширины 80%)
         },
         y: {
             title: {
                 display: true,
-                text: 'Value ($)'
+                text: 'Стоимость ($)'
             },
           beginAtZero: true
         }
@@ -621,7 +627,7 @@ function updateHealthGraph(valueInBands, valueAboveBands, liqDiscount) {
         },
         title: {
             display: true,
-            text: 'Value vs. Debt'
+            text: 'Стоимость vs. Долг'
         }
       },
       
@@ -645,11 +651,11 @@ let rateChart = null;
 let ampChart = null;
 
 document.addEventListener('DOMContentLoaded', function() {
-    updateAmpGraph(); // Draw the initial amplification chart with default values
+    updateAmpGraph(); // Нарисовать начальный график амплификации с значениями по умолчанию
     calculateLTV()
 
 
-    // amp graph
+    // График амплификации
     const ampInput = document.getElementById('ampInput');
     const basePriceInput = document.getElementById('basePriceInput');
     const numBandsInput = document.getElementById('numBandsInput');
@@ -657,7 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
     basePriceInput.addEventListener('change', updateAmpGraph);
     numBandsInput.addEventListener('change', updateAmpGraph);
 
-    //ltv calculator
+    // Калькулятор LTV
     const ampInput2 = document.getElementById('ampInput2');
     const numBandsInput2 = document.getElementById('numBandsInput2');
     const loanDiscountInput = document.getElementById('loanDiscountInput');
@@ -695,7 +701,7 @@ function generateRectangleData(basePrice, count, A, equalHeight) {
             height = 100;
             yAxisMax = 1;
         } else {
-            height = startingWidth/(xMax-xMin)*100;
+            height = startingWidth / (xMax - xMin) * 100;
             yAxisMax = height;
         }
 
@@ -716,11 +722,17 @@ function generateRectangleData(basePrice, count, A, equalHeight) {
         label: {
             color: textColor,
             drawTime: 'afterDatasetsDraw',
-            content: (ctx) => ['Band ' + Number(i+1), 'Lower Lim: $' + Number(xMin.toPrecision(4)), 'Upper Lim: $' + Number(xMax.toPrecision(4)), 'Width: $' + Number((xMax-xMin).toPrecision(4)), 'Liq Density: ' + Number(height.toPrecision(4)) + '%'],
+            content: (ctx) => [
+                'Полоса ' + Number(i + 1),
+                'Нижний предел: $' + Number(xMin.toPrecision(4)),
+                'Верхний предел: $' + Number(xMax.toPrecision(4)),
+                'Ширина: $' + Number((xMax - xMin).toPrecision(4)),
+                'Плотность Ликвидности: ' + Number(height.toPrecision(4)) + '%'
+            ],
             },
             enter({ element }, event) {
                 element.label.options.display = true;
-                return true; // force update
+                return true; // принудительное обновление
             },
             leave({ element }, event) {
                 element.label.options.display = false;
@@ -741,7 +753,7 @@ function updateAmpGraph() {
     const reversedXTicks = xTicks.slice().reverse();
     const data = {
       datasets: [{
-        data: [], // Empty dataset
+        data: [], // Пустой набор данных
       }]
     };
 
@@ -750,19 +762,19 @@ function updateAmpGraph() {
         x: {
             title: {
                 display: true,
-                text: 'Price ($)'
+                text: 'Цена ($)'
             },
-            min: (xAxisMin - (xAxisMax-xAxisMin)*0.1),
-            max: (xAxisMax + (xAxisMax-xAxisMin)*0.1),
+            min: (xAxisMin - (xAxisMax - xAxisMin) * 0.1),
+            max: (xAxisMax + (xAxisMax - xAxisMin) * 0.1),
             afterBuildTicks: axis => axis.ticks = xTicks.slice().reverse().map(v => ({ value: v }))
         },
         y: {
             title: {
                 display: true,
-                text: 'Liquidity Density (%)'
+                text: 'Плотность Ликвидности (%)'
             },
             min: 0,
-            max: (yAxisMax*1.1)
+            max: (yAxisMax * 1.1)
         }
       },
       plugins: {
@@ -792,8 +804,8 @@ function updateAmpGraph() {
 }
 
 function updateRateGraph() {
-    const rateMin = parseFloat(document.getElementById('rateMinInput').value)/100;
-    const rateMax = parseFloat(document.getElementById('rateMaxInput').value)/100;
+    const rateMin = parseFloat(document.getElementById('rateMinInput').value) / 100;
+    const rateMax = parseFloat(document.getElementById('rateMaxInput').value) / 100;
 
     let borrowDataPoints = [];
     for (let u = 0; u <= 1.01; u += 0.01) {
@@ -812,7 +824,7 @@ function updateRateGraph() {
     const data = {
         datasets: [
             {
-                label: 'Borrow APR',
+                label: 'Ставка Заимствования APR',
                 data: borrowDataPoints,
                 borderColor: 'rgba(75, 192, 192, 0.9)',
                 fill: false,
@@ -821,7 +833,7 @@ function updateRateGraph() {
                 borderWidth: 2,
             },
             {
-                label: 'Lend APR',
+                label: 'Ставка Кредитования APR',
                 data: lendDataPoints,
                 borderColor: 'rgba(255, 99, 132, 0.9)',
                 fill: false,
@@ -842,7 +854,7 @@ function updateRateGraph() {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: 'Utilization (%)'
+                        text: 'Утилизация (%)'
                     },
                     max: 100
                 },
@@ -886,9 +898,9 @@ function updateRateGraph() {
                             const borrowRate = context.chart.data.datasets[0].data[context.dataIndex].y.toFixed(2);
                             const lendRate = context.chart.data.datasets[1].data[context.dataIndex].y.toFixed(2);
                             return [
-                                `Utilization: ${utilization}%`,
-                                `Borrow APR: ${borrowRate}%`,
-                                `Lend APR: ${lendRate}%`
+                                `Утилизация: ${utilization}%`,
+                                `APR Заимствования: ${borrowRate}%`,
+                                `APR Кредитования: ${lendRate}%`
                             ];
                         }
                     }
@@ -906,3 +918,4 @@ function updateRateGraph() {
         rateChart = new Chart(ctx, config);
     }
 </script>
+
