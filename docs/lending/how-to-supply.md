@@ -1,120 +1,118 @@
-<h1>How to Supply (Lend)</h1>
+<h1>Как Предоставлять (Lend)</h1>
 
-## **Supplying UI**
+## **Интерфейс Предоставления (Supplying UI)** {#supplying-ui}
 
-By choosing the **`"SUPPLY"`** tab from the [main UI](https://lend.curve.fi/#/ethereum/markets), all relevant market information and values for lenders are displayed:
-
+При выборе вкладки **`"SUPPLY"`** в [основном интерфейсе](https://lend.curve.fi/#/ethereum/markets), отображается вся соответствующая информация о рынках и показатели доходности для поставщиков ликвидности (lenders):
+    
 <figure markdown="span">
   ![](../images/lending/lend_supply.png){ width="800" }
   <figcaption></figcaption>
 </figure>
-
-
-`Supply` shows the underlying token of the vault which can be supplied. `Lend APY` is the current annualized rate for doing so.
-
-Additionally, vaults can have gauges, which are eligible to receive CRV emissions once they are added to the GaugeController. These rewards will show up in the `Rewards APR / CRV + Incentives` column if there are any.  See [here](./overview.md#rewards-apr) for information about what's required to have CRV rewards.
-
-`TVL` displays the total value locked into the vault.
-
-
+    
+`Supply` показывает базовый токен хранилища, который можно предоставить. `Lend APY` — это текущая годовая процентная ставка за предоставление.
+    
+Кроме того, хранилища могут иметь счётчики вознаграждений (gauges), которые имеют право на получение эмиссий CRV после их добавления в GaugeController. Эти вознаграждения будут отображаться в столбце `Rewards APR / CRV + Incentives`, если они есть. См. [здесь](./overview.md#rewards-apr) для получения информации о том, что необходимо для получения CRV-вознаграждений.
+    
+`TVL` отображает общую стоимость, заблокированную в хранилище.
+    
 ---
-
-
-## **How do Supply Vaults work?**
-
-Liquidity for borrowers is provided in **ERC-4626 vaults**. For detailed documentation on how they work, please check out the official [Ethereum documentation](https://ethereum.org/de/developers/docs/standards/tokens/erc-4626/) or visit the [technical docs of Curve](https://docs.curve.fi/lending/contracts/vault/).
-
-These vaults are **yield-bearing**, meaning there is **no need for the user to claim** awarded rewards for lending out their assets[^1]. The shares they receive for depositing assets into the vault **increase in value** because the balance of the underlying asset increases due to the dynamics of interest rates.
-
-[^1]: This does not apply to rewards awarded from liquidity gauges. They need to be claimed under the `"Withdraw" -> "Claim Rewards"` tab.
-
+    
+## **Как Работают Хранилища Предоставления (Supply Vaults)?** {#how-do-supply-vaults-work}
+    
+Ликвидность для заемщиков предоставляется в **ERC-4626 хранилищах**. Для подробной документации о том, как они работают, пожалуйста, ознакомьтесь с официальной [документацией Ethereum](https://ethereum.org/de/developers/docs/standards/tokens/erc-4626/) или посетите [техническую документацию Curve](https://docs.curve.fi/lending/contracts/vault/).
+    
+Эти хранилища **приносят доход**, что означает, что **пользователю не нужно отдельно требовать** начисленные вознаграждения за кредитование своих активов[^1]. Доли выраженные в токеннах хранилища, которые пользователь получает за депонирование активов в хранилище, **увеличиваются в цене**, поскольку баланс базового актива растет благодаря динамике процентных ставок.
+    
+[^1]: Это не относится к вознаграждениям, начисляемым из liquidity gauges. Их нужно требовать во вкладке `"Withdraw" -> "Claim Rewards"`.
+    
 ---
-
-## **Depositing Assets**
-
-In order to supply tokens to the vault, the user must **specify the amount of underlying tokens to add**. Underlying tokens are referred to as the asset in the vault, which is the asset that's borrowed.  
-When depositing, the UI previews the amount of shares to receive and projects the lend APY after the deposit. For depositing, there is no cap. Users can deposit as much as they want.
-
+    
+## **Депонирование Активов (Depositing Assets)** {#depositing-assets}
+    
+Для того чтобы предоставить токены в хранилище, пользователь должен **указать количество базовых токенов для добавления**. Базовыми токенами называются активы в хранилище, под которые производится заимствование.  
+При депонировании интерфейс предварительно показывает количество долей, которые будут получены, и прогнозирует `Lend APY` после депонирования. Для депонирования нет ограничений. Пользователи могут депонировать столько, сколько хотят.
+    
 <figure markdown="span">
   ![](../images/lending/supply_deposit.png){ width="350" }
   <figcaption></figcaption>
 </figure>
-
+    
 ---
-
-## **Staking Assets**
-
-After depositing, if desired, users can stake their vault shares into the corresponding gauge (if there is one) under the **`"Stake"`** tab.  This allows the user to receive Rewards APR if there is any available.  Click on the `Deposit` -> `Stake` tab to deposit your assets.  By staking your supply vault shares you are sending them to the Rewards Gauge, you retain ownership, but they are nontransferable while staked.  Staking requires a transaction.
-
+    
+## **Стейкинг Активов (Staking Assets)** {#staking-assets}
+    
+После депонирования, при желании, пользователи могут застейкать свои доли хранилища в соответствующий gauge (если он есть) во вкладке **`"Stake"`**. Это позволяет пользователю получать `Rewards APR`, если они доступны. Нажмите на вкладку `Deposit` -> `Stake`, чтобы застейкать свои активы. Стейкинг долей хранилища означает отправку их в счётчик вознаграждений (Rewards Gauge), пользователь сохраняет владение, но они становятся непередаваемыми во время стейкинга. Стейкинг требует отдельной транзакции.
+    
 <figure markdown="span">
   ![](../images/lending/stake_assets.png){ width="350" }
   <figcaption></figcaption>
 </figure>
-
-Liquidity gauges of vaults can be added to the GaugeController in order to be eligible to receive CRV emissions or external rewards can be added to the gauge by the deployer.
-
+    
+Liquidity gauges хранилищ могут быть добавлены в GaugeController для получения права на эмиссии CRV или внешние вознаграждения могут быть добавлены в gauge развертывателем.
+    
 ---
-
-## **Unstaking Assets**
-
-Unstaking withdraws your Vault Shares from the Rewards Gauge to your address.  It requires a transaction to unstake.  Unstaking and claiming rewards can be done together in a single transaction.  It can be done from the `Withdraw` -> `Unstake` tab of the Supply UI for the lending market you've supplied to.
-
+    
+## **Разстейкинг Активов (Unstaking Assets)** {#unstaking-assets}
+    
+Разстейкинг снимает ваши доли хранилища из Rewards Gauge и возвращает их на ваш адрес. Это требует транзакции для разстейкинга. Разстейкинг и требование вознаграждений могут быть выполнены вместе в одной транзакции. Это можно сделать во вкладке `Withdraw` -> `Unstake` интерфейса Предоставления для кредитного рынка, в который вы предоставляли средства.
+    
 <figure markdown="span">
   ![](../images/lending/unstake_assets.png){ width="350" }
   <figcaption></figcaption>
 </figure>
-
-You must `Unstake` your Vault shares before being able to `Withdraw`.
-
+    
+Вы должны выполнить `Unstake` для своих долей хранилища перед тем, как сможете соврешить `Withdraw`.
+    
 ---
-
-## **Withdrawing Assets**
-
-If a user already has some shares, they can withdraw a desired amount of the underlying asset under the **`"Withdraw"`** tab. There is also a "Withdraw in full" option, which burns all the user's shares and converts them into the underlying asset[^2]. 
-
+    
+## **Вывод Активов (Withdrawing Assets)** {#withdrawing-assets}
+    
+Если у пользователя уже есть доли, он может вывести желаемое количество базового актива во вкладке **`"Withdraw"`**. Также есть опция "Withdraw in full" (полный вывод), которая сжигает все доли пользователя и возвращает базовый актив[^2].
+    
 <figure markdown="span">
   ![](../images/lending/supply_withdraw.png){ width="350" }
   <figcaption></figcaption>
 </figure>
-
-The UI previews the amount of shares to be burned in order to receive the underlying tokens. If a user has staked the vault shares in a gauge, they are required to unstake them under the **`"Unstake"`** tab before being able to withdraw.
-
-[^2]: This method will only work if the vault has enough underlying assets to fully redeem all the shares. 
-
-!!!tip "Lending Rates when Depositing or Withdrawing Assets"
-    When depositing underlying assets into the vault, the lending rate may decrease depending on the amount of assets added. The reason for this is that when supplying additional assets, the market's Utilization Rate will decrease (as there are now more assets to borrow from), which simultaneously decreases the borrow rate. When the borrow rate decreases, the lending rate decreases as well.
-
-    Vice versa: Withdrawing assets from the vault reduces the total amount of assets. This drives the utilization rate up, which increases the borrow rate and therefore also the lending rate.  
     
-    See [here](./overview.md#utilization-lend-apy-and-borrow-apy) for more information about Utilization and how it affects lending and borrow rates
-
-
+Интерфейс предварительно показывает количество долей, которые будут сожжены для получения базовых токенов. Если пользователь застейкал доли хранилища в счётчике вознаграждений (gauge), ему необходимо разстейкать их во вкладке **`"Unstake"`** перед тем, как сможет вывести.
+    
+[^2]: Этот метод будет работать только если хранилище имеет достаточно базовых активов для полного выкупа всех долей.
+    
+!!!tip "Ставки Кредитования при Депонировании или Выводе Активов"
+    При депонировании базовых активов в хранилище, ставка кредитования может снизиться в зависимости от количества добавленных активов. Причина этого в том, что при предоставлении дополнительных активов уровень утилизации рынка снизится (так как теперь больше активов для заимствования), что одновременно снижает ставку заимствования. Когда ставка заимствования снижается, ставка кредитования также снижается.
+    
+    И наоборот: вывод активов из хранилища уменьшает общее количество активов. Это увеличивает уровень утилизации, что повышает ставку заимствования и, следовательно, ставку кредитования.  
+        
+    См. [здесь](./overview.md#utilization-lend-apy-and-borrow-apy) для получения дополнительной информации об утилизации и о том, как она влияет на ставки кредитования и заимствования.
+    
 ---
-
-## **Claiming Rewards**
-
-Any rewards from a **Rewards APR** will be available under the `Withdraw` -> `Claim Rewards` tab here:
-
+    
+## **Требование Вознаграждений (Claiming Rewards)** {#claiming-rewards}
+    
+Любые вознаграждения из **Rewards APR** будут доступны во вкладке `Withdraw` -> `Claim Rewards` здесь:
+    
 <figure markdown="span">
   ![](../images/lending/claim_rewards.png){ width="350" }
   <figcaption></figcaption>
 </figure>
-
-Claiming rewards requires a transaction, however unstaking and claiming together can be done in a single transaction.
-
+    
+Требование вознаграждений требует транзакции, однако разстейкинг и требование вместе могут быть выполнены в одной транзакции.
+    
 ---
-
-*Having **`"Advanced Mode"`** enabled adds a full overview of the vault.*
-
+    
+*Активировав **`"Advanced Mode"`**, пользователь получает полный обзор хранилища.*
+    
 <figure markdown="span">
   ![](../images/lending/supply_overview.png){ width="600" }
   <figcaption></figcaption>
 </figure>
-
-
-*If a user has shares, the user can view their personal vault information on the `"Your Details"` tab.*
-
+    
+*Если у пользователя есть доли, он может просмотреть свою личную информацию хранилища во вкладке `"Your Details"`.*
+    
 <figure markdown="span">
   ![](../images/lending/supply_yourdetails.png){ width="600" }
   <figcaption></figcaption>
 </figure>
+    
+---
+

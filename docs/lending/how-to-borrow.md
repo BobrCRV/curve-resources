@@ -1,75 +1,72 @@
-<h1>How to Borrow & Use Leverage</h1>
+<h1>Как Брать Займы и Использовать Кредитное Плечо</h1>
 
-## **Borrowing UI**
+## **Интерфейс Заимствования (Borrowing UI)** {#borrowing-ui}
 
-When selecting the **`"BORROW"`** tab from the [main UI](https://lend.curve.fi/#/ethereum/markets), all relevant market information and values for borrowers are displayed:
+При выборе вкладки **`"BORROW"`** на [основном интерфейсе](https://lend.curve.fi/#/ethereum/markets), отображается вся соответствующая информация о рынке и значения для заемщиков:
 
 <figure markdown="span">
   ![](../images/lending/lend_borrow.png){ width="800" }
   <figcaption></figcaption>
 </figure>
 
-`Collateral` displays the collateral token of the market, while `Borrow` shows the token which can be borrowed.  The `leverage` column shows whether or not built-in leverage is available in the market.
+`Collateral` отображает залоговый токен рынка, в то время как `Borrow` показывает токен, который можно занять. Столбец `leverage` показывает, доступно ли встроенное кредитное плечо на рынке.
 
-`Borrow APY` represents the current [borrow rate](./overview.md#borrow-rate).  The `Available` column shows the amount of assets left to borrow and `Borrowed` is the total amount currently borrowed.
+`Borrow APY` представляет текущую [ставку заимствования](./overview.md#borrow-rate). Столбец `Available` показывает количество оставшихся для заимствования активов, а `Borrowed` — общее количество текущих займов.
 
-`Supplied` shows the total amount of the borrowable token which has been supplied by users.  The `Utilization (%)` is the ratio of `Borrowed` to `Supplied` tokens, see [here](./overview.md#utilization-lend-apy-and-borrow-apy) for more information.
-
+`Supplied` показывает общее количество предоставленного токена, который может быть заимствован пользователями. `Utilization (%)` — это отношение `Borrowed` к `Supplied` токенам, см. [здесь](./overview.md#utilization-lend-apy-and-borrow-apy) для получения дополнительной информации.
 
 ---
 
-## **Creating A New Loan**
+## **Создание Нового Займа** {#creating-a-new-loan}
 
-In order to create a loan and borrow tokens against collateral, a user first needs to choose a lending market. This can simply be done by clicking the desired market.
+Для создания займа и заимствования токенов под залог, пользователь сначала должен выбрать кредитный рынок. Это можно сделать, просто кликнув по желаемому рынку.
 
-Having **`"Advanced Mode"`** activated when creating a loan allows the user to additionally select the number of bands for the loan and displays the corresponding liquidation range. If deactivated, the loan will be created with a default amount of 10 bands.
+Активировав **`"Advanced Mode"`** при создании займа, пользователь может дополнительно выбрать количество полос для займа и увидеть соответствующий диапазон ликвидации. Если режим не активирован, займ будет создан с использованием количества полос по умолчанию — 10.
 
 <figure markdown="span">
   ![](../images/lending/advanced_mode.png){ width="300" }
-  <figcaption>Advanced Mode can be toggled on the top right of the page.</figcaption>
+  <figcaption>Advanced Mode можно переключить в верхнем правом углу страницы.</figcaption>
 </figure>
 
-!!!tip "Number of Bands (N)"
-    A **higher number of bands results in fewer losses when the loan is in soft-liquidation** mode. The maximum number of bands is 50, while the minimum is 4.
+!!!tip "Количество Полос (N)"
+    **Большое количество полос приводит к меньшим потерям при режиме мягкой ликвидации**. Максимальное количество полос — 50, а минимальное — 4.
 
 <figure markdown="span">
   ![](../images/lending/lend_createloan.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-Additionally, the UI shows the future borrow APY when the user's loan is created and the loan-to-value (LTV) ratio.
-
+Дополнительно интерфейс показывает ожидаемую ставку заимствования (`Borrow APY`) при создании займа и отношение займа к залогу (`Loan-to-Value`, `LTV`).
 
 ---
 
-
-*Advanced mode also enables an overview of the entire LLAMMA including important values such as lend or borrow APY, available amount to borrow, etc.*
+*Расширенный режим также предоставляет обзор всей системы LLAMMA, включая важные значения, такие как ставки по заимствованию (`Borrow APY`) и кредитованию (`Lend APY`), доступное количество для заимствования и т.д.*
 
 <figure markdown="span">
   ![](../images/lending/lend_marketdetails.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-*Down below, a section containing relevant contracts and the current parameters for the lending market is displayed.*
+*Ниже отображается раздел, содержащий соответствующие контракты и текущие параметры кредитного рынка.*
 
 <figure markdown="span">
   ![](../images/lending/lend_parameters.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-- **`Fee`**: The current exchange fee for swapping tokens in the AMM.
-- **`Admin Fee`**: The percentage of the total fee, which is awarded to veCRV holders. Currently, all fees go to liquidity providers in the AMM (which are the borrowers).
-- **`A`**: The amplification parameter A defines the density of liquidity and band size.
-- **`Loan Discount`**: The percentage used to discount the collateral for calculating the maximum borrowable amount when creating a loan.
-- **`Liquidation Discount`**: The percentage used to discount the collateral for calculating the recoverable value upon liquidation at the current market price.
-- **`Base Price`**: The base price is the price of the band number 0.
-- **`Oracle Price`**: The oracle price is the current price of the collateral as determined by the oracle. The oracle price is used to calculate the collateral's value and the loan's health.
+- **`Fee`**: Текущая комиссия за обмен токенов в AMM.
+- **`Admin Fee`**: Процент от общей комиссии, который начисляется держателям veCRV. В настоящее время все комиссии идут поставщикам ликвидности в AMM (которые являются заемщиками).
+- **`A`**: Параметр усиления A определяет плотность ликвидности и размер полосы.
+- **`Loan Discount`**: Процент, используемый для скидки залога при расчете максимальной суммы, которую можно занять при создании займа.
+- **`Liquidation Discount`**: Процент, используемый для скидки залога при расчете восстановимой стоимости при ликвидации по текущей рыночной цене.
+- **`Base Price`**: Базовая цена — это цена полосы номер 0.
+- **`Oracle Price`**: Цена оракула — это текущая цена залога, определенная оракулом. Цена оракула используется для расчета стоимости залога и здоровья займа.
 
 ---
 
-*Navigating to the `"Your Details"` tab displays all the user's loan details:[^1]*
+*Переход к вкладке `"Your Details"` отображает все детали займа пользователя:[^1]*
 
-[^1]: This tab will only show up if a user has a loan and their wallet is connected to the site.
+[^1]: Эта вкладка отображается только если у пользователя есть займ и его кошелек подключен к сайту.
 
 <figure markdown="span">
   ![](../images/lending/lend_yourdetails.png){ width="600" }
@@ -78,122 +75,124 @@ Additionally, the UI shows the future borrow APY when the user's loan is created
 
 ---
 
-## **Loan Management**
+## **Управление Займом (Loan Management)** {#loan-management}
 
-!!!info "Loan Management when in soft-liquidation mode"
-    **During soft-liquidation, users are unable to add or withdraw collateral.** They can choose to **either partially or fully repay** their crvUSD debt to improve their health ratio **or** decide to **self-liquidate** their loan if their collateral composition contains sufficient crvUSD to cover the outstanding debt. If they opt for self-liquidation, the user's debt is fully repaid and the loan will be closed. Any residual amounts are then returned to the user.
+!!!info "Управление Займом в режиме мягкой ликвидации"
+    **Во время мягкой ликвидации пользователи не могут добавлять или выводить залог.** Они могут выбрать **либо частично, либо полностью погасить** свой долг в crvUSD, чтобы улучшить соотношение здоровья, **или** решить **самостоятельно ликвидировать** свой займ, если их состав залога содержит достаточное количество crvUSD для покрытия непогашенного долга. Если они выберут самостоятельную ликвидацию, долг пользователя полностью погашается, и займ закрывается. Любые остатки возвращаются пользователю.
+    
+Понимание того, как работают мягкие ликвидации, здоровье займа и жёсткие ликвидации, необходимо для управления займами на Curve. Обязательно прочитайте и поймите следующие разделы перед взятием займа:
 
-Understanding how soft-liquidations, loan health and hard-liquidations work is essential for understanding how to manage loans on Curve.  Be sure to read and understand the following sections before taking out a loan:
+- [**Понимание Мягких Ликвидаций**](./overview.md#soft-liquidation)
+- [**Понимание Здоровья Займа и Жёстких Ликвидаций**](./overview.md#health-hard-liquidation)
 
-- [**Understanding Soft-Liquidations**](./overview.md#soft-liquidation)
-- [**Understanding Loan Health & Hard-Liquidations**](./overview.md#health-hard-liquidation)
+Остальная часть этого раздела описывает, как использовать интерфейс для управления займами и залогом.
 
-The rest of this section talks about how to use the UI to manage loans and collateral.
+### **Вкладка Залог (Collateral Tab)** {#collateral-tab}
 
-### **Collateral Tab**
-
-*The `"Collateral"` tab allows the adjustment of collateral:*
+*Вкладка `"Collateral"` позволяет регулировать залог:*
 
 <figure markdown="span">
   ![](../images/lending/lend_collateral.png){ width="400" }
   <figcaption></figcaption>
 </figure>
 
-#### Add collateral
+#### Добавить залог (Add Collateral) {#add-collateral}
 
-Add more collateral to the loan.  *This is not possible while in soft-liquidation.  If health is getting low, some debt must be repaid instead of adding more collateral*.
+Добавьте больше залога к займу. *Это невозможно во время мягкой ликвидации. Если здоровье снижается, необходимо погасить часть долга вместо добавления залога*.
 
-#### Remove collateral
+#### Удалить залог (Remove Collateral) {#remove-collateral}
 
-Remove collateral from the loan.
+Удалите залог из займа.
 
+### **Вкладка Управления Займом (Manage Loan Tab)** {#manage-loan-tab}
 
-### **Manage Loan Tab**
-
-*The `"Manage Loan"` tab has the following options:*
+*Вкладка `"Manage Loan"` имеет следующие опции:*
 
 <figure markdown="span">
   ![](../images/lending/lend_manageloan.png){ width="400" }
   <figcaption></figcaption>
 </figure>
 
-#### **Borrow More**
+#### **Дополнить Заимствование (Borrow More)** {#borrow-more}
 
-Borrow more simply allows the user to borrow more debt and add more collateral at the same time.
+Дополнительно заимствование позволяет пользователю занять больше долга и одновременно добавить больше залога.
 
-#### **Repay**
+#### **Погасить (Repay)** {#repay}
 
-Repay has the following options, and all options allow the user to **partially** or **fully repay** their loans.  If only a partial repayment is done then the liquidation range will change for the user.
+Погашение имеет следующие опции, и все опции позволяют пользователю **частично** или **полностью погасить** свои займы. Если погашение происходит частично, диапазон ликвидации будет изменен для пользователя.
 
 ![Repay UI](../images/ui/repay.png){: .centered }
 
-**Repay From Collateral** will remove the collateral (e.g., WETH or crvUSD) out of the lending market, convert them all to the debt asset if required (e.g., crvUSD), and send any leftover debt asset (e.g., crvUSD) back to the user if the loan is fully paid and closed.  *Note this is only available on new markets (markets which allow leverage allow this feature).  For older markets it's required to repay with the debt token.*
+**Погасить из Залога (Repay From Collateral)** удаляет залог (например, WETH или crvUSD) из кредитного рынка, конвертирует их в токен долга, если необходимо (например, crvUSD), и возвращает любой остаток токена долга (например, crvUSD) пользователю, если займ полностью погашен и закрыт. *Обратите внимание, что это доступно только на новых рынках (рынках, которые поддерживают кредитное плечо, доступна эта функция). На старых рынках требуется погашение с использованием токена долга.*
 
-**Repay from wallet** has two boxes, one for the collateral asset, and one for the debt asset:
+**Погасить из кошелька (Repay from Wallet)** имеет два поля, одно для залогового актива, и одно для токена долга:
 
- * **Collateral asset, e.g., WETH**: this works the same way as **Repay From Collateral**, all sent WETH would be converted to crvUSD, debt would be repaid and any remaining crvUSD transferred back to the user if the loan is fully paid and closed.
+ * **Залоговый актив, например, WETH**: работает так же, как и **Погасить из Залога**, все отправленные WETH будут конвертированы в crvUSD, долг будет погашен и любые оставшиеся crvUSD будут возвращены пользователю, если займ полностью погашен и закрыт.
+ 
+ * **Токен долга, например, crvUSD**: погашает долг с помощью отправленного crvUSD. Если весь долг погашен, займ закрывается, и весь залог на кредитном рынке возвращается пользователю, в приведенном выше случае пользователь получит обратно свои WETH.
 
-* **Debt asset, e.g., crvUSD**: this repays the debt with the sent crvUSD.  If all debt is repaid the loan is closed and all collateral in the lending market is sent back to the user, in the above case the user would receive back their WETH.
+#### **Самостоятельная Ликвидация (Self-liquidate)** {#self-liquidate}
 
-#### **Self-liquidate**
+Это позволяет пользователю ликвидировать свой займ до того, как его смогут жёстко ликвидировать. Пользователи, использующие эту функцию, скорее всего, уже находятся в режиме мягкой ликвидации. Это позволяет пользователю вернуть свой залог и предотвращает потерю суммы, определенной [`Liquidation Discount`](../crvusd/loan-concepts.md#market-parameters).
 
-This allows a user to liquidate themselves before they get hard-liquidated.  Users using this feature will most likely already be in soft-liquidation.  This lets the user retrieve their collateral and stops them from losing the amount defined by the [`liquidation_discount`](../crvusd/loan-concepts.md#market-parameters).
-
-Let's look at user called Alice who intially borrowed 1000 crvUSD using 1 WETH as collateral for how this works.  Alice is in soft liquidation and her health is getting low.  In soft liquidation 0.2 WETH has been converted to 250 crvUSD, so she now has 0.8 WETH and 250 crvUSD backing her 1000 crvUSD loan.  Alice wants to self liquidate.  Alice only needs to send 750 crvUSD to self-liquidate, because she already has 250 crvUSD of collateral, both these amounts together will pay off the 1000 crvUSD debt.  Alice then receives back her 0.8 WETH.
+Рассмотрим пользователя по имени Алиса, которая изначально заняла 1000 crvUSD, используя 1 WETH в качестве залога, чтобы понять, как это работает. Алиса находится в режиме мягкой ликвидации, и ее здоровье снижается. В режиме мягкой ликвидации 0.2 WETH было конвертировано в 250 crvUSD, поэтому у нее теперь 0.8 WETH и 250 crvUSD, обеспечивающих ее займ на 1000 crvUSD. Алиса хочет самостоятельно ликвидировать свой займ. Алисе нужно отправить только 750 crvUSD для самостоятельной ликвидации, так как у нее уже есть 250 crvUSD залога. Эти суммы вместе погашают долг в 1000 crvUSD. Затем Алиса получает обратно свои 0.8 WETH.
 
 ---
 
-## **How to take out a leverage loan**
+## **Как Взять Займ с Кредитным Плечом (How to take out a leverage loan)** {#how-to-take-out-a-leverage-loan}
 
-All new lending markets allow users to use leverage.  E.g., the WBTC market below allows up to 11x leverage when borrowing from this lending market.  11x leverage means 10x the deposited amount of WBTC is borrowed as crvUSD and swapped to WBTC using 1inch.
+Все новые кредитные рынки позволяют пользователям использовать кредитное плечо. Например, рынок WBTC ниже позволяет использовать кредитное плечо до 11x при заимствовании с этого кредитного рынка. Кредитное плечо 11x означает, что 10x от депонированной суммы WBTC заимствуется в crvUSD и конвертируется в WBTC с использованием 1inch.
 
-![WBTC Leverage](../images/ui/leverage.png){: .centered }
+![WBTC Кредитное Плечо](../images/ui/leverage.png){: .centered }
 
-!!!info "Info"
-    If the market does not display a value in the leverage column, then leverage can still be built up manually by [looping](./leverage.md#leverage-looping).
+!!!info "Информация"
+    Если рынок не отображает значение в столбце кредитного плеча, то кредитное плечо все еще можно нарастить вручную, используя [циклическое кредитное плечо](./leverage.md#leverage-looping).
 
-Click on the desired market with leverage, then navigate to the `leverage` tab next to the `create loan` tab shown here:
+Кликните на желаемый рынок с кредитным плечом, затем перейдите на вкладку `leverage` рядом с вкладкой `create loan`, как показано здесь:
 
-![Navigating to leverage](../images/ui/navigate_leverage.png){: .centered }
+![Переход к кредитному плечу](../images/ui/navigate_leverage.png){: .centered }
 
-After navigating to the `leverage` tab, the following options will be displayed:
+После перехода на вкладку `leverage` будут отображаться следующие опции:
 
-![Leverage Menu](../images/ui/leverage_menu.png){: .centered }
+![Меню Кредитного Плеча](../images/ui/leverage_menu.png){: .centered }
 
-This shows all the information and options to open a leveraged loan.  Notice that the `ADD FROM WALLET` allows both assets to be added to the loan.  In this market a user could add WBTC, or crvUSD or both.  See the information about [depositing a combination of assets](./leverage.md#depositing-a-combination-of-assets) for how this works.
+Это показывает всю информацию и опции для открытия займа с кредитным плечом. Обратите внимание, что `ADD FROM WALLET` позволяет добавлять оба актива в займ. На этом рынке пользователь может добавить WBTC, crvUSD или оба. См. информацию о [депонировании комбинации активов](./leverage.md#depositing-a-combination-of-assets) для понимания, как это работает.
 
-The **`BORROW AMOUNT`** lets the user specify how much they would like to borrow.
+**`BORROW AMOUNT`** позволяет пользователю указать, сколько он хотел бы занять.
 
-If [**`Advanced Mode` is enabled**](#creating-a-new-loan), then the user can click on the **`adjust`** button next to the liquidation range.  This allows a user to change the number of bands `N` for their liquidation range.  An example of this is shown below with the other loan details:
+Если [**`Advanced Mode` активирован**](#creating-a-new-loan), пользователь может нажать кнопку **`adjust`** рядом с диапазоном ликвидации. Это позволяет пользователю изменить количество полос `N` для своего диапазона ликвидации. Пример этого показан ниже с другими деталями займа:
 
-![Leverage Menu](../images/ui/leverage_details.png){: .centered }
+![Детали Кредитного Плеча](../images/ui/leverage_details.png){: .centered }
 
-**`Leverage`** is calculated using the following formula:
+**`Leverage`** рассчитывается по следующей формуле:
 
 $$ \text{Leverage} = \frac{\text{value deposited} + \text{value borrowed}}{\text{value deposited}}$$
 
-For example if \$10,000 crvUSD and \$10,000 of WBTC is deposited (\$20,000 value total deposited) and the user borrows \$80,000 crvUSD, then leverage is 5x.
+Например, если \$10,000 crvUSD и \$10,000 WBTC депонированы (\$20,000 общей стоимости депонирования), и пользователь заимствует \$80,000 crvUSD, то кредитное плечо составляет 5x.
 
-**`Expected`** and **`Expected avg. price`** both relate in this case to how much WBTC is expected to be received after swapping the borrowed crvUSD, and what the expected average price for swapping is.  **`Expected`** has collapsible details which shows the route the assets will be swapped through.  These **swaps are always provided by 1inch**.  An example of these details are provided below and show that 125 crvUSD will be swapped to 0.0019074 WBTC.
+**`Expected`** и **`Expected avg. price`** связаны с тем, сколько WBTC ожидается получить после обмена заимствованного crvUSD и какова ожидаемая средняя цена обмена. **`Expected`** имеет сворачиваемые детали, которые показывают маршрут, по которому активы будут обмениваться. Эти **обмены всегда предоставляются 1inch**. Пример этих деталей приведен ниже и показывает, что 125 crvUSD будут обменены на 0.0019074 WBTC.
 
-![Routing Details](../images/ui/routing_details.png){: .centered }
+![Детали Маршрутизации](../images/ui/routing_details.png){: .centered }
 
-**`Price impact`** is the difference between the oracle price and the average swap price.
+**`Price impact`** — это разница между ценой оракула и средней ценой обмена.
 
-**`Band range`** is the starting and finishing bands of liquidity for the loan, e.g., "4 to 13" means the loan will begin soft-liquidation in band 4, and finish in band 13.  **`Price range`** shows the `Band range` but as a price range, e.g., band 4 to 13 could be a price range like 52,994 to 60,607. See [here](../crvusd/loan-concepts.md#bands-n) for more information about bands.
+**`Band range`** — это начальные и конечные полосы ликвидации займа, например, "4 до 13" означает, что займ начнется в полосе 4 и закончится в полосе 13. **`Price range`** показывает `Band range` как ценовой диапазон, например, полосы 4 до 13 могут соответствовать ценовому диапазону 52,994 до 60,607. См. [здесь](../crvusd/loan-concepts.md#bands-n) для получения дополнительной информации о полосах.
+    
+**`Health`** показывает, насколько здоров займ, это значение должно быть положительным. Если оно меньше или равно 0, займ может быть жёстко ликвидирован. См. [здесь](../crvusd/loan-concepts.md#loan-health) для получения дополнительной информации о здоровье займа.
 
-**`Health`** is how healthy the loan is, this value must be positive, if it is less than or equal to 0 then the loan can be hard liquidated.  See [here](../crvusd/loan-concepts.md#loan-health) for more information about health.
+**`Borrow APY`** показывает процентную ставку до и после создания займа. **`Loan to Value Ratio`** показывает стоимость депонированного залога по сравнению с заимствованным залогом.
 
-**`Borrow APY`** shows the interest rate before and after the loan is created.  **`Loan to Value Ratio`** shows the deposited collateral value compared to the borrowed collateral.
+**`Estimated TX Cost`** показывает стоимость газа в USD. **`Slippage tolerance`** — это максимальное допустимое проскальзывание при обмене.
 
-**`Estimated TX Cost`** shows the gas cost in USD.  **`Slippage tolerance`** is the maximum slippage allowed when swapping.
+Перед взятием займа появится экран, показывающий детали займа, например: 
 
-Before taking out a loan, a screen will appear showing the details of the loan, for example: 
+![Пример Деталей Займа](../images/ui/get_leverage_loan.png){: .centered }
 
-![Example loan details](../images/ui/get_leverage_loan.png){: .centered }
+Затем токены, которые будут использованы в качестве залога, нужно одобрить, и затем займ может быть взят путем нажатия на **`Get Loan`** и отправки транзакции.
 
-Then the tokens which will be used as collateral need to be approved and then the loan can be taken out by clicking the **`Get Loan`** and sending the transaction.
+## **Закрытие Займа с Кредитным Плечом (Closing a leveraged loan)** {#closing-a-leveraged-loan}
 
-## **Closing a leveraged loan**
+Закрытие займа с кредитным плечом можно выполнить двумя способами: либо через [погашение](#repay), либо через [самостоятельную ликвидацию](#self-liquidate). Самым эффективным из этих вариантов является [погашение с залогом](#repay). Это удаляет весь залог, обменивает его на тот же токен долга, погашает долг и возвращает остаток пользователю. В противном случае долг необходимо полностью погасить для закрытия займа, и поскольку это займ с кредитным плечом, долг может быть выше, чем доступные у пользователя активы, что делает этот вариант непрактичным.
 
-Closing a leveraged loan can be done in 2 ways, either through [repaying](#repay), or [self-liquidating](#self-liquidate).  The most efficient of these options is to [Repay with collateral](#repay).  This removes all collateral, swaps it to the same token as the debt, repays the debt and transfers the rest back to the user.  Otherwise the debt needs to be fully repaid to close the loan, and as this is a leveraged loan, the debt may be higher than the user's available assets, making this unviable.
+---
+

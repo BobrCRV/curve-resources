@@ -1,45 +1,48 @@
-<h1>Leverage</h1>
+<h1>Кредитное Плечо (Leverage)</h1>
 
-This section explains how leverage works, if you would like to know how to take out a leverage loan, see [How to take out a leverage loan](how-to-borrow.md#how-to-take-out-a-leverage-loan) section of the how to borrow page.
+Этот раздел объясняет, как работает кредитное плечо. Если вы хотите узнать, как взять займ с кредитным плечом, см. раздел [Как взять займ с кредитным плечом](how-to-borrow.md#how-to-take-out-a-leverage-loan) на странице "Как брать займы".
 
-# **How Leverage Works**
+# **Как Работает Кредитное Плечо** {#how-leverage-works}
 
-Leverage on Curve Lending allows a user to **multiply their gains (and losses) by the amount of leverage** they desire. For example, if a user is borrowing crvUSD with WETH collateral at 2x leverage, they will make twice as much profit in crvUSD compared to just holding their WETH without leverage (not accounting for borrowing rates).  Let's look at a few quick examples:
+Кредитное плечо на Curve Lending позволяет пользователю **умножать свои прибыли (и убытки) на желаемое количество кредитного плеча**. Например, если пользователь берет займ crvUSD под залог WETH с кредитным плечом 2x, он получит в два раза больше прибыли в crvUSD по сравнению с тем, если бы просто держал свой WETH без кредитного плеча (не учитывая ставки заимствования). Давайте рассмотрим несколько быстрых примеров:
 
-| ETH starting price | ETH end price | Deposited Collateral | Borrowed Collateral | Total Collateral | Leverage | Profit | ETH Profit |
+| Начальная цена ETH | Конечная цена ETH | Депонированный Залог | Заимствованный Залог | Общий Залог | Кредитное Плечо | Прибыль | Прибыль в ETH |
 |---|---|---|---|---|---|---|---|
 | 1000 crvUSD | 2000 crvUSD| 1 ETH | 0 ETH | 1 ETH | 1x | 1000 crvUSD | 0 |
 | 1000 crvUSD| 2000 crvUSD| 1 ETH | 1 ETH | 2 ETH | 2x | 2000 crvUSD | 1 ETH |
 | 1000 crvUSD| 2000 crvUSD| 1 ETH | 2 ETH | 3 ETH | 3x | 3000 crvUSD | 2 ETH |
 
-!!!warning "Warning"
-    Multiplied profits from leverage also means multiplied loses when prices decrease.
+!!!warning "Внимание"
+    Умноженные прибыли от кредитного плеча также означают умноженные убытки при снижении цен.
 
-## **Leverage Looping**
+## **Циклическое Кредитное Плечо (Leverage Looping)** {#leverage-looping}
 
-Anyone can create their own leverage in any lending market, let's see how it can be done:
+Любой может создать собственное кредитное плечо на любом кредитном рынке. Давайте посмотрим, как это можно сделать:
 
-![Leverage Looping](../images/lending/leverage_simple.svg#only-light){: .centered }
-![Leverage Looping](../images/lending/leverage_simple.svg#only-dark){: .centered }
+![Циклическое Кредитное Плечо](../images/lending/leverage_simple.svg#only-light){: .centered }
+![Циклическое Кредитное Плечо](../images/lending/leverage_simple.svg#only-dark){: .centered }
 
-In the above example Alice can create her own leverage by simply continually depositing her WETH, borrowing crvUSD, swapping the borrowed crvUSD back to WETH, and then depositing the new WETH, and borrowing more crvUSD.  This process can be repeated as much as desired, but each time the user will loop less and less as the loan LTV is always less than 100%.
+В приведенном выше примере Алиса может создать собственное кредитное плечо, просто постоянно депонируя свои WETH, заимствуя crvUSD, обменивать заимствованный crvUSD обратно на WETH через 1inch, а затем снова депонировать новые WETH и заимствовать больше crvUSD. Этот процесс можно повторять столько, сколько необходимо, но каждый раз пользователь будет заимствовать все меньше и меньше, поскольку соотношение займа к залогу (LTV) всегда меньше 100%.
 
-If 1 WETH is worth 3,000 crvUSD and the user has borrowed 6,000 crvUSD then that is called 2x leverage.
+Если 1 WETH стоит 3,000 crvUSD, и пользователь заимствует 6,000 crvUSD, это называется кредитным плечом 2x.
 
-## **Built-in Leverage**
+# **Встроенное Кредитное Плечо (Built-in Leverage)** {#built-in-leverage}
 
-Some Curve Lending markets allow leverage without doing the looping strategy mentioned above.  This built-in leverage allows the user to achieve their desired leverage using a single transaction.  Only some lending markets have this functionality, below is a image of the lending UI which shows the WBTC market.  This market allows a leverage of up to 11x.  
+Некоторые кредитные рынки Curve Lending позволяют использовать кредитное плечо без применения стратегии циклического кредитного плеча, упомянутой выше. Это встроенное кредитное плечо позволяет пользователю достичь желаемого уровня кредитного плеча с помощью одной транзакции. Только некоторые кредитные рынки имеют эту функциональность. Ниже приведено изображение интерфейса кредитования, которое показывает рынок WBTC. Этот рынок позволяет использовать кредитное плечо до 11x.
 
-![UI Leverage](../images/ui/leverage.png){: .centered }
+![Интерфейс Кредитного Плеча](../images/ui/leverage.png){: .centered }
 
-Built-in leverage works and can be used in the following way:
+Встроенное кредитное плечо работает и может использоваться следующим образом:
 
-![UI Leverage](../images/lending/leverage.svg){: .centered }
+![Встроенное Кредитное Плечо](../images/lending/leverage.svg){: .centered }
 
-### **Depositing a combination of assets**
+### **Депонирование Комбинации Активов** {#depositing-a-combination-of-assets}
 
-Instead of depositing only WETH, Curve Lending also lets Alice deposit crvUSD and WETH together.  If Alice chooses to do this, then any crvUSD she deposits will be added to the borrowed crvUSD and converted to WETH through 1inch before it's all deposited into the lending market, let's look at that quickly below.
+Вместо депонирования только WETH, Curve Lending также позволяет Алисе депонировать crvUSD и WETH вместе. Если Алиса решает сделать это, любой crvUSD, который она депонирует, будет добавлен к заимствованному crvUSD и конвертирован в WETH через 1inch, прежде чем все они будут депонированы на кредитный рынок. Давайте быстро посмотрим на это ниже.
 
-![Leverage with a combination of assets](../images/lending/add_both_leverage.svg){: .centered }
+![Кредитное Плечо с Комбинацией Активов](../images/lending/add_both_leverage.svg){: .centered }
 
-*Note: as Alice's total collateral is still worth 3,000 crvUSD (1,500 crvUSD + 0.5 WETH), with 5x leverage she still borrows 12,000 crvUSD (4x her deposited collateral).  Also, the repayments transaction and profit made in this instance work exactly the same as shown in the other image above as all the collateral is converted to WETH even though she deposited WETH and crvUSD together.*
+*Примечание: поскольку общий залог Алисы все еще стоит 3,000 crvUSD (1,500 crvUSD + 0.5 WETH), с кредитным плечом 5x она все еще заимствует 12,000 crvUSD (4x от ее депонированного залога). Также транзакция погашения и полученная прибыль в этом случае работают точно так же, как показано на другом изображении выше, поскольку весь залог конвертируется в WETH, несмотря на то, что она депонировала WETH и crvUSD вместе.*
+
+---
+

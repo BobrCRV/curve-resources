@@ -1,146 +1,135 @@
 <h1>Curve Lending: FAQ</h1>
 
 
-## **General**
+## **Общие Вопросы** {#general}
 
-### What's the difference between minting crvUSD and lending markets?
+### В чем разница между рынками чеканки crvUSD и кредитными рынками Curve Lending?
 
-*Lending markets work very similarly to the markets for minting crvUSD. Here are the major differences:*
+*Кредитные рынки работают очень похоже на рынки чеканки crvUSD. Вот основные отличия:*
 
-- Lending markets are permissionless; **any assets in combination with crvUSD can be used**. This means users can borrow against tokens like CRV, LRT's, etc. You name it. The only requirement is a **proper oracle[^1]**. Although, before creating a lending market, proper parameters should be simulated.
-- The **interest rate of lending markets solely depends on the utilization of the supplied assets**, unlike for minting markets which depend on various factors such as crvUSD price, pegkeeper debt, and other parameters.
+- Кредитные рынки являются permissionless; **любые активы в комбинации с crvUSD могут быть использованы без чьего либо разрешения**. Это означает, что пользователи могут брать займы под залог таких токенов, как CRV, LRT и других. Единственное требование — **правильный оракул[^1]**. Хотя, перед созданием кредитного рынка необходимо провести симуляцию правильных параметров.
+- **Процентная ставка на кредитных рынках зависит исключительно от утилизации предоставленных активов**, в отличие от рынков чеканки, где ставки зависят от различных факторов, таких как цена crvUSD, долг pegkeeper и другие параметры.
 
-[^1]: New Curve pools such as stableswap-ng, twocrypto-ng, or tricrypto-ng provide a suitable oracle.
+[^1]: Новые Curve пулы, такие как stableswap-ng, twocrypto-ng или tricrypto-ng, предоставляют подходящий оракул.
 
+### Сколько можно занять под залог (LTV)?
 
-### How much can you borrow against your collateral (LTV)?
+Максимальная сумма, которую можно занять (LTV), зависит от параметра `A` и выбранного количества полос (`N`) при создании рынка. Чем больше количество полос, тем выше LTV.
 
-The maximum borrowable amount (LTV) is dependent on the parameter `A` and number of bands (`N`) chosen when creating a market. The more bands used, the higher the LTV.
+### Чем процесс ликвидации LLAMMA отличается от других стейблкоинов, основанных на займах?
 
+crvUSD использует инновационный механизм снижения риска ликвидаций. Вместо мгновенного запуска ликвидации при достижении определенной цены, залог пользователя конвертируется в стейблкионы по плавному диапазону цен.
 
-### How does the LLAMMA liquidation process differ from other debt-based stablecoins?
+Симуляции показывают, что большинство падений цен приведет к потере только нескольких процентных пунктов стоимости залога, вместо мгновенной и полной потери, реализуемой в процессе ликвидации, характерной для большинства долговых стейблкоинов.
 
-crvUSD uses an innovative mechanism to reduce the risk of liquidations. Instead of instantly triggering a liquidation at a specific price, a user’s collateral is converted into stablecoins across a smooth range of prices.
+### Какие токены можно использовать на кредитных рынках? Как создать кредитный рынок?
 
-Simulations suggest most price drops would result in the loss of just a few percentage points worth of collateral value, instead of the instant and total loss implemented by the liquidation process common to most debt-based stablecoins.
+Curve lending полностью permissionless. Каждый может создавать рынки. Единственное требование — crvUSD должен быть либо заимствуемым, либо залоговым токеном.
+Хотя создание рынка полностью разрешено, некоторые важные параметры необходимо симулировать перед развертыванием.
 
+### Что такое 'loan discount' и какое влияние она оказывает?
 
-### What tokens can be used in lending markets? How to create a lending market?
+'Loan discount' (Скидка на займ) — это процентное снижение стоимости залога при определении максимальной суммы займа. Более высокая скидка на займ приводит к уменьшению предельной суммы займа, создавая тем самым дополнительный запас прочности для кредиторов (поставщиков ликвидности) на случай падения стоимости залога.
 
-Curve lending is totally permissionless. Everyone can create markets. The only requirement is, that crvUSD is either the borrowable or collateral token.
-Although creating a market is totally permissionless, some important parameters need to be simulated ahead of deployment.
+Максимальная сумма, которую можно занять, также зависит от других факторов, таких как рыночные условия и волатильность актива. Подробнее об этих факторах и их влиянии на возможность заимствования можно узнать в технической документации по ссылке: [https://docs.curve.fi/crvUSD/amm/](https://docs.curve.fi/crvUSD/amm/).
 
+### В чем разница между самоликвидацией (self-liquidating) и погашением (repaying)?
 
-### What is a 'loan discount' and what impact does it have?
+Невозможно провести частичную самоликвидацию займа — самоликвидация закрывает весь займ. Однако можно погасить часть займа, например, 20% от долга, что улучшает здоровье займа. Если погашение происходит вне состояния мягкой ликвидации, ваши полосы могут сместиться.
 
-A 'loan discount' is a percentage applied to reduce the value of collateral for determining the maximum borrowable amount. A higher loan discount results in a lower borrowing limit, acting as a safety margin for lenders against collateral value declines. 
+Погашение и самостоятельная ликвидация работают немного по-разному. Рассмотрим это на примере кредитного рынка crvUSD с использованием WETH в качестве залога:
 
-The maximum amount that can be borrowed is also influenced by other factors, such as market conditions and asset volatility. For more details on these factors and their impact on borrowing, see the technical documentation at https://docs.curve.fi/crvUSD/amm/.
-
-
-### What is the difference between self-liquidating and repaying?
-
-You cannot self-liquidate a partial amount of a loan, self-liquidating closes the loan, but you can repay a partial amount, e.g., 20% of the debt, this increases the health of the loan.  If the repayment takes you out of soft-liquidation, your bands may move.
-
-When repaying and self-liquidating the whole loan, repaying and self liquidating work slightly differently, let's show this using a market lending crvUSD using WETH as collateral:
-
-- For self-liquidating, if some WETH has been converted to crvUSD during soft-liquidation, then the user must transfer the difference between the crvUSD held as collateral and the debt.
-- When repaying with crvUSD, you must transfer enough crvUSD to cover the debt, and you receive all the collateral in return.  However in new markets (markets with leverage), it's possible to repay with collateral.  In this case, the user does not need to send anything, all collateral is transferred to crvUSD, and the user receives back any crvUSD left after debt is repaid.
+- При самоликвидации, если часть WETH была конвертирована в crvUSD во время мягкой ликвидации, пользователь должен перевести разницу между crvUSD, хранящимся как залог, и долгом.
+- При погашении с crvUSD, необходимо перевести достаточное количество crvUSD для покрытия долга, и все залоговые активы возвращаются. Однако на новых рынках (рынках с кредитным плечом) возможно погашение из токенов залога (repay from collateral). В этом случае пользователю не нужно ничего отправлять: весь залог конвертируется в crvUSD для погашения долга, а оставшаяся разница возвращается пользователю в crvUSD.
 
 ---
+    
+    
+## **Процесс Ликвидации** {#liquidation-process}
 
 
-## **Liquidation Process**
+### Что такое моя цена ликвидации? {#what-is-my-liquidation-price}
 
+В начале процесса займа crvUSD залог депонируется и равномерно распределяется по диапазону цен, а не по одной конкретной цене ликвидации. Если цена опустится в этот диапазон, залог начнет конвертироваться в crvUSD. Этот процесс помогает поддерживать здоровье займа и, при большинстве условий, предотвращает ликвидацию. В результате нет одной конкретной цены ликвидации.
+        
+        
+### Когда я вношу залог, как мне настроить и выбрать диапазон цен для моего залога? {#when-depositing-collateral-how-do-i-adjust-and-select-my-collateral-deposit-price-range}
+        
+Диапазон цен можно при необходимости настроить и кастомизировать в процессе первоначального создания займа. В пользовательском интерфейсе переключатель «Advanced off/on» предоставляет дополнительную информацию о этом диапазоне. Также доступна кнопка «Adjust», позволяющая пользователям точно настроить предпочитаемый диапазон цен.
+        
+        
+### Что происходит, когда цена залога опускается в выбранный мной диапазон? (мягкая ликвидация) {#what-happens-when-collateral-price-drops-into-my-selected-range-soft-liquidation}
+        
+Каждый рынок crvUSD связан с автоматизированным маркет-мейкером (AMM). Если цена залога падает в выбранный диапазон, этот залог становится торгуемым в AMM. В этот момент трейдеры имеют возможность приобрести залог, заменяя его на токен займа. Следовательно, займ обеспечивается монетами займа, что способствует поддержанию здоровья.
+        
+        
+### Что происходит, если цена залога восстанавливается? (де-ликвидация) {#what-happens-if-the-collateral-price-recovers-de-liquidation}
+        
+По мере роста цены залога, в режиме мягкой ликвидации, описанный выше процесс происходит в обратную сторону. Позиция проходит через торговлю в AMM, переходя от crvUSD обратно к исходной форме залога. Обычно из-за торговых издержек AMM, первоначальная стоимость залога уменьшается на небольшой процент, как только цена залога превышает верхний предел заранее определенного диапазона ликвидации.
+        
+        
+### В каких обстоятельствах меня могут ликвидировать? (жёсткая ликвидация) {#under-what-circumstances-can-i-be-liquidated-hard-liquidation}
+        
+Если здоровье займа падает ниже 0%, он становится доступным для полной ликвидации (жёсткая ликвидация). В этом случае залог продается, долг покрывается, и займ закрывается. Хотя механизм конвертации залога в crvUSD в AMM разработан для защиты от ликвидаций, он может не справиться с резкими колебаниями цен. Заемщикам рекомендуется поддерживать здоровье своего займа, особенно когда цены падают в их диапазон ликвидации.
+        
+        
+### Как поддерживать здоровье займа, если цена залога опускается в мой диапазон? {#how-do-i-maintain-my-loan-health-if-collateral-price-drops-into-my-range}
+        
+Когда цена залога падает в диапазон ликвидации, добавление нового залога для защиты здоровья займа невозможно. В этом диапазоне здоровье займа можно улучшить только путем погашения crvUSD. Даже минимальные погашения crvUSD имеют значение и могут эффективно предотвратить жёсткую ликвидацию.
 
-### What is my liquidation price?
-
-When creating a loan, collateral is deposited and equally distributed over a range of prices, not just a single liquidation price. Should the price fall within this range, the collateral begins its conversion into crvUSD. This process aids in maintaining the loan's health and, under most conditions, wards off liquidation. As a result, there isn't one specific liquidation price.
-
-
-### When depositing collateral, how do I adjust and select my collateral deposit price range?
-
-The price range can be optionally adjusted and customized during the initial loan creation process. In the UI, the **`"Advanced Mode"`** toggle provides further insights into this range. 
-
-
-### What happens when the collateral price drops into my selected range? (soft-liquidation)
-
-Each lending market is linked to a LLAMMA, which is a special AMM. If the collateral price falls into the selected range, this collateral becomes tradable in the AMM. At this juncture, traders have the opportunity to acquire the collateral, substituting it with crvUSD. Consequently, the loan becomes collateralized by stablecoins, known for their more reliable value retention, contributing to the sustained health of the loan.
-
-
-### What happens if the collateral price recovers? (de-liquidation)
-
-As the collateral price increases, the aforementioned process reverses. The position undergoes trading through the AMM, transitioning from crvUSD back to the original form of collateral. Owing to AMM trading fees, it's typical for a slight percentage of the original collateral value to be diminished once the collateral price surpasses the upper limit of the predetermined liquidation range.
-
-
-### Under what circumstances can I be liquidated? (hard-liquidation)
-
-Should a loan's health drop below 0%, it becomes eligible for liquidation. In this scenario, the collateral is sold off, and the position closes. Although the crvUSD collateral conversion mechanism within the AMM is designed to protect against liquidations, it might not keep up with severe price fluctuations. It is advisable for borrowers to maintain their loan health, especially when prices fall within the selected liquidation range.
-
-
-### How do I maintain my loan health if collateral price drops into my range?
-
-When the collateral price falls into the liquidation range, adding new collateral to protect loan health is not permitted. Within this liquidation range, loan health can only be improved by repaying debt. Even minimal debt repayments can be effective in preventing liquidation while the collateral price resides within this range.
-
-
-### What happens to the collateral in the event of hard liquidation?
-
-In the event of a hard liquidation, all available collateral is sold off by the AMM system, the debt is covered, and the loan is closed.
-
-
-### What is a ‘liquidation discount’ and how is the 'liquidation discount' calculated during a liquidation?
-
-The 'liquidation discount' is calculated based on the collateral's market value and is designed to incentivize liquidators to participate in the liquidation process. This factor is used to effectively discount the collateral valuation when calculating the health for liquidation purposes.
-
-In other protocols, this may be referred to as a “liquidation threshold” and is often hard-coded instead of calculated dynamically.
+        
+### Что происходит с залогом в случае жёсткой ликвидации? {#what-happens-to-the-collateral-in-the-event-of-hard-liquidation}
+        
+В случае жёсткой ликвидации весь доступный залог выкупается ликвидатором, таким образом долг покрывается, и займ закрывается.
+        
+        
+### Что такое «скидка на ликвидацию» и как она рассчитывается во время ликвидации? {#what-is-a-liquidation-discount-and-how-is-the-liquidation-discount-calculated-during-a-liquidation}
+        
+«Скидка на ликвидацию» рассчитывается на основе рыночной стоимости залога и предназначена для стимулирования ликвидаторов к участию в процессе ликвидации. Этот фактор используется для эффективного снижения оценки залога при расчетах здоровья для целей ликвидации.
+        
+В других протоколах это может называться «порог ликвидации» и часто жестко кодируется вместо динамического расчета.
 
 
 ---
 
-
-## **Interest Rate**
-
-### What is the borrow rate?
-
-The borrow rate is the variable interest rate charged on the debt of the loan. The borrow rate is solely determined by the [utilization](./overview.md#utilization-lend-apy-and-borrow-apy) of the market.
+## **Процентная Ставка** {#interest-rate}
 
 
-### How is the borrow rate calculated?
+### Что такое ставка заимствования?
 
-For the calculation of the borrow rate, see [here](./overview.md#borrow-rate).
+Ставка заимствования — это переменная процентная ставка, взимаемая путем увеличения долга займа. 
 
+### Как рассчитывается ставка заимствования?
 
-### What is the lend rate?
+Ставки заимствования рассчитываются по-разному в зависимости от того, имеет ли залоговый актив рынок чеканки crvUSD, подробнее смотрите [здесь](./overview.md#borrow-rate).
 
-The lend rate is the variable interest rate a lender receives in exchange for lending out their assets to borrowers.
+### Что такое ставка кредитования?
 
+Ставка кредитования — это переменная процентная ставка, которую кредитор получает в обмен на предоставление своих активов заемщикам.
 
-### How is the lend rate calculated?
+### Как рассчитывается ставка кредитования?
 
-For the calculation of the lend rate, see [here](./overview.md#lend-rate).
-
+Расчет ставки кредитования смотрите [здесь](./overview.md#lend-rate).
 
 ---
 
-
-## **Safety and Risks**
-
-
-### What are the risks of using crvUSD
-
-A risk disclaimer can be found [here](../risks-security/risks/crvusd.md)
+## **Безопасность и Риски** {#safety-and-risks}
 
 
-### How can I best manage my risks when borrowing assets?
+### Каковы риски использования crvUSD?
 
-Best risk management practices include maintaining a safe collateralization ratio, understanding the potential for liquidation, and keeping an eye on market conditions.
+Отказ от ответственности о рисках можно найти [здесь](../risks-security/risks/crvusd.md).
+
+### Как лучше всего управлять рисками при заимствовании активов?
+
+Лучшие практики управления рисками включают поддержание безопасного соотношения залога, понимание потенциальных ликвидаций и отслеживание рыночных условий.
+
+### Была ли система кредитования проверена аудитом?
+
+Да. Все публичные аудиты можно найти [здесь](https://docs.curve.fi/references/audits/).
+
+### Могу ли я увидеть код?
+
+Код доступен публично на [**Curve Github**](https://github.com/curvefi/curve-stablecoin).
 
 
-### Has the lending system been audited?
-
-Yes. All public audits can be found [here](https://docs.curve.fi/references/audits/).
-
-
-### Can I see the code?
-
-The code is publicly available on the [**Curve Github**](https://github.com/curvefi/curve-stablecoin).

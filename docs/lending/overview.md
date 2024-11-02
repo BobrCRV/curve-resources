@@ -1,261 +1,251 @@
-<h1>Curve Lending Overview</h1>
+<h1>Обзор Кредитования на Curve</h1>
 
-Curve Lending allows users to borrow crvUSD against any collateral token or to borrow any token against crvUSD, while benefiting from the **soft-liquidation mechanism** provided by [LLAMMA](https://docs.curve.fi/crvUSD/amm/).  This innovative approach to overcollateralized loans enhances risk management and user experience for borrowers.  Additionally, Curve Lending allows users to **generate interest through lending (supplying) their assets** to be borrowed by others.
+Curve Lending позволяет пользователям брать взаймы crvUSD под любой залоговый токен или брать взаймы любой токен под crvUSD, при этом пользуясь **механизмом мягкой ликвидации**, предоставляемым [LLAMMA](https://docs.curve.fi/crvUSD/amm/). Этот инновационный подход к обеспеченным займам повышает управление рисками и улучшает пользовательский опыт для заемщиков. Кроме того, Curve Lending позволяет пользователям **генерировать доход через предоставление (поставку) своих активов**, которые могут быть заимствованы другими.
 
-!!!warning "Collateral in Lending Markets *DO NOT* back crvUSD"
-    The collateral used in Curve Lending markets does not back crvUSD. **All crvUSD within Curve Lending is supplied by users**.  Conversely, minting new crvUSD requires high-quality crypto collateral approved by the DAO.  The **crvUSD minting system is separate from the lending markets**. *[See here for more differences between Curve Lending and minting crvUSD](./faq.md#whats-the-difference-between-minting-crvusd-and-lending-markets)*.
+!!!warning "Залог (Collateral) в кредитных рынках *НЕ* обеспечивает crvUSD"
+    Залог, используемый в кредитных рынках Curve Lending, не обеспечивает crvUSD. **Весь crvUSD внутри Curve Lending предоставляется пользователями**. В свою очередь, чеканка нового crvUSD требует высококачественного криптозалога, одобренного DAO. **Система чеканки crvUSD отделена от кредитных рынков**. *[Подробнее о различиях между кредитованием на Curve и чеканкой crvUSD можно узнать здесь](./faq.md#whats-the-difference-between-minting-crvusd-and-lending-markets)*.
 
-!!!danger "Curve Lending Risk Disclaimer"
-    Full risk disclaimer on using Curve Lending can be found [here](../risks-security/risks/lending.md)
-
+!!!danger "Отказ от ответственности по рискам кредитования на Curve"
+    Полный отказ от ответственности по использованию Curve Lending можно найти [здесь](../risks-security/risks/lending.md).
 
 <div class="grid cards" markdown>
 
--   :fontawesome-solid-money-bill-1: **Borrowers**
+-   :fontawesome-solid-money-bill-1: **Заемщики**
 
     ---
 
-    Borrowers are the ones **borrowing assets**. To do so, they create a loan and put up some collateral. In exchange for borrowing, they pay a certain [Borrow Interest Rate (Borrow APY)](#borrow-rate).
+    Заемщики — это те, кто **берет взаймы активы**. Для этого они создают займ и предоставляют залог. В обмен на заем они платят определенную [Ставку заимствования (Borrow APY)](#borrow-rate).
 
     ---
 
-    [:octicons-arrow-right-24: How to Borrow](./how-to-borrow.md)
+    [:octicons-arrow-right-24: Как взять займ](./how-to-borrow.md)
 
--   :material-bank: **Lenders**
-
-    ---
-
-    Lenders **supply their assets so they can be loaned to borrowers**. To do so, they deposit their assets into a [Vault](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/). In exchange for supplying their assets, they are awarded a [Lending Interest Rate](#lend-rate).
+-   :material-bank: **Кредиторы**
 
     ---
 
-    [:octicons-arrow-right-24: How to Supply (Lend)](./how-to-supply.md)
+    Кредиторы **предоставляют свои активы, чтобы они могли быть заимствованы заемщиками**. Для этого они депонируют свои активы в [Хранилище (Vault)](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/). В обмен на предоставление своих активов им начисляется [Ставка по кредитованию (Lend APY)](#lend-rate).
+
+    ---
+
+    [:octicons-arrow-right-24: Как предоставить (предоставить займ)](./how-to-supply.md)
 
 </div>
 
 ---
 
-# **Overview**
+# **Обзор** {#overview}
 
+*Давайте рассмотрим один рынок, чтобы понять основы его работы:*
 
-*Let's take a look at a single market to see the basics of how it works:*
+![Простая иллюстрация рынка](../images/lending/single_market.svg#only-light)
+![Простая иллюстрация рынка](../images/lending/single_market_dark.svg#only-dark)
 
-![Simple market illustration](../images/lending/single_market.svg#only-light)
-![Simple market illustration](../images/lending/single_market_dark.svg#only-dark)
+*Разберем различные сущности и их роли на этом рынке:*
 
-*Let's breakdown the different entities and their roles in this market:*
-
-| Entity | | Role |
+| Сущность | | Роль |
 |:--:|:--|:--|
-| ![Business Llama](../images/lending/llama_head.svg){: style="height:50px"} | **Business Llama** | Business Llama represents the lending market and smart contracts in the system.  This llama uses CRV as collateral, and lends out crvUSD.  Business Llama **charges interest on crvUSD users borrow (Borrow APY)**, and **pays interest to lenders who supply crvUSD (Lend APY)**. |
-| ![bob](../images/lending/bob_head.svg){: style="height:50px"} | **Bob** | Bob always thinks the market will crash, so he **supplies his crvUSD** and Business Llama **lends it out and pays Bob interest (Lend APY)**. |
-| ![alice](../images/lending/alice_head.svg){: style="height:50px"} | **Alice** | Alice wants to go trade meme coins but doesn't want to sell her CRV, so she **deposits CRV and uses it as collateral to borrow crvUSD**.  She feels safe knowing she's better protected here with LLAMMA and soft-liquidations than other lending markets.  She is **charged the Borrow APY on her debt** while the loan is open.  |
-| ![charlie](../images/lending/charlie_head.svg){: style="height:50px"} ![daisy](../images/lending/daisy_head.svg){: style="height:50px"} | **Charlie** & **Daisy** | Charlie and Daisy are just talking to the wrong Business Llama (lending market).  All Curve Lending Markets are one-way, and isolated. They need to go and find the Business Llama that lends out CRV with crvUSD collateral. (Business llama with the red background [here](#markets)) |
-
-
----
-
-
-# **Markets**
-
-There are many Curve Lending markets listed on the [main UI](https://lend.curve.fi/#/ethereum/markets).  Each market uses a single type of collateral, and make loans in a single asset (**all markets are one-way**, and **all markets are isolated**).  Some of the markets available are pictured below (we've used llamas in suits to illustrate different markets), but there are many more available, and **new markets can be permissionlessly deployed** by anyone, at anytime (as long as the asset has a suitable [price oracle](https://docs.curve.fi/stableswap-exchange/stableswap-ng/pools/oracles/)).  
-
-![Curve lending llamas](../images/lending/llamma_markets.svg)
-
-*Note: All markets are paired with crvUSD. crvUSD must be either the collateral or the coin being borrowed.*
+| ![Business Llama](../images/lending/llama_head.svg){: style="height:50px"} | **Business Llama** | Business Llama представляет кредитный рынок и смарт-контракты в системе. Эта ламма использует CRV в качестве залога и предоставляет crvUSD в займ. Business Llama **начисляет проценты за заем crvUSD пользователям (Borrow APY)** и **выплачивает проценты кредиторам, предоставляющим crvUSD (Lend APY)**. |
+| ![bob](../images/lending/bob_head.svg){: style="height:50px"} | **Боб** | Боб всегда считает, что рынок упадет, поэтому он **предоставляет свои crvUSD**, и Business Llama **предоставляет их в займ и выплачивает Бобу проценты (Lend APY)**. |
+| ![alice](../images/lending/alice_head.svg){: style="height:50px"} | **Алиса** | Алиса хочет торговать мем-монетами, но не хочет продавать свой CRV, поэтому она **депонирует CRV и использует его в качестве залога для заимствования crvUSD**. Она чувствует себя в безопасности, зная, что она лучше защищена здесь с LLAMMA и мягкой ликвидацией, чем на других кредитных рынках. На нее **начисляется Borrow APY за ее долг**, пока займ открыт. |
+| ![charlie](../images/lending/charlie_head.svg){: style="height:50px"} ![daisy](../images/lending/daisy_head.svg){: style="height:50px"} | **Чарли** & **Дейзи** | Чарли и Дейзи просто обращаются к неправильной Business Llama (кредитному рынку). Все кредитные рынки Curve Lending однонаправленные и изолированные. Им нужно найти другую Business Llama, которая предоставляет CRV под залог в crvUSD. (Business Llama с красным фоном [здесь](#markets)) |
 
 ---
 
+# **Рынки** {#markets}
 
-# **Supplying (Lending)**
+Существует множество кредитных рынков Curve Lending, перечисленных на [основном интерфейсе](https://lend.curve.fi/#/ethereum/markets). Каждый рынок использует один тип залога и предоставляет займы в одном активе (**все рынки однонаправленные** и **все рынки изолированные**). Некоторые из доступных рынков изображены ниже (мы использовали ламм в костюмах для иллюстрации различных рынков), но доступно гораздо больше, и **новые рынки могут быть развернуты без разрешения** любым человеком в любое время (при условии, что актив имеет подходящий [оракул цен](https://docs.curve.fi/stableswap-exchange/stableswap-ng/pools/oracles/)).  
 
-Earning interest for supplying assets to Curve Lending is simple.
+![Кредитные рынки Curve](../images/lending/llamma_markets.svg)
 
-*Let's have a look at an example where Bob lends his crvUSD for a year and how much he earns:*
-
-![Lending Interest](../images/lending/lending_market_simple.svg#only-light)
-![Lending Interest](../images/lending/lending_market_simple_dark.svg#only-dark)
-
-So after 1 year **Bob earned 20 crvUSD** and **$20 worth of CRV**, this equates to an **APR of 40%** over that year.
-
+*Примечание: Все рынки связаны с crvUSD. crvUSD должен быть либо залогом, либо заимствуемым монетой.*
 
 ---
 
-## **Depositing and Withdrawing**
+# **Предоставление (Кредитование)** {#supplying-lending}
 
-After depositing to a lending market your assets are added to the pool of **available supply**.
+Зарабатывать проценты за предоставление активов на Curve Lending просто.
 
-You can withdraw a supplied asset provided there are sufficient available (un-borrowed) assets in the market. For example in the below image Bob could have withdrawn up to 1200 crvUSD from the market, but he only withdrew 300 crvUSD.  
+*Давайте рассмотрим пример, где Боб предоставляет свои crvUSD на год и сколько он зарабатывает:*
 
-![Withdrawing Supply](../images/lending/supply_withdrawal.svg#only-light){: .centered }
-![Withdrawing Supply](../images/lending/supply_withdrawal_dark.svg#only-dark){: .centered }
+![Процент по кредитованию](../images/lending/lending_market_simple.svg#only-light)
+![Процент по кредитованию](../images/lending/lending_market_simple_dark.svg#only-dark)
 
-If there are insufficient available assets for a full withdrawal, you can withdraw the maximum amount currently available. The high utilization rate will cause Borrow APY and Lend APYs to increase, incentivizing borrowers to repay their loans, and more lenders to supply. As available supply increases you can withdraw your remaining balance over time.
+Итак, через 1 год **Боб заработал 20 crvUSD** и **CRV на сумму $20**, что эквивалентно **APR в 40%** за этот год.
 
-!!!warning "Bad Debt"
-    [Bad debt](../crvusd/loan-concepts.md#bad-debt) is rare, but if it exists within a lending market, it **may be impossible to withdraw supplied assets**, as it locks supplied assets as "borrowed" indefinitely.  It is recommended not to supply assets to markets with large amounts of bad debt.  Use [this notebook](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/saint-rat/baddebt.ipynb) or see the code on [github here](https://github.com/saint-rat/curve-notebooks/blob/main/bad_debt.ipynb) to find which markets have bad debt.  
+---
+
+## **Депонирование и Вывод** {#depositing-and-withdrawing}
+
+После депонирования на кредитный рынок ваши активы добавляются в пул **доступных средств (available supply)**.
+
+Вы можете вывести предоставленный актив при условии, что на рынке достаточно доступных (незаимствованных) активов. Например, на изображении ниже Боб мог бы вывести до 1200 crvUSD с рынка, но он вывел только 300 crvUSD.  
+
+![Вывод средств](../images/lending/supply_withdrawal.svg#only-light){: .centered }
+![Вывод средств](../images/lending/supply_withdrawal_dark.svg#only-dark){: .centered }
+
+Если на рынке недостаточно доступных активов для полного вывода, вы можете вывести максимально доступную сумму в данный момент. Высокий уровень утилизации приведет к увеличению Borrow APY и Lend APY (годовая процентна ставка заимствования и предложения), стимулируя заемщиков погашать свои займы и больше кредиторов предоставлять средства. По мере увеличения доступных средств вы можете постепенно выводить свой оставшийся баланс со временем.
+
+!!!warning "Плохой долг"
+    [Плохой долг](../crvusd/loan-concepts.md#bad-debt) редок, но если он существует на кредитном рынке, то **может быть невозможно вывести предоставленные активы**, так как они блокируются как "заимствованные" навсегда. Рекомендуется не предоставлять активы на рынках с большим количеством плохого долга. Используйте [этот Notebook](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/saint-rat/baddebt.ipynb) или смотрите код на [GitHub здесь](https://github.com/saint-rat/curve-notebooks/blob/main/bad_debt.ipynb), чтобы узнать, на каких рынках имеется плохой долг.  
     
-    *At the time of writing (May, 2024) no bad debt exists on Ethereum markets. On Arbitrum, two markets have bad debt - CRV/crvUSD: 1700 crvUSD bad debt, FXN/crvUSD: 39,000 crvUSD bad debt.*
+    *На момент написания (май 2024 года) плохой долг не существует на рынках Ethereum. На Arbitrum два рынка имеют плохой долг - CRV/crvUSD: 1700 crvUSD плохого долга, FXN/crvUSD: 39 000 crvUSD плохого долга.*
 
 ---
 
-## **Supply Vault Share Tokens**
+## **Токены Доли Хранилища (Supply Vault Share Tokens)** {#supply-vault-share-tokens}
 
-By Supplying assets on Curve Lending, you are given **Supply Vault Shares** ([more info here](https://docs.curve.fi/lending/contracts/vault/)).  These are tokens representing your **share of the total supply**.  The **value of these shares increases by Lend APY**.
-
-When you withdraw your supplied assets, the Vault Shares you had previously deposited are returned to the Lending Market. At this point, you receive the current value of the Vault Shares you are returning. This is how your interest on the supplied assets accrues. **By withdrawing your assets, you effectively claim the interest that has been earned** on your initial deposit during the time it was being lent out in the market.
-
----
-
-## **Rewards APR**
-
-Rewards APR is a combination of CRV emission rewards and any other incentives provided to suppliers. **Rewards accrue altogether and can be claimed at any time.**
-
-!!!warning "Rewards APR is *ONLY* given to Suppliers *STAKED* in the Liquidity Gauge"
-    You ***MUST*** stake your Supply Vault Shares in the Lending Market's Liquidity Gauge to receive Reward APR.  
-    **You will not get any Rewards APR if you** ***DO NOT*** **stake**.  See [here](./how-to-supply.md#staking-assets)
-
-*For a market to have CRV rewards the following conditions must be met:*
-
-1. The Curve DAO must vote to add a [Liquidity Gauge](https://resources.curve.fi/reward-gauges/understanding-gauges/) to the `GaugeController` for that specific lending market
-2. The liquidity gauge must receive a positive [gauge weight](../reward-gauges/gauge-weights.md) through votes from veCRV holders. This will result in CRV being emitted to the liquidity gauge.
-
-Due to the boosting mechanism of liquidity gauges, the Reward APR will be displayed as a range based on the user's boost factor. Learn more about boosting [here](../reward-gauges/boosting-your-crv-rewards.md).
+Предоставляя активы на Curve Lending, вы получаете **Токены Доли Хранилища (Supply Vault Shares)** ([подробнее здесь](https://docs.curve.fi/lending/contracts/vault/)). Это токены, представляющие вашу **долю от общего пула поставок**. **Стоимость этих долей увеличивается за счет Lend APY**.
 
 
-Other incentives can be added by anyone, i.e., if a project wants to incentivize their token being used as collateral they may add incentives to a Lending Market. See [here](../reward-gauges/permissionless-rewards.md) for more details and how to add them.
-
+В момент вывода предоставленных ранее активов вы получаете текущую стоимость возвращаемых токенов Доли Хранилища с учетом накопленных процентов. **Вывод активов фактически позволяет вам также получить заработанные проценты** на ваш первоначальный депозит за время его предоставления в займ на рынке (отдельный вывод не требуется).
 
 ---
 
-# **Borrowing**
+## **APR Вознаграждений (Rewards APR)** {#rewards-apy}
 
-When borrowing from Curve Lending Markets, you are taking an **overcollateralized loan** against deposited assets (e.g., borrowing crvUSD with CRV collateral). In exchange, you are **charged the Borrow APY on the borrowed assets**.
+Rewards APR представляет собой комбинацию вознаграждений за эмиссию CRV и любых других стимулов, предоставляемых поставщикам. **Вознаграждения накапливаются вместе и могут быть востребованы в любое время.**
 
+!!!warning "Rewards APR предоставляется только поставщикам, **застейкавшими (STAKED)** свои Токены Доли Хранилища в Liquidity Gauge (Счетчик Вознаграждений Ликвидности)"
+    Вы ***ДОЛЖНЫ*** заставить свои Токены Доли Хранилища в Liquidity Gauge кредитного рынка, чтобы получать Rewards APR.  
+    **Вы не получите Rewards APR, если вы** ***НЕ*** **заставите их**. См. [здесь](./how-to-supply.md#staking-assets)
 
-Collateral is deposited into each lending market's [LLAMMA](https://docs.curve.fi/crvUSD/amm/) system and split evenly across the chosen number of bands (N).  **Each band represents a small liquidation price range, with an upper and lower limit.  If the oracle price enters one of your bands, [soft-liquidation begins](#soft-liquidation)**.  **Your loan is safe while the oracle price is higher than any of your bands**.  
+*Для того чтобы на рынке были CRV-вознаграждения, должны быть выполнены следующие условия:*
 
-*See the image below for a breakdown of how supplied assets are borrowed, and how collateral is deposited into bands.*
+1. Curve DAO должно проголосовать за добавление [Liquidity Gauge](https://resources.curve.fi/reward-gauges/understanding-gauges/) в `GaugeController` для конкретного кредитного рынка.
+2. Liquidity Gauge должен получить положительный [вес гейджа](../reward-gauges/gauge-weights.md) через голоса держателей veCRV. Это приведет к эмиссии CRV в Liquidity Gauge.
 
-![loan to bands](../images/lending/loan_to_bands.svg#only-light){: .centered }
-![loan to bands](../images/lending/loan_to_bands_dark.svg#only-dark){: .centered }
+Благодаря механизму усиления (boosting) Liquidity Gauge, Rewards APR будет отображаться как диапазон на основе коэффициента усиления пользователя. Узнайте больше об усилении [здесь](../reward-gauges/boosting-your-crv-rewards.md).
 
-By **minimizing the number of bands** (N=4), you can **maximize the amount you borrow** (LTV), just like Charlie. Alice, however, prefers spreading his liquidity, so he chooses 10 bands (N=10) and does not maximize his borrowing. This explains why Charlie's loan is split into bands 3-12, while Alice's is split into bands 1-4. When you borrow, you can choose to split your collateral into **any number of bands from 4 to 50**.
-
-There is no set rule for **whether fewer or more bands are better**. Different numbers of bands are better in different scenarios:
-
-* **More bands** equate to having fewer losses in soft-liquidation, but this also widens your Liquidation Range, potentially extending the duration of soft-liquidation.
-* **Fewer bands** will narrow your Liquidation Range, causing your collateral to be traded more aggressively, but you may remain in the Liquidation Range for a shorter time.
+Другие стимулы могут быть добавлены любым, то есть если проект хочет стимулировать использование своего токена в качестве залога, он может добавить стимулы на кредитный рынок. См. [здесь](../reward-gauges/permissionless-rewards.md) для получения дополнительных деталей и информации о том, как их добавить.
 
 ---
 
-## **Soft-liquidation**
+# **Займ (Borrowing)** {#borrowing}
 
-Soft-liquidation is a mechanism that gradually exchanges collateral (e.g., WETH) for the borrowed asset (e.g., crvUSD) as the collateral's value declines, avoiding the need for a single large liquidation. It also reverses this process if the collateral's value rises. The system sells collateral at a small discount, which increases with market volatility. Users undergoing soft-liquidation experience minor losses over time (in crvUSD minting markets typical losses are <0.1% per day), though this can vary based on loan and market conditions.
+При заимствовании на кредитных рынках Curve Lending вы берете **сверхобеспеченный займ** под залог депонированных активов (например, заимствуя crvUSD под залог CRV). В обмен на это вы **платите Borrow APY за заимствованные активы**.
 
-Soft-liquidation begins if the oracle price of your collateral falls into one of your bands. At this point, your collateral will be linearly traded for your borrowed asset as the price continues to drop through each band.
+Залог депонируется в системе [LLAMMA](https://docs.curve.fi/crvUSD/amm/) каждого кредитного рынка и равномерно распределяется по выбранному количеству полос (N).  **Каждая полоса (band) представляет собой небольшой диапазон цен ликвидации с верхним и нижним пределами. Если цена оракула попадает в одну из ваших полос, начинается [мягкая ликвидация](#soft-liquidation)**.  **Ваш займ защищен, пока цена оракула выше любой из ваших полос (bands)**.  
+    
+*См. изображение ниже для разбивки того, как предоставленные активы заимствуются и как залог депонируется полосы.*
 
-Let's examine what soft-liquidation looks like in a simplified example with a **single band** in an **ETH/crvUSD LLAMMA market**. This example illustrates that if the price declines by 20% within the band, 20% of the ETH is converted to crvUSD. When the price is below the lower bound of the band (<\$990), all the collateral is converted to crvUSD (100% crvUSD, 0% ETH). Conversely, when the price exceeds the upper bound (>\$1000), all collateral remains as ETH (100% ETH, 0% crvUSD).
+![Заем в диапазоны](../images/lending/loan_to_bands.svg#only-light){: .centered }
+![Заем в диапазоны](../images/lending/loan_to_bands_dark.svg#only-dark){: .centered }
 
-![single llamma band](../images/lending/single_llamma_band.svg#only-light){: .centered style="height:250px" }
-![single llamma band](../images/lending/single_llamma_band_dark.svg#only-dark){: .centered style="height:250px" }
+**Минимизируя количество полос (bands)** (N=4), вы можете **максимизировать сумму, которую вы берете взаймы** (LTV), как Чарли. Однако Алиса предпочитает распределять свою ликвидность, поэтому она выбирает 10 полос (N=10) и не максимизирует свое заимствование. Это объясняет, почему займ Чарли разделен на полосы 3-12, а займ Алисы — на полосы 1-4. При заимствовании вы можете выбрать **любое количество полос от 4 до 50**.
 
-The below image represents **multiple bands** through soft-liquidation.  Note the higher bands than the current price are fully converted to crvUSD and the lower bands are still ETH.
-
-![llamma bands](../images/lending/llamma_bands.svg#only-light){: .centered style="height:250px" }
-![llamma bands](../images/lending/llamma_bands_dark.svg#only-dark){: .centered style="height:250px" }
-
-The value of traded assets remains as loan collateral throughout soft-liquidation. For example, if ETH is swapped for crvUSD, the value of that crvUSD is added to the collateral backing the loan. Additionally, **LLAMMA works both ways; if prices increase through your bands, any swapped collateral will be traded back for your initial collateral** (e.g., ETH swapped to crvUSD as the price decreased will be swapped back to ETH as the price increases).
-
-Rebalancing collateral through soft-liquidation is incentivized for arbitrage traders by offering a small discount (when required) to buy or sell through LLAMMA. Trading back and forth your collateral is the reason why your **health factor erodes over time during soft-liquidation**. Higher volatility generally leads to greater losses. However, your losses are partly recouped by the earned trading fees for providing liquidity.
-
-!!!warning "Collateral *CANNOT* be deposited while in soft-liquidation"
-    Collateral **cannot** be deposited during soft-liquidation. **Only debt repayment is allowed**.
+Нет установленного единого правила, **какое количество диапазонов лучше — меньше или больше**. Для разных сценариев подходят разные варианты пдиапазонов полос:
+    
+* **Больше полос** означает меньшие потери при мягкой ликвидации, но также расширяет ваш диапазон ликвидации, потенциально увеличивая длительность мягкой ликвидации.
+* **Меньше полос** сужает ваш диапазон ликвидации, вызывая более агрессивную торговлю вашим залогом, но вы можете находиться в диапазоне ликвидации меньше времени.
 
 ---
 
-## **Health & Hard-Liquidation**
+## **Мягкая Ликвидация** {#soft-liquidation}
 
-**Loan Health** is a measure of debt to collateral value.  As long as health is positive, the position remains open. The health of a loan decreases due to losses in soft-liquidation and when debt increases due to interest paid.
+Мягкая ликвидация — это механизм, который постепенно обменивает залог (например, WETH) на заимствованный актив (например, crvUSD) по мере снижения стоимости залога, избегая необходимости в одной крупной ликвидации. Он также обращает этот процесс вспять, если стоимость залога возрастает. Система продает залог с небольшим дисконтом, который увеличивается с ростом рыночной волатильности. Пользователи, проходящие через мягкую ликвидацию, испытывают незначительные потери со временем (на рынках чеканки crvUSD типичные потери <0,1% в день), хотя это может варьироваться в зависимости от условий займа и рынка.
 
-Soft-liquidation **losses do not only occur when prices go down but also when the collateral price rises again**. This implies that the health of a loan can decrease even though the collateral value of the position increases.
+Мягкая ликвидация начинается, если цена оракула вашего залога попадает в один из ваших диапазонов. В этот момент ваш залог будет линейно обмениваться на заимствованный актив по мере дальнейшего снижения цены через каждый диапазон.
 
-A loan becomes eligible for **hard-liquidation when its health drops below 0**. In this process, an external party can repay the user's debt and claim their collateral in return, closing the loan. **Going below the soft-liquidation range does not trigger a hard-liquidation**. The key trigger is the health falling below 0.
+Давайте рассмотрим, как выглядит мягкая ликвидация на упрощенном примере с **одной полосой** в **рынке ETH/crvUSD LLAMMA**. Этот пример иллюстрирует, что если цена падает на 20% в пределах полосы, 20% ETH конвертируется в crvUSD. Когда цена ниже нижнего предела полсы (<\$990), весь залог конвертируется в crvUSD (100% crvUSD, 0% ETH). Напротив, когда цена превышает верхний предел (>\$1000), весь залог остается в ETH (100% ETH, 0% crvUSD).
 
-**It's possible for a loan to be below the soft-liquidation range, and have all its collateral converted to the borrowed asset (e.g., all CRV to crvUSD) while still maintaining a positive health**.  In this scenario, further price drops don't impact the position, as the converted collateral covers both the debt and safety buffer.
+![Один диапазон LLAMMA](../images/lending/single_llamma_band.svg#only-light){: .centered style="height:250px" }
+![Один диапазон LLAMMA](../images/lending/single_llamma_band_dark.svg#only-dark){: .centered style="height:250px" }
 
-In contrast, most other lending platforms will hard-liquidate your collateral and terminate your loan if your loan falls below a minimum collateral ratio (LTV), even if only by a small amount for a brief time. This can be highly stressful for borrowers and lead to significant losses. Curve Lending offers a safer space and more peace of mind for borrowers.
+Изображение ниже представляет **несколько полос** проходящих через мягкую ликвидацию. Обратите внимание, что более высокие полосы (правее), чем текущая цена, полностью конвертируются в crvUSD, а более низкие (левее) полосы остаются ETH.
+
+![Диапазоны LLAMMA](../images/lending/llamma_bands.svg#only-light){: .centered style="height:250px" }
+![Диапазоны LLAMMA](../images/lending/llamma_bands_dark.svg#only-dark){: .centered style="height:250px" }
+
+Стоимость этих торгуемых активов остается залогом займа на протяжении всей мягкой ликвидации. Например, если ETH обменяется на crvUSD, стоимость этого crvUSD добавляется к залогу, обеспечивающему займ. Кроме того, **LLAMMA работает в обе стороны; если цены повышаются через ваши диапазоны, любой обменянный залог будет снова обмениваться на ваш первоначальный залог** (например, ETH, обменянный на crvUSD при снижении цены, будет снова обменян на ETH при повышении цены).
+
+Перебалансировка залога через мягкую ликвидацию стимулируется для арбитражных трейдеров, предлагая небольшой дисконт (при необходимости) для покупки или продажи через LLAMMA. Обмен вашего залога туда и обратно является причиной, по которой ваш **коэффициент здоровья ухудшается со временем во время мягкой ликвидации**. Более высокая волатильность обычно приводит к большим потерям. Однако ваши потери частично компенсируются заработанными торговыми комиссиями за предоставление ликвидности.
+
+!!!warning "Залог *НЕЛЬЗЯ* депонировать во время мягкой ликвидации"
+    Залог **нельзя** депонировать во время мягкой ликвидации. **Допускается только погашение долга**.
 
 ---
 
-## **Leverage**
+## **Здоровье и Жёсткая Ликвидация** {#health-hard-liquidation}
 
-All new lending markets allow leverage.  This allows users to multiply their gains (and losses) by the amount of leverage they desire.  In a WETH/crvUSD market for example, this would allow the user to borrow up to 9x the amount of collateral they deposit.  The caveat is that the user doesn't receive the borrowed crvUSD into their wallet, it is swapped for more WETH through 1inch and deposited into the lending market.  To see how leverage works please see the dedicated [leverage page](leverage.md).
+**Здоровье займа** — это мера соотношения долга к стоимости залога. Пока здоровье положительно, позиция остаётся открытой. Здоровье займа уменьшается из-за потерь при мягкой ликвидации и когда долг увеличивается из-за начисленных процентов.
+
+В мягкой ликвидации **потери происходят не только при снижении цен, но и при увеличении цены залога**. Это означает, что здоровье займа может уменьшаться, даже если стоимость залога позиции увеличивается.
+
+Займ становится доступным для **жёсткой ликвидации, когда его здоровье (Health) падает ниже 0**. В этом процессе сторонняя сторона может погасить долг пользователя и забрать его залог в обмен, закрывая займ. **Снижение ниже диапазона мягкой ликвидации не вызывает жёсткую ликвидацию**. Ключевым триггером является снижение здоровья ниже 0.
+
+**Возможно, что займ находится ниже диапазона мягкой ликвидации и все его залоги конвертированы в заимствованный актив (например, весь CRV в crvUSD), при этом здоровье остаётся положительным**. В этом сценарии дальнейшие падения цен не влияют на позицию, так как конвертированный залог покрывает как долг, так и страховой буфер.
+
+В отличие от Curve Lending, большинство других кредитных платформ будут жёстко ликвидировать ваш залог и закрывать ваш займ, если ваш займ падает ниже минимального соотношения залога (LTV), даже если только на небольшую сумму и на короткое время. Это может быть крайне стрессовым для заемщиков и привести к значительным потерям. Curve предлагает более безопасное пространство и большее спокойствие для заемщиков.
 
 ---
 
+## **Кредитное Плечо (Leverage)** {#leverage}
 
-## **Utilization, Lend APY and Borrow APY**
+Все новые кредитные рынки позволяют использовать кредитное плечо. Это позволяет пользователям умножать свои прибыли (и убытки) на желаемое количество кредитного плеча. В кредитном рынке WETH/crvUSD, например, это позволило бы пользователю взять взаймы до 9x от суммы депонированного залога. Условие заключается в том, что пользователь не получает заимствованный crvUSD на свой кошелек, он обменяется на большее количество WETH через 1inch и депонируется на кредитный рынок. Чтобы понимать, как работает кредитное плечо, пожалуйста, изучите [страницу о кредитном плече](leverage.md).
 
-The **Lend APY** and **Borrow APY** are affected by the **Utilization** of the market.  It is the ratio of assets supplied, to assets borrowed. In the image below the Utilization is 80% as 80% of the Supply is borrowed. **Higher Utilization means a higher Lending APY and Borrowing APY**.
+---
 
-![Supply Utilization](../images/lending/supply.svg#only-light){: .centered }
-![Supply Utilization](../images/lending/supply_dark.svg#only-dark){: .centered }
+## **Утилизация, Lend APY и Borrow APY** {#utilization-lend-apy-borrow-apy}
 
-### Utilization Rate
+**Lend APY** и **Borrow APY**  (годовая процентна ставка заимствования и предложения) зависят от **Утилизации** рынка. Это отношение предоставленных активов к заимствованным активам. На изображении ниже утилизация составляет 80%, так как 80% поставок заимствованы. **Более высокая утилизация означает более высокий Lend APY и Borrow APY**.
 
-*The formula for Utilization is the following:*
+![Утилизация поставок](../images/lending/supply.svg#only-light){: .centered }
+![Утилизация поставок](../images/lending/supply_dark.svg#only-dark){: .centered }
 
-$$\text{Utilization} = \frac{\text{Total assets borrowed}}{\text{Total assets supplied}}$$
+### **Уровень Утилизации** {#utilization-rate}
 
+*Формула для Утилизации выглядит следующим образом:*
 
-### Borrow Rate
+$$\text{Утилизация} = \frac{\text{Всего заимствованных активов}}{\text{Всего предоставленных активов}}$$
 
-The borrow APR is the rate a **borrower pays for borrowing out assets**.  In the **Curve UI this is quoted as an APY not an APR**, see the info box below for the conversion formula and difference.
+### **Ставка заимствования (Borrow Rate)** {#borrow-rate}
 
-Borrowing rates are calculated differently based on whether the collateral asset has a crvUSD minting market.
+APR заимствования — это ставка, которую **заемщик платит за заимствование активов**. В **интерфейсе Curve эта ставка указывается как APY, а не как APR**, изучите информационный блок ниже для понимания формулы преобразования и разницы.
 
-#### Borrow Rate for assets with a crvUSD Minting Market
+Ставки заимствования рассчитываются по-разному в зависимости от того, имеет ли залоговый актив рынок чеканки crvUSD.
 
-Assets with minting markets currently are: ETH (=WETH in lending markets), WBTC, wstETH, sfrxETH, tBTC.  For these assets, the borrowing rates on Curve Lend depend on two factors: the borrow rate for minting crvUSD and the utilization of the lending pool.  The technical documentation shows the [borrowing rate formula here](https://docs.curve.fi/lending/contracts/secondary-mp/#borrow-rate).  To decide whether to mint crvUSD or borrow from the lending market, consider the following:
+#### **Ставка заимствования для активов с рынком чеканки crvUSD** {#borrow-rate-for-assets-with-a-crvusd-minting-market}
 
-* Lending market **utilization below 85%** -> Borrowing rate will be lower on the [Lending Market](https://lend.curve.fi/#/ethereum)
-* Lending market **utilization above 85%** -> Borrowing rate will be lower on the [crvUSD Minting Market](https://crvusd.curve.fi/#/ethereum)
-* Lending market **utilization equals 85%** -> Borrowing rates will be equal
+Активы с рынками чеканки в настоящее время включают: ETH (=WETH на кредитных рынках), WBTC, wstETH, sfrxETH, tBTC. Для этих активов ставки заимствования на Curve Lend зависят от двух факторов: ставки заимствования для чеканки crvUSD и утилизации Curve Lending пула. Техническая документация показывает [формулу ставки заимствования здесь](https://docs.curve.fi/lending/contracts/secondary-mp/#borrow-rate). Чтобы решить, стоит ли чеканить crvUSD или заимствовать на Curve Lending, рассмотрите следующее:
+    
+* Curve Lend **утилизация ниже 85%** -> Ставка заимствования будет ниже на [Рынке Curve Lend](https://lend.curve.fi/#/ethereum)
+* Curve Lend **утилизация выше 85%** -> Ставка заимствования будет ниже на [Рынке чеканки crvUSD](https://crvusd.curve.fi/#/ethereum)
+* Curve Lend **утилизация равна 85%** -> Ставки заимствования будут равны
 
-#### Borrow Rate for all other Assets
+#### **Ставка заимствования для всех других активов** {#borrow-rate-for-all-other-assets}
 
-The formula for the borrow rate if the collateral asset does not have a minting market (e.g., CRV, pufETH, sUSDe, etc) is as follows:
+Формула ставки заимствования, если залоговый актив не имеет рынка чеканки (например, CRV, pufETH, sUSDe и т.д.), выглядит следующим образом:
 
-$$\text{rate} = \text{rate}_{\text{min}} \cdot \left(\frac{\text{rate}_{\text{max}}}{\text{rate}_{\text{min}}}\right)^{\text{utilization}}$$
+$$\text{ставка} = \text{ставка}_{\text{min}} \cdot \left(\frac{\text{ставка}_{\text{max}}}{\text{ставка}_{\text{min}}}\right)^{\text{утилизация}}$$
 
-$$\text{borrowAPR} = \text{rate} \cdot (365 \cdot 86400)$$
+$$\text{Borrow APR} = \text{ставка} \cdot (365 \cdot 86400)$$
 
-$\text{rate}_{\text{min}}$ and $\text{rate}_{\text{max}}$ values are obtained from the monetary policy contract of each Lending Market and are given in interest per second.  We multiply the rate by $365 \cdot 86400$ to get the APR because this is the amount of seconds in a year ($365$ days $\times 86400$ seconds in a day).
+Значения $\text{ставка}_{\text{min}}$ и $\text{ставка}_{\text{max}}$ получены из контракта монетарной политики каждого кредитного рынка и указаны в процентах за секунду. Мы умножаем ставку на $365 \cdot 86400$, чтобы получить APR, так как это количество секунд в году ($365$ дней $\times$ 86400 секунд в дне).
 
-### Lend Rate
+### **Ставка по кредитованию (Lend Rate)** {#lend-rate}
 
-Lend APR is the **yield a lender receives in exchange for lending out their assets**.  The lend APR is calculated the same way for all lending markets.
+Lend APR — это **доходность, которую кредитор получает в обмен на предоставление своих активов**. Lend APR рассчитывается одинаково для всех кредитных рынков.
 
-*Formula to calculate the Lend APR:*
+*Формула для расчета Lend APR:*
 
-$$\text{lendAPR} = \text{borrowAPR} \cdot \text{utilization}$$
+$$\text{lendAPR} = \text{Borrow APR} \cdot \text{утилизация}$$
 
-!!!info "Difference between `APR` and `APY`"
-    - **`APR`** represents the Annual Percentage Rate (**interest without compounding**)
-    - **`APY`** is the Annual Percentage Yield (**interest with compounding**)
-
-    *To convert the APR into APY, we need to annualize it and compound it every second (86400 seconds in a day):*
-
+!!!info "Разница между `APR` и `APY`"
+    - **`APR`** представляет собой годовую процентную ставку (**проценты без капитализации**)
+    - **`APY`** — это годовая процентная доходность (**проценты с капитализацией**)
+    
+    *Чтобы преобразовать APR в APY, необходимо годово аннуализировать ее и капитализировать каждую секунду (86400 секунд в дне):*
+    
     $$\text{APY} = \left(1 + \frac{APR}{86400 \cdot 365}\right)^{86400 \cdot 365} - 1$$
 
-*For the current [CRV Lending Market](https://lend.curve.fi/#/ethereum/markets/one-way-market-3/create) the Borrow APR and Lend APR for different Utilization rates is the following:*
+*К примеру для этого [кредитного рынка CRV](https://lend.curve.fi/#/ethereum/markets/one-way-market-3/create) Borrow APR и Lend APR для различных уровней утилизации следующие:*
 
 <canvas id="graphContainer"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        updateGraph(); // Draw the initial graph with hardcoded values
+        updateGraph(); // Нарисовать первоначальный график с фиксированными значениями
     });
 
     let myChart = null;
@@ -311,7 +301,7 @@ function updateGraph() {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: 'Utilization (%)'
+                        text: 'Утилизация (%)'
                     },
                     max: 100
                 },
@@ -355,7 +345,7 @@ function updateGraph() {
                             const borrowRate = context.chart.data.datasets[0].data[context.dataIndex].y.toFixed(2);
                             const lendRate = context.chart.data.datasets[1].data[context.dataIndex].y.toFixed(2);
                             return [
-                                `Utilization: ${utilization}%`,
+                                `Утилизация: ${utilization}%`,
                                 `Borrow APR: ${borrowRate}%`,
                                 `Lend APR: ${lendRate}%`
                             ];
@@ -376,12 +366,13 @@ function updateGraph() {
 
 ---
 
-## **More Information**
+## **Дополнительная Информация** {#more-information}
 
-For information relating to opening loans see the [loan creation page](./how-to-borrow.md)
+Для информации, связанной с открытием займов, см. [страницу создания займа](./how-to-borrow.md)
 
-For information relating to how to supply assets see [supplying assets page](./how-to-supply.md)
+Для информации, связанной с тем, как предоставлять активы, см. [страницу предоставления активов](./how-to-supply.md)
 
-For Frequently Asked Questions about Curve Lending see the [FAQ here](./faq.md)
+Для часто задаваемых вопросов о Curve Lending см. [FAQ здесь](./faq.md)
 
-For more technical information especially relating to the underlying smart contracts please see the [Lending section within the Curve Docs](https://docs.curve.fi/lending/overview/)
+Для более технической информации, особенно касающейся основных смарт-контрактов, см. [раздел Кредитования в документации Curve](https://docs.curve.fi/lending/overview/)
+

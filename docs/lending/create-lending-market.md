@@ -1,108 +1,107 @@
-<h1>Creating Lending Markets</h1>
+<h1>Создание Кредитных Рынков</h1>
 
-## **Creating a Pool**
+## **Создание Пула (Creating a Pool)** {#creating-a-pool}
 
-Before attempting to create a lending market, a curve pool for the ASSET paired with crvUSD which implements an unmanipulatable price oracle must exist.   Pools with unmanipulatable oracles are the following:
+Перед тем как приступить к созданию кредитного рынка, должен существовать пул Curve для АКТИВА (ASSET), парного с crvUSD, который реализует нечувствительный к манипуляциям оракул цен. Пулы с нечувствительными к манипуляциям оракулами включают следующие:
 
- - [twocrypto-ng](https://docs.curve.fi/references/deployed-contracts/#twocrypto-ng) - for 2 unpegged assets, e.g., crvUSD/CRV
- - [tricrypto-ng](https://docs.curve.fi/references/deployed-contracts/#tricrypto-ng) - for 3 unpegged assets, e.g., crvUSD/WETH/CRV
- - [stableswap-ng](https://docs.curve.fi/references/deployed-contracts/#stableswap-ng) - for 2 pegged assets, e.g., crvUSD/USDC
+- [twocrypto-ng](https://docs.curve.fi/references/deployed-contracts/#twocrypto-ng) — для 2 не привязанных активов, например, crvUSD/CRV
+- [tricrypto-ng](https://docs.curve.fi/references/deployed-contracts/#tricrypto-ng) — для 3 не привязанных активов, например, crvUSD/WETH/CRV
+- [stableswap-ng](https://docs.curve.fi/references/deployed-contracts/#stableswap-ng) — для 2 привязанных активов, например, crvUSD/USDC
 
+!!!info "Пользовательские Оракулы Цен"
+    Если пул ASSET/WETH более предпочтителен, чем пул ASSET/crvUSD, можно связать цену ASSET/WETH с ценой WETH/crvUSD, используя пользовательский оракул цен. Это затем можно использовать для создания кредитного рынка. Пожалуйста, свяжитесь с командой в Telegram, если это необходимо.
 
-!!!info "Custom Price Oracles" 
-    If an ASSET/WETH pool is more desirable than an ASSET/crvUSD pool, it is possible to link the ASSET/WETH price to the WETH/crvUSD price using a custom price oracle.  This can then be used to create a lending market.  Please get in contact with the team in telegram if this is the case.
+Самый простой способ создать пул — через официальный интерфейс создания пула [Create Pool UI](https://curve.fi/#/ethereum/create-pool).
 
-The easiest way to create a pool is through the official [Create Pool UI](https://curve.fi/#/ethereum/create-pool).
-
-Guides are available for creating a [stableswap-ng pool](../factory-pools/creating-a-stableswap-ng-pool.md), [twocrypto-ng pool](../factory-pools/creating-a-twocrypto-ng-pool.md), and a [tricrypto-ng pool](../factory-pools/creating-a-tricrypto-ng-pool.md).
-
----
-
-## **Creating a Lending Market**
-
-To create a lending market use the `create`, or `create_from_pool` methods in the `OneWay Lending Factory` smart contract to deploy all relevant contracts and set all parameters.  Find the `OneWay Lending Factory` addresses for different chains [here](https://docs.curve.fi/references/deployed-contracts/#curve-lending).  There is no UI for this step, it has to be done through Etherscan, or manually.
-
-To deploy a lending market using the `create_from_pool` method after deploying a pool the following unique parameter is used:
-
- - `pool` : the address of the pool which includes both the `borrowed_token` and `collateral_token`.
-
-To deploy a lending market using the `create` method with a custom oracle the following unique parameter is used:
-
- - `price_oracle` : address of the custom price oracle contract
-
-Then for both methods the following additional parameters must be supplied:
-
- - `borrowed_token` : address of the token to be supplied and borrowed
- - `collateral_token` : address of the token to be used as collateral
- - [`A`](#amplification-factor-a) : the amplification factor, most markets use a value between 10-30.  Use lower values for riskier assets.  
- Input as a normal number, e.g., 10 = 10
- - `fee` : the amm swap fee, most pools use between 0.3-1.5%.  
- Input as a $10^{18}$ number, e.g., 0.06% = 6000000000000000.
- - [`loan_discount`](#loan-discount) : the amount to discount collateral for calculating maximum LTV.  This is usually higher than `liquidation_discount` by 3-4%.  
- Input as a $10^{18}$ number, e.g., 11% = 110000000000000000.
- - [`liquidation_discount`](#liquidation-discount) : the amount to discount collateral for health and hard-liquidation calculations.  This is usually less than `loan_discount` by 3-4%.  
- Input as a $10^{18}$ number, e.g., 8% = 80000000000000000.
- - `name` : The name of the market
-
-Finally, the following parameters are **optional** for both methods, if they are not supplied they are set to the default values set by the CurveDAO:
-
- - [`min_borrow_rate`](#borrowing-interest-rates) : the minimum borrow rate, as rate/sec.  
- Input as a $10^{18}$ number, e.g., 1% APR = 317097919
- - [`max_borrow_rate`](#borrowing-interest-rates) : the maximum borrow rate, as rate/sec.  
- Input as a $10^{18}$ number, e.g., 80% APR = 25367833587
-
-!!!warning "Warning"
-    Parameters are given in different formats: `A` is just given as itself, e.g., 30 = 30, but others like `loan_discount` are given as a a $10^{18}$ number, e.g., 11% = 110000000000000000.
-
-Using the `OneWay Lending Factory` will add the pool to the Curve UI and deploy all contracts needed for the market to function.
+Доступны руководства по созданию [stableswap-ng пула](../factory-pools/creating-a-stableswap-ng-pool.md), [twocrypto-ng пула](../factory-pools/creating-a-twocrypto-ng-pool.md) и [tricrypto-ng пула](../factory-pools/creating-a-tricrypto-ng-pool.md).
 
 ---
 
-## **CRV Rewards and other Incentives for Suppliers**
+## **Создание Кредитного Рынка (Creating a Lending Market)** {#creating-a-lending-market}
 
-### **Deploying a Gauge**
+Для создания кредитного рынка используйте методы `create` или `create_from_pool` в смарт-контракте `OneWay Lending Factory`, чтобы развернуть все необходимые контракты и установить все параметры. Адреса `OneWay Lending Factory` для различных сетей можно найти [здесь](https://docs.curve.fi/references/deployed-contracts/#curve-lending). Для этого шага нет пользовательского интерфейса, его необходимо выполнить через Etherscan или вручную.
 
-A **Curve lending market requires a gauge** linked to the supply vault **before suppliers can stake their [vault shares](./overview.md#supply-vault-share-tokens) to receive incentives/rewards**.  A gauge can be easily deployed through the `OneWay Lending Factory` by calling the `deploy_gauge` method and supplying the newly created `vault` contract address.  **Anyone can deploy a gauge** for a market that does not have one.
+Для развертывания кредитного рынка с использованием метода `create_from_pool` после создания пула используется следующий уникальный параметр:
 
-### **Receiving CRV rewards from weekly emissions**
+- `pool`: адрес пула, который включает как `borrowed_token`, так и `collateral_token`.
 
-Before a gauge is eligible to receive CRV from weekly emissions, it must be added to the `Gauge Controller` contract, the contract is deployed on Ethereum [here](https://etherscan.io/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB).  To be added to the `Gauge Controller` the CurveDAO must vote to add the lending market's gauge.  See [here](../reward-gauges/creating-a-pool-gauge.md#submit-a-dao-vote) for how to create a vote to add a gauge to the `Gauge Controller`.
+Для развертывания кредитного рынка с использованием метода `create` с пользовательским оракулом используется следующий уникальный параметр:
 
-Once a Curve lending market has a gauge added to the `Gauge Controller` and it receives some [gauge weight](../reward-gauges/gauge-weights.md), the suppliers will receive CRV rewards when they stake their [vault shares](./overview.md#supply-vault-share-tokens) into the gauge.
+- `price_oracle`: адрес смарт-контракта пользовательского оракула цен
 
-### **Adding other incentives for suppliers**
+Затем для обоих методов необходимо предоставить следующие дополнительные параметры:
 
-The deployer of the Curve Lending Market is given the role of `manager`.  The `manager` can add reward tokens to the pool through the `add_reward` method within the lending market's gauge.  Once a token is added, the `manager` can deposit the token using the `deposit_reward_token` method.  The tokens then stream to the suppliers staked in the gauge over the specified period.
+- `borrowed_token`: адрес токена, который будет предоставлен и заимствован
+- `collateral_token`: адрес токена, который будет использоваться как залог
+- [`A`](#amplification-factor-a): коэффициент усиления, большинство рынков используют значение между 10-30. Используйте более низкие значения для рискованных активов.  
+  Вводится как обычное число, например, 10 = 10
+- `fee`: комиссия AMM за обмен, большинство пулов используют от 0.3-1.5%.  
+  Вводится как число с основанием $10^{18}$, например, 0.06% = 6000000000000000.
+- [`loan_discount`](#loan-discount): процент, используемый для скидки залога при расчете максимального LTV. Обычно выше, чем `liquidation_discount` на 3-4%.  
+  Вводится как число с основанием $10^{18}$, например, 11% = 110000000000000000.
+- [`liquidation_discount`](#liquidation-discount): процент, используемый для скидки залога при расчетах здоровья и жёсткой ликвидации. Обычно ниже, чем `loan_discount` на 3-4%.  
+  Вводится как число с основанием $10^{18}$, например, 8% = 80000000000000000.
+- `name`: название рынка
+
+Наконец, следующие параметры являются **опциональными** для обоих методов. Если они не предоставлены, они устанавливаются на значения по умолчанию, заданные CurveDAO:
+
+- [`min_borrow_rate`](#borrowing-interest-rates): минимальная ставка заимствования, как ставка/сек.  
+  Вводится как число с основанием $10^{18}$, например, 1% APR = 317097919
+- [`max_borrow_rate`](#borrowing-interest-rates): максимальная ставка заимствования, как ставка/сек.  
+  Вводится как число с основанием $10^{18}$, например, 80% APR = 25367833587
+
+!!!warning "Внимание"
+    Параметры заданы в разных форматах: `A` задается как есть, например, 30 = 30, но другие, такие как `loan_discount`, задаются как число с основанием $10^{18}$, например, 11% = 110000000000000000.
+
+Использование `OneWay Lending Factory` добавит пул в Curve UI и развернет все необходимые контракты для функционирования рынка.
 
 ---
 
-## **Lending Market Deployment Parameters**
+## **CRV Вознаграждения и другие Стимулы для Поставщиков Ликвидности** {#crv-rewards-and-other-incentives-for-suppliers}
 
-### **Amplification Factor (A)**
+### **Развертывание Gauge (Счётчика вознаграждений)** {#deploying-a-gauge}
 
-The amplification factor `A` defines the width of bands, see formula below and more detailed information [here](../crvusd/loan-concepts.md#bands-n) and applet [here](../crvusd/loan-concepts.md#band-calculator).  `A` is also a part of the calculation for the maximum LTV of the market, see [`loan_discount` section](#loan-discount).
+**Кредитный рынок Curve требует наличие gauge (Счётчика вознаграждений)**, связанного с хранилищем поставок (supply vault), **перед тем как поставщики смогут застейкать свои [доли хранилища](./overview.md#supply-vault-share-tokens) для получения инцентивов/вознаграждений**. Gauge можно легко развернуть через `OneWay Lending Factory`, вызвав метод `deploy_gauge` и предоставив адрес нового контракта `vault`. **Любой может развернуть gauge** для рынка, у которого его нет.
+
+### **Получение CRV вознаграждений из еженедельных эмиссий** {#receiving-crv-rewards-from-weekly-emissions}
+
+Перед тем как gauge станет доступным для получения CRV из еженедельных эмиссий, его необходимо добавить в смарт-контракт `Gauge Controller`, который развернут на Ethereum [здесь](https://etherscan.io/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB). Для добавления в `Gauge Controller` CurveDAO должна проголосовать за добавление gauge кредитного рынка. См. [здесь](../reward-gauges/creating-a-pool-gauge.md#submit-a-dao-vote) для информации о том, как создать голосование за добавление gauge в `Gauge Controller`.
+
+Как только кредитный рынок Curve будет добавлен в `Gauge Controller` и получит некоторый [вес gauge](../reward-gauges/gauge-weights.md), поставщики ликвидности будут получать CRV вознаграждения при стейкинге своих [долей хранилища](./overview.md#supply-vault-share-tokens) в gauge.
+
+### **Добавление других Стимулов для Поставщиков Ликвидности** {#adding-other-incentives-for-suppliers}
+
+Развертыватель (deployer) кредитного рынка Curve получает роль `manager`. `Manager` может добавлять токены вознаграждений в пул через метод `add_reward` в gauge кредитного рынка. После добавления токена, `manager` может депонировать токен, используя метод `deposit_reward_token`. Токены затем распределяются среди застейканных поставщиков в gauge в течение указанного периода.
+
+---
+
+## **Параметры Развертывания Кредитного Рынка** {#lending-market-deployment-parameters}
+
+### **Коэффициент Усиления (A) (Amplification Factor A)** {#amplification-factor-a}
+
+Коэффициент усиления `A` определяет ширину полос (band width), см. формулу ниже и более подробную информацию [здесь](../crvusd/loan-concepts.md#bands-n) и апплет [здесь](../crvusd/loan-concepts.md#band-calculator). `A` также является частью расчета максимального LTV рынка, см. секцию [`loan_discount`](#loan-discount).
 
 $$\text{band_width} \approx \frac{\text{price}}{\text{A}}$$
 
-### **Loan Discount**
+### **Скидка на Займ (Loan Discount)** {#loan-discount}
 
-The `loan_discount` is used for finding the maximum LTV (loan-to-value) a user can have in a lending market.  At the time of writing this value ranges from 7% for WETH to 33% for volatile and less liquid assets like UwU.  Use the calculator [here](../crvusd/loan-concepts.md#loan-discount) to see the maximum LTVs a user can have based on the `loan_discount`, amplification factor `A` and their number of bands `N`.  The formula is:
+`loan_discount` используется для определения максимального LTV (loan-to-value), который пользователь может иметь на кредитном рынке. На момент написания значение варьируется от 7% для WETH до 33% для волатильных и менее ликвидных активов, таких как UwU. Используйте калькулятор [здесь](../crvusd/loan-concepts.md#loan-discount), чтобы увидеть максимальные LTV, которые пользователь может иметь на основе `loan_discount`, коэффициента усиления `A` и количества полос `N`. Формула:
 
 $$\text{max_LTV} = 1 - \text{loan_discount} - \frac{N}{2*A}$$
 
-### **Liquidation Discount**
+### **Скидка на Ликвидацию (Liquidation Discount)** {#liquidation-discount}
 
-`liquidation_discount` defines how much to discount the collateral for the purpose of a hard-liquidation.  This is usually 3-4% lower than the `loan_discount`.  A user is hard-liquidated when their health is less than 0, and the `liquidation_discount` is an integral part of the health calculation.  See [here](../crvusd/loan-concepts.md#loan-health) for more information
+`liquidation_discount` определяет, насколько нужно снизить стоимость залога для целей расчета здоровья займа при жёсткой ликвидации. Обычно это на 3-4% меньше, чем `loan_discount`. Пользователь подлежит жёсткой ликвидации, когда его здоровье ниже 0%, и `liquidation_discount` является неотъемлемой частью расчета здоровья займа. См. [здесь](../crvusd/loan-concepts.md#loan-health) для дополнительной информации.
 
-### **Borrowing Interest Rates**
+### **Процентные Ставки Заимствования (Borrowing Interest Rates)** {#borrowing-interest-rates}
 
-When creating a market the creator must define the `min_borrow_rate` and `max_borrow_rate` of the market.  Use the tool below to simulate how [utilization](./overview.md#utilization-rate) affects borrowing and lending interest rates.  In the smart contracts the rates they are given as **interest per second**, converting from a desired `APR` to a `borrow_rate` in interest per second is as follows:
+При создании рынка создатель должен определить `min_borrow_rate` и `max_borrow_rate` рынка. Используйте инструмент ниже, чтобы симулировать, как [утилизация](./overview.md#utilization-rate) влияет на процентные ставки заимствования и кредитования. В смарт-контрактах ставки задаются как **процент за секунду**, преобразование желаемого `APR` в `borrow_rate` в процентах за секунду осуществляется следующим образом:
 
 $$\text{borrow_rate} = \frac{\text{APR}}{\text{seconds_in_year}} = \frac{\text{APR}}{86400 \times 365}$$
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom:0;">
-<h3>Rate Calculator</h3>
-<h4>Inputs:</h4>
+<h3>Калькулятор Ставок (Rate Calculator)</h3>
+<h4>Вводные Данные:</h4>
 <div class="input">
 <div style="display: flex; align-items: center; justify-content: center; font-size: 16px;">
     <label for="rateMinInput" style="margin-right: 10px;">Min Borrow APR % :</label>
@@ -110,12 +109,12 @@ $$\text{borrow_rate} = \frac{\text{APR}}{\text{seconds_in_year}} = \frac{\text{A
     <label for="rateMaxInput" style="margin-left: 20px; margin-right: 10px;">Max Borrow APR % :</label>
     <input type="number" id="rateMaxInput" min="0" max="1000" step="1" value="50" style="font-size: 16px; width: 80px;">
 </div>
-<h4>Utilization Chart</h4>
+<h4>График Утилизации (Utilization Chart)</h4>
 <canvas id="interestRateChart"></canvas>
 </div>
 <div class="collapsible-table">
   <h4 class="collapsible-heading">
-    Utilization Table
+    Таблица Утилизации (Utilization Table)
     <span class="expand-text"></span>
   </h4>
   <div id="dataTable" class="md-typeset__table"></div>
@@ -149,9 +148,9 @@ let tableData = [];
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    updateAll(); // Draw the initial rate graph with default values
+    updateAll(); // Рисуем начальный график ставок с дефолтными значениями
 
-    // rate graph
+    // график ставок
     const rateMinInput = document.getElementById('rateMinInput');
     const rateMaxInput = document.getElementById('rateMaxInput');
     rateMinInput.addEventListener('change', updateAll);
@@ -171,7 +170,7 @@ function updateRateGraph() {
         borrowDataPoints.push({x: u * 100, y: borrowRate * 100});
         lendDataPoints.push({x: u * 100, y: lendRate * 100});
         
-        // Add data to table array (rounded to 2 decimal places)
+        // Добавляем данные в массив таблицы (округлено до 2 знаков после запятой)
         tableData.push({
             utilization: (u * 100).toFixed(2),
             borrowAPR: (borrowRate * 100).toFixed(2),
@@ -215,7 +214,7 @@ function updateRateGraph() {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: 'Utilization (%)'
+                        text: 'Утилизация (%)'
                     },
                     max: 100
                 },
@@ -259,7 +258,7 @@ function updateRateGraph() {
                             const borrowRate = context.chart.data.datasets[0].data[context.dataIndex].y.toFixed(2);
                             const lendRate = context.chart.data.datasets[1].data[context.dataIndex].y.toFixed(2);
                             return [
-                                `Utilization: ${utilization}%`,
+                                `Утилизация: ${utilization}%`,
                                 `Borrow APR: ${borrowRate}%`,
                                 `Lend APR: ${lendRate}%`
                             ];
@@ -280,14 +279,14 @@ function updateRateGraph() {
     }
   
    function updateTable() {
-    // Create and populate the table
+    // Создаем и заполняем таблицу
     const tableContainer = document.getElementById('dataTable');
     let csv = `Utilization; Borrow APR; Lend APR; Spread`;
     let tableHTML = `
         <table>
             <thead>
                 <tr>
-                    <th>Utilization (%)</th>
+                    <th>Утилизация (%)</th>
                     <th>Borrow APR (%)</th>
                     <th>Lend APR (%)</th>
                     <th>Spread (%)</th>
@@ -296,9 +295,9 @@ function updateRateGraph() {
             <tbody>
     `;
 
-    
+
     for (let i = 0; i < tableData.length; i++) {
-        if (i % 5 === 0) { // Only add rows for every 5% step
+        if (i % 5 === 0) { // Добавляем строки только для каждого 5% шага
             const row = tableData[i];
             csv += `${row.utilization};${row.borrowAPR};${row.lendAPR};${row.spread}`;
             tableHTML += `
@@ -360,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const table = document.querySelector('.collapsible-table');
   const expandText = heading.querySelector('.expand-text');
   
-  // Set initial state to collapsed and set initial text
+  // Устанавливаем начальное состояние как свернутое и устанавливаем начальный текст
   table.classList.add('collapsed');
   heading.classList.add('collapsed');
   expandText.textContent = '(click to expand)';
@@ -369,8 +368,9 @@ document.addEventListener('DOMContentLoaded', function() {
     table.classList.toggle('collapsed');
     heading.classList.toggle('collapsed');
     
-    // Update expand/collapse text
+    // Обновляем текст разворачивания/свертывания
     expandText.textContent = table.classList.contains('collapsed') ? '(click to expand)' : '(click to collapse)';
   });
 });
 </script>
+
