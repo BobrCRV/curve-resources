@@ -1,27 +1,28 @@
-## **How to participate in governance?**
+## **Как участвовать в управлении?** {#how-to-participate-in-governance}
 
-To participate in governance, Curve Finance users need to [lock](../vecrv/locking-your-crv.md) their CRV into a voting escrow.
+Чтобы участвовать в управлении, пользователям Curve Finance необходимо [заблокировать](../vecrv/locking-your-crv.md) (lock) свои CRV в хранилище для голосования (voting escrow).
 
-You can do so at this address: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
+Вы можете сделать это по следующему адресу: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)
 
-## **What are veCRV?**
+## **Что такое veCRV?** {#what-are-vecrv}
 
-veCRV stands for voting escrow CRV. They are your CRV locked for voting. The longer you lock your CRV for, the more voting power you have (and the bigger boost you can reach). You can vote lock 1,000 CRV for a year to have a 250 veCRV weight.
+veCRV расшифровывается как voting escrow CRV (депонированный на голосование CRV). Это ваши CRV, заблокированные для голосования. Чем на более долгий срок вы блокируете свои CRV, тем больше у вас голосовой силы (Voting Power) (и тем большего буста вы можете достичь). Вы можете заблокировать для голосования 1,000 CRV на год, чтобы получить вес 250 veCRV.
 
-Your veCRV weight gradually decreases as your escrowed tokens approach their lock expiry. A graph illustrating the decrease can be found at this address: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)​
+Ваш вес veCRV постепенно уменьшается по мере приближения заблокированных токенов к окончанию срока блокировки. График, иллюстрирующий это уменьшение, можно найти по адресу: [https://dao.curve.fi/locker](https://dao.curve.fi/locker)
 
-Get more voting power by locking your CRV for a longer period of time.
+Вы получите больше голосовой силы (Voting Power), заблокировав свои CRV на более длительный период.
 
-## **Can I start voting right away?**
+## **Могу ли я начать голосовать сразу?** {#can-i-start-voting-right-away}
 
-You can only vote using your voting weight at the block where a proposal was created.
+Вы можете начать голосовать, но ваш голосовой вес фиксируется в блоке, в котором было создано предложение. Это означает, что ваш голосовой вес для конкретного предложения определяется на момент его создания. Если вы заблокировали свои CRV после того, как предложение уже было создано, ваш голосовой вес для этого предложения не изменится.
 
-## **How to vote?**
+## **Как голосовать?** {#how-to-vote}
 
-Simply visit the proposal of your choice, click your vote option and confirm your transaction. You can find DAO proposals at this address: [https://dao.curve.fi/dao](https://dao.curve.fi/dao)​
+Просто перейдите к выбранному предложению на сайте, нажмите на вариант голосования и подтвердите транзакцию. Вы можете найти предложения DAO по адресу: [https://dao.curve.fi/dao](https://dao.curve.fi/dao)
 
 ![Voting UI](../images/ui/how-to-vote.webp)
 
-## **Where can I find out about governance?**
+## **Где я могу узнать об управлении?** {#where-can-i-find-out-about-governance}
 
-You can visit the Curve Finance governance forum at this address [http://gov.curve.fi/](http://gov.curve.fi/)​
+Вы можете посетить форум управления Curve Finance по адресу: [http://gov.curve.fi/](http://gov.curve.fi/)
+

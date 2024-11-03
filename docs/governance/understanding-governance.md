@@ -1,96 +1,83 @@
-<h1>Understanding Governance</h1>
+<h1>Понимание Управления</h1>
 
-## **Voting on the Curve DAO**
+## **Голосование в Curve DAO** {#voting-on-the-curve-dao}
 
-To vote in the Curve DAO, users need to [vote lock their CRV](../vecrv/locking-your-crv.md). By doing so, participants can earn a boost on their provided liquidity and vote on all DAO proposals. Users who reach a voting power of 2,500 veCRV can also create new proposals. There is no **minimum voting power required to participate in voting. The duration of governance proposals is seven days**.
+Чтобы голосовать в Curve DAO, пользователям нужно [заблокировать свои CRV](../vecrv/locking-your-crv.md). Делая это, участники могут получить буст на свою предоставленную ликвидность и голосовать по всем предложениям DAO. Пользователи, которые достигают голосовой силы в 2,500 `veCRV`, могут также создавать новые предложения. **Минимального требования по голосовой силе для участия в голосовании нет. Продолжительность голосований по управлению составляет семь дней**.
 
-!!!warning "Voting Power Decay"
-    When voting on DAO proposals, a user's voting power on an individual proposal starts to decay halfway through the vote as a measure to protect against manipulation by whales. This does not apply to gauge weight votes. Additionally, overall voting power decays linearly over time. More details are provided in the section below.
+!!!warning "Уменьшение Голосовой Силы (Voting Power Decay)"
+    При голосовании по предложениям DAO голосовая сила пользователя по конкретному предложению начинает уменьшаться на половине срока голосования как мера защиты от манипуляций китами. Это не распространяется на голосования по весам `gauge`. Кроме того, общая голосовая сила уменьшается линейно со временем. Более подробная информация представлена в разделе ниже.
 
-    **Example:** A user begins the voting period for a proposal with 100 veCRV. If the voting duration is 7 days, their voting power will remain at 100 veCRV for the first 3.5 days. After this point, their voting power starts to decay linearly. By day 5.25 (which is halfway through the decay period), their voting power would have decreased to 50 veCRV. By the end of the 7-day voting period, the user’s voting power would have diminished further, approaching 0 veCRV.
-
-
----
-
-
-## **Voting Power**
-
-veCRV stands for [vote-escrowed CRV](../vecrv/overview.md). It's a mechanism where users can lock their CRV tokens for varying lengths of time to gain voting power. Users have the option to lock their CRV for a minimum of one week and a maximum of four years. Those with longer voting escrows wield more stake, thereby receiving greater voting power.
-
-A user's voting power gradually decreases over time until it reaches zero at the time of unlock. For instance, if a user decides to lock 100 CRV for four years, they will initially receive 100 veCRV. After one year, due to the constant decay, the user's veCRV balance will reduce to 75 veCRV, then to 50 veCRV after two years, etc... until it finally zeroes out after four years.
-
-The existing lock can be extended at every point in time, resulting in a increased veCRV balance again.
-
+    **Пример:** Пользователь начинает период голосования по предложению со 100 `veCRV`. Если продолжительность голосования составляет 7 дней, их голосовая сила останется на уровне 100 `veCRV` в течение первых 3,5 дней. После этого их голосовая сила начинает линейно уменьшаться. К 5,25 дню (это середина периода уменьшения), их голосовая сила уменьшится до 50 `veCRV`. К концу 7-дневного периода голосования голосовая сила пользователя уменьшится еще больше, приближаясь к 0 `veCRV`.
 
 ---
 
+## **Голосовая Сила (Voting Power)** {#voting-power}
 
-## **DAO Votes**
+`veCRV` расшифровывается как [vote-escrowed CRV](../vecrv/overview.md) (депонированный на голосование CRV). Это механизм, где пользователи могут блокировать свои CRV токены на различные сроки, чтобы получить голосовую силу. Пользователи имеют возможность заблокировать свои CRV минимум на одну неделю и максимум на четыре года. Те, кто блокирует на более долгий срок, обладают большим влиянием и получают большую голосовую силу.
 
-There are three different kinds of votes:
+Голосовая сила пользователя постепенно уменьшается со временем, пока не достигнет нуля к моменту разблокировки. Например, если пользователь решает заблокировать 100 CRV на четыре года, они изначально получат 100 `veCRV`. Через год, из-за постоянного уменьшения, баланс `veCRV` пользователя снизится до 75 `veCRV`, затем до 50 `veCRV` через два года, и так далее, пока наконец не достигнет нуля через четыре года.
 
-1. **Ownership votes**, which control most functionality within the protocol. These votes require a 30% quorum with 51% support.
-2. **Parameter votes**, which can modify pool parameters. These votes require a 15% quorum with 60% support.
-3. **Emergency votes**, which are executed through a multisig consisting of nine members, comprised of reputable figures within the DeFi and Crypto community. More here: [Emergency DAO](#emergency-dao).
-
-!!!info "Voting Quorum"
-    Intuitively, one might think that the total number of votes (`YES` and `NO`) would count towards the quorum. However, this is not the case here. Only `YES` votes are counted towards the quorum.
-
-    This can lead to scenarios like this: https://twitter.com/WormholeOracle/status/1782646259536531808
-
+Существующую блокировку можно продлить в любой момент времени, в результате чего баланс `veCRV` снова увеличится.
 
 ---
 
+## **Голосования DAO** {#dao-votes}
 
+Существует три разных вида голосований:
 
-## **Emergency DAO**
+1. **Голосования по владению (Ownership votes)**, которые контролируют большинство функций внутри протокола. Эти голосования требуют кворума в 30% с поддержкой 51%.
+2. **Голосования по параметрам (Parameter votes)**, которые могут изменять параметры пулов. Эти голосования требуют кворума в 15% с поддержкой 60%.
+3. **Экстренные голосования (Emergency votes)**, которые выполняются через мультисиг из девяти членов, состоящих из уважаемых фигур в сообществе DeFi и криптовалюты. Подробнее здесь: [Экстренное DAO](#emergency-dao).
 
-The EmergencyDAO is a **5 of 9 multisig** which has **very limited actions**. It **may kill non-factory pools** up to 2 months old. Pools that have been killed will only allow users to `remove_liquidity`. It may also **kill liquidity gauges** at any time, setting its rate of CRV emissions to 0 and therefore not allowing any further CRV emission to the pool. 
+!!!info "Кворум при голосовании"
+    Интуитивно можно подумать, что общее количество голосов (`YES` и `NO`) будет учитываться для кворума. Однако в данном случае это не так. Только голоса `YES` учитываются при подсчете кворума.
 
-The EmergencyDAO multisig is deployed at [`0x467947EE34aF926cF1DCac093870f613C96B1E0c`](https://etherscan.io/address/0x467947EE34aF926cF1DCac093870f613C96B1E0c) and currently consists of the following signers:
+    Это может привести к таким ситуациям: https://twitter.com/WormholeOracle/status/1782646259536531808
 
+---
 
+## **Экстренное DAO (Emergency DAO)** {#emergency-dao}
+
+`EmergencyDAO` — это **мультисиг 5 из 9**, который имеет **очень ограниченные действия**. Он **может отключать non-factory пулы** возрастом до 2 месяцев. Пулы, которые были отключены, будут позволять пользователям только `remove_liquidity` - выводить свою ликвидность. Он также может **отключать `liquidity gauges`** в любое время, устанавливая скорость эмиссии CRV на 0 и, таким образом, не позволяя дальнейшей эмиссии CRV в пул.
+
+Мультисиг `EmergencyDAO` развернут по адресу [`0x467947EE34aF926cF1DCac093870f613C96B1E0c`](https://etherscan.io/address/0x467947EE34aF926cF1DCac093870f613C96B1E0c) и в настоящее время состоит из следующих подписантов:
 
 <div class="centered" markdown="block">
-| Name            | Details - Telegram Handle |
-| --------------- | ------------------------- |
-| `banteg`        | `Yearn, @banteg`          |
-| `Calvin`        | `@calchulus`              |
-| `C2tP`          | `Convex, @c2tp_eth`       |
-| `Darly Lau`     | `@Daryllautk`             |
-| `Ga3b_node`     | `@ga3b_node`              |
-| `Naga King`     | `@nagakingg`              |
-| `Peter MM`      | `@PeterMm`                |
-| `Addison`       | `@addisonthunderhead`     |
-| `Quentin Milne` |  `StakeDAO, @Kii_iu`      |
+| Имя              | Детали — Telegram          |
+| ---------------- | -------------------------- |
+| `banteg`         | `Yearn, @banteg`           |
+| `Calvin`         | `@calchulus`               |
+| `C2tP`           | `Convex, @c2tp_eth`        |
+| `Darly Lau`      | `@Daryllautk`              |
+| `Ga3b_node`      | `@ga3b_node`               |
+| `Naga King`      | `@nagakingg`               |
+| `Peter MM`       | `@PeterMm`                 |
+| `Addison`        | `@addisonthunderhead`      |
+| `Quentin Milne`  | `StakeDAO, @Kii_iu`        |
 </div>
 
 ---
 
+## **Кросс-чейн Управление (Cross-Chain Governance)** {#cross-chain-governance}
 
-## **Cross-Chain Governance**
+Поскольку Curve развернут на различных блокчейнах, возникает необходимость в permissionless кросс-чейн фреймворке управления, чтобы предоставить DAO контроль над контрактами в этих сетях. Для этого Curve развернул различные контракты в этих сетях, чтобы обеспечить контроль DAO. Даже для кросс-чейн голосований **голосование всегда происходит в основной сети Ethereum**. После завершения голосования итог **передается в виде сообщения в соответствующую сеть**, где затем исполняется.
 
-Since Curve is deployed on various chains, there is a need for a permissionless cross-chain governance framework to grant the DAO control over contracts across these chains. To address this, Curve has deployed various contracts on those chains to ensure DAO control. Even for cross-chain votes, **voting always takes place on the Ethereum Mainnet**. Once the vote concludes, the final **outcome is transmitted via a message to the corresponding chain**, where it is then executed.
-
-!!!warning "DAO Control Across Chains"
-    While DAO control of Curve smart contracts is ensured on most chains, some chains might not yet offer the required infrastructure to support this cross-chain framework. A list of all cross-chain ownership-related contracts, as well as more technical documentation, can be found [here](https://docs.curve.fi/deployments/xgov-xgauges/#curve-x-gov).
-
+!!!warning "Контроль DAO в разных сетях"
+    Хотя контроль DAO над смарт-контрактами Curve обеспечен в большинстве сетей, некоторые сети могут еще не предлагать необходимую инфраструктуру для поддержки этого кросс-чейн фреймворка. Список всех контрактов, связанных с владением в кросс-чейн сетях, а также более техническая документация, доступна [здесь](https://docs.curve.fi/deployments/xgov-xgauges/#curve-x-gov).
 
 ---
 
+## **Панель Управления DAO (The DAO Dashboard)** {#the-dao-dashboard}
 
-## **The DAO Dashboard**
-
-Users can access the Curve DAO dashboard at [https://dao.curve.fi/dao](https://dao.curve.fi/dao). This dashboard provides an overview of all current and closed votes. Each proposal should have a corresponding topic on the Curve governance forum, accessible at [https://gov.curve.fi/](https://gov.curve.fi/).
-
+Пользователи могут получить доступ к панели управления Curve DAO по адресу [https://dao.curve.fi/dao](https://dao.curve.fi/dao). Эта панель предоставляет обзор всех текущих и закрытых голосований. Каждое предложение должно иметь соответствующую тему на форуме управления Curve, доступном по адресу [https://gov.curve.fi/](https://gov.curve.fi/).
 
 ---
 
+## **Создание Предложений (Creating Proposals)** {#creating-proposals}
 
-## **Creating Proposals**
+Чтобы создать официальное предложение, пользователям следует сначала составить предложение и опубликовать его на форуме управления. Важно оценить осуществимость предложения и измерить интерес сообщества через Curve Discord, Telegram или форум управления.
 
-To create an official proposal, users should first draft the proposal and post it on the governance forum. It’s important to evaluate the proposal’s feasibility and gauge community interest through the Curve Discord, Telegram, or Governance forum.
+Если пользователи не уверены в технических аспектах подачи предложения в блокчейн Ethereum, они могут обратиться за помощью к члену команды.
 
-If users are unsure about the technical aspects of submitting the proposal to the Ethereum blockchain, they can seek assistance from a member of the team.
+Для получения дополнительной информации см.: [Создание предложений DAO](./proposals/creating-a-dao-proposal.md)
 
-For more details, see: [Creating DAO Proposals](./proposals/creating-a-dao-proposal.md)

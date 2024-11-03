@@ -1,27 +1,30 @@
-Official DAO proposals are the only way to create enforceable changes in the Curve protocol. There are currently two types of votes: parameter and text.
+<h1>Создание предложения в DAO</h1>
 
-Parameter votes are automatically committed to the DAO three days after they are enacted at the end of the vote. Text proposals are different as they often necessitate development. For these, it is recommended to discuss with the Curve team to understand the feasibility and to create a signaling proposal.
+Официальные предложения DAO — это единственный способ внести обязательные изменения в протокол Curve. В настоящее время существует два типа голосований: параметрические и текстовые.
 
-Before creating an on-chain vote, it might make sense to do a temperature check on the [governance forum](https://gov.curve.fi/), especially if the subject is of an important matter.
+- Параметрические голосования (Parameter votes) автоматически фиксируются в DAO через три дня после их принятия в конце голосования. 
+- Текстовые предложения (Text proposals) отличаются, так как они часто требуют разработки. Для них рекомендуется обсудить с командой Curve, чтобы понять осуществимость и создать сигнальное предложение.
 
+Перед созданием голосования в блокчейне имеет смысл провести предварительное обсуждение на [форуме управления](https://gov.curve.fi/), особенно если тема имеет большое значение.
 
-To actually create an on-chain proposal, 2500 veCRV are required. (1)
+Для фактического создания голосования в блокчейне требуется 2500 `veCRV`. (1)
 { .annotate }
 
-1. But there's nothing to worry about, my friend. If you don't have 2500 veCRV, there are plenty of helpful community members who will surely help you create one.
+1. Но не беспокойтесь, мой друг. Если у вас нет 2500 `veCRV`, есть много полезных членов сообщества, которые наверняка помогут вам создать его.
 
-## **Creating your vote** 
+## **Создание вашего голосования** {#creating-your-vote}
 
-Visit the Curve DAO: [https://dao.curve.fi/dao](https://dao.curve.fi/dao), select your type of vote and submit it.
+Посетите Curve DAO: [https://dao.curve.fi/dao](https://dao.curve.fi/dao), выберите тип голосования и отправьте его.
 
-![Create Vote UI](../../images/ui/crate-vote.webp)
+![Интерфейс создания голосования](../../images/ui/crate-vote.webp)
 
-## **Creating your proposal**
+## **Создание вашего предложения** {#creating-your-proposal}
 
-Every DAO proposal must be accompanied with a proposal on the Curve governance forum. Visit the proposal section: [https://gov.curve.fi/c/proposals/8](https://gov.curve.fi/c/proposals/8) and click **"New Topic"**.
+Каждое предложение DAO должно сопровождаться предложением на форуме управления Curve. Посетите раздел предложений: [https://gov.curve.fi/c/proposals/8](https://gov.curve.fi/c/proposals/8) и нажмите **"New Topic"**.
 
-You will then be presented with a template to help you present your proposed choices to the community.
+Затем вам будет представлен шаблон, который поможет вам представить ваши предложенные варианты сообществу.
 
-![Proposal Guidelines](../../images/ui/proposal_guidelines.webp)
+![Руководство по предложениям](../../images/ui/proposal_guidelines.webp)
 
-After that's done, be sure to engage with members of the community who have questions about your proposal.
+После этого обязательно взаимодействуйте с членами сообщества, у которых есть вопросы по вашему предложению.
+

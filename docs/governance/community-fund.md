@@ -1,11 +1,12 @@
-<h1>Community Fund</h1>
+<h1>Фонд Сообщества</h1>
 
-The initial distribution of CRV allocated around 151M CRV to a community fund, intended for use in emergencies or as rewards for community-led initiatives. 
+Первоначальное распределение CRV выделило около 151 млн CRV в Фонд Сообщества (Community Fund), предназначенный для использования в чрезвычайных ситуациях или в качестве вознаграждений за инициативы, возглавляемые сообществом.
 
-The Curve DAO has full access to these funds and can decide to award part of this fund through a proposal. Funds can only be distributed through linear vesting over a minimum duration of one year using a vesting contract.
+Curve DAO имеет полный доступ к этим средствам и может принять решение о выделении части этого фонда через предложение. Средства могут быть распределены только через линейный вестинг (linear vesting) на минимальный срок в один год с использованием контракта вестинга (vesting contract).
 
-The contract is deployed on Ethereum at [`0xe3997288987e6297ad550a69b31439504f513267`](https://etherscan.io/address/0xe3997288987e6297ad550a69b31439504f513267).
+Контракт развернут в сети Ethereum по адресу [`0xe3997288987e6297ad550a69b31439504f513267`](https://etherscan.io/address/0xe3997288987e6297ad550a69b31439504f513267).
 
-If you have a project you believe deserves a grant, please create a proposal or discuss it with a team member on [:simple-discord: Discord](https://discord.gg/twUngQYz85) or [:simple-telegram: Telegram](https://t.me/curvefi).
+Если у вас есть проект, который, по вашему мнению, заслуживает гранта, пожалуйста, создайте предложение или обсудите его с членом команды в [:simple-discord: Discord](https://discord.gg/twUngQYz85) или [:simple-telegram: Telegram](https://t.me/curvefi).
 
-More information on proposals: [Creating a DAO proposal](./proposals/creating-a-dao-proposal.md)
+Дополнительная информация о предложениях: [Создание предложения DAO](./proposals/creating-a-dao-proposal.md)
+
