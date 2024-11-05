@@ -1,122 +1,116 @@
-Explanation of how the Curve UI displays yield calculations
+<h1>Расчет доходности</h1>
 
-!!!warning "Warning"
-    **This page is outdated and will be updated soon.**  Much of this information has changed.  If you need up to date information please check the [**new Technical Documentation**](https://docs.curve.fi/) or ask in the [**Curve Telegram**](https://t.me/curvefi).  There are some links here to the [**old Technical Documentation**](https://curve.readthedocs.io/), documentation there is also outdated.
+# **Объяснение того, как интерфейс Curve отображает расчеты доходности**
 
-Like all documentation within this guide, this article is intended to be detailed but non-technical, outside of a few light mathematical formulas. While we highlight specific smart contract function names that the Curve UI may reference for convenience, no knowledge of coding is otherwise necessary to understand this article.
+!!!warning "Предупреждение"
+    **Эта страница устарела и скоро будет обновлена.** Многое из этой информации изменилось. Если вам нужна актуальная информация, пожалуйста, ознакомьтесь с [**новой технической документацией**](https://docs.curve.fi/) или спросите в [**Telegram Curve**](https://t.me/curvefi). Здесь есть ссылки на [**старую техническую документацию**](https://curve.readthedocs.io/), но документация там тоже устарела.
 
-# **Types of Yield**
+Как и вся документация в этом руководстве, эта статья предназначена для подробного, но не технического ознакомления, за исключением нескольких простых математических формул. Хотя мы выделяем конкретные названия функций смарт-контрактов, на которые может ссылаться интерфейс Curve для удобства, никаких знаний программирования не требуется для понимания этой статьи.
 
-![Curve Pools](../images/ui/pools.png)
+# **Типы Доходности** {#types-of-yield}
 
-Curve UI displaying different types of displayed Curve yield (tAPY and tAPR).
+![Пулы Curve](../images/ui/pools.png)
 
-In the above screenshot you can see a Curve pool has the potential to offer many different types of yield. The documentation provides an overview of the different types of yield here:
+Интерфейс Curve, отображающий различные типы доходности Curve (tAPY и tAPR).
 
-[**Understanding CRV**](../crv-token/overview.md)
+На приведенном выше скриншоте вы можете увидеть, что пул Curve имеет потенциал предлагать множество различных типов доходности. Документация предоставляет обзор различных типов доходности здесь:
 
-It’s important to remember that these numbers are a projections of historical pool performance. The user would get this rate if the pool performance stays exactly the same for one year.
+[**Понимание CRV**](../crv-token/overview.md)
 
-These yield types are:
+Важно помнить, что эти цифры являются прогнозами на основе исторической производительности пула. Пользователь получит эту ставку, если производительность пула останется точно такой же в течение одного года.
 
-*   **Base vAPY:** Shown on the first line, this number represents the fees that accrue to holders of the LP token based on trading volume. [More Info](https://resources.curve.fi/lp/understanding-curve-pools)​
-*   **$CRV Rewards tAPR:** Shown on the second line, the rewards tAPR represents the rate of $CRV token emissions one would have earned if the pool has a rewards gauge and the user stakes into this rewards gauge. The number is listed as a range of possible rewards, based on the user’s locked veCRV the size of this boost can vary. [More Info](https://resources.curve.fi/reward-gauges/understanding-gauges)​
-*   **Incentives Rewards tAPR:** Some pools also choose to stream rewards in the form of a different token — this is represented on the third line if applicable.
+Эти типы доходности:
 
-**`vAPY`** stands for _“variable annual percentage yield”_, this value calculates an annualized estimate of the trading fee yield based on the past day’s trading activity, inclusive of any effect of compounding.
+*   **Базовый vAPY:** Показан в первой строке, это число представляет комиссии, которые начисляются держателям LP-токенов на основе объема торгов. [Подробнее](https://resources.curve.fi/lp/understanding-curve-pools)
+*   **$CRV Вознаграждения tAPR:** Показан во второй строке, tAPR вознаграждений представляет ставку эмиссии токенов $CRV, которую пользователь получил бы, если у пула есть gauge вознаграждений, и пользователь стейкает в этот gauge вознаграждений. Число указано в виде диапазона возможных вознаграждений, размер этого буста может варьироваться в зависимости от заблокированного пользователем veCRV. [Подробнее](https://resources.curve.fi/reward-gauges/understanding-gauges)
+*   **Вознаграждения tAPR за стимулы:** Некоторые пулы также выбирают раздавать вознаграждения в форме другого токена — это представлено в третьей строке, если применимо.
 
-The rewards **`tAPR`** stands for _“token annual percentage rate”_ — token rewards must be claimed manually and therefore do not automatically compound, so “rate” is the more proper term.
+**`vAPY`** означает _«variable annual percentage yield»_ («переменная годовая процентная доходность»), это значение рассчитывает годовую оценку доходности от торговых комиссий на основе торговой активности за прошлый день, включая любой эффект сложного процента.
 
-## **Base vAPY**
+Вознаграждения **`tAPR`** означает _«token annual percentage rate»_ («годовая процентная ставка по токенам») — вознаграждения в токенах должны быть востребованы вручную и поэтому не капитализируются автоматически, поэтому «ставка» является более правильным термином.
 
-When Curve pools are launched, they receive a value for both the **`fee`** (the overall fee applied to trades) and the **`admin_fee`** (the percentage of this fee that goes to the Curve DAO as opposed to pool LPs). These parameters are directly viewable on the smart contract through the corresponding function names.
+## **Базовый vAPY** {#base-vapy}
 
-These fees are displayed on the Curve UI pool page:
+Когда пулы Curve запускаются, им назначаются значения для **`fee`** (общая комиссия, применяемая к сделкам) и **`admin_fee`** (процент этой комиссии, который идет в Curve DAO, в отличие от LP пула). Эти параметры можно напрямую просмотреть в смарт-контракте через соответствующие названия функций.
 
-![UI Pool Fee](../images/ui/fee.png)
+Эти комиссии отображаются на странице пула в интерфейсе Curve:
 
-These parameters may also be updated in the future by the Curve DAO by calling the **`commit_new_fee`** method. If the fees are in the process of being changed, these are readable in the smart contract via the **`future_fee`** and **`future_admin_fee`** methods.
+![Комиссия пула в интерфейсе](../images/ui/fee.png)
 
-The fees are specifically earned or charged every time a user interacts with a pool contract through a transaction which may affect the pool balances. For example, directly calling the **`exchange`** function would rebalance the pool, so a fee clearly applies. If you add or remove liquidity in an imbalanced fashion, this would also adjust the ratios of tokens within the pool and thus be subject to fees. No fees are charged if a user adds coin in a balanced proportion or on removal.
+Эти параметры могут быть обновлены в будущем Curve DAO путем вызова метода **`commit_new_fee`**. Если комиссии находятся в процессе изменения, они доступны для чтения в смарт-контракте через методы **`future_fee`** и **`future_admin_fee`**.
 
-When you call methods to preview how many tokens you might receive for interacting with a pool (ie **`get_dy`** or **`calc_token_amount`**) the values they return are usually but not always inclusive of any fees — the UI calculations are intended to make any corrections where appropriate, but be sure to ask the support team if you have questions.
+Комиссии конкретно зарабатываются или взимаются каждый раз, когда пользователь взаимодействует с контрактом пула через транзакцию, которая может повлиять на балансы пула. Например, прямой вызов функции **`exchange`** перебалансирует пул, поэтому комиссия явно применяется. Если вы добавляете или удаляете ликвидность несбалансированным образом, это также изменит соотношения токенов внутри пула и, таким образом, подлежит комиссиям. Комиссии не взимаются, если пользователь добавляет монеты в сбалансированной пропорции или при удалении.
 
-Theoretically, one could calculate the base vAPY for any period by calculating the fees for every transaction and summing over the entire range. However, the Curve UI utilizes a simpler methodology to calculate the base vAPY, where **`t`** is the time in days:
+Когда вы вызываете методы для предварительного просмотра того, сколько токенов вы можете получить при взаимодействии с пулом (например, **`get_dy`** или **`calc_token_amount`**), значения, которые они возвращают, обычно, но не всегда, включают все комиссии — расчеты в интерфейсе предназначены для внесения любых корректировок, где это необходимо, но обязательно спросите у службы поддержки, если у вас есть вопросы.
 
-
+Теоретически, можно рассчитать базовый vAPY за любой период, вычисляя комиссии для каждой транзакции и суммируя по всему диапазону. Однако, интерфейс Curve использует более простую методологию для расчета базового vAPY, где **`t`** — это время в днях:
 
 $$\left( \frac{\text{virtual_price}(t=0)}{\text{virtual_price}(t=-1)} \right)^{365} - 1$$
 
-
-In other words, the vAPY measures the change in the pool’s _**"virtual price"**_ between today and yesterday, then annualizes this rate. The _**"virtual price"**_ is a measure of the pool growth over time, and is viewable directly on the UI.
+Другими словами, vAPY измеряет изменение _**«virtual price»**_ пула между сегодня и вчера, затем ежегодизирует эту ставку. _**«Virtual price»**_ — это мера роста пула со временем, и она видна напрямую в интерфейсе.
 
 ![Virtual Price](../images/ui/virtual-price.webp)
 
-The UI receives this value directly by calling the **`get_virtual_price`** method on the pool contract.
+Интерфейс получает это значение напрямую, вызывая метод **`get_virtual_price`** в контракте пула.
 
-Every time a transaction occurs that charges a fee, the virtual price is incremented accordingly. Thus, when a pool launches with a virtual price of exactly 1, if the pool’s virtual price is 1.01 at some future time, an LP holding a token has seen the token’s value increase by 1%.
-
+Каждый раз, когда происходит транзакция, которая взимает комиссию, virtual price увеличивается соответствующим образом. Таким образом, когда пул запускается с virtual price ровно 1, если virtual price пула составляет 1.01 в какой-то момент в будущем, LP, держащий токен, увидел увеличение стоимости токена на 1%.
 
 $$\frac{1.01}{1.00} - 1 = 0.01 = 1\%$$
 
+Virtual price 1.01 означает, что LP получит на 1% больше стоимости при удалении ликвидности. Аналогично, новые пользователи, добавляющие ликвидность, получат на 1% меньше LP-токенов при депозите.
 
+Для пулов привязанных стейблкоинов virtual price может быть легко использован для расчета vAPY пула с момента его создания без необходимости дополнительных вычислений. Для пулов v2 необходимо также учитывать колеблющиеся цены базовых активов.
 
-A virtual price of 1.01 means an LP will get 1% more value back on removing liquidity. Similarly, new users adding liquidity will receive 1% fewer LP tokens on deposit.
+Для разработчиков здесь есть более подробная информация о торговых комиссиях из технической документации:
 
-For pegged stablecoin pools, virtual price can easily be utilized to calculate vAPY of the pool since inception with no further calculations necessary. For v2 pools, one must also consider the fluctuating prices of underlying assets.
+*   [**О торговых комиссиях**](https://curve.readthedocs.io/factory-deployer.html?highlight=fees#trade-fees)
+*   [**Запрос админских комиссий**](https://curve.readthedocs.io/factory-pools.html?highlight=fees#claiming-admin-fees)
+*   [**Распределение комиссий**](https://curve.readthedocs.io/dao-fees.html?highlight=fees#fee-distribution)
 
-For developers, here are more details about trade fees from the technical documentation:
+## **CRV Вознаграждения tAPR** {#crv-rewards-tapr}
 
-*   ​[**About Trade Fees**](https://curve.readthedocs.io/factory-deployer.html?highlight=fees#trade-fees)​
-*   ​[**Claiming Admin Fees**](https://curve.readthedocs.io/factory-pools.html?highlight=fees#claiming-admin-fees)​
-*   ​[**Fee Distribution**](https://curve.readthedocs.io/dao-fees.html?highlight=fees#fee-distribution)​
-    
+Curve DAO также уполномочивает некоторые пулы получать бонусные вознаграждения от эмиссии токенов $CRV, как описано в разделе [**Понимание Gauges**](https://resources.curve.fi/reward-gauges/understanding-gauges) документации. Если у пула есть подходящий gauge, то интерфейс отображает диапазон возможных значений tAPR, которые пользователи зарабатывают в настоящее время, с возможными изменениями в будущем.
 
-## **CRV Rewards tAPR**
-
-The Curve DAO also authorizes some pools to receive bonus rewards from $CRV token emission, as described in the [**Understanding Gauges**](https://resources.curve.fi/reward-gauges/understanding-gauges) section of the documentation. If the pool has an eligible gauge, then the UI displays the range of possible tAPR values users are earning at present, subject to change in the future.
-
-The formula used here to calculate rewards tAPR:
+Формула, используемая здесь для расчета вознаграждений tAPR:
 
 $$tAPR = \frac{\text{crv_price} \times \text{inflation_rate} \times \text{relative_weight} \times 12614400}{\text{working_supply} \times \text{asset_price} \times \text{virtual_price}}$$
 
+Эти параметры получены из различных источников данных, в основном ончейн:
 
-These parameters are obtained from various data sources, mostly on-chain:
+*   **`crv_price:`** Текущая цена токена $CRV в долларах США. Это может быть экстраполировано из ончейн-данных, но интерфейс полагается на API CoinGecko для получения этого значения.
+*   **`inflation_rate:`** Ставка инфляции токена $CRV, доступная из функции `rate` токена $CRV.
+*   **`relative_weight:`** На основе еженедельного голосования, каждый gauge вознаграждений пула Curve имеет вес относительно всех других gauges Curve. Это значение можно вычислить, вызвав ту же функцию в [**контракте контроллера gauges**](https://curve.readthedocs.io/dao-gauges.html#the-gauge-controller) Curve.
 
-*   **`crv_price:`** The current price of the $CRV token in USD. This could be extrapolated from on-chain data, but the UI relies on the CoinGecko API to fetch this value.
-*   **`inflation_rate:`** The inflation rate of the $CRV token, accessed from the `rate` function of the $CRV token.
-*   **`relative_weight:`** Based on weekly voting, each Curve pool rewards gauge has a weighting relative to all other Curve gauges. This value can be calculated by calling the same function on the Curve [**gauge controller contract**](https://curve.readthedocs.io/dao-gauges.html#the-gauge-controller).
-    
-![Gauge Weights](../images/ui/gauge-weights.webp)
+![Весы gauges](../images/ui/gauge-weights.webp)
 
-​[https://dao.curve.fi/](https://dao.curve.fi/)​
+[https://dao.curve.fi/](https://dao.curve.fi/)
 
-*   **`working_supply:`** Accessed by calling the same function on the specific Curve gauge contract for the pool.
-*   **`asset_price:`** The price of the asset — that is, if the pool contains only bitcoin, you would use the current price of $BTC. For v2 pools, this must be calculated by averaging over the specific assets within the pool.
-*   **`virtual_price:`** The measure of the pool growth over time, as described above.
-    
-The magic number `12614400` is number of seconds in a year `(60 * 60 * 24 * 365 = 31536000)` times 0.4. In this case the 0.4 is due to the effect of boosts (minimum boost of 1 / maximum boost of 2.5 = 0.4).
+*   **`working_supply:`** Доступен путем вызова той же функции в конкретном контракте gauge Curve для пула.
+*   **`asset_price:`** Цена актива — то есть, если пул содержит только биткоин, вы бы использовали текущую цену $BTC. Для пулов v2 это должно быть рассчитано путем усреднения по конкретным активам внутри пула.
+*   **`virtual_price:`** Мера роста пула со временем, как описано выше.
 
-As shown in the UI, all tAPR values are displayed as a range, with the base rate on the left of the arrow representing the default rate one would receive if the user has no boost, and the value on the right of the arrow representing the maximum value a user could receive if the user has the maximum boost, which is 2.5 times higher than the minimum boost. Further details about calculating boosts [**are provided here**](../reward-gauges/boosting-your-crv-rewards.md).
+Магическое число `12614400` — это количество секунд в году `(60 * 60 * 24 * 365 = 31536000)` умноженное на 0.4. В этом случае 0.4 связано с эффектом бустов (минимальный буст 1 / максимальный буст 2.5 = 0.4).
 
-For developers, here are relevant links to the technical documentation:
+Как показано в интерфейсе, все значения tAPR отображаются в виде диапазона, базовая ставка слева от стрелки представляет собой стандартную ставку, которую пользователь получил бы, если у него нет буста, а значение справа от стрелки представляет максимальное значение, которое пользователь мог бы получить, если бы у него был максимальный буст, который в 2.5 раза выше минимального буста. Дополнительные подробности о расчете бустов [**предоставлены здесь**](../reward-gauges/boosting-your-crv-rewards.md).
 
-*   ​[**About Liquidity Gauges**](https://curve.readthedocs.io/dao-gauges.html?highlight=gauge)​
-*   ​[**Gauge Controller**](https://curve.readthedocs.io/dao-gauges.html#the-gauge-controller)​
-*   ​[**Gauges for EVM Sidechains**](https://curve.readthedocs.io/dao-gauges-sidechain.html)​
-*   ​[**Gauge Proxy**](https://curve.readthedocs.io/dao-ownership.html?highlight=gauge#gaugeproxy)​
-    
-## **Incentives tAPR**
+Для разработчиков здесь приведены соответствующие ссылки на техническую документацию:
 
-All pools may permissionlessly stream other token rewards without approval from the Curve DAO. The UI displays these bonus rewards only when applicable. In the example of stETH below, note how the pool is streaming $LDO tokens in addition to $CRV rewards.
+*   [**О Liquidity Gauges**](https://curve.readthedocs.io/dao-gauges.html?highlight=gauge)
+*   [**Gauge Controller**](https://curve.readthedocs.io/dao-gauges.html#the-gauge-controller)
+*   [**Gauges для EVM Sidechains**](https://curve.readthedocs.io/dao-gauges-sidechain.html)
+*   [**Gauge Proxy**](https://curve.readthedocs.io/dao-ownership.html?highlight=gauge#gaugeproxy)
+
+## **tAPR Стимулов** {#incentives-tapr}
+
+Все пулы могут без разрешения транслировать вознаграждения в других токенах без одобрения Curve DAO. Интерфейс отображает эти бонусные вознаграждения только когда это применимо. В примере stETH ниже обратите внимание, как пул транслирует токены $LDO в дополнение к вознаграждениям $CRV.
 
 ![tAPR Rewards](../images/ui/tAPR.webp)
 
-​[**Pool Overview Page**](https://curve.fi/#/ethereum/pools)​
+[**Страница обзора пулов**](https://curve.fi/#/ethereum/pools)
 
-![stETH Pool Overview](../images/ui/steth-overview.webp)
+![Обзор пула stETH](../images/ui/steth-overview.webp)
 
-​[**stETH Pool Page**](https://curve.fi/#/ethereum/pools/steth/deposit)​
+[**Страница пула stETH**](https://curve.fi/#/ethereum/pools/steth/deposit)
 
-Further information on these extra incentives is available in the developer documentation.
+Дополнительная информация об этих дополнительных стимулах доступна в документации для разработчиков.
 

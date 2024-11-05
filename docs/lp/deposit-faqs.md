@@ -1,72 +1,77 @@
-## **What is the “deposit wrapped” option?**
+<h1>FAQ по Депозиту</h1>
 
-(This applies to metapools or pools with c-tokens or a-tokens). If you deposit a stablecoin to one of the pools with lending, Curve will automatically wrap your token to a cToken (for Compound) or aToken (for AAVE). The option is simply there if you have already previously lent them on Compound or AAVE. If your stablecoin is in its original form, you can ignore this option.
-If you deposit into metapools and you have the corresponding basepool token (for example, 3Crv), you can also use the "deposit wrapped" option to deposit this token.
+## **Что такое опция «deposit wrapped»?** {#what-is-the-deposit-wrapped-option}
+
+(Это относится к метапулам или пулам с c-токенами или a-токенами). Если вы вносите стейблкоин в один из пулов с кредитованием, Curve автоматически обернет ваш токен в `cToken` (для Compound) или `aToken` (для AAVE). Эта опция существует на случай, если вы ранее уже предоставили их в кредит на Compound или AAVE. Если ваш стейблкоин в его исходной форме, вы можете игнорировать эту опцию.
+
+Если вы вносите средства в метапулы и у вас есть соответствующий токен базового пула (например, `3Crv`), вы также можете использовать опцию «deposit wrapped», чтобы внести этот токен.
 
 <figure markdown>
   ![](../images/deposit_wrapped.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
+## **Что происходит, когда вы предоставляете ликвидность в Curve?** {#what-happens-when-you-provide-liquidity-on-curve}
 
-## **What happens when you provide liquidity on Curve?**
-
-When you go to the deposit page and deposit one stablecoin, it then gets split between each token in the pool. That’s something you have to keep in mind because if you were to deposit 1000 DAI in the Pool, as per the screenshot below, your balance would be roughly equal to 390.7 GUSD, 120 DAI, 119.8 USDC and 362.6 USDT. Those values change constantly as people trade and arb the price of stable coins.
+Когда вы переходите на страницу депозита и вносите один стейблкоин, он затем распределяется между каждым токеном в пуле. Это важно иметь в виду, потому что если вы внесете 1000 DAI в пул, как показано на скриншоте ниже, ваш баланс будет примерно равен 390,7 GUSD, 120 DAI, 119,8 USDC и 362,6 USDT. Эти значения постоянно меняются, поскольку люди торгуют и проводят арбитраж цен стейблкоинов.
 
 <figure markdown>
   ![](../images/gusd_balances.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
+## **Имеет ли значение, какую монету я вношу?** {#does-the-coin-i-deposit-matter}
 
-## **Does the coin I deposit matter?**
+Помимо бонуса за депозит, объясненного ниже, это не имеет значения. Ваши токены будут распределены в пуле, и это не повлияет на вашу доходность, поэтому вы можете вносить одну, несколько или все монеты в пул, не беспокоясь о влиянии на вашу доходность.
 
-Besides the deposit bonus explained below, it doesn’t matter. Your tokens will get split into the pool and it doesn’t affect your returns so you can deposit one, some or all the coins into the pool without worrying about it affecting your returns.
+Однако здесь стоит уточнить важный момент. Если пул имеет низкую ликвидность или сумма вашего депозита значительна по сравнению с размером пула, внесение средств в одном токене может привести к тому, что ваши средства будут обменяны на другие токены пула по невыгодному курсу. Это связано с тем, что крупный депозит может нарушить баланс пула, вызывая проскальзывание и неблагоприятные обменные ставки.
 
-## **Understanding deposit bonuses**
+В таких случаях рекомендуется предварительно обменять свои токены на открытом рынке таким образом, чтобы внести в пул все необходимые токены в пропорциях, соответствующих их долям в пуле. Это поможет минимизировать потери от неблагоприятных курсов обмена и обеспечить более эффективное использование ваших средств.
 
-On the screenshot above, you can see GUSD is quite low as it should make up 50% of the total pool because it's a metapool paired against 3crv. So if your plan was to join the gusd-pool, you would ideally deposit GUSD into it.   
-As you can see on the screenshot, you would get an instant 0.0082% bonus for depositing GUSD into the pool.
+## **Понимание бонусов за депозит** {#understanding-deposit-bonuses}
 
-The main reason for this is that GUSD is currently slightly more expensive so if you went to a centralized exchange you might sell it for $1.007 instead of $1. The deposit bonus reflects that.
+На скриншоте выше вы можете увидеть, что GUSD довольно низкий, так как он должен составлять 50% от общего пула, потому что это метапул, спаренный с `3Crv`. Поэтому, если вы планировали присоединиться к GUSD-пулу, вам желательно внести GUSD в него.
 
-The other reason behind this is that the pools are always trying to balance themselves and go back to equal parts (in this case 50% GUSD) so depositing the coin with the lowest share will get you a deposit bonus.
+Как вы можете увидеть на скриншоте, вы получите мгновенный бонус 0.0082% за внесение GUSD в пул.
+
+Основная причина этого в том, что GUSD в настоящее время немного дороже, поэтому если вы пойдете на централизованную биржу, вы можете продать его за $1.007 вместо $1. Бонус за депозит отражает это.
+
+Другая причина заключается в том, что пулы всегда стремятся уравновесить себя и вернуться к равным долям (в этом случае 50% GUSD), поэтому внесение монеты с наименьшей долей даст вам бонус за депозит.
 
 <figure markdown>
   ![](../images/gusd_deposit.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
+## **Но означает ли это, что я все еще могу вывести в моем любимом стейблкоине?** {#but-does-that-mean-i-can-still-withdraw-in-my-favorite-stable-coin}
 
-## **But does that mean I can still withdraw in my favorite stable coin?**
+Когда вы выводите средства, применяется тот же принцип, что и в предыдущем вопросе, но в обратном порядке. Если вы выводите стейблкоин с наибольшей долей, вы получите бонус, но вы все еще выбираете, какой стейблкоин вы хотите вывести.
 
-When you withdraw, the same principle as in the question above applies- but reversed. If you withdraw the stable coin with the biggest share, you would get a bonus but you still choose what stable coin you want to withdraw.
+## **Насколько быстро начисляются/капитализируются проценты?** {#how-quickly-does-interest-accrue-compound}
 
-## **How quickly does interest accrue/compound?**
+Проценты для пулов, использующих кредитные протоколы, капитализируются каждый блок или каждые 15 секунд, или сразу после уплаты комиссий. Они также автоматически капитализируются.
 
-Interests for pools using lending protocols compound every block or 15 seconds or immediately after fees are paid. It’s also compounded automatically.
+## **Что такое арбитраж?** {#what-is-arbitrage}
 
-## **What is arbitrage?**
+Арбитраж — это одновременная покупка и продажа, в нашем случае, токена с целью получения прибыли. Поскольку криптовалютные рынки часто могут испытывать недостаток ликвидности, у трейдеров нередко возникают возможности воспользоваться ценовыми несоответствиями для получения прибыли, и этому могут способствовать такие протоколы, как Curve.
 
-Arbitrage is the simultaneous buying and selling of, in our case, a token to make a profit. Because cryptocurrency markets can often lack liquidity, there are often opportunities for traders to take advantage of price discrepancies to make a profit which can be helped by protocols like Curve.
+Пример транзакции: ​[**Etherscan**](https://etherscan.io/tx/0x259b7ac1f50554fe5ddcfeea7b4fa90ad70356ddfbbd341289db0dfbf99447f9)​
 
-An example transaction: ​[**Etherscan**](https://etherscan.io/tx/0x259b7ac1f50554fe5ddcfeea7b4fa90ad70356ddfbbd341289db0dfbf99447f9)​
+В этой транзакции кто-то использовал Curve и OasisDex и заработал около $200. Это возвращает нас к тому, что обсуждалось ранее с ликвидными пулами. Идея в том, чтобы стимулировать трейдеров использовать ценовые расхождения, от чего мы все получаем выгоду.
 
-In this transaction, someone used Curve and OasisDex and made around $200. This goes back to what was discussed earlier with liquidity pools. The idea is that is you incentivize traders to take advantage of price discrepancies which we all get rewarded for.
+## **Что такое стимулируемые пулы?** {#what-are-incentivized-pools}
 
-## **What are incentivized pools?**
+Пулы ликвидности, особенно те, участие в которых не требует от вас отказа от других выгодных возможностей (то есть без альтернативных издержек), являются отличным способом помочь стейблкоинам сохранять свою привязку к базовой стоимости. Это упрощает для трейдеров возможность заниматься арбитражем (см. вопрос выше), когда цена отклоняется от привязки. Это очень важно для всех компаний и фондов, разрабатывающих стейблкоины, поскольку стейблкоин по цене $0,98 выглядит не лучшим образом.
 
-Liquidity pools (particularly one without an opportunity cost) are a great way to help stable coins keep their pegs. It makes easy for traders to arb (see question above) when the price slips off the peg which is very important for all the companies and foundations developing stable coins as having a $0.98 stablecoin is never a good look.
-
-As a result, some pools on Curve are “incentivized”. That means that on top of trading fees and lending fees, the companies will give rewards to people providing liquidity to the pools with their coins.
+В результате некоторые пулы на Curve являются «стимулированными». Это означает, что помимо торговых комиссий и комиссий за заимствование, компании предоставляют дополнительные вознаграждения людям, которые предоставляют ликвидность в эти пулы своими монетами.
 
 ![Pool Incentives](../images/ui/pool-incentives.png)
 
-## **What makes the incentives APR move?**
+## **Что заставляет меняться APR по стимулам?** {#what-makes-the-incentives-apr-move}
 
-The steth pool in this screenshot earns another 2.69% of LDO per year and there are three variables that can make this change:
+Пул stETH на этом скриншоте зарабатывает еще 2.69% LDO в год, и есть три переменные, которые могут изменить это:
 
-*   The LDO distributed is based on the number of people staking their LP tokens, which means your share of rewards gets lower if more people start staking
-*   The price of LDO (price of LDO going up would make the yearly bonus go up)
-*   The size of weekly rewards (48,000 SNX as of today) could also be lowered as Lido reevaluates its partnership with Curve
+* Распределение LDO основано на количестве людей, стейкающих свои LP-токены, что означает, что ваша доля вознаграждений становится меньше, если больше людей начинают стейкать
+
+* Цена LDO (рост цены LDO приведет к увеличению годового бонуса)
 

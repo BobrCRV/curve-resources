@@ -1,67 +1,70 @@
-<h1>Pools Overview</h1>>
+<h1>Обзор Пулов Curve</h1>
 
-If you are new to Ethereum or DeFi, liquidity pools are a seemingly complicated concept to understand.  
+Если вы новичок в Ethereum или DeFi, ликвидные пулы могут показаться сложной концепцией для понимания.
 
-Pools hold multiple assets, allowing users to swap between them. Liquidity providers who deposit assets earn fees from these swaps.
+Пулы содержат несколько активов, позволяя пользователям обменивать их между собой. Поставщики ликвидности, которые вносят активы, зарабатывают комиссии с этих обменов.
 
-In Curve, pools can be 2 different types, these are:
+В Curve пулы могут быть 2 разных типов, это:
 
-* **Stableswap Pools** for coins that are pegged to each other, for example USDC and USDT, or stETH and ETH.  
-* **Cryptoswap Pools** which are for assets which fluctuate in value against each other, for example USDT and ETH, or CRV and ETH.
+* **Stableswap Пулы** для монет, привязанных друг к другу, например, USDC и USDT, или stETH и ETH.
+* **Cryptoswap Пулы** для активов, которые колеблются в стоимости относительно друг друга, например, USDT и ETH, или CRV и ETH.
 
-It’s important to understand that when you provide liquidity to a pool, no matter what coin you deposit, you essentially **gain exposure to all the coins in the pool** which means you want to find a pool with coins you are comfortable holding.
+Важно понимать, что когда вы предоставляете ликвидность в пул, независимо от того, какую монету вы вносите, вы по сути **получаете экспозицию ко всем монетам в пуле**, что означает, что вам нужно найти пул с монетами, которые вы готовы держать.
 
-!!!danger "Liquidity Pool Risks"
-    Before using liquidity pools, it's advisable to review our [risk disclaimer](../risks-security/risks/pool.md) page for a comprehensive overview of potential risks.
+!!!danger "Риски Ликвидных Пулов"
+    Прежде чем использовать ликвидные пулы, рекомендуется ознакомиться с нашей [страницей отказа от ответственности по рискам](../risks-security/risks/pool.md) для полного обзора потенциальных рисков.
 
 ---
 
-## **Stableswap** (**Curve V1**)
+## **Stableswap** (**Curve V1**) {#stableswap-curve-v1}
 
-Stableswap pools have assets pegged to each other.  For example USDC and USDT, as their value should always be **close to a 1:1 ratio**.
+Stableswap пулы содержат активы, привязанные друг к другу. Например, USDC и USDT, так как их стоимость должна всегда быть **близка к соотношению 1:1**.
 
-Let's look at an example about how it works for a liquidity provider:
+Давайте рассмотрим пример того, как это работает для поставщика ликвидности:
 
 ![Stableswap](../images/pools/stableswap.svg#only-light){: .centered }
 ![Stableswap](../images/pools/stableswap-dark.svg#only-dark){: .centered }
 
-*Note: Alice can deposit/withdraw any combination of assets/amounts, but pays a small [fee](#pool-fees) for unbalanced actions (e.g., USDC-only deposit).*
+*Примечание: Алиса может вносить/выводить любую комбинацию активов/сумм, но платит небольшую [комиссию](#pool-fees) за несбалансированные действия (например, депозит только в USDC).*
 
 ---
 
-## **Cryptoswap** (**Curve V2**)
+## **Cryptoswap** (**Curve V2**) {#cryptoswap-curve-v2}
 
-Cryptoswap pools contain unpaired assets like USDC and ETH, whose relative values fluctuate. This necessitates a different pool design than Stableswap.
+Cryptoswap пулы содержат несвязанные по стоимости активы, такие как USDC и ETH, чьи относительные значения колеблются. Это требует иной конструкции пула, чем у Stableswap.
 
-Cryptoswap pools maintain an equal value balance between their assets. For example, $1,000,000 in USDC would be matched by $1,000,000 worth of ETH.
+Cryptoswap пулы поддерживают равновесие стоимости между своими активами. Например, $1,000,000 в USDC будет соответствовать $1,000,000 в эквиваленте ETH.
 
-Let's look at an example about how it works for a liquidity provider:
+Давайте рассмотрим пример того, как это работает для поставщика ликвидности:
 
 ![Cryptoswap](../images/pools/cryptoswap.svg#only-light){: .centered }
 ![Cryptoswap](../images/pools/cryptoswap-dark.svg#only-dark){: .centered }
 
-*Note: Bob can deposit/withdraw any combination of assets/amounts, but pays a small [fee](#pool-fees) for unbalanced actions (e.g., ETH-only deposit).*
+*Примечание: Боб может вносить/выводить любую комбинацию активов/сумм, но платит небольшую [комиссию](#pool-fees) за несбалансированные действия (например, депозит только в ETH).*
 
 ---
 
-## **Pool Fees**
+## **Комиссии Пула** {#pool-fees}
 
-Pool fees are specific to each pool, they typically range from 0.01%-0.04%.  They are shown under the **`pool details`** tab on the pool's page.   All new pools also have dynamic fees, so in times of high volatility, fees earned by the pools increase.
+Комиссии пулов специфичны для каждого пула, обычно они варьируются от 0.01% до 0.04%. Они отображаются на вкладке **`pool details`** на странице пула. Все новые пулы также имеют динамические комиссии, поэтому в периоды высокой волатильности заработанные пулом комиссии увеличиваются.
 
-**50% of the pool fees go to the Liquidity Providers** increasing the value of LP tokens, and **50% to DAO (veCRV holders)**.
+**50% комиссий пула идут Поставщикам Ликвидности**, увеличивая стоимость LP-токенов, и **50% — DAO (держателям veCRV)**.
 
-**Balanced deposits and withdrawals are free**. Unbalanced actions incur a small fee (max 50% of swap fee). This prevents free swaps via deposit/withdraw cycles. *Note: "Balanced" means equal asset values in Cryptoswap pools, but matches current ratios in Stableswap pools*.
+**Сбалансированные депозиты и выводы бесплатны**. Несбалансированные действия влекут небольшую комиссию (максимум 50% от комиссии за обмен). Это предотвращает бесплатные обмены через циклы депозита/вывода. *Примечание: "Сбалансированные" означает равные стоимости активов в Cryptoswap пулах, но соответствует текущим пропорциям в Stableswap пулах.*
 
 ---
 
-## **Rewards & Yield**
+## **Вознаграждения и Доходность** {#rewards-and-yield}
 
-Liquidity providers are rewarded with 2 different types of yield:
+Поставщики ликвидности вознаграждаются 2 разными типами доходности:
 
-* **Base vAPY**: This is how much the LP token value is increasing due to accruing pool fees.
-* **Rewards tAPR**: These are CRV inflation rewards, other token incentives, and points. Staking LP tokens is required to earn CRV and other token rewards, which accrue through the pool's gauge. Points programs are project-specific; many don't require LP token staking. Refer to each project's point program for the most accurate information.
+* **Базовый vAPY**: Это то, насколько увеличивается стоимость LP-токена за счет накопления комиссий за обмены в пуле.
+* **Вознаграждения tAPR**: Это инфляционные вознаграждения CRV, другие стимулы в токенах и поинты (баллы за взаимодействие с определенными протоколами блокчейна). Для получения CRV и других токеновых вознаграждений требуется стейкинг LP-токенов, которые накапливаются через `gauge` (счётчик вознаграждений) пула. Программы поинтов являются специфичными для каждого проекта; многие не требуют стейкинга LP-токенов. Изучите программу поинтов конкретного проекта для получения наиболее точной информации.
 
 ![Rewards](../images/pools/rewards.svg#only-light){: .centered style="width: 500px;" }
 ![Rewards](../images/pools/rewards-dark.svg#only-dark){: .centered style="width: 500px;" }
 
-Some pools include yield-bearing tokens like sUSDe and sDAI. All yield from these tokens goes directly to Liquidity Providers, none is taken away by fees or the pool.
+Некоторые пулы включают токены с встроенной доходностью, такие как scrvUSD, sUSDe и sDAI. Вся доходность от этих токенов идет напрямую Поставщикам Ликвидности, ничего не забирается комиссиями или пулом.
+
+---
+
