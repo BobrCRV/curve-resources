@@ -1,44 +1,47 @@
-Metapools is a old concept to Curve Finance, it allows a single coin to be pooled with all the coins in another (base) pool without diluting its liquidity. Currently, the most common base pool is the 3Pool. It uses the three most liquid stable coins (USDT-USDC-DAI).
 
-## **Depositing**
+Metapools — это старая концепция в Curve Finance, которое позволяет одному токену быть объединенным с токенами в другом (базовом) пуле, не размывая его ликвидность. В настоящее время наиболее распространенным базовым пулом является 3Pool, который включает три самых ликвидных стабильных монеты (USDT-USDC-DAI).
 
-Metapools offer several options for deposits. For example, in the [GUSD/3Pool](https://curve.fi/#/ethereum/pools/gusd/deposit) Metapool you can deposit the following:
+## **Внесение средств** {#depositing}
+
+Metapools предлагают несколько вариантов для внесения средств. Например, в Metapool [GUSD/3Pool](https://curve.fi/#/ethereum/pools/gusd/deposit) вы можете внести следующие активы:
 
 *   GUSD
-*   Any of the 3Pool (DAI-USDC-USDT)
-*   3Pool LP token (3crv)
+*   Любую из монет 3Pool (DAI-USDC-USDT)
+*   LP токен 3Pool (3crv)
 
 <figure markdown>
 ![](../../images/gusd1_deposit.png){ width="300" }
 <figcaption></figcaption>
 </figure>
 
-When becoming a liquidity provider, you don't have to deposit all the coins, you can deposit one or several of the coins in the pool and it won't affect your returns. Depositing the coin with the smallest share in the pool will result in a small deposit bonus.
+Становясь поставщиком ликвидности, вам не обязательно вносить все монеты; вы можете внести одну или несколько монет в пул, и это не повлияет на вашу прибыль в пуле. Внесение монеты с наименьшей долей в пуле приведет к небольшому бонусу при депозите.
 
-Second, once you deposit one stable coin, **it gets split over the four different coins in the pool which means you now have exposure to all of them**. The first checkbox (Add all coins in a balanced proportion) allows you to deposit all four coins in the same proportion they currently are in the pool, resulting in no slippage occurrence.
+Во-вторых, как только вы вносите одну стабильную монету, **она будет распределена между тремя разными монетами в пуле, что означает, что теперь вы владеете ими всеми**. Первый флажок **`Add all coins in a balanced proportion`** (Добавить все монеты в сбалансированной пропорции) позволяет вам внести все три монеты в той же пропорции, в которой они находятся в пуле, что исключает возникновение проскальзывания.
 
-The **deposit wrapped** option lets you deposit the base pool token (usually 3Pool).
+Опция **`deposit wrapped`** позволяет внести токен базового пула (обычно 3Pool).
 
 <figure markdown>
 ![](../../images/gusd_wrapped_deposit.png){ width="300" }
 <figcaption></figcaption>
 </figure>
 
-When depositing coins into a metapool, and thus having exposure to a base pool token (e.g., 3CRV) and its paired token, you will earn at the rate of the metapool gauge. However, you'll receive trading fees from both the base and metapool.
+Внося монеты в метапул и, таким образом, получая доступ к токену базового пула (например, 3CRV) и его парному токену, вы будете зарабатывать по ставке  метапула. Однако вы также будете получать торговые комиссии как от базового пула, так и от метапула.
 
-## **Confirming and staking**
+## **Подтверждение и стейкинг** {#confirming-and-staking}
 
-You will then be asked to approve the Curve Finance contract, follow by a deposit transaction which will wrap your stable coins and deposit them into the pool. This transaction can be expensive so you ideally want to wait for gas to be fairly cheap if this will impact the size of your deposit.
+Вам будет предложено одобрить контракт Curve Finance, после чего следует транзакция депозита, которая упакует ваши стейблкоины и внесет их в пул.
 
-After depositing in the pool, you receive liquidity provider (LP) tokens. They represent your share of ownership in the pool and you will need them to stake for CRV.
+После внесения средств в пул вы получаете токены провайдера ликвидности (LP-токены). Они представляют вашу долю владения в пуле, и они понадобятся вам для стейкинга в гейдже (для получения эмиссии CRV, стимулов и поинтов).
 
-After depositing, you will be prompted with a new transaction that will deposit your LP tokens in the DAO liquidity gauge. Confirming the transaction **will let you mine CRV.** This second transaction will only pop up if you deposited your tokens under the "Deposit and stake" tab. Otherwise it will just deposit the tokens in the pool.
+Если у вас уже есть LP-токены, вы можете непосредственно застейкать их в гейдже через вкладку **`Stake`** для получения эмиссии CRV, стимулов и поинтов. В противном случае токены просто останутся в пуле зарабатывая доход только с комиссий за обмены.
 
-If you already have LP tokens, you can also directly stake them into the gauge under the 'Stake' tab.
+Через вкладку **`Deposit and stake`** вы можете сделать два предыдущих действия в одну транзакцию. 
 
-**Once that's done, you're providing liquidity and staking so all that's left to do is wait for your trading fees to accrue.**
 
-*You can click the link below to learn how to boost your CRV rewards by locking CRV on the Curve DAO:*
+**После предоставления ликвидности и стейкинга доступные комиссии, стимулы, CRV и поинты начнут начислятся сразу.**
 
-- [Boosting your CRV Rewards](../../reward-gauges/boosting-your-crv-rewards.md)
-- [Staking your $CRV](../../vecrv/locking-your-crv.md)
+*Вы можете перейти по ссылке ниже, чтобы узнать, как увеличить свои награды CRV, заблокировав CRV в Curve DAO:*
+
+- [Увеличение ваших наград CRV](../../reward-gauges/boosting-your-crv-rewards.md)
+- [Стейкинг вашего $CRV](../../vecrv/locking-your-crv.md)
+

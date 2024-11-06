@@ -1,37 +1,40 @@
-Tricrypto pools contain three volatile assets.
+Tricrypto пулы содержат три волатильных актива.
 
-[Learn more about v2 pools](../../base-features/understanding-crypto-pools.md)
+[Узнайте больше о пулах версии v2](../../base-features/understanding-crypto-pools.md)
 
-*For instance, the [TriCRV pool](https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit) is used in the examples below.*
+*Например, [пул TriCRV](https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit) используется в примерах ниже.*
 
-## **Depositing into the pool**
-Visit the deposit page ([https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit](https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit)). You will need at least one of the three tokens in the pool to deposit. The TriCRV pool consists of CRV, crvUSD, and ETH.
+## **Внесение средств в пул** {#depositing-into-the-pool}
+
+Посетите страницу депозита ([https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit](https://curve.fi/#/ethereum/pools/factory-tricrypto-4/deposit)). Вам потребуется как минимум один из трех токенов в пуле для внесения. Пул TriCRV состоит из CRV, crvUSD и ETH.
 
 <figure markdown>
   ![](../../images/tricrv_deposit.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-First, it's important to understand that you don't have to deposit all coins, you can deposit one or several of the coins in the pool and it won't affect your returns. Depositing the coin with the smallest share in the pool will result in a small positive price impact. Since crypto pools have a rebalancing mechanism, the balances of the pool should be relatively equal.
+Во-первых, важно понимать, что вам не нужно вносить все монеты, вы можете внести одну или несколько из них, и это не повлияет на вашу прибыль в пуле. Внесение монеты с наименьшей долей в пуле приведет к небольшому бонусу при депозите.
 
-Second, once you deposit one coin, **it gets split over the three different coins in the pool which means you now have exposure to all of them**. The first checkbox (Add all coins in a balanced proportion) allows you to deposit all three coins in the same proportion they currently are in the pool, resulting in no price impact.
+Во-вторых, как только вы вносите одну стабильную монету, **она будет распределена между тремя разными монетами в пуле, что означает, что теперь вы владеете ими всеми**. Первый флажок **`Add all coins in a balanced proportion`** (Добавить все монеты в сбалансированной пропорции) позволяет вам внести все три монеты в той же пропорции, в которой они находятся в пуле, что исключает возникновение проскальзывания.
 
-The second checkbox (Deposit Wrapped) allows users to deposit wrapped ETH instead of plain ETH.
+Второй флажок **`Deposit Wrapped`** позволяет пользователям вносить обернутый ETH (wETH) вместо обычного ETH.
 
 
-## **Confirming and staking**
+## **Подтверждение и стейкинг** {#confirming-and-staking}
 
-You will then be asked to approve the Curve Finance contract, follow by a deposit transaction which will deposit your into the pool. This transaction can be expensive so you ideally want to wait for gas to be fairly cheap if this will impact the size of your deposit.
+Вам будет предложено одобрить контракт Curve Finance, после чего следует транзакция депозита, которая упакует ваши стейблкоины и внесет их в пул.
 
-After depositing in the pool, you receive liquidity provider (LP) tokens. They represent your share of ownership in the pool and you will need them to stake for CRV.
+После внесения средств в пул вы получаете токены провайдера ликвидности (LP-токены). Они представляют вашу долю владения в пуле, и они понадобятся вам для стейкинга в гейдже (для получения эмиссии CRV, стимулов и поинтов).
 
-After depositing, you will be prompted with a new transaction that will deposit your LP tokens in the DAO liquidity gauge. Confirming the transaction **will let you mine CRV.** This second transaction will only pop up if you deposited your tokens under the "Deposit and stake" tab. Otherwise it will just deposit the tokens in the pool. 
+Если у вас уже есть LP-токены, вы можете непосредственно застейкать их в гейдже через вкладку **`Stake`** для получения эмиссии CRV, стимулов и поинтов. В противном случае токены просто останутся в пуле зарабатывая доход только с комиссий за обмены.
 
-If you already have LP tokens, you can also directly stake them into the gauge under the 'Stake' tab.
+Через вкладку **`Deposit and stake`** вы можете сделать два предыдущих действия в одну транзакцию. 
 
-**Once that's done, you're providing liquidity and staking so all that's left to do is wait for your trading fees to accrue.**
 
-*You can click the link below to learn how to boost your CRV rewards by locking CRV on the Curve DAO:*
+**После предоставления ликвидности и стейкинга доступные комиссии, стимулы, CRV и поинты начнут начислятся сразу.**
 
-- [Boosting your CRV Rewards](../../reward-gauges/boosting-your-crv-rewards.md)
-- [Staking your $CRV](../../vecrv/locking-your-crv.md)
+*Вы можете перейти по ссылке ниже, чтобы узнать, как увеличить свои награды CRV, заблокировав CRV в Curve DAO:*
+
+- [Увеличение ваших наград CRV](../../reward-gauges/boosting-your-crv-rewards.md)
+- [Стейкинг вашего $CRV](../../vecrv/locking-your-crv.md)
+

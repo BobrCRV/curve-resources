@@ -1,14 +1,16 @@
-## **Before depositing...**
+## **Перед депозитом...** {#before-depositing}
 
-Before depositing into a Curve pool, it is highly recommended to familiarise yourself with how Curve works, how it makes money and its basic mechanisms.
+Перед внесением депозита в пул Curve настоятельно рекомендуется ознакомиться с тем, как работает Curve, как он зарабатывает деньги и его основными механизмами.
 
-You can do so by visiting the page below:
+Вы можете сделать это, посетив страницу ниже:
 
-[**Understanding Curve v1**](../../base-features/understanding-curve.md)
-[**Understanding Curve v2**](../../base-features/understanding-crypto-pools.md)
+[**Понимание Curve v1**](../../base-features/understanding-curve.md)
 
-## **Choosing the right pool**
+[**Понимание Curve v2**](../../base-features/understanding-crypto-pools.md)
 
-Curve has many pools to choose from currently accepting stable coins and tokenised Bitcoin (Bitcoin on Ethereum). If you are not sure which pool is right for you, click the link below:
+## **Выбор подходящего пула** {#choosing-the-right-pool}
 
-[**Understanding Curve Pools**](../../lp/overview.md)
+В Curve есть множество пулов на выбор, которые в настоящее время принимают стабильные монеты и токенизированный Биткойн (Bitcoin на Ethereum). Если вы не уверены, какой пул подходит вам, нажмите на ссылку ниже:
+
+[**Понимание пулов Curve**](../../lp/overview.md)
+

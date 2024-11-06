@@ -1,15 +1,15 @@
-The Tri-Pool is a classic Curve pool and improved upon earlier offerings in many ways.
+Tri-Pool — это классический пул Curve, который был улучшен по сравнению с предыдущими предложениями во многих аспектах.
 
-Here are some of the major improvements this pool:
+Вот некоторые из главных улучшений этого пула:
 
-*   A new rampable A parameter (like on BTC pools) which can adjust liquidity density without causing losses to the virtual price (and to LPs)
-*   Gas optimised
-*   Will be used as a base pool for meta pools (which would essentially allow some pools to seemingly trade against underlying “base” pools without diluting liquidity)
-*   By only having the three most liquid stable coins in crypto, this pool should grow to become the most liquid and offer the best prices
-    
-This pool is expected to become the most liquid and the cheapest to interact with making it a good place to start for newcomers wanting to try Curve with small amounts of capital. Because this pool is likely to offer the best prices, it will also likely be one of the Curve pools getting the most volume.
+*   Регулируемый параметр A, который может настраивать плотность ликвидности, не вызывая потерь для виртуальной цены (и для LP).
+*   Оптимизация газовых затрат.
+*   Используется в качестве базового пула для метапулов (что, по сути, позволяет некоторым пулам как бы торговать против базовых пулов, не размывая ликвидность).
+*   Благодаря включению трех наиболее ликвидных стабильных монет в криптовалюте, этот пул должен стать самым ликвидным и предложить лучшие цены.
 
-*See how to deposit and stake into the 3Pool: https://www.youtube.com/watch?v=OsRrGij9Ou8*
+Ожидается, что этот пул станет наиболее ликвидным и дешевым для взаимодействия, что делает его отличной отправной точкой для новичков, желающих попробовать Curve с небольшими суммами капитала. Поскольку этот пул, вероятно, предложит лучшие цены, он также, скорее всего, станет одним из самых популярных пулов Curve по объему.
+
+*Узнайте, как внести и застейкать в 3Pool: https://www.youtube.com/watch?v=OsRrGij9Ou8*
 
 <figure class="video_container">
   <video controls="true" allowfullscreen="true">
@@ -17,35 +17,34 @@ This pool is expected to become the most liquid and the cheapest to interact wit
   </video>
 </figure>
 
-## **Depositing into the pool**
+## **Внесение средств в пул** {#depositing-into-the-pool}
 
-Visit the deposit page ([https://curve.fi/#/ethereum/pools/3pool/deposit](https://curve.fi/#/ethereum/pools/3pool/deposit)). You will need one or multiple stable coins to deposit. The Tri-Pool takes DAI, USDC and USDT.
+Посетите страницу депозита ([https://curve.fi/#/ethereum/pools/3pool/deposit](https://curve.fi/#/ethereum/pools/3pool/deposit)). Вам понадобятся одна или несколько стабильных монет для внесения. Tri-Pool принимает DAI, USDC и USDT.
 
 <figure markdown>
   ![](../../images/3crv_deposit.png){ width="300" }
   <figcaption></figcaption>
 </figure>
 
-First, it's important to understand that you don't have to deposit all coins, you can deposit one or several of the coins in the pool and it won't affect your returns. Depositing the coin with the smallest share in the pool will result in a small deposit bonus.
+Во-первых, важно понимать, что вам не нужно вносить все монеты, вы можете внести одну или несколько из них, и это не повлияет на вашу прибыль в пуле. Внесение монеты с наименьшей долей в пуле приведет к небольшому бонусу при депозите.
 
-Second, once you deposit one stable coin, **it gets split over the three different coins in the pool which means you now have exposure to all of them**. The first checkbox (Add all coins in a balanced proportion) allows you to deposit all three coins in the same proportion they currently are in the pool, resulting in no slippage occurrence.
+Во-вторых, как только вы вносите одну стабильную монету, **она будет распределена между тремя разными монетами в пуле, что означает, что теперь вы владеете ими всеми**. Первый флажок **`Add all coins in a balanced proportion`** (Добавить все монеты в сбалансированной пропорции) позволяет вам внести все три монеты в той же пропорции, в которой они находятся в пуле, что исключает возникновение проскальзывания.
 
-## **Confirming and staking**
+## **Подтверждение и стейкинг** {#confirming-and-staking}
 
-You will then be asked to approve the Curve Finance contract, follow by a deposit transaction which will wrap your stable coins and deposit them into the pool. This transaction can be expensive so you ideally want to wait for gas to be fairly cheap if this will impact the size of your deposit.
+Вам будет предложено одобрить контракт Curve Finance, после чего следует транзакция депозита, которая упакует ваши стейблкоины и внесет их в пул.
 
-After depositing in the pool, you receive liquidity provider (LP) tokens. They represent your share of ownership in the pool and you will need them to stake for CRV.
+После внесения средств в пул вы получаете токены провайдера ликвидности (LP-токены). Они представляют вашу долю владения в пуле, и они понадобятся вам для стейкинга в гейдже (для получения эмиссии CRV, стимулов и поинтов).
 
-After depositing, you will be prompted with a new transaction that will deposit your LP tokens in the DAO liquidity gauge. Confirming the transaction **will let you mine CRV.** This second transaction will only pop up if you deposited your tokens under the "Deposit and stake" tab. Otherwise it will just deposit the tokens in the pool.
+Если у вас уже есть LP-токены, вы можете непосредственно застейкать их в гейдже через вкладку **`Stake`** для получения эмиссии CRV, стимулов и поинтов. В противном случае токены просто останутся в пуле зарабатывая доход только с комиссий за обмены.
 
-If you already have LP tokens, you can also directly stake them into the gauge under the 'Stake' tab.
-
-**Once that's done, you're providing liquidity and staking so all that's left to do is wait for your trading fees to accrue.**
-
-*You can click the link below to learn how to boost your CRV rewards by locking CRV on the Curve DAO:*
-
-- [Boosting your CRV Rewards](../../reward-gauges/boosting-your-crv-rewards.md)
-- [Staking your $CRV](../../vecrv/locking-your-crv.md)
+Через вкладку **`Deposit and stake`** вы можете сделать два предыдущих действия в одну транзакцию. 
 
 
-​
+**После предоставления ликвидности и стейкинга доступные комиссии, стимулы, CRV и поинты начнут начислятся сразу.**
+
+*Вы можете перейти по ссылке ниже, чтобы узнать, как увеличить свои награды CRV, заблокировав CRV в Curve DAO:*
+
+- [Увеличение ваших наград CRV](../../reward-gauges/boosting-your-crv-rewards.md)
+- [Стейкинг вашего $CRV](../../vecrv/locking-your-crv.md)
+
