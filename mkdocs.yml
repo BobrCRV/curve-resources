@@ -187,11 +187,10 @@ nav:
       - Депонирование в tricrypto-pool: lp/depositing/depositing-into-a-tricrypto-pool.md
 
   - Создание пулов:
-    - Обзор создания пулов: factory-pools/pool-creation-overview.md
-    - Создание Stableswap NG пула: factory-pools/creating-a-stableswap-ng-pool.md
-    - Создание Twocrypto NG пула: factory-pools/creating-a-twocrypto-ng-pool.md
-    - Создание Tricrypto NG пула: factory-pools/creating-a-tricrypto-ng-pool.md
-    - Понимание оракулов: factory-pools/understanding-oracles.md
+    - Обзор создания пулов: pool-creation/pool-creation-overview.md
+    - Создание Stableswap пула: pool-creation/creating-a-stableswap-pool.md
+    - Создание Cryptoswap пула: pool-creation/creating-a-cryptoswap-pool.md
+    - Понимание оракулов: pool-creation/understanding-oracles.md
 
   - Гейджи вознаграждений (Reward Gauges):
     - Обзор: reward-gauges/overview.md
