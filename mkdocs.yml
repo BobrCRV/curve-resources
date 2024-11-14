@@ -207,11 +207,11 @@ nav:
       - Создание предложения DAO: governance/proposals/creating-a-dao-proposal.md
 
   - Мульти-чейн:
+    - Понимание мульти-чейн: multichain/understanding-multichain.md
     - CRV: multichain/crv.md
     - crvUSD: multichain/crvusd.md
-    - Понимание мульти-чейн: multichain/understanding-multichain.md
-    - Перемещение средств между сетями: multichain/bridging-funds.md
-    - Как перенести crvUSD на BSC: multichain/bridging-crvusd-to-bsc.md
+    - scrvUSD: multichain/scrvusd.md
+    - Как перенести CRV, crvUSD и scrvUSD на L1 сети: multichain/bridging-curve-eco-tokens.md
 
   - Поддержка и устранение неполадок:
     - Поддержка: troubleshooting/support.md
