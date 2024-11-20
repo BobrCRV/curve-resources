@@ -16,8 +16,8 @@ Curve существует на множестве блокчейн сетей, 
 
 ## **Форки Curve** {#curve-forks}
 
-!!!tip
-    Для мостов и адресов контрактов CRV на других блокчейнах, пожалуйста, смотрите [*Важные мосты*](../multichain/understanding-multichain.md#).
+!!!tip "Подсказка"
+    Адреса контрактов Bridges и CRV в других цепочках см. в разделе [*Важные мосты*](../multichain/understanding-multichain.md#).
 
 Форки Curve включают:
 

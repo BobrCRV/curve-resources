@@ -140,9 +140,8 @@ repo_url: https://github.com/CurveDocs/curve-resources
 
 nav:
   - Главная: index.md
-  - Начало работы:
-    - Понимание Curve & Stableswap (v1): base-features/understanding-curve.md  
-    - Понимание Cryptoswap (v2): base-features/understanding-crypto-pools.md
+
+  - Начало работы с Curve: getting-started.md
 
   - Токен CRV:
     - Обзор & Токеномика: crv-token/overview.md
